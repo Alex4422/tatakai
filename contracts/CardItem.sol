@@ -20,7 +20,7 @@ contract CardItem is ERC721URIStorage {
     mapping (uint256 => TokenInfo) public tokenInfoMap;
     mapping(string => uint8) hashes;
 
-    constructor (string memory _name, string memory _symbol, string memory _baseUri) public ERC721(_name, _symbol) {
+    constructor () public ERC721("Tatakai", "TAK") {
          tokenCounter = 0;
     }
 
