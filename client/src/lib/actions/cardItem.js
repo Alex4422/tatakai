@@ -1,6 +1,5 @@
 import {
-  SET_VALUE_SUCCESS,
-  GET_VALUE_SUCCESS,
+  MINT_NFT_SUCCESS,
   TRANSACTION_ERROR,
   TRANSACTION_PENDING,
 } from "./types";
@@ -17,27 +16,22 @@ const transactionError = (err) => {
     payload: { error: err },
   };
 };
-const getValueSuccess = (value) => {
+
+const mintNFTSuccess = (id, bool) => {
   return {
-    type: GET_VALUE_SUCCESS,
-    payload: { storageValue: value, isPending: false },
-  };
-};
-const setValueSuccess = (value) => {
-  return {
-    type: SET_VALUE_SUCCESS,
-    payload: { isPending: value },
+    type: MINT_NFT_SUCCESS,
+    payload: { id, isPending: bool },
   };
 };
 
-export const setValue = (value) => {
-  return (dispatch, _, { instances: { SimpleStorage }, admin }) => {
+export const mint = (addressMarketplace, hash, metadata) => {
+  return (dispatch, _, { instances: { CardItem }, admin }) => {
     dispatch(transactionPending());
-    SimpleStorage.methods
-      .set(value)
+    CardItem.methods
+      .mintNFT(addressMarketplace, hash, metadata)
       .send({ from: admin })
       .then((result) => {
-        dispatch(setValueSuccess(!result.status));
+        dispatch(mintNFTSuccess(!result.status));
         dispatch(getValue());
       })
       .catch(transactionError);
