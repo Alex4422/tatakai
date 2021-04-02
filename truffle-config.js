@@ -54,16 +54,20 @@ module.exports = {
       timeoutBlocks: 200,
     },
     matic: {
-      provider: () => new HDWalletProvider(process.env.MNEMONIC, `https://rpc-mumbai.matic.today`),
+      provider: () =>
+        new HDWalletProvider(
+          process.env.MNEMONIC,
+          `https://rpc-mumbai.matic.today`
+        ),
       network_id: 80001,
       confirmations: 2,
       timeoutBlocks: 200,
-      skipDryRun: true
+      skipDryRun: true,
     },
   },
   compilers: {
     solc: {
-      version: "^0.7.4",
+      version: "0.8.3",
       optimizer: {
         enabled: true,
         runs: 200,

@@ -1,5 +1,5 @@
-var SimpleStorage = artifacts.require("SimpleStorage");
+var CardItem = artifacts.require("CardItem");
 
 module.exports = function (deployer) {
-  deployer.deploy(SimpleStorage);
+  deployer.deploy(CardItem);
 };
