@@ -1,28 +1,38 @@
-import { NEW_INSTANCE, SEED_INSTANCE } from "../actions/types";
+import {
+  CHANGE_FIELD,
+  SUBMIT_VALUE,
+  SEED_VALUE_RECEIPT,
+} from "../actions/types";
 
 export const initialState = {
-  web3: null,
-  accounts: null,
-  contract: {},
+  storageValue: 0,
+  inputValue: 0,
+  isLoading: false,
 };
 
 // reducer qui va gérer les recettes
-const contract = (
-  oldState: IContractState = initialState,
+const storage = (
+  oldState: IStorageState = initialState,
   { type, payload }: IAction
 ) => {
   switch (type) {
-    case NEW_INSTANCE:
+    case CHANGE_FIELD:
+      return {
+        ...oldState,
+        ...payload,
+      };
+    case SUBMIT_VALUE:
       return {
         ...oldState,
         isLoading: true,
       };
-    case SEED_INSTANCE:
+    case SEED_VALUE_RECEIPT:
       return {
         ...oldState,
         ...payload,
         isLoading: false,
       };
+
     default:
       return {
         ...oldState,
@@ -31,4 +41,4 @@ const contract = (
   }
 };
 
-export default contract;
+export default storage;
