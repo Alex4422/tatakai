@@ -1,6 +1,5 @@
-import { useEffect, useCallback } from "react";
-import { Button, FormControl, InputLabel, Input } from "@material-ui/core";
-import "../styles.css";
+import { useEffect, useCallback, useRef } from "react";
+import { Button } from "@material-ui/core";
 
 type Props = IContractAction & IContractState;
 type StorageProps = IStorageState & IStorageAction;
@@ -26,6 +25,7 @@ const App = ({
   newInstance,
 }: Props & StorageProps) => {
   const classes = useStyles();
+  const inputRef = useRef(null);
   const handleOnChange = (e: any) => changeField(e);
   const fetchContract = useCallback(() => {
     newInstance();
@@ -39,6 +39,9 @@ const App = ({
     console.log("New Instance...");
     fetchContract();
   }, [fetchContract]);
+  useEffect(() => {
+    !isLoading && changeField({ target: { name: "inputValue", value: 0 } });
+  }, [isLoading]);
   return (
     <div className="App">
       <h1>Good to Go!</h1>
