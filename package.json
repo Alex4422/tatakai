@@ -1,0 +1,14 @@
+{
+  "name": "react-redux-box",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@truffle/hdwallet-provider": "^1.2.3",
+    "dotenv": "^8.2.0"
+  },
+  "scripts": {
+    "test": "truffle test",
+    "start": "cd client && npm start",
+    "install-pkg": "npm install && cd client && npm install && cd .."
+  }
+}
