@@ -1,18 +1,5 @@
-type State = {
-  web3: any;
-  accounts: Array<string>;
-  contract: Object;
-  storageValue: number;
-  inputValue: number;
-  isLoading: boolean;
-};
-
-interface Action {
+interface IAction {
   type: string;
-  storageValue: number;
-  accounts: Array<string>;
-  web3: any;
-  instance: Object;
   payload: Object;
 }
 
@@ -22,8 +9,21 @@ interface ContractJSON {
   index: any;
 }
 
-interface propsConnector extends State {
+interface IContractState {
+  web3: any | null;
+  accounts: Array<string> | null;
+  contract: any;
+}
+interface IContractAction {
   newInstance: Function;
+}
+
+interface IStorageState {
+  storageValue: number;
+  inputValue: number;
+  isLoading: boolean;
+}
+interface IStorageAction {
   changeField: Function;
   submitValue: Function;
 }
