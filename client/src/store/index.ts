@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from "redux";
 
 import rootReducer from "../reducers";
-import contract from "../middlewares/contract";
+import contract from "../middlewares/contracts";
 import storage from "../middlewares/storage";
 
 declare const window: any;
