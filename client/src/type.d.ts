@@ -27,3 +27,8 @@ interface IStorageAction {
   changeField: Function;
   submitValue: Function;
 }
+
+type IMapStateToPropsType = {
+  contract: IContractState;
+  storage: IStorageState;
+};
