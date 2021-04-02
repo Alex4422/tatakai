@@ -28,7 +28,12 @@ interface IStorageAction {
   submitValue: Function;
 }
 
-type IMapStateToPropsType = {
-  contract: IContractState;
-  storage: IStorageState;
-};
+interface IAdminState {
+  token: any;
+  isLoading: boolean;
+}
+
+interface IAdminAction {
+  changeField: Function;
+  submitValue: Function;
+}

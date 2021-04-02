@@ -1,5 +1,7 @@
 import { useEffect, useCallback, useRef } from "react";
 import { Button } from "@material-ui/core";
+import Container from "@material-ui/core/Container";
+import "../styles.css";
 
 type Props = IContractAction & IContractState;
 type StorageProps = IStorageState & IStorageAction;
@@ -15,7 +17,7 @@ const useStyles = () => {
   };
   return classes;
 };
-const App = ({
+const Home = ({
   contract,
   storageValue,
   isLoading,
@@ -43,37 +45,44 @@ const App = ({
     !isLoading && changeField({ target: { name: "inputValue", value: 0 } });
   }, [isLoading]);
   return (
-    <div className="App">
-      <h1>Good to Go!</h1>
-      <p>Your Truffle Box is installed and ready.</p>
+    <Container component="main" maxWidth="xs">
+      <div className="App">
+        <h1>Good to Go!</h1>
+        <p>Your Truffle Box is installed and ready.</p>
 
-      <p>
-        {contract
-          ? "Your contracts compiled and migrated successfully"
-          : "Try to deploy your contract !"}
-      </p>
+        <p>
+          {contract
+            ? "Your contracts compiled and migrated successfully"
+            : "Try to deploy your contract !"}
+        </p>
 
-      <p>
-        Try changing the value stored on your smart contract :
-        <form onSubmit={handleOnSubmit} style={classes.form}>
-          <input
-            style={classes.input}
-            type="number"
-            name="inputValue"
-            value={inputValue}
-            onChange={handleOnChange}
-          />
-          &nbsp;
-          <Button size="small" type="submit" variant="outlined" color="primary">
-            Primary
-          </Button>
-        </form>
-      </p>
-      <div>
-        The stored value is: {isLoading ? "data is loading..." : storageValue}
+        <p>
+          Try changing the value stored on your smart contract :
+          <form onSubmit={handleOnSubmit} style={classes.form}>
+            <input
+              style={classes.input}
+              type="number"
+              name="inputValue"
+              value={inputValue}
+              onChange={handleOnChange}
+            />
+            &nbsp;
+            <Button
+              size="small"
+              type="submit"
+              variant="outlined"
+              color="primary"
+            >
+              Primary
+            </Button>
+          </form>
+        </p>
+        <div>
+          The stored value is: {isLoading ? "data is loading..." : storageValue}
+        </div>
       </div>
-    </div>
+    </Container>
   );
 };
 
-export default App;
+export default Home;

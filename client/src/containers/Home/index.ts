@@ -3,6 +3,11 @@ import Home from "../../components/Home";
 import { newInstance } from "../../actions/contract";
 import { changeField, submitValue } from "../../actions/storage";
 
+type IMapStateToPropsType = {
+  contract: IContractState;
+  storage: IStorageState;
+};
+
 const mapStateToProps = ({
   contract: { web3, accounts, contract },
   storage: { storageValue, isLoading, inputValue },
