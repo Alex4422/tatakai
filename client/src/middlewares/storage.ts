@@ -6,15 +6,15 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
 ) => async (action: IAction) => {
   const result = next(action);
   const {
-    contract: { contract, inputValue, accounts },
+    contract: { accounts },
+    storage: { contract, inputValue },
   } = getState();
 
   switch (action.type) {
     case SUBMIT_VALUE:
       try {
-        console.log("passe par submit value", inputValue);
+        console.log("passe par submit value", action.payload);
         console.log("instance:", contract);
-        debugger;
         const res = await contract.methods
           .set(inputValue)
           .send({ from: accounts[0] });

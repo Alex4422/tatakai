@@ -4,7 +4,8 @@ import { newInstance } from "../actions/contract";
 import { changeField, submitValue } from "../actions/storage";
 
 const mapStateToProps = ({
-  contract: { web3, accounts, contract, storageValue, isLoading, inputValue },
+  contract: { web3, accounts, contract },
+  storage: { storageValue, isLoading, inputValue },
 }: any) => {
   return {
     web3,
@@ -18,8 +19,7 @@ const mapStateToProps = ({
 
 const mapDispatchToProps = (dispatch: any) => ({
   newInstance: () => dispatch(newInstance()),
-  changeField: (field: string, value: Number) =>
-    dispatch(changeField(field, value)),
-  submitValue: () => dispatch(submitValue()),
+  changeField: (e: any) => dispatch(changeField(e)),
+  submitValue: (e: any) => dispatch(submitValue(e)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(App);
