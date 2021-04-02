@@ -1,6 +1,6 @@
 import { useEffect, useCallback } from "react";
 import { Button, FormControl, InputLabel, Input } from "@material-ui/core";
-import "./App.css";
+import "../styles.css";
 
 type Props = IContractAction & IContractState;
 type StorageProps = IStorageState & IStorageAction;
