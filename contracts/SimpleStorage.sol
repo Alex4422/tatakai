@@ -3,7 +3,7 @@ pragma solidity ^0.7.4;
 
 contract SimpleStorage {
   uint storedData;
-  //Declare an Event
+  //Declare an Eventer
   event Set(uint x);
 
   function set(uint x) public {

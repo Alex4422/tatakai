@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@openzeppelin/contracts": "^4.0.0",
     "@truffle/hdwallet-provider": "^1.2.3",
     "dotenv": "^8.2.0"
   },
