@@ -1,10 +1,16 @@
-import { ADMIN_FORM_HANDLECHANGE, ADMIN_FORM_SUBMIT } from "./types";
+import {
+  ADMIN_FORM_HANDLECHANGE,
+  ADMIN_FORM_SUBMIT,
+  MINT_NFT_SUCCESS,
+} from "./types";
 
 export const changeField = ({ target: { name, value } }: IEventType) => ({
   type: ADMIN_FORM_HANDLECHANGE,
   payload: { [name]: value },
 });
-export const submitValue = ({ target: { value } }: IEventType) => ({
+export const submitValue = () => ({
   type: ADMIN_FORM_SUBMIT,
-  payload: { storageValue: value, inputValue: value },
+});
+export const mintNFTSuccess = () => ({
+  type: MINT_NFT_SUCCESS,
 });

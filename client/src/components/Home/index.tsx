@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useRef } from "react";
+import { useEffect, createRef } from "react";
 import { Button } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import "../styles.css";
@@ -23,10 +23,8 @@ const Home = ({
   inputValue,
   changeField,
   submitValue,
-  newInstance,
 }: Props & StorageProps) => {
   const classes = useStyles();
-  const inputRef = useRef(null);
   const handleOnChange = (e: any) => changeField(e);
 
   const handleOnSubmit = (e: any) => {
