@@ -1,4 +1,4 @@
-import getWeb3 from "../utils/getWeb3";
+import getWeb3 from "./getWeb3";
 import { deploy } from "../actions/contract";
 
 // Connect web3 and accounts
@@ -15,7 +15,7 @@ const connectWeb3 = async (store: any) => {
   }
 };
 
-// Get the contract instance.
+// Get the contract'sinstance.
 export const getContract = async (web3: any, contract: any) => {
   const networkId: any = await web3?.eth.net.getId();
   const deployedNetwork: ContractJSON = (contract as any).networks[networkId];

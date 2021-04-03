@@ -1,11 +1,5 @@
 import { CHANGE_FIELD, SUBMIT_VALUE, SEED_VALUE_RECEIPT } from "./types";
 
-interface IEventType {
-  target: {
-    name: string;
-    value: number;
-  };
-}
 export const changeField = ({ target: { name, value } }: IEventType) => ({
   type: CHANGE_FIELD,
   payload: { [name]: value },

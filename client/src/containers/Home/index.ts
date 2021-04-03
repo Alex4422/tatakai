@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import Home from "../../components/Home";
 
-import { changeField, submitValue } from "../../actions/storage";
+import { changeField, submitValue } from "../../lib/actions/storage";
 
 type IMapStateToPropsType = {
   contract: IContractState;
