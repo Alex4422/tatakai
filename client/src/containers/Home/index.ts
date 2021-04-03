@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import Home from "../../components/Home";
-import { newInstance } from "../../actions/contract";
+
 import { changeField, submitValue } from "../../actions/storage";
 
 type IMapStateToPropsType = {
@@ -9,13 +9,13 @@ type IMapStateToPropsType = {
 };
 
 const mapStateToProps = ({
-  contract: { web3, accounts, contract },
+  contract: { web3, accounts },
   storage: { storageValue, isLoading, inputValue },
 }: IMapStateToPropsType) => {
   return {
     web3,
     accounts,
-    contract,
+
     storageValue,
     isLoading,
     inputValue,
@@ -23,7 +23,6 @@ const mapStateToProps = ({
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-  newInstance: () => dispatch(newInstance()),
   changeField: (e: any) => dispatch(changeField(e)),
   submitValue: (e: any) => dispatch(submitValue(e)),
 });

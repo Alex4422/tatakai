@@ -1,6 +1,6 @@
 interface IAction {
   type: string;
-  payload: Object;
+  payload: any | null;
 }
 
 interface ContractJSON {
@@ -10,9 +10,9 @@ interface ContractJSON {
 }
 
 interface IContractState {
+  admin: any | null;
   web3: any | null;
   accounts: Array<string> | null;
-  contract: any;
 }
 interface IContractAction {
   newInstance: Function;

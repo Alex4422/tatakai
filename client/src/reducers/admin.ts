@@ -20,11 +20,9 @@ const admin = (
         ...oldState,
         ...payload,
       };
-
     default:
       return {
         ...oldState,
-        ...payload,
       };
   }
 };

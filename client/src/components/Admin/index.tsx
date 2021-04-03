@@ -31,21 +31,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Admin = ({
-  changeField,
-  newInstance,
-  token,
-  contract,
-}: Props & AdminProps) => {
+const Admin = ({ changeField, token }: Props & AdminProps) => {
   const classes = useStyles();
   const handleOnChange = (e: any) => changeField(e);
-  const fetchContract = useCallback(() => {
-    newInstance();
-  }, [newInstance]);
-  useEffect(() => {
-    console.log("New Instance...");
-    !contract && fetchContract();
-  }, [fetchContract]);
 
   return (
     <Container component="main" maxWidth="sm">

@@ -1,20 +1,18 @@
 import { createStore, applyMiddleware } from "redux";
-
 import rootReducer from "../reducers";
-import contract from "../middlewares/contracts";
 import storage from "../middlewares/storage";
-
+import connectWeb3 from "../middlewares/utils";
 declare const window: any;
 
 const composeEnhancers =
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ trace: true, traceLimit: 25 });
 
-const contracts = [contract(), storage()];
+const contractsMiddlewares = [storage];
 const store = createStore(
   rootReducer,
-  composeEnhancers(applyMiddleware(...contracts))
+  composeEnhancers(applyMiddleware(...contractsMiddlewares))
 );
 
-// on l'exporte par défaut
+connectWeb3(store);
 export default store;

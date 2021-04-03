@@ -1,9 +1,9 @@
-import { NEW_INSTANCE, SEED_INSTANCE } from "../actions/types";
+import { DEPLOY } from "../actions/types";
 
 export const initialState = {
+  admin: null,
   web3: null,
   accounts: null,
-  contract: {},
 };
 
 // reducer qui va gérer les recettes
@@ -12,21 +12,15 @@ const contract = (
   { type, payload }: IAction
 ) => {
   switch (type) {
-    case NEW_INSTANCE:
-      return {
-        ...oldState,
-        isLoading: true,
-      };
-    case SEED_INSTANCE:
+    case DEPLOY:
       return {
         ...oldState,
         ...payload,
-        isLoading: false,
+        isLoading: true,
       };
     default:
       return {
         ...oldState,
-        ...payload,
       };
   }
 };
