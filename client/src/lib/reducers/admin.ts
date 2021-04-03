@@ -5,7 +5,7 @@ import {
 } from "../actions/types";
 
 export const initialState = {
-  token: {},
+  token: { tokenName: null, description: null, file: null, supply: null },
   isLoading: false,
 };
 
