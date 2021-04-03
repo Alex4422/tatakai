@@ -1,5 +1,5 @@
-import { useEffect, useCallback } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import useFormValidation from "../../hooks/useFormValidation";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -7,6 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import InputLabel from "@material-ui/core/InputLabel";
 import Container from "@material-ui/core/Container";
+import { useEffect } from "react";
 
 type Props = IContractAction & IContractState;
 type AdminProps = IAdminState & IAdminAction;
@@ -32,12 +33,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Admin = ({ changeField, token, submitValue }: Props & AdminProps) => {
+  const { validate, isValid } = useFormValidation();
   const classes = useStyles();
   const handleOnChange = (e: any) => changeField(e);
   const handleOnSubmit = (e: any) => {
     e.preventDefault();
     submitValue();
   };
+  useEffect(() => {
+    validate(token);
+  }, [validate, token]);
   return (
     <Container component="main" maxWidth="sm">
       <CssBaseline />
@@ -110,15 +115,15 @@ const Admin = ({ changeField, token, submitValue }: Props & AdminProps) => {
               />
             </Grid>
           </Grid>
-
           <Button
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
+            disabled={!isValid}
             className={classes.submit}
           >
-            Admin
+            Create NFT
           </Button>
         </form>
       </div>
