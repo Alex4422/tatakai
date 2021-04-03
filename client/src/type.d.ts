@@ -37,3 +37,10 @@ interface IAdminAction {
   changeField: Function;
   submitValue: Function;
 }
+
+interface IEventType {
+  target: {
+    name: string;
+    value: number;
+  };
+}

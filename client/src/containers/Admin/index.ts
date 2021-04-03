@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import Admin from "../../components/Admin";
-import { changeField, submitValue } from "../../actions/admin-form";
+import { changeField, submitValue } from "../../lib/actions/admin-form";
 
 type IMapStateToPropsType = {
   contract: IContractState;
