@@ -1,10 +1,11 @@
 import { useEffect, useCallback } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
+import InputLabel from "@material-ui/core/InputLabel";
 import Container from "@material-ui/core/Container";
 
 type Props = IContractAction & IContractState;
@@ -47,7 +48,7 @@ const Admin = ({
   }, [fetchContract]);
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="sm">
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
@@ -86,20 +87,24 @@ const Admin = ({
             </Grid>
           </Grid>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={8}>
+              {/* <InputLabel shrink htmlFor="bootstrap-input">
+                File Upload
+              </InputLabel> */}
               <TextField
-                variant="outlined"
+                variant="filled"
                 required
                 fullWidth
                 id="file"
                 type="file"
-                label="Upload Image"
+                label="File upload"
                 name="file"
+                InputLabelProps={{ shrink: true }}
                 defaultValue={token.file || ""}
                 onChange={handleOnChange}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={4}>
               <TextField
                 variant="outlined"
                 required
