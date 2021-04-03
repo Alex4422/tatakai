@@ -6,7 +6,6 @@ import { getContract } from "./utils";
 const customMiddleware = () => ({ dispatch, getState }: any) => (
   next: any
 ) => async (action: IAction) => {
-  const result = next(action);
   const {
     contract: { admin, web3 },
     storage: { inputValue },
@@ -29,9 +28,9 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
       }
       break;
     default:
-      return result;
+      return next(action);
   }
-  return result;
+  return next(action);
 };
 const storage = () => customMiddleware();
 export default storage();

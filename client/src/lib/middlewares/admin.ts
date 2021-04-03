@@ -6,15 +6,12 @@ import { getContract } from "./utils";
 const customMiddleware = () => ({ dispatch, getState }: any) => (
   next: any
 ) => async (action: IAction) => {
-  const result = next(action);
   const {
     contract: { admin, web3 },
     admin: { token },
   } = getState();
 
   const instance = await getContract(web3, CardItem);
-
-  console.log(instance._address, token);
   switch (action.type) {
     case ADMIN_FORM_SUBMIT:
       try {
@@ -32,9 +29,9 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
       }
       break;
     default:
-      return result;
+      return next(action);
   }
-  return result;
+  return next(action);
 };
-const storage = () => customMiddleware();
-export default storage();
+const admin = () => customMiddleware();
+export default admin();
