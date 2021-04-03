@@ -43,12 +43,12 @@ const Admin = ({ changeField, token, submitValue }: Props & AdminProps) => {
   useEffect(() => {
     validate(token);
   }, [validate, token]);
-  return (
+  return 
     <Container component="main" maxWidth="sm">
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
-          Create new NFT
+          Create new NFTe
         </Typography>
         <form className={classes.form} onSubmit={handleOnSubmit}>
           <Grid container spacing={2}>
