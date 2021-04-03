@@ -18,5 +18,6 @@ const mapStateToProps = ({
 
 const mapDispatchToProps = (dispatch: any) => ({
   changeField: (e: any) => dispatch(changeField(e)),
+  submitValue: () => dispatch(submitValue()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Admin);

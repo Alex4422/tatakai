@@ -1,4 +1,8 @@
-import { ADMIN_FORM_SUBMIT, ADMIN_FORM_HANDLECHANGE } from "../actions/types";
+import {
+  ADMIN_FORM_SUBMIT,
+  ADMIN_FORM_HANDLECHANGE,
+  MINT_NFT_SUCCESS,
+} from "../actions/types";
 
 export const initialState = {
   token: {},
@@ -18,7 +22,12 @@ const admin = (
     case ADMIN_FORM_SUBMIT:
       return {
         ...oldState,
-        ...payload,
+        isLoading: true,
+      };
+    case MINT_NFT_SUCCESS:
+      return {
+        token: {},
+        isLoading: false,
       };
     default:
       return {

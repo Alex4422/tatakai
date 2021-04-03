@@ -1,5 +1,5 @@
 import getWeb3 from "./getWeb3";
-import { deploy } from "../actions/contract";
+import { deploy } from "../../actions/contract";
 
 // Connect web3 and accounts
 const connectWeb3 = async (store: any) => {

@@ -31,10 +31,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Admin = ({ changeField, token }: Props & AdminProps) => {
+const Admin = ({ changeField, token, submitValue }: Props & AdminProps) => {
   const classes = useStyles();
   const handleOnChange = (e: any) => changeField(e);
-
+  const handleOnSubmit = (e: any) => {
+    e.preventDefault();
+    submitValue();
+  };
   return (
     <Container component="main" maxWidth="sm">
       <CssBaseline />
@@ -42,7 +45,7 @@ const Admin = ({ changeField, token }: Props & AdminProps) => {
         <Typography component="h1" variant="h5">
           Create new NFT
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={handleOnSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
