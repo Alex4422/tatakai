@@ -18,7 +18,6 @@ const useStyles = () => {
   return classes;
 };
 const Home = ({
-  contract,
   storageValue,
   isLoading,
   inputValue,
@@ -29,18 +28,12 @@ const Home = ({
   const classes = useStyles();
   const inputRef = useRef(null);
   const handleOnChange = (e: any) => changeField(e);
-  const fetchContract = useCallback(() => {
-    newInstance();
-  }, [newInstance]);
 
   const handleOnSubmit = (e: any) => {
     e.preventDefault();
     submitValue(e);
   };
-  useEffect(() => {
-    console.log("New Instance...");
-    fetchContract();
-  }, [fetchContract]);
+
   useEffect(() => {
     !isLoading && changeField({ target: { name: "inputValue", value: 0 } });
   }, [isLoading]);
@@ -51,7 +44,7 @@ const Home = ({
         <p>Your Truffle Box is installed and ready.</p>
 
         <p>
-          {contract
+          {true
             ? "Your contracts compiled and migrated successfully"
             : "Try to deploy your contract !"}
         </p>

@@ -5,6 +5,7 @@ import {
 } from "../actions/types";
 
 export const initialState = {
+  instance: null,
   storageValue: 0,
   inputValue: 0,
   isLoading: false,
@@ -36,7 +37,6 @@ const storage = (
     default:
       return {
         ...oldState,
-        ...payload,
       };
   }
 };
