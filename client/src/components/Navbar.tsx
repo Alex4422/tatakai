@@ -59,7 +59,9 @@ function Navbar() {
             aria-label="menu"
           ></IconButton>
           <Typography variant="h6" className={classes.title}>
-            NFT - Startere
+            <Link style={{ color: "white", textDecoration: "none" }} to="/">
+              NFT - TAKAKAI{" "}
+            </Link>
           </Typography>
 
           <ul
@@ -88,18 +90,6 @@ function Navbar() {
           </ul>
         </Toolbar>
       </AppBar>
-      <FormGroup>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={auth}
-              onChange={handleChange}
-              aria-label="login switch"
-            />
-          }
-          label={auth ? "Logout" : "Login"}
-        />
-      </FormGroup>
     </div>
   );
 }

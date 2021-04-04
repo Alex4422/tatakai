@@ -1,5 +1,5 @@
 import { ADMIN_FORM_SUBMIT } from "../actions/types";
-import { mintNFTSuccess } from "../actions/admin-form";
+import { mintNFTSuccess } from "../actions/admin";
 import CardItem from "../../contracts/CardItem.json";
 import { getContract } from "./utils";
 
