@@ -4,42 +4,56 @@ pragma solidity 0.8.3;
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import '@openzeppelin/contracts/access/Ownable.sol';
 
-contract CardItem is ERC721URIStorage {
+contract CardItem is ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
+    
     Counters.Counter private _tokenIds;
-
-    uint256 public tokenCounter;
-
+    
+    event ItemCreated(
+        address owner,
+        uint256 tokenId
+    );
+    
     struct TokenInfo {
-        string metaDataHash;
-        string metaData;
-        uint256 count;
+        address owner;
+        string ipfsHash;
     }
+    
+    uint256 public pricePerToken;
 
     mapping (uint256 => TokenInfo) public tokenInfoMap;
-    mapping(string => uint8) hashes;
+    mapping(string => bool) public ipfsHashes;
+    mapping(string => uint256) public ipfsHashToTokenId;
 
-    constructor () public ERC721("Tatakai", "TAK") {
-         tokenCounter = 0;
+    constructor (string memory _name, string memory _symbol, uint256 _pricePerToken) public ERC721(_name, _symbol) {
+          pricePerToken = _pricePerToken;
     }
 
-    function mintNFT(address _marketplace, string memory hash, string memory metadata) public returns (uint256) {
-        require(hashes[hash] != 1);
-        hashes[hash] = 1;
+    /** 
+     * @dev Mint a new NFT  
+     * @param _owner - NFT owner
+     * @param _tokenURI - URL include ipfs hash
+     */
+    function mint(address _owner, string memory _tokenURI) public onlyOwner returns (uint256) {
+        require(ipfsHashes[_tokenURI] != true, "Already registered");  
         
-        _tokenIds.increment();
+         _tokenIds.increment();
         uint256 newItemId = _tokenIds.current();
-        _mint(_marketplace, newItemId);
-        _setTokenURI(newItemId, metadata);
         
-        tokenCounter = tokenCounter + 1;
+        _safeMint(_owner, newItemId);
+        _setTokenURI(newItemId, _tokenURI);
         
+        ipfsHashes[_tokenURI] = true;
+        ipfsHashToTokenId[_tokenURI] = newItemId;
+     
         tokenInfoMap[newItemId] = TokenInfo({
-            metaDataHash: hash,
-            metaData: metadata,
-            count : tokenCounter
+                owner: _owner,
+                ipfsHash: _tokenURI
         });
+     
+        emit ItemCreated(_owner, newItemId);
      
         return newItemId;
     }
