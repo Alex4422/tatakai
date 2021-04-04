@@ -1,29 +1,25 @@
 import { connect } from "react-redux";
 import Home from "../../components/Home";
+import { getAuthMetamask } from "../../lib/actions/user";
+import { initMarket } from "../../lib/actions/marketplace";
 
-import { changeField, submitValue } from "../../lib/actions/storage";
+
 
 type IMapStateToPropsType = {
   contract: IContractState;
-  storage: IStorageState;
 };
 
 const mapStateToProps = ({
   contract: { web3, accounts },
-  storage: { storageValue, isLoading, inputValue },
 }: IMapStateToPropsType) => {
   return {
     web3,
     accounts,
-
-    storageValue,
-    isLoading,
-    inputValue,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-  changeField: (e: any) => dispatch(changeField(e)),
-  submitValue: (e: any) => dispatch(submitValue(e)),
+  getAuthMetamask: () => dispatch(getAuthMetamask()),
+  initMarket: () => dispatch(initMarket()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import useFormValidation from "../../hooks/useFormValidation";
+import useFormValidation from "../../Hooks/useFormValidation";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -115,6 +115,15 @@ const Admin = ({ changeField, token, submitValue }: Props & AdminProps) => {
               />
             </Grid>
           </Grid>
+          {token.file ?
+            <Grid container spacing={2}>
+            <Grid item xs={12} sm={8}>
+              <img src={token.file}></img>
+            </Grid>
+          </Grid>
+            :  null
+          }
+          
           <Button
             type="submit"
             fullWidth

@@ -1,4 +1,4 @@
-import { DEPLOY } from "../actions/types";
+import { GET_AUTH_METAMASK } from "../actions/types";
 
 export const initialState = {
   admin: null,
@@ -12,12 +12,6 @@ const contract = (
   { type, payload }: IAction
 ) => {
   switch (type) {
-    case DEPLOY:
-      return {
-        ...oldState,
-        ...payload,
-        isLoading: true,
-      };
     default:
       return {
         ...oldState,

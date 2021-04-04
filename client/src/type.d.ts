@@ -28,8 +28,20 @@ interface IStorageAction {
   submitValue: Function;
 }
 
+interface IUserState {
+  web3: any | null;
+  accounts: Array<string> | null;
+}
+
+
 interface IAdminState {
   token: any;
+  isLoading: boolean;
+}
+
+
+interface IMarketplaceState {
+  NFTS: array<Object> | null;
   isLoading: boolean;
 }
 
@@ -44,3 +56,11 @@ interface IEventType {
     value: number;
   };
 }
+
+interface ConfigAxios {
+    method: string;
+    url: string;
+    headers: any;
+    body: any;
+  };
+

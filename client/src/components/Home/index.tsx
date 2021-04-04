@@ -2,9 +2,12 @@ import { useEffect, createRef } from "react";
 import { Button } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import "../styles.css";
+import { getAuthMetamask } from "../../lib/actions/user";
 
-type Props = IContractAction & IContractState;
-type StorageProps = IStorageState & IStorageAction;
+declare interface Props {
+  getAuthMetamask: Function;
+  initMarket: Function;
+};
 
 const useStyles = () => {
   const classes = {
@@ -17,60 +20,22 @@ const useStyles = () => {
   };
   return classes;
 };
-const Home = ({
-  storageValue,
-  isLoading,
-  inputValue,
-  changeField,
-  submitValue,
-}: Props & StorageProps) => {
+const Home = ({getAuthMetamask, initMarket}:Props) => {
   const classes = useStyles();
-  const handleOnChange = (e: any) => changeField(e);
-
-  const handleOnSubmit = (e: any) => {
-    e.preventDefault();
-    submitValue(e);
-  };
-
+ 
   useEffect(() => {
-    !isLoading && changeField({ target: { name: "inputValue", value: 0 } });
-  }, [isLoading]);
+    getAuthMetamask();
+    //initMarket()
+  }, []);
   return (
     <Container component="main" maxWidth="xs">
       <div className="App">
-        <h1>Good to Go!</h1>
-        <p>Your Truffle Box is installed and ready.</p>
+        <h1>Liste des NFTS : </h1>
 
-        <p>
-          {true
-            ? "Your contracts compiled and migrated successfully"
-            : "Try to deploy your contract !"}
-        </p>
+        
 
-        <p>
-          Try changing the value stored on your smart contract :
-          <form onSubmit={handleOnSubmit} style={classes.form}>
-            <input
-              style={classes.input}
-              type="number"
-              name="inputValue"
-              value={inputValue}
-              onChange={handleOnChange}
-            />
-            &nbsp;
-            <Button
-              size="small"
-              type="submit"
-              variant="outlined"
-              color="primary"
-            >
-              Primary
-            </Button>
-          </form>
-        </p>
-        <div>
-          The stored value is: {isLoading ? "data is loading..." : storageValue}
-        </div>
+       
+       
       </div>
     </Container>
   );
