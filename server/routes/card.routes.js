@@ -9,6 +9,18 @@ module.exports = app => {
  *     summary: Create a NFT Fighter Card.
  *     parameters:
  *       - in: query
+ *         name: name
+ *         required: true
+ *         description: Card Name
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: description
+ *         required: true
+ *         description: Card Description
+ *         schema:
+ *           type: string
+ *       - in: query
  *         name: file
  *         required: true
  *         description: Card Image
