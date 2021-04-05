@@ -1,14 +1,12 @@
+import { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import useFormValidation from "../../Hooks/useFormValidation";
+import useFormValidation from "../../hooks/useFormValidation";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import InputLabel from "@material-ui/core/InputLabel";
 import Container from "@material-ui/core/Container";
-import { useEffect, useState, useRef } from "react";
-import { readBuilderProgram } from "typescript";
 
 type Props = IContractAction & IContractState;
 type AdminProps = IAdminState & IAdminAction;
@@ -33,19 +31,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-const types = ["Commune","Rare", "Légendaire","Unique"];
-
-
+const types = ["Commune", "Rare", "Légendaire", "Unique"];
 
 const Admin = ({ changeField, token, submitValue }: Props & AdminProps) => {
   const { validate, isValid } = useFormValidation();
   const classes = useStyles();
- 
 
- 
   const handleOnChange = (e: any) => changeField(e);
-  
+
   const handleOnSubmit = (e: any) => {
     e.preventDefault();
     submitValue();
@@ -125,11 +118,13 @@ const Admin = ({ changeField, token, submitValue }: Props & AdminProps) => {
                 autoComplete="Type"
                 defaultValue={token.type || "Commune"}
                 onChange={handleOnChange}
-              > {types.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
+              >
+                {" "}
+                {types.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
               </TextField>
             </Grid>
           </Grid>
@@ -166,15 +161,14 @@ const Admin = ({ changeField, token, submitValue }: Props & AdminProps) => {
               />
             </Grid>
           </Grid>
-          {token.file ?
+          {token.file ? (
             <Grid container spacing={2}>
-            <Grid item xs={12} sm={8}>
-              <img src={token.file}></img>
+              <Grid item xs={12} sm={8}>
+                <img src={token.file}></img>
+              </Grid>
             </Grid>
-          </Grid>
-            :  null
-          }
-          
+          ) : null}
+
           <Button
             type="submit"
             fullWidth
