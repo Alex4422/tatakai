@@ -38,18 +38,18 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
 
     case ADMIN_FORM_SUBMIT:
       console.log("Passe par le MW admin via ADMIN FORM SUBMIT")
-      let formData = new FormData();
-      formData.append("token", token);
+      let data = action.data!;
+      data.append("token", token);
+      for (var value of data.values()) {
+        console.log(value);
+     }
       const config: Object = {
-        method: 'POST',
-        url: `${URL}cards`,
         headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        body: formData,
+          "Content-Type": `multipart/form-data; boundary=${data._boundary}`,
+        }
       }
       try {
-        const response: any = await axios(config);
+        const response: any = await axios.post(`${URL}cards`,data,config);
         console.log("response Api", response)
       } catch (error) {
         console.error(error);

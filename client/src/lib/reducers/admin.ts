@@ -2,6 +2,7 @@ import {
   ADMIN_FORM_SUBMIT,
   ADMIN_FORM_HANDLECHANGE,
   MINT_NFT_SUCCESS,
+  ADMIN_FORM_HANDLECHANGE_FILE,
 } from "../actions/types";
 
 export const initialState = {

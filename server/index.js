@@ -33,7 +33,7 @@ app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(specs));
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(upload.array()); 
+//app.use(upload.array()); 
 
 require("./routes/card.routes")(app);
 

@@ -9,6 +9,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Container from "@material-ui/core/Container";
 import { useEffect, useState, useRef } from "react";
 import { readBuilderProgram } from "typescript";
+import { StdioNull } from "node:child_process";
 
 type Props = IContractAction & IContractState;
 type AdminProps = IAdminState & IAdminAction;
@@ -38,21 +39,28 @@ const types = ["Commune","Rare", "Légendaire","Unique"];
 
 
 
-const Admin = ({ changeField, token, submitValue }: Props & AdminProps) => {
+const Admin = ({ changeField, token, submitValue, changeFieldFile }: Props & AdminProps) => {
   const { validate, isValid } = useFormValidation();
   const classes = useStyles();
- 
+  const [file, setFile] = useState();
 
  
   const handleOnChange = (e: any) => changeField(e);
   
   const handleOnSubmit = (e: any) => {
     e.preventDefault();
-    submitValue();
+    let data: any = new FormData();
+    data.append("file", file!);
+    //console.log("file",file);
+    for (var value of data.values()) {
+      console.log(value);
+   }
+    submitValue(data);
   };
-  useEffect(() => {
+/*   useEffect(() => {
     validate(token);
   }, [validate, token]);
+ */
   return (
     <Container component="main" maxWidth="sm">
       <CssBaseline />
@@ -148,7 +156,7 @@ const Admin = ({ changeField, token, submitValue }: Props & AdminProps) => {
                 name="file"
                 InputLabelProps={{ shrink: true }}
                 defaultValue={token.file || ""}
-                onChange={handleOnChange}
+                onChange={(e:any) => setFile(e.target.files[0])}
               />
             </Grid>
             <Grid item xs={12} sm={4}>
@@ -180,7 +188,7 @@ const Admin = ({ changeField, token, submitValue }: Props & AdminProps) => {
             fullWidth
             variant="contained"
             color="primary"
-            disabled={!isValid}
+            //disabled={!isValid}
             className={classes.submit}
           >
             Create NFT

@@ -1,6 +1,7 @@
 interface IAction {
   type: string;
   payload: any | null;
+  data?: any;
 }
 
 interface ContractJSON {
@@ -52,12 +53,14 @@ interface IMarketplaceState {
 interface IAdminAction {
   changeField: Function;
   submitValue: Function;
+  changeFieldFile: Function;
 }
 
 interface IEventType {
   target: {
     name: string;
     value: number;
+    files?: any;
   };
 }
 
