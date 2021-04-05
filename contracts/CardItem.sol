@@ -36,7 +36,7 @@ contract CardItem is ERC721URIStorage, Ownable {
      * @param _owner - NFT owner
      * @param _tokenURI - URL include ipfs hash
      */
-    function mint(address _owner, string memory _tokenURI) public onlyOwner returns (uint256) {
+    function mintNFT(address _owner, string memory _tokenURI) public onlyOwner returns (uint256) {
         require(ipfsHashes[_tokenURI] != true, "Already registered");  
         
          _tokenIds.increment();

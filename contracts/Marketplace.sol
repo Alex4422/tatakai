@@ -17,7 +17,13 @@ contract Marketplace is ERC721Holder, Ownable {
         acceptedToken = IERC20(_acceptedToken);
     }
     
-    
+    /** 
+     * @dev Buy a NFT  
+     * @param _nftAddress - NFT contract address
+     * @param _buyer - Buyer address
+     * @param _assetId - NFT id
+     * @param _priceInWei - NFT price
+     */
     function buy(address _nftAddress, address _buyer, uint256 _assetId, uint256 _priceInWei) public returns(uint256) {
         acceptedToken.transferFrom(
                 msg.sender,
@@ -30,8 +36,6 @@ contract Marketplace is ERC721Holder, Ownable {
             _buyer,
             _assetId
         );
-        
-        
     }
-     
+    
 }
