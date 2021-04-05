@@ -51,8 +51,9 @@ exports.create = async (req, res) => {
     const nft_minted = await lms.tokenInfoMap(item.receipt.logs[0].args.tokenId)
 
     res.status(200).send({
-     owner: nft_minted.owner,
-     ipfsHash: nft_minted.IpfsHash
+      id: item.receipt.logs[0].args.tokenId,  
+      owner: nft_minted.owner,
+      ipfsHash: nft_minted.ipfsHash
     });
 
   } catch (err) {
@@ -63,15 +64,31 @@ exports.create = async (req, res) => {
 };
 
 exports.findAll = async (req, res) => {
-  try {
-    const url = `https://api.pinata.cloud/data/pinList?status=pinned`;
-    const nft_list = await axios.get(url, {
-        headers: {
-          pinata_api_key: pinataApiKey, 
-          pinata_secret_api_key: pinataSecretApiKey,
-        },
-    });
-    res.status(200).send(nft_list.data.rows);
+ try {
+    const lms = await contract.deployed();
+    const nft_count = await lms._tokenIds();
+    let all_nfts = [];
+    for (let i = 0; i < nft_count; i++) {
+      const nft = await lms.tokenInfoMap(i);
+      if(nft.ipfsHash !== "") {
+        const info = await axios.get("https://ipfs.io/ipfs/"+nft.ipfsHash);
+        // const url = `https://api.pinata.cloud/data/pinList?hashContains=${nft.ipfsHash}`;
+        // const nft_info = await axios.get(url, {
+        //   headers: {
+        //   pinata_api_key: pinataApi.key, 
+        //   pinata_secret_api_key: pinataApi.secretKey,
+        //   },
+        // });
+        all_nfts.push({
+          id: i,
+          owner: nft.owner,
+          name: info.data.name,
+          description: info.data.description,
+          image: info.data.image
+        });
+      }
+    }
+    res.status(200).send(all_nfts);
   }
   catch (err) {
     res.status(500).send({
@@ -81,15 +98,20 @@ exports.findAll = async (req, res) => {
 };
 
 exports.findOne = async (req, res) => {
-  const id = req.params.id;
   try {
+    const id = req.params.id;
     const lms = await contract.deployed();
-    const nft_minted = await lms.tokenInfoMap(id)
-
-    res.status(200).send({
-     ipfs_hash: nft_minted.metaDataHash,
-     metadata: nft_minted.metaData
-    });
+    const nft = await lms.tokenInfoMap(id);
+      if(nft.ipfsHash !== "") {
+        const info = await axios.get("https://ipfs.io/ipfs/"+nft.ipfsHash);
+        const nft_info = {
+          owner: nft.owner,
+          name: info.data.name,
+          description: info.data.description,
+          image: info.data.image
+        };
+        res.status(200).send(nft_info);
+      }
   }
   catch (err) {
     res.status(500).send({
