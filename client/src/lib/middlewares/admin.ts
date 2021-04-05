@@ -4,7 +4,7 @@ import CardItem from "../../contracts/CardItem.json";
 import { getContract } from "./utils";
 import axios from 'axios';
 
-const URL = "http://localhost:8080/";
+const URL = "http://localhost:8080/api/";
 
 const customMiddleware = () => ({ dispatch, getState }: any) => (
   next: any
@@ -42,7 +42,7 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
       formData.append("token", token);
       const config: Object = {
         method: 'POST',
-        url: `${URL}Card`,
+        url: `${URL}cards`,
         headers: {
           "Content-Type": "multipart/form-data",
         },

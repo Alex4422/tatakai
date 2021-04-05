@@ -7,6 +7,9 @@ export const initialState = {
   web3: null,
   accounts: null,
   isLoading: false,
+  isAdmin: false,
+  cards: null,
+  balance: null,
 };
 
 const marketplace = (
@@ -21,7 +24,9 @@ const marketplace = (
       };
     case SEED_AUTH_METAMASK:
       return {
-        ...payload,
+        ...oldState,
+        web3: payload.web3,
+        accounts: payload.accounts,
         isLoading: false,
       };
     default:

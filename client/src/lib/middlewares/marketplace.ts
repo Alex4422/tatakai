@@ -3,7 +3,7 @@ import {seedMarket} from "../actions/marketplace";
 import getAccount from "./utils"
 import axios from 'axios';
 
-const URL = "http://localhost:8080/";
+const URL = "http://localhost:8080/api/";
 
 const customMiddleware = () => ({ dispatch, getState }: any) => (
   next: any
@@ -20,7 +20,7 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
       
       const config: Object = {
         method: 'get',
-        url: `${URL}Card`,
+        url: `${URL}cards`,
       }
       try {
         const response: any = await axios(config);

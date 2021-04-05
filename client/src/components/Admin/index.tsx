@@ -7,7 +7,8 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import InputLabel from "@material-ui/core/InputLabel";
 import Container from "@material-ui/core/Container";
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
+import { readBuilderProgram } from "typescript";
 
 type Props = IContractAction & IContractState;
 type AdminProps = IAdminState & IAdminAction;
@@ -32,10 +33,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+const types = ["Commune","Rare", "Légendaire","Unique"];
+
+
+
 const Admin = ({ changeField, token, submitValue }: Props & AdminProps) => {
   const { validate, isValid } = useFormValidation();
   const classes = useStyles();
+ 
+
+ 
   const handleOnChange = (e: any) => changeField(e);
+  
   const handleOnSubmit = (e: any) => {
     e.preventDefault();
     submitValue();
@@ -65,21 +75,62 @@ const Admin = ({ changeField, token, submitValue }: Props & AdminProps) => {
                 onChange={handleOnChange}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={4}>
               <TextField
                 variant="outlined"
                 required
-                fullWidth
-                name="description"
-                label="Description"
+                name="age"
+                label="Age"
                 type="text"
-                id="description"
-                multiline
-                rows={3}
-                autoComplete="description"
-                defaultValue={token.description || ""}
+                id="age"
+                autoComplete="Age"
+                defaultValue={token.age || ""}
                 onChange={handleOnChange}
               />
+            </Grid>
+            <Grid item xs={4}>
+              <TextField
+                variant="outlined"
+                required
+                name="nationalité"
+                label="Nationalité"
+                type="text"
+                id="nationalité"
+                autoComplete="Nationalité"
+                defaultValue={token.nationalité || ""}
+                onChange={handleOnChange}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <TextField
+                variant="outlined"
+                required
+                name="saison"
+                label="Saison"
+                type="text"
+                id="Saison"
+                autoComplete="Saison"
+                defaultValue={token.saison || ""}
+                onChange={handleOnChange}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <TextField
+                variant="outlined"
+                required
+                name="type"
+                label="Type"
+                select
+                id="Type"
+                autoComplete="Type"
+                defaultValue={token.type || "Commune"}
+                onChange={handleOnChange}
+              > {types.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+              </TextField>
             </Grid>
           </Grid>
           <Grid container spacing={2}>
@@ -109,7 +160,7 @@ const Admin = ({ changeField, token, submitValue }: Props & AdminProps) => {
                 type="number"
                 label="Supply"
                 name="supply"
-                autoComplete="lname"
+                autoComplete="supply"
                 defaultValue={token.supply || ""}
                 onChange={handleOnChange}
               />
