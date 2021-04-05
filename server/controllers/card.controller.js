@@ -16,15 +16,7 @@ exports.create = async (req, res) => {
       return res.status(400).send({ message: "Please upload a file!" });
     }
     const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
-    const metadata = JSON.stringify({
-            name: 'testname',
-            keyvalues: {
-                exampleKey: 'exampleValue'
-            }
-    });
-    
-    let data = new FormData();  
-    data.append('pinataMetadata', metadata);
+    let data = new FormData();
     data.append("file", fs.createReadStream(req.file.path));  
 
     const nft = await axios.post(url, data, {
@@ -36,18 +28,36 @@ exports.create = async (req, res) => {
         },
     });
 
+    const metadata = {
+      "pinataMetadata": {
+          "name": req.body.name
+      },
+      "pinataContent": {
+          "name": req.body.name,
+          "description": req.body.description,
+          "image": "https://ipfs.io/ipfs/"+nft.data.IpfsHash
+      }
+    };
+
+    const nft_json = await axios.post("https://api.pinata.cloud/pinning/pinJSONToIPFS", metadata, {
+        headers: {
+        pinata_api_key: pinataApi.key, 
+        pinata_secret_api_key: pinataApi.secretKey,
+        },
+    });
+
     const accounts = await web3.eth.getAccounts();
-    const item = await lms.mintNFT(accounts[0], nft.data.IpfsHash, metadata, {from: accounts[0]});
+    const item = await lms.mintNFT(accounts[0], nft_json.data.IpfsHash, {from: accounts[0]});
     const nft_minted = await lms.tokenInfoMap(item.receipt.logs[0].args.tokenId)
 
     res.status(200).send({
-     ipfs_hash: nft_minted.metaDataHash,
-     metadata: nft_minted.metaData
+     owner: nft_minted.owner,
+     ipfsHash: nft_minted.IpfsHash
     });
 
   } catch (err) {
     res.status(500).send({
-      error: `Could not upload the file: ${err}`,
+      error: err,
     });
   }
 };

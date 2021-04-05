@@ -1,29 +1,66 @@
-type State = {
-  web3: any,
-  accounts: array<string>,
-  contract: Object,
-  storageValue: number,
-  inputValue: number,
-  isLoading: boolean,
-}
-
-interface Action {
-  type: string,
-  storageValue: number,
-  accounts: array<string>,
-  web3: any,
-  instance: Object,
-  payload: Object
+interface IAction {
+  type: string;
+  payload: any | null;
 }
 
 interface ContractJSON {
-  networks: any,
-  address: any,
-  index: any,
+  networks: any;
+  address: any;
+  index: any;
 }
 
-interface propsConnector extends State {
-  newInstance: function,
-  changeField: function,
-  submitValue: function,
+interface IContractState {
+  admin: any | null;
+  web3: any | null;
+  accounts: Array<string> | null;
 }
+interface IContractAction {
+  newInstance: Function;
+}
+
+interface IStorageState {
+  storageValue: number;
+  inputValue: number;
+  isLoading: boolean;
+}
+interface IStorageAction {
+  changeField: Function;
+  submitValue: Function;
+}
+
+interface IUserState {
+  web3: any | null;
+  accounts: Array<string> | null;
+}
+
+
+interface IAdminState {
+  token: any;
+  isLoading: boolean;
+}
+
+
+interface IMarketplaceState {
+  NFTS: array<Object> | null;
+  isLoading: boolean;
+}
+
+interface IAdminAction {
+  changeField: Function;
+  submitValue: Function;
+}
+
+interface IEventType {
+  target: {
+    name: string;
+    value: number;
+  };
+}
+
+interface ConfigAxios {
+    method: string;
+    url: string;
+    headers: any;
+    body: any;
+  };
+
