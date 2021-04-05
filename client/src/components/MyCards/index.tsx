@@ -5,8 +5,10 @@ import CardsCarousel from "../../ui/CardsCarousel";
 import "../styles.css";
 
 declare interface Props {
-  initMarket: Function;
-  nfts: Array<Object> | null;
+  fetchUserCards: Function;
+  getAuthMetamask: Function;
+  seedAuthMetamask: Function;
+  cards: Array<any> | null;
 }
 
 const useStyles = () => {
@@ -20,19 +22,16 @@ const useStyles = () => {
   };
   return classes;
 };
-const MarketPlace = ({ initMarket, nfts }: Props) => {
+const MarketPlace = ({ getAuthMetamask, seedAuthMetamask, cards }: Props) => {
   const classes = useStyles();
-
-  useEffect(() => {
-    //initMarket()
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <Container component="main" maxWidth="lg">
       <div className="App">
-        <h1>Liste des NFTS : </h1>
+        <h1>My Cards </h1>
         {/* <CardsCarousel items={nfts} /> */}
-        <Gallery items={nfts} />
+        <Gallery items={cards} />
       </div>
     </Container>
   );
