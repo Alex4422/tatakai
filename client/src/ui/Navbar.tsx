@@ -60,34 +60,75 @@ function Navbar() {
           ></IconButton>
           <Typography variant="h6" className={classes.title}>
             <Link style={{ color: "white", textDecoration: "none" }} to="/">
-              NFT - TAKAKAI{" "}
+              TAKAKAI
             </Link>
           </Typography>
-
-          <ul
+          <div
             style={{
-              listStyleType: "none",
-              width: "15%",
               display: "flex",
-              justifyContent: "space-around",
+              justifyContent: "space-between",
+              width: "100%",
             }}
           >
-            <li>
-              {" "}
-              <Link style={{ color: "white", textDecoration: "none" }} to="/">
-                Home
-              </Link>
-            </li>
-            <li>
-              {" "}
-              <Link
-                style={{ color: "white", textDecoration: "none" }}
-                to="/admin"
-              >
-                Admin
-              </Link>
-            </li>
-          </ul>
+            <ul
+              style={{
+                listStyleType: "none",
+                width: "30%",
+                display: "flex",
+                justifyContent: "space-around",
+              }}
+            >
+              <li>
+                <Link style={{ color: "white", textDecoration: "none" }} to="/">
+                  MarketPlace
+                </Link>
+              </li>
+              <li>
+                <Link style={{ color: "white", textDecoration: "none" }} to="/">
+                  My Cards
+                </Link>
+              </li>
+              <li>
+                <Link
+                  style={{
+                    color: "white",
+                    textDecoration: "none",
+                    opacity: "0.5",
+                    cursor: "not-allowed",
+                  }}
+                  to="/"
+                >
+                  Bid
+                </Link>
+              </li>
+            </ul>
+
+            <ul
+              style={{
+                listStyleType: "none",
+                width: "20%",
+                display: "flex",
+                justifyContent: "space-around",
+              }}
+            >
+              <li>
+                <Link
+                  style={{ color: "white", textDecoration: "none" }}
+                  to="/admin"
+                >
+                  Admin
+                </Link>
+              </li>
+              <li>
+                <Link
+                  style={{ color: "white", textDecoration: "none" }}
+                  to="/admin"
+                >
+                  Profile
+                </Link>
+              </li>
+            </ul>
+          </div>
         </Toolbar>
       </AppBar>
     </div>
