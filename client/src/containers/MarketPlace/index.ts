@@ -1,6 +1,5 @@
 import { connect } from "react-redux";
 import MarketPlace from "../../components/MarketPlace";
-import { getAuthMetamask } from "../../lib/actions/user";
 import { initMarket } from "../../lib/actions/marketplace";
 
 // dummy data pending api call available
@@ -34,7 +33,6 @@ const mapStateToProps = ({
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-  getAuthMetamask: () => dispatch(getAuthMetamask()),
   initMarket: () => dispatch(initMarket()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(MarketPlace);

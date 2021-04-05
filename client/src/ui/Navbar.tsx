@@ -79,12 +79,18 @@ function Navbar() {
               }}
             >
               <li>
-                <Link style={{ color: "white", textDecoration: "none" }} to="/">
+                <Link
+                  style={{ color: "white", textDecoration: "none" }}
+                  to="/marketplace"
+                >
                   MarketPlace
                 </Link>
               </li>
               <li>
-                <Link style={{ color: "white", textDecoration: "none" }} to="/">
+                <Link
+                  style={{ color: "white", textDecoration: "none" }}
+                  to="/cards"
+                >
                   My Cards
                 </Link>
               </li>

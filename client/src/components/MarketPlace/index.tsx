@@ -6,7 +6,6 @@ import CardsCarousel from "../../ui/CardsCarousel";
 import "../styles.css";
 
 declare interface Props {
-  getAuthMetamask: Function;
   initMarket: Function;
   nfts: Array<Object> | null;
 }
@@ -22,12 +21,11 @@ const useStyles = () => {
   };
   return classes;
 };
-const MarketPlace = ({ getAuthMetamask, initMarket, nfts }: Props) => {
+const MarketPlace = ({ initMarket, nfts }: Props) => {
   const classes = useStyles();
   const [spacing, setSpacing] = useState(2);
 
   useEffect(() => {
-    getAuthMetamask();
     //initMarket()
   }, []);
 
