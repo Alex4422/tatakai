@@ -39,10 +39,12 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
     case ADMIN_FORM_SUBMIT:
       console.log("Passe par le MW admin via ADMIN FORM SUBMIT")
       let data = action.data!;
-      data.append("token", token);
-      for (var value of data.values()) {
-        console.log(value);
-     }
+      data.append("name", token.tokenName);
+      // console.log(data);
+    //   for (var value of data.values()) {
+    //     console.log(value);
+    //   // data.append("file", value);
+    //  }
       const config: Object = {
         headers: {
           "Content-Type": `multipart/form-data; boundary=${data._boundary}`,
