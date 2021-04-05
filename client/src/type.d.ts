@@ -32,21 +32,19 @@ interface IStorageAction {
 interface IUserState {
   web3: any | null;
   accounts: Array<string> | null;
-  isLoading: Boolean,
-  isAdmin: Boolean,
-  cards: Array<Object> | null,
-  balance: Number | null,
+  isLoading: Boolean;
+  isAdmin: Boolean;
+  cards: Array<Object> | null;
+  balance: Number | null;
 }
-
 
 interface IAdminState {
   token: any;
   isLoading: boolean;
 }
 
-
 interface IMarketplaceState {
-  NFTS: array<Object> | null;
+  NFTS: Array<any> | null;
   isLoading: boolean;
 }
 
@@ -65,9 +63,8 @@ interface IEventType {
 }
 
 interface ConfigAxios {
-    method: string;
-    url: string;
-    headers: any;
-    body: any;
-  };
-
+  method: string;
+  url: string;
+  headers: any;
+  body: any;
+}

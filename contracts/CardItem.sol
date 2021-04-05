@@ -9,7 +9,7 @@ import '@openzeppelin/contracts/access/Ownable.sol';
 contract CardItem is ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
     
-    Counters.Counter private _tokenIds;
+    Counters.Counter public _tokenIds;
     
     event ItemCreated(
         address owner,
