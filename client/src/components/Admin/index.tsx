@@ -103,6 +103,7 @@ const Admin = ({
         <Typography component="h1" variant="h5">
           Create new NFT
         </Typography>
+<<<<<<< HEAD
         {isLoading ? (
           <CircularProgress size="75px" style={{ color: "black" }} />
         ) : (
@@ -195,6 +196,96 @@ const Admin = ({
                   onChange={handleOnChange}
                 />
               </Grid>
+=======
+        <form className={classes.form} onSubmit={handleOnSubmit}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="name"
+                label="name"
+                name="name"
+                autoComplete="email"
+                defaultValue={nft.name || ""}
+                onChange={handleOnChange}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <TextField
+                variant="outlined"
+                required
+                name="age"
+                label="Age"
+                type="text"
+                id="age"
+                autoComplete="Age"
+                defaultValue={nft.age || ""}
+                onChange={handleOnChange}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <TextField
+                variant="outlined"
+                required
+                name="nationality"
+                label="Nationality"
+                type="text"
+                id="nationality"
+                autoComplete="Nationality"
+                defaultValue={nft.nationality || ""}
+                onChange={handleOnChange}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <TextField
+                variant="outlined"
+                required
+                name="saison"
+                label="Saison"
+                type="text"
+                id="saison"
+                autoComplete="saison"
+                defaultValue={nft.saison || ""}
+                onChange={handleOnChange}
+              />
+            </Grid>
+            <Grid item sm={6} xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                name="type"
+                label="Type"
+                select
+                id="type"
+                autoComplete="Type"
+                defaultValue={nft.type || "COMMON"}
+                onChange={handleOnChange}
+                style={{ width: "100%" }}
+              >
+                {" "}
+                {types.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </TextField>
+            </Grid>
+            <Grid item sm={6} xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="supply"
+                type="number"
+                label="Supply"
+                name="supply"
+                autoComplete="supply"
+                defaultValue={nft.supply || ""}
+                onChange={handleOnChange}
+              />
+>>>>>>> edit form
             </Grid>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={12}>
