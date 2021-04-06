@@ -32,19 +32,16 @@ const Gallery = ({ items }: Props) => {
     <div
       style={{
         display: "flex",
+        flexWrap: "wrap",
         justifyContent: "space-around",
         alignItems: "space-around",
       }}
     >
-      <GridList cellHeight={416} style={classes.gridList} cols={3} spacing={20}>
         {items?.map((item, index) => (
-          <GridListTile key={index} cols={1}>
-            <div style={{height: "416px", width:"257px", backgroundImage: `url(${item.image})`, backgroundSize: "cover"}}>
-            
+            <div style={{height: "416px", width:"257px", backgroundImage: `url(${item.image})`, backgroundSize: "cover", margin: "1rem"}}>
             </div>
-          </GridListTile>
         ))}
-      </GridList>
+      
     </div>
   );
 };
