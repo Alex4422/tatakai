@@ -13,8 +13,9 @@ contract Marketplace is ERC721Holder, Ownable {
     using SafeERC20 for IERC20;
     IERC20 public acceptedToken;
 
-    constructor(address _acceptedToken) public {
+    constructor(address _acceptedToken) public payable {
         acceptedToken = IERC20(_acceptedToken);
+        transferOwnership(address(this));
     }
     
     /** 
@@ -24,12 +25,14 @@ contract Marketplace is ERC721Holder, Ownable {
      * @param _assetId - NFT id
      * @param _priceInWei - NFT price
      */
-    function buy(address _nftAddress, address _buyer, uint256 _assetId, uint256 _priceInWei) public returns(uint256) {
-        acceptedToken.transferFrom(
-                msg.sender,
-                owner(),
-                _priceInWei
-        );
+    function buy(address _nftAddress, address _buyer, uint256 _assetId, uint256 _priceInWei) public payable returns(uint256) {
+        /*acceptedToken.safeApprove(address(this), _priceInWei);
+        
+        acceptedToken.safeTransferFrom(
+            msg.sender,
+            owner(),
+            _priceInWei
+        );*/
         
         IERC721(_nftAddress).safeTransferFrom(
             address(this),
