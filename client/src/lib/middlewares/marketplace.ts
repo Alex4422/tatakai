@@ -22,7 +22,7 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
       try {
         const response: any = await axios(config);
         console.log("response Api", response)
-        //dispatch(seedMarket(response.data))
+        dispatch(seedMarket(response.data))
       } catch (error) {
         console.error(error);
       }

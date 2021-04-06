@@ -1,3 +1,4 @@
+import { bindActionCreators } from "redux";
 import {
   INIT_MARKET,
   SEED_MARKET,
@@ -20,7 +21,7 @@ const marketplace = (
       };
     case SEED_MARKET:
       return {
-        NFTS: {},
+        NFTS: payload,
         isLoading: false,
       };
     default:

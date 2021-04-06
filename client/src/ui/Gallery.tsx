@@ -20,7 +20,7 @@ const useStyles = () => {
     },
     gridList: {
       width: "70%",
-      height: "100vh",
+      height: "100vh", 
     },
   };
   return classes;
@@ -36,10 +36,12 @@ const Gallery = ({ items }: Props) => {
         alignItems: "space-around",
       }}
     >
-      <GridList cellHeight={380} style={classes.gridList} cols={3} spacing={20}>
+      <GridList cellHeight={416} style={classes.gridList} cols={3} spacing={20}>
         {items?.map((item, index) => (
           <GridListTile key={index} cols={1}>
-            <div style={classes.item}>{item.title}</div>
+            <div style={{height: "416px", width:"257px", backgroundImage: `url(${item.image})`, backgroundSize: "cover"}}>
+            
+            </div>
           </GridListTile>
         ))}
       </GridList>
