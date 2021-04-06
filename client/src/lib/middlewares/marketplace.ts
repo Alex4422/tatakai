@@ -10,14 +10,11 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
 ) => async (action: IAction) => {
 
   switch (action.type) {
-
   /*******************************/
   /* MARKET INIT via API / GET NFTS MARKETPLACE /
   /*******************************/
-
     case INIT_MARKET:
-      console.log("Passe par le MW MArketPLace via MArketINit")
-      
+      console.log("Passe par le MW MarketPLace via MarketINit")      
       const config: Object = {
         method: 'get',
         url: `${URL}cards`,

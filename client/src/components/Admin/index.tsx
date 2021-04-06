@@ -32,9 +32,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const types = ["Commune", "Rare", "Légendaire", "Unique"];
+const types = ["COMMON", "RARE", "LEGEND", "UNIQUE"];
 
-const Admin = ({ changeField, token, submitValue, changeFieldFile }: Props & AdminProps) => {
+const Admin = ({ changeField, nft, submitValue, changeFieldFile }: Props & AdminProps) => {
   const { validate, isValid } = useFormValidation();
   const classes = useStyles();
   const [file, setFile] = useState();
@@ -69,11 +69,11 @@ const Admin = ({ changeField, token, submitValue, changeFieldFile }: Props & Adm
                 variant="outlined"
                 required
                 fullWidth
-                id="description"
-                label="Token's name"
-                name="tokenName"
+                id="name"
+                label="name"
+                name="name"
                 autoComplete="email"
-                defaultValue={token.tokenName || ""}
+                defaultValue={nft.name || ""}
                 onChange={handleOnChange}
               />
             </Grid>
@@ -86,7 +86,7 @@ const Admin = ({ changeField, token, submitValue, changeFieldFile }: Props & Adm
                 type="text"
                 id="age"
                 autoComplete="Age"
-                defaultValue={token.age || ""}
+                defaultValue={nft.age || ""}
                 onChange={handleOnChange}
               />
             </Grid>
@@ -94,12 +94,12 @@ const Admin = ({ changeField, token, submitValue, changeFieldFile }: Props & Adm
               <TextField
                 variant="outlined"
                 required
-                name="nationalité"
-                label="Nationalité"
+                name="nationality"
+                label="Nationality"
                 type="text"
-                id="nationalité"
-                autoComplete="Nationalité"
-                defaultValue={token.nationalité || ""}
+                id="nationality"
+                autoComplete="Nationality"
+                defaultValue={nft.nationality || ""}
                 onChange={handleOnChange}
               />
             </Grid>
@@ -110,9 +110,9 @@ const Admin = ({ changeField, token, submitValue, changeFieldFile }: Props & Adm
                 name="saison"
                 label="Saison"
                 type="text"
-                id="Saison"
-                autoComplete="Saison"
-                defaultValue={token.saison || ""}
+                id="saison"
+                autoComplete="saison"
+                defaultValue={nft.saison || ""}
                 onChange={handleOnChange}
               />
             </Grid>
@@ -123,9 +123,9 @@ const Admin = ({ changeField, token, submitValue, changeFieldFile }: Props & Adm
                 name="type"
                 label="Type"
                 select
-                id="Type"
+                id="type"
                 autoComplete="Type"
-                defaultValue={token.type || "Commune"}
+                defaultValue={nft.type || "COMMON"}
                 onChange={handleOnChange}
               >
                 {" "}
@@ -151,7 +151,7 @@ const Admin = ({ changeField, token, submitValue, changeFieldFile }: Props & Adm
                 label="File upload"
                 name="file"
                 InputLabelProps={{ shrink: true }}
-                defaultValue={token.file || ""}
+                defaultValue={nft.file || ""}
                 onChange={(e:any) => setFile(e.target.files[0])}
               />
             </Grid>
@@ -165,15 +165,15 @@ const Admin = ({ changeField, token, submitValue, changeFieldFile }: Props & Adm
                 label="Supply"
                 name="supply"
                 autoComplete="supply"
-                defaultValue={token.supply || ""}
+                defaultValue={nft.supply || ""}
                 onChange={handleOnChange}
               />
             </Grid>
           </Grid>
-          {token.file ? (
+          {nft.file ? (
             <Grid container spacing={2}>
               <Grid item xs={12} sm={8}>
-                <img src={token.file}></img>
+                <img src={nft.file}></img>
               </Grid>
             </Grid>
           ) : null}

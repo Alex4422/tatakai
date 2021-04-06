@@ -39,7 +39,7 @@ interface IUserState {
 }
 
 interface IAdminState {
-  token: any;
+  nft: any;
   isLoading: boolean;
 }
 

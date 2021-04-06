@@ -10,41 +10,25 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
   next: any
 ) => async (action: IAction) => {
   const {
-    contract: { admin, web3 },
-    admin: { token },
+    admin: { nft },
   } = getState();
 
-  //const instance = await getContract(web3, CardItem);
   switch (action.type) {
-    /* case ADMIN_FORM_SUBMIT:
-      try {
-        instance.methods
-          .mintNFT(instance._address, "", token)
-          .send({ from: admin })
-          .then((result: any) => {
-            if (result.status) {
-              console.log(result);
-              dispatch(mintNFTSuccess());
-            }
-          });
-      } catch (error) {
-        console.error(error);
-      }
-      break; */
-
   /*******************************/
   /* ADMIN_FORM_SUBMIT via API */
   /*******************************/
-
     case ADMIN_FORM_SUBMIT:
       console.log("Passe par le MW admin via ADMIN FORM SUBMIT")
+      //get FormData img
       let data = action.data!;
-      data.append("name", token.tokenName);
-      // console.log(data);
-    //   for (var value of data.values()) {
-    //     console.log(value);
-    //   // data.append("file", value);
-    //  }
+      //append data
+      data.append("name", nft.name);
+      data.append("age", nft.age);
+      data.append("nationality", nft.nationality);
+      data.append("saison", nft.saison);
+      data.append("type", nft.type);
+      data.append("supply", nft.supply);
+
       const config: Object = {
         headers: {
           "Content-Type": `multipart/form-data; boundary=${data._boundary}`,

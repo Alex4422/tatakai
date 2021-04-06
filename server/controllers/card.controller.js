@@ -34,7 +34,7 @@ exports.create = async (req, res) => {
       },
       "pinataContent": {
           "name": req.body.name,
-          "description": req.body.description,
+          "description": "",
           "image": "https://ipfs.io/ipfs/"+nft.data.IpfsHash
       }
     };
@@ -48,14 +48,13 @@ exports.create = async (req, res) => {
 
     const accounts = await web3.eth.getAccounts();
     const item = await lms.mintNFT(accounts[0], nft_json.data.IpfsHash, {from: accounts[0]});
-    const nft_minted = await lms.tokenInfoMap(item.receipt.logs[0].args.tokenId)
-
+    const nft_minted = await lms.tokenInfoMap(item.receipt.logs[0].args.tokenId) 
     res.status(200).send({
       id: item.receipt.logs[0].args.tokenId,  
       owner: nft_minted.owner,
       ipfsHash: nft_minted.ipfsHash
-    });
-
+    }); 
+    
   } catch (err) {
     res.status(500).send({
       error: err,
@@ -63,12 +62,17 @@ exports.create = async (req, res) => {
   }
 };
 
+
+
+
+
+
 exports.findAll = async (req, res) => {
  try {
     const lms = await contract.deployed();
     const nft_count = await lms._tokenIds();
     let all_nfts = [];
-    for (let i = 0; i < nft_count; i++) {
+    for (let i = 0; i <= nft_count; i++) {
       const nft = await lms.tokenInfoMap(i);
       if(nft.ipfsHash !== "") {
         const info = await axios.get("https://ipfs.io/ipfs/"+nft.ipfsHash);

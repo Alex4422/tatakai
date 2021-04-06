@@ -8,10 +8,10 @@ type IMapStateToPropsType = {
 };
 const mapStateToProps = ({
   contract: {},
-  admin: { token, isLoading },
+  admin: { nft, isLoading },
 }: IMapStateToPropsType) => {
   return {
-    token,
+    nft,
     isLoading,
   };
 };

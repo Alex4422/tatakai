@@ -24,7 +24,7 @@ const MarketPlace = ({ initMarket, nfts }: Props) => {
   const classes = useStyles();
 
   useEffect(() => {
-    //initMarket()
+    initMarket()
   }, []);
 
   return (

@@ -6,7 +6,7 @@ import {
 } from "../actions/types";
 
 export const initialState = {
-  token: { tokenName: null, age: null, file: null, supply: null, nationalité: null, saison: null, type: null },
+  nft: { name: null, age: null, file: null, supply: null, nationality: null, saison: null, type: null },
   isLoading: false,
 };
 
@@ -18,7 +18,7 @@ const admin = (
     case ADMIN_FORM_HANDLECHANGE:
       return {
         ...oldState,
-        token: { ...oldState.token, ...payload },
+        nft: { ...oldState.nft, ...payload },
       };
     case ADMIN_FORM_SUBMIT:
       return {
@@ -27,7 +27,7 @@ const admin = (
       };
     case MINT_NFT_SUCCESS:
       return {
-        token: {},
+        nft: {},
         isLoading: false,
       };
     default:
