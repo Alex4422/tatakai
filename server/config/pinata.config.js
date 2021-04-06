@@ -1,4 +1,4 @@
 module.exports = {
-    key: "9e39d44f2d12d18b658a",
-    secretKey: "fe3ef02424f10ec63626cbfee0a51dc07f7a02315b631d4835933721b4637dcd"
+    key: "332cfbb97463d8c3d925",
+    secretKey: "215a7bb54fa9d8a20e200ecade6909dfd3a471246229ff6b7421ffa92c42e6d9"
 }
