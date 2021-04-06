@@ -1,5 +1,5 @@
 import { ADMIN_FORM_SUBMIT } from "../actions/types";
-import { mintNFTSuccess } from "../actions/admin";
+import { mintNFTSuccess, isMinting } from "../actions/admin";
 import CardItem from "../../contracts/CardItem.json";
 import { getContract } from "./utils";
 import axios from 'axios';
@@ -18,6 +18,7 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
   /* ADMIN_FORM_SUBMIT via API */
   /*******************************/
     case ADMIN_FORM_SUBMIT:
+      dispatch(isMinting());
       console.log("Passe par le MW admin via ADMIN FORM SUBMIT")
       //get FormData img
       let data = action.data!;
@@ -37,6 +38,9 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
       try {
         const response: any = await axios.post(`${URL}cards`,data,config);
         console.log("response Api", response)
+        if(response.status === 200){
+          dispatch(mintNFTSuccess())
+        }
       } catch (error) {
         console.error(error);
       }

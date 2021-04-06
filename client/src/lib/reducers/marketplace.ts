@@ -6,7 +6,7 @@ import {
 
 export const initialState = {
   NFTS: null,
-  isLoading: false,
+  isLoading: true,
 };
 
 const marketplace = (
