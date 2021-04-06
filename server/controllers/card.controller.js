@@ -30,11 +30,18 @@ exports.create = async (req, res) => {
 
     const metadata = {
       "pinataMetadata": {
-          "name": req.body.name
+          "name": req.body.name,
+          "keyvalues": {
+            "name": req.body.name,
+            "age": req.body.age,
+            "nationality": req.body.nationality,
+            "saison": req.body.saison,
+            "type": req.body.type
+          }
       },
       "pinataContent": {
           "name": req.body.name,
-          "description": "",
+          "description": req.body.type,
           "image": "https://ipfs.io/ipfs/"+nft.data.IpfsHash
       }
     };
@@ -62,11 +69,6 @@ exports.create = async (req, res) => {
   }
 };
 
-
-
-
-
-
 exports.findAll = async (req, res) => {
  try {
     const lms = await contract.deployed();
@@ -76,19 +78,20 @@ exports.findAll = async (req, res) => {
       const nft = await lms.tokenInfoMap(i);
       if(nft.ipfsHash !== "") {
         const info = await axios.get("https://ipfs.io/ipfs/"+nft.ipfsHash);
-        // const url = `https://api.pinata.cloud/data/pinList?hashContains=${nft.ipfsHash}`;
-        // const nft_info = await axios.get(url, {
-        //   headers: {
-        //   pinata_api_key: pinataApi.key, 
-        //   pinata_secret_api_key: pinataApi.secretKey,
-        //   },
-        // });
+        const url = `https://api.pinata.cloud/data/pinList?hashContains=${nft.ipfsHash}`;
+        const nft_info = await axios.get(url, {
+          headers: {
+            pinata_api_key: pinataApi.key, 
+            pinata_secret_api_key: pinataApi.secretKey,
+          },
+        });
         all_nfts.push({
           id: i,
           owner: nft.owner,
           name: info.data.name,
           description: info.data.description,
-          image: info.data.image
+          image: info.data.image,
+          metadata: nft_info.data.rows[0] !== undefined ? nft_info.data.rows[0].metadata.keyvalues : null
         });
       }
     }
