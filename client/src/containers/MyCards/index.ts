@@ -29,7 +29,7 @@ const mapStateToProps = ({
 const mapDispatchToProps = (dispatch: any) => ({
   getUserNFTS: () => dispatch(getUserNFTS()),
   getAuthMetamask: () => dispatch(getAuthMetamask()),
-  seedAuthMetamask: (web3: any, accounts: string[]) =>
-    dispatch(seedAuthMetamask(web3, accounts)),
+  seedAuthMetamask: (web3: any, accounts: string[], balanceWei: Number) =>
+    dispatch(seedAuthMetamask(web3, accounts, balanceWei)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(MyCards);

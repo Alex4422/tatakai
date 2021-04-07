@@ -23,9 +23,9 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
         console.log("web3",web3)
         const accounts = await web3.eth.getAccounts();
         console.log("accounts", accounts)
-        dispatch(seedAuthMetamask(web3, accounts));
-
-      //TODO dispatch la balance
+        const balance = await web3.eth.getBalance(accounts[0])
+        console.log("balance", balance)
+        dispatch(seedAuthMetamask(web3, accounts, balance));
       } catch (error) {
         alert(
           `Failed to load web3, accounts, or contract. Check console for details.`

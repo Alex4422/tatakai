@@ -9,7 +9,8 @@ export const initialState = {
   isLoading: false,
   isAdmin: false,
   cards: null,
-  balance: null,
+  balanceWei: null,
+  balanceTAK: null,
 };
 
 const marketplace = (
@@ -27,6 +28,7 @@ const marketplace = (
         ...oldState,
         web3: payload.web3,
         accounts: payload.accounts,
+        balanceWei: payload.balanceWei,
         isLoading: false,
       };
     default:
