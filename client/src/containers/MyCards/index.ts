@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import MyCards from "../../components/MyCards";
-import { seedAuthMetamask, getAuthMetamask } from "../../lib/actions/user";
+import { seedAuthMetamask, getAuthMetamask, getUserNFTS } from "../../lib/actions/user";
 
 // dummy data pending api call available
 const items = [
@@ -27,7 +27,7 @@ const mapStateToProps = ({
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-  fetchUserCards: () => null,
+  getUserNFTS: () => dispatch(getUserNFTS()),
   getAuthMetamask: () => dispatch(getAuthMetamask()),
   seedAuthMetamask: (web3: any, accounts: string[]) =>
     dispatch(seedAuthMetamask(web3, accounts)),
