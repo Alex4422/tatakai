@@ -36,7 +36,8 @@ exports.create = async (req, res) => {
             "age": req.body.age,
             "nationality": req.body.nationality,
             "saison": req.body.saison,
-            "type": req.body.type
+            "type": req.body.type,
+            "price": req.body.price
           }
       },
       "pinataContent": {
