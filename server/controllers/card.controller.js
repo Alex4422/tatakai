@@ -70,39 +70,17 @@ exports.create = async (req, res) => {
 };
 
 exports.findAll = async (req, res) => {
- try {
-    const lms = await contract.deployed();
-    const nft_count = await lms._tokenIds();
-    const marketplace_address = await lms.marketplace();
-    let all_nfts = [];
-    for (let i = 0; i <= nft_count; i++) {
-      const nft = await lms.tokenInfoMap(i);
-      if(nft.ipfsHash !== "" && marketplace_address == nft.owner) {
-        const info = await axios.get("https://ipfs.io/ipfs/"+nft.ipfsHash);
-        const url = `https://api.pinata.cloud/data/pinList?hashContains=${nft.ipfsHash}`;
-        const nft_info = await axios.get(url, {
-          headers: {
-            pinata_api_key: pinataApi.key, 
-            pinata_secret_api_key: pinataApi.secretKey,
-          },
-        });
-        all_nfts.push({
-          id: i,
-          owner: nft.owner,
-          name: info.data.name,
-          description: info.data.description,
-          image: info.data.image,
-          metadata: nft_info.data.rows[0] !== undefined ? nft_info.data.rows[0].metadata.keyvalues : null
-        });
-      }
-    }
-    res.status(200).send(all_nfts);
-  }
-  catch (err) {
-    res.status(500).send({
-      error: err
-    });
-  }
+     try {
+        const lms = await contract.deployed();
+        const marketplace = await lms.marketplace();
+         const cards = await CardService.getCardsOf(marketplace);
+         if(!cards){
+            res.status(404).json("There are no cards minted yet!")
+         }
+         res.json(cards);
+       } catch (error) {
+          res.status(500).json({error: error})
+       }
 };
 
 exports.findOne = async (req, res) => {
