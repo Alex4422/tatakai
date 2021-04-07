@@ -1,6 +1,8 @@
 import getWeb3 from "./getWeb3";
 import { seedAuthMetamask } from "../../actions/user";
 import { AssertionError } from "node:assert";
+import detectEthereumProvider from '@metamask/detect-provider';
+
 
 // Connect web3 and accounts
 const connectWeb3 = async (store: any) => {
@@ -8,7 +10,9 @@ const connectWeb3 = async (store: any) => {
     const web3: any = await getWeb3();
     const accounts = await web3.eth.getAccounts();
     const balance = await web3.eth.getBalance(accounts[0])
-    store.dispatch(seedAuthMetamask(web3, accounts, balance));
+    const provider: any = await detectEthereumProvider()
+
+    store.dispatch(seedAuthMetamask(web3, accounts, balance, provider));
   } catch (error) {
     alert(
       `Failed to load web3, accounts, or contract. Check console for details.`

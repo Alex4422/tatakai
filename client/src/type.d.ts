@@ -31,6 +31,7 @@ interface IStorageAction {
 
 interface IUserState {
   web3: any | null;
+  provider: any | null;
   accounts: Array<string> | null;
   isLoading: Boolean;
   isAdmin: Boolean;

@@ -6,7 +6,7 @@ import detectEthereumProvider from '@metamask/detect-provider'
 const tokenAddress = '0xd00981105e61274c8a5cd5a88fe7e037d935b513';
 const tokenSymbol = 'TAK';
 const tokenDecimals = 18;
-const tokenImage = 'http://placekitten.com/200/300';
+const tokenImage = 'https://ipfs.io/ipfs/QmRLgx3aigZhbNQjZpY3gyErWijnH6AvXSS5dd2ddFgw2d';
 
 
 const addTAKToken = async (web3: any) => {

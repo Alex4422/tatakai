@@ -1,5 +1,6 @@
 import { GET_AUTH_METAMASK, GET_USER_NFTS, GET_TAK } from "../actions/types";
 import {seedAuthMetamask, seedUserNFTS} from "../actions/user";
+import detectEthereumProvider from '@metamask/detect-provider';
 import getAccount from "./utils"
 import addTAKToken from "./utils/addTak"
 import getWeb3 from "./utils/getWeb3";
@@ -26,7 +27,8 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
         console.log("accounts", accounts)
         const balance = await web3.eth.getBalance(accounts[0])
         console.log("balance", balance)
-        dispatch(seedAuthMetamask(web3, accounts, balance));
+        const provider: any = await detectEthereumProvider()
+        dispatch(seedAuthMetamask(web3, accounts, balance, provider));
       } catch (error) {
         alert(
           `Failed to load web3, accounts, or contract. Check console for details.`
