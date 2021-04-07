@@ -36,6 +36,8 @@ app.use(express.urlencoded({ extended: true }));
 //app.use(upload.array()); 
 
 require("./routes/card.routes")(app);
+require("./routes/user.routes")(app);
+require("./routes/faucet.routes")(app);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
