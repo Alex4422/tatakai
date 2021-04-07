@@ -1,7 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 import useFormValidation from "../../hooks/useFormValidation";
 import UploadService from "../../services/file-upload.service";
-import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -32,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  preview: {
+    width: "100%",
+  },
 }));
 
 const types = ["COMMON", "RARE", "LEGEND", "UNIQUE"];
@@ -48,9 +50,7 @@ const Admin = ({
   const [file, setFile] = useState();
   const [preview, setPreview] = useState({
     image: "",
-    currentFile: "",
     progress: 0,
-    message: null,
     imageInfos: [],
   });
 
@@ -73,7 +73,6 @@ const Admin = ({
       ...preview,
       image: URL.createObjectURL(event.target.files[0]),
       progress: 0,
-      message: null,
     });
   };
   useEffect(() => {
@@ -234,12 +233,6 @@ const Admin = ({
                     src={preview.image}
                     alt=""
                   />
-                </div>
-              )}
-
-              {preview.message && (
-                <div className="alert alert-secondary mt-3" role="alert">
-                  {preview.message}
                 </div>
               )}
             </Grid>
