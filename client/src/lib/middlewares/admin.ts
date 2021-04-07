@@ -29,6 +29,7 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
       data.append("saison", nft.saison);
       data.append("type", nft.type);
       data.append("supply", nft.supply);
+      data.append("price", nft.price);
 
       const config: Object = {
         headers: {

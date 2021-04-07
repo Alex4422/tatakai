@@ -139,6 +139,34 @@ const Admin = ({ changeField, nft, submitValue, changeFieldFile, isLoading }: Pr
                 ))}
               </TextField>
             </Grid>
+            <Grid item xs={4}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="price"
+                type="number"
+                label="Price in TAK"
+                name="price"
+                autoComplete="Price"
+                defaultValue={nft.price || ""}
+                onChange={handleOnChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="supply"
+                type="number"
+                label="Supply"
+                name="supply"
+                autoComplete="supply"
+                defaultValue={nft.supply || ""}
+                onChange={handleOnChange}
+              />
+            </Grid>
           </Grid>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={8}>
@@ -158,20 +186,7 @@ const Admin = ({ changeField, nft, submitValue, changeFieldFile, isLoading }: Pr
                 onChange={(e:any) => setFile(e.target.files[0])}
               />
             </Grid>
-            <Grid item xs={12} sm={4}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="supply"
-                type="number"
-                label="Supply"
-                name="supply"
-                autoComplete="supply"
-                defaultValue={nft.supply || ""}
-                onChange={handleOnChange}
-              />
-            </Grid>
+          
           </Grid>
           {nft.file ? (
             <Grid container spacing={2}>
