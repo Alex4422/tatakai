@@ -73,10 +73,11 @@ exports.findAll = async (req, res) => {
  try {
     const lms = await contract.deployed();
     const nft_count = await lms._tokenIds();
+    const marketplace_address = await lms.marketplace();
     let all_nfts = [];
     for (let i = 0; i <= nft_count; i++) {
       const nft = await lms.tokenInfoMap(i);
-      if(nft.ipfsHash !== "") {
+      if(nft.ipfsHash !== "" && marketplace_address == nft.owner) {
         const info = await axios.get("https://ipfs.io/ipfs/"+nft.ipfsHash);
         const url = `https://api.pinata.cloud/data/pinList?hashContains=${nft.ipfsHash}`;
         const nft_info = await axios.get(url, {
