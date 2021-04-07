@@ -12,7 +12,7 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
   next: any
 ) => async (action: IAction) => {
   const {
-    user: { accounts, Web3 },
+    user: { accounts, Web3, provider },
   } = getState();
   switch (action.type) {
 
@@ -68,16 +68,24 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
     console.log("Passe par le MW GET TAK") 
      
     try {
-    const reponse = await addTAKToken(Web3);
-    console.log("reponse", reponse)
+     /******** ADD TAK TOKEN TO USER'S METAMASK WALLET********/ 
+     //const promise = await addTAKToken(provider);
+    
 
-    /* const config: Object = {
-      method: 'get',
-      url: `${URL}users/${accounts[0]}`,
+    //Ask Faucet try
+     const config: Object = {
+      method: 'post',
+      url: `${URL}faucet/`,
+      body: {
+       address: accounts[0]
+      },
+      data: {
+        address: accounts[0]
+       },
     }
-   
+    
       const response: any = await axios(config);
-      console.log("response Api", response) */
+      console.log("response Api", response) 
       //dispatch(seedUserNFTS(response.data))
     } catch (error) {
       console.error(error);
