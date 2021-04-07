@@ -6,6 +6,7 @@ const contract = instance.contract;
 const FormData = require("form-data");const axios = require("axios");
 const fs = require("fs");
 const pinataApi = require("../config/pinata.config.js");
+const CardService = require("../services/card.services");
 
 exports.create = async (req, res) => {
   try {
@@ -30,19 +31,19 @@ exports.create = async (req, res) => {
 
     const metadata = {
       "pinataMetadata": {
-          "name": req.body.name,
+          "name": req.body.name || "",
           "keyvalues": {
-            "name": req.body.name,
-            "age": req.body.age,
-            "nationality": req.body.nationality,
-            "saison": req.body.saison,
-            "type": req.body.type,
-            "price": req.body.price
+            "name": req.body.name || "",
+            "age": req.body.age || "",
+            "nationality": req.body.nationality || "",
+            "saison": req.body.saison || "",
+            "type": req.body.type || "",
+            "price": req.body.price || ""
           }
       },
       "pinataContent": {
-          "name": req.body.name,
-          "description": req.body.type,
+          "name": req.body.name || "",
+          "description": req.body.type || "",
           "image": "https://ipfs.io/ipfs/"+nft.data.IpfsHash
       }
     };
@@ -55,7 +56,7 @@ exports.create = async (req, res) => {
     });
 
     const accounts = await web3.eth.getAccounts();
-    const item = await lms.mintNFT(accounts[0], nft_json.data.IpfsHash, {from: accounts[0]});
+    const item = await lms.mintNFT(nft_json.data.IpfsHash, {from: accounts[0]});
     const nft_minted = await lms.tokenInfoMap(item.receipt.logs[0].args.tokenId) 
     res.status(200).send({
       id: item.receipt.logs[0].args.tokenId,  
@@ -71,14 +72,16 @@ exports.create = async (req, res) => {
 };
 
 exports.findAll = async (req, res) => {
-     try {
         const lms = await contract.deployed();
         const marketplace = await lms.marketplace();
          const cards = await CardService.getCardsOf(marketplace);
          if(!cards){
             res.status(404).json("There are no cards minted yet!")
          }
+         console.log(cards);
          res.json(cards);
+     try {
+
        } catch (error) {
           res.status(500).json({error: error})
        }
