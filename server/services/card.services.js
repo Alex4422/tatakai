@@ -14,6 +14,8 @@ module.exports = class CardService {
             for (let i = 0; i <= nft_count; i++) {
             const nft = await lms.tokenInfoMap(i);
             if(nft.ipfsHash !== "" && address == nft.owner) {
+                console.log(address);
+                console.log(nft.owner);
                 const info = await axios.get("https://ipfs.io/ipfs/"+nft.ipfsHash);
                 const url = `https://api.pinata.cloud/data/pinList?hashContains=${nft.ipfsHash}`;
                 const nft_info = await axios.get(url, {
@@ -23,21 +25,19 @@ module.exports = class CardService {
                 },
                 });
                 all_nfts.push({
-                id: i,
-                owner: nft.owner,
-                name: info.data.name,
-                description: info.data.description,
-                image: info.data.image,
-                metadata: nft_info.data.rows[0] !== undefined ? nft_info.data.rows[0].metadata.keyvalues : null
+                    id: i,
+                    owner: nft.owner,
+                    name: info.data.name,
+                    description: info.data.description,
+                    image: info.data.image,
+                    metadata: nft_info.data.rows[0] !== undefined ? nft_info.data.rows[0].metadata.keyvalues : null
                 });
             }
             }
-            res.status(200).send(all_nfts);
+            return all_nfts;
         }
         catch (err) {
-            res.status(500).send({
-            error: err
-            });
+            return err;
         }
     }
 }
