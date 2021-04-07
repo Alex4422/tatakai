@@ -38,7 +38,7 @@ exports.create = async (req, res) => {
             "nationality": req.body.nationality || "",
             "saison": req.body.saison || "",
             "type": req.body.type || "",
-            "price": req.body.price || ""
+            "price": req.body.price || 1
           }
       },
       "pinataContent": {
@@ -72,40 +72,39 @@ exports.create = async (req, res) => {
 };
 
 exports.findAll = async (req, res) => {
+     try {
         const lms = await contract.deployed();
         const marketplace = await lms.marketplace();
-         const cards = await CardService.getCardsOf(marketplace);
-         if(!cards){
-            res.status(404).json("There are no cards minted yet!")
-         }
-         console.log(cards);
-         res.json(cards);
-     try {
-
-       } catch (error) {
+        const cards = await CardService.getByAddress(marketplace);
+        if(!cards){
+            res.status(404).json({error: "There are no cards minted yet!"})
+        }
+        res.json(cards);
+      } catch (error) {
           res.status(500).json({error: error})
-       }
+      }
 };
 
 exports.findOne = async (req, res) => {
-  try {
-    const id = req.params.id;
-    const lms = await contract.deployed();
-    const nft = await lms.tokenInfoMap(id);
-      if(nft.ipfsHash !== "") {
-        const info = await axios.get("https://ipfs.io/ipfs/"+nft.ipfsHash);
-        const nft_info = {
-          owner: nft.owner,
-          name: info.data.name,
-          description: info.data.description,
-          image: info.data.image
-        };
-        res.status(200).send(nft_info);
+      try {
+        const id = req.params.id;
+        const card = await CardService.getById(id);
+        if(!card){
+            res.status(404).json({error: "No exists!"})
+        }
+        res.json(card);
+      } catch (error) {
+          res.status(500).json({error: error})
       }
-  }
-  catch (err) {
-    res.status(500).send({
-      error: err
-    });
-  }
+};
+
+exports.buy = async (req, res) => {
+      try {
+          const id = req.body.id;
+          const buyer = req.body.address;
+          const card = await CardService.buyFrom(buyer, id); 
+          res.json(card);
+      } catch (error) {
+          res.status(500).json({error: error})
+      }
 };

@@ -33,10 +33,10 @@ app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(specs));
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-//app.use(upload.array()); 
+// app.use(upload.array()); 
 
 require("./routes/card.routes")(app);
-require("./routes/user.routes")(app);
+require("./routes/account.routes")(app);
 require("./routes/faucet.routes")(app);
 
 app.listen(PORT, () => {

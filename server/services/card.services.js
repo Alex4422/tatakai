@@ -6,18 +6,17 @@ const fs = require("fs");
 const pinataApi = require("../config/pinata.config.js");
 
 module.exports = class CardService {
-    static async getCardsOf(address){
+    static async getByAddress(address) {
         try {
             const lms = await contract.deployed();
             const nft_count = await lms._tokenIds();
             let all_nfts = [];
-            for (let i = 0; i <= nft_count; i++) {
-            const nft = await lms.tokenInfoMap(i);
-            if(nft.ipfsHash !== "" && address == nft.owner) {
-                console.log(address);
-                console.log(nft.owner);
-                const info = await axios.get("https://ipfs.io/ipfs/"+nft.ipfsHash);
-                const url = `https://api.pinata.cloud/data/pinList?hashContains=${nft.ipfsHash}`;
+            for (let i = 1; i <= nft_count; i++) {
+            const owner = await lms.ownerOf(i);
+            const ipfsHash = await lms.tokenURI(i);
+            if(ipfsHash !== "" && address == owner) {
+                const info = await axios.get("https://ipfs.io/ipfs/"+ipfsHash);
+                const url = `https://api.pinata.cloud/data/pinList?hashContains=${ipfsHash}`;
                 const nft_info = await axios.get(url, {
                 headers: {
                     pinata_api_key: pinataApi.key, 
@@ -26,7 +25,7 @@ module.exports = class CardService {
                 });
                 all_nfts.push({
                     id: i,
-                    owner: nft.owner,
+                    owner: owner,
                     name: info.data.name,
                     description: info.data.description,
                     image: info.data.image,
@@ -39,5 +38,52 @@ module.exports = class CardService {
         catch (err) {
             return err;
         }
+    }
+
+    static async getById(id) {
+        try {
+            const lms = await contract.deployed();
+            const owner = await lms.ownerOf(id);
+            const ipfsHash = await lms.tokenURI(id);
+            if(owner) {
+                const info = await axios.get("https://ipfs.io/ipfs/"+ipfsHash);
+                const url = `https://api.pinata.cloud/data/pinList?hashContains=${ipfsHash}`;
+                const nft_extra = await axios.get(url, {
+                    headers: {
+                        pinata_api_key: pinataApi.key, 
+                        pinata_secret_api_key: pinataApi.secretKey,
+                    },
+                });
+                const nft_info = {
+                    id,
+                    owner,
+                    name: info.data.name,
+                    description: info.data.description,
+                    image: info.data.image,
+                    metadata: nft_extra.data.rows[0].metadata.keyvalues || null
+
+                };
+                return nft_info;
+            }
+        }
+        catch (err) {
+            return err;
+        }
+    }
+
+    static async buyFrom(buyer, id) {
+      try {
+            const card = await CardService.getById(id);
+            const lms = await contract.deployed();
+            const lms2 = await instance.taktoken.deployed();
+            const lms3 = await instance.marketplace.deployed();
+            const marketplace = await lms.marketplace();
+            const approve = await lms2.approve(marketplace, card.metadata.price, {from: buyer});
+            await lms3.buy(lms.address, buyer, id, card.metadata.price, {from: buyer})
+            const new_card = await CardService.getById(id);
+            return new_card;
+      } catch (error) {
+            return error;
+      }
     }
 }
