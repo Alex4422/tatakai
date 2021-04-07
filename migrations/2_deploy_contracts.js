@@ -1,7 +1,10 @@
+var TakToken = artifacts.require("TakToken");
+var Marketplace = artifacts.require("Marketplace");
 var CardItem = artifacts.require("CardItem");
 var SimpleStorage = artifacts.require("SimpleStorage");
 
-module.exports = function (deployer) {
-  deployer.deploy(CardItem, "takakai", "TKAI", 1);
-  deployer.deploy(SimpleStorage);
+module.exports = async (deployer) => {
+  await deployer.deploy(TakToken, 10000, "Tatakai", "TAK");
+  await deployer.deploy(Marketplace, TakToken.address);
+  await deployer.deploy(CardItem, "TatakaiCard", "TAKCARD", Marketplace.address);
 };
