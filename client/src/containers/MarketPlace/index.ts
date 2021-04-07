@@ -23,12 +23,14 @@ type IMapStateToPropsType = {
 
 const mapStateToProps = ({
   contract: { web3, accounts },
-  marketplace: { NFTS },
+  marketplace: { NFTS, isLoading },
 }: IMapStateToPropsType) => {
   return {
     web3,
     accounts,
-    nfts: NFTS || items,
+    nfts: NFTS,
+    isLoading,
+    //nfts: NFTS || items,
   };
 };
 

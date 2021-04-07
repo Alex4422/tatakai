@@ -6,6 +6,7 @@ import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { useEffect, useState, useRef } from "react";
 
 
@@ -34,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
 const types = ["COMMON", "RARE", "LEGEND", "UNIQUE"];
 
-const Admin = ({ changeField, nft, submitValue, changeFieldFile }: Props & AdminProps) => {
+const Admin = ({ changeField, nft, submitValue, changeFieldFile, isLoading }: Props & AdminProps) => {
   const { validate, isValid } = useFormValidation();
   const classes = useStyles();
   const [file, setFile] = useState();
@@ -45,12 +46,12 @@ const Admin = ({ changeField, nft, submitValue, changeFieldFile }: Props & Admin
     e.preventDefault();
     let data: any = new FormData();
     data.append("file", file!);
-    //console.log("file",file);
-    for (var value of data.values()) {
-      console.log(value);
-   }
     submitValue(data);
   };
+
+  useEffect(() => {
+    console.log("isLoading", isLoading);
+  }, [isLoading]);
 /*   useEffect(() => {
     validate(token);
   }, [validate, token]);
@@ -62,7 +63,9 @@ const Admin = ({ changeField, nft, submitValue, changeFieldFile }: Props & Admin
         <Typography component="h1" variant="h5">
           Create new NFT
         </Typography>
-        <form className={classes.form} onSubmit={handleOnSubmit}>
+        {isLoading 
+        ?<CircularProgress size='75px' style={{ color: "black" }} />
+        :<form className={classes.form} onSubmit={handleOnSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -189,6 +192,8 @@ const Admin = ({ changeField, nft, submitValue, changeFieldFile }: Props & Admin
             Create NFT
           </Button>
         </form>
+        }
+        
       </div>
     </Container>
   );
