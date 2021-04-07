@@ -13,10 +13,6 @@ class FileUploadService {
       onUploadProgress,
     });
   }
-
-  getFiles() {
-    return http.get("/files");
-  }
 }
 
 export default new FileUploadService();

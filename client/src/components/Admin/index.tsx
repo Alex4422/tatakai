@@ -75,14 +75,7 @@ const Admin = ({
       progress: 0,
     });
   };
-  useEffect(() => {
-    UploadService.getFiles().then((response: any) => {
-      setPreview({
-        ...preview,
-        imageInfos: response.data,
-      });
-    });
-  }, []);
+
   /*   
 
     useEffect(() => {
@@ -103,7 +96,6 @@ const Admin = ({
         <Typography component="h1" variant="h5">
           Create new NFT
         </Typography>
-<<<<<<< HEAD
         {isLoading ? (
           <CircularProgress size="75px" style={{ color: "black" }} />
         ) : (
@@ -161,7 +153,7 @@ const Admin = ({
                   onChange={handleOnChange}
                 />
               </Grid>
-              <Grid item sm={6}>
+              <Grid item sm={6} xs={12}>
                 <TextField
                   variant="outlined"
                   required
@@ -182,7 +174,7 @@ const Admin = ({
                   ))}
                 </TextField>
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item sm={6} xs={12}>
                 <TextField
                   variant="outlined"
                   required
@@ -196,148 +188,58 @@ const Admin = ({
                   onChange={handleOnChange}
                 />
               </Grid>
-=======
-        <form className={classes.form} onSubmit={handleOnSubmit}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="name"
-                label="name"
-                name="name"
-                autoComplete="email"
-                defaultValue={nft.name || ""}
-                onChange={handleOnChange}
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <TextField
-                variant="outlined"
-                required
-                name="age"
-                label="Age"
-                type="text"
-                id="age"
-                autoComplete="Age"
-                defaultValue={nft.age || ""}
-                onChange={handleOnChange}
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <TextField
-                variant="outlined"
-                required
-                name="nationality"
-                label="Nationality"
-                type="text"
-                id="nationality"
-                autoComplete="Nationality"
-                defaultValue={nft.nationality || ""}
-                onChange={handleOnChange}
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <TextField
-                variant="outlined"
-                required
-                name="saison"
-                label="Saison"
-                type="text"
-                id="saison"
-                autoComplete="saison"
-                defaultValue={nft.saison || ""}
-                onChange={handleOnChange}
-              />
-            </Grid>
-            <Grid item sm={6} xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                name="type"
-                label="Type"
-                select
-                id="type"
-                autoComplete="Type"
-                defaultValue={nft.type || "COMMON"}
-                onChange={handleOnChange}
-                style={{ width: "100%" }}
-              >
-                {" "}
-                {types.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </TextField>
-            </Grid>
-            <Grid item sm={6} xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="supply"
-                type="number"
-                label="Supply"
-                name="supply"
-                autoComplete="supply"
-                defaultValue={nft.supply || ""}
-                onChange={handleOnChange}
-              />
->>>>>>> edit form
-            </Grid>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={12}>
-                {/* <InputLabel shrink htmlFor="bootstrap-input">
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={12}>
+                  {/* <InputLabel shrink htmlFor="bootstrap-input">
                 File Upload
               </InputLabel> */}
-                <TextField
-                  variant="filled"
-                  required
-                  fullWidth
-                  id="file"
-                  type="file"
-                  label="File upload"
-                  name="file"
-                  InputLabelProps={{ shrink: true }}
-                  defaultValue={nft.file || ""}
-                  onChange={selectFile}
-                />
-              </Grid>
-            </Grid>
-            {nft.file ? (
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={8}>
-                  <img src={nft.file}></img>
+                  <TextField
+                    variant="filled"
+                    required
+                    fullWidth
+                    id="file"
+                    type="file"
+                    label="File upload"
+                    name="file"
+                    InputLabelProps={{ shrink: true }}
+                    defaultValue={nft.file || ""}
+                    onChange={selectFile}
+                  />
                 </Grid>
               </Grid>
-            ) : null}
-            <br />
+              {nft.file ? (
+                <Grid container spacing={2}>
+                  <Grid item xs={12} sm={8}>
+                    <img src={nft.file}></img>
+                  </Grid>
+                </Grid>
+              ) : null}
+              <br />
 
-            <Grid xs={4} spacing={2}>
-              {preview.image && (
-                <div>
-                  <img
-                    className="preview"
-                    style={{ width: "100%" }}
-                    src={preview.image}
-                    alt=""
-                  />
-                </div>
-              )}
+              <Grid xs={4} spacing={2}>
+                {preview.image && (
+                  <div>
+                    <img
+                      className="preview"
+                      style={{ width: "100%" }}
+                      src={preview.image}
+                      alt=""
+                    />
+                  </div>
+                )}
+              </Grid>
+
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                //disabled={!isValid}
+                className={classes.submit}
+              >
+                Create NFT
+              </Button>
             </Grid>
-
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              //disabled={!isValid}
-              className={classes.submit}
-            >
-              Create NFT
-            </Button>
           </form>
         )}
       </div>
