@@ -1,4 +1,4 @@
-import { GET_AUTH_METAMASK, SEED_AUTH_METAMASK, GET_USER_NFTS, SEED_USER_NFTS, BUY_NFT, USER_BOUGHT_NFT  } from "./types";
+import { GET_AUTH_METAMASK, SEED_AUTH_METAMASK, GET_USER_NFTS, SEED_USER_NFTS, BUY_NFT, USER_BOUGHT_NFT, GET_TAK  } from "./types";
 
 export const getAuthMetamask = () => ({
   type: GET_AUTH_METAMASK,
@@ -19,6 +19,11 @@ export const seedUserNFTS = (data: Array<Object>) => ({
   type: SEED_USER_NFTS,
   payload: data
 })
+
+export const getTAK = () => ({
+  type: GET_TAK
+})
+
 
 export const buyNFT = (id: any)  => ({
   type: BUY_NFT,

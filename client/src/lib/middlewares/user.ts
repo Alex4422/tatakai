@@ -1,6 +1,7 @@
-import { GET_AUTH_METAMASK, GET_USER_NFTS } from "../actions/types";
+import { GET_AUTH_METAMASK, GET_USER_NFTS, GET_TAK } from "../actions/types";
 import {seedAuthMetamask, seedUserNFTS} from "../actions/user";
 import getAccount from "./utils"
+import addTAKToken from "./utils/addTak"
 import getWeb3 from "./utils/getWeb3";
 import axios from 'axios';
 
@@ -10,7 +11,7 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
   next: any
 ) => async (action: IAction) => {
   const {
-    user: { accounts },
+    user: { accounts, Web3 },
   } = getState();
   switch (action.type) {
 
@@ -38,7 +39,7 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
   /* GET USER NFTS /
   /*******************************/
 
-    case GET_USER_NFTS:
+    case GET_USER_NFTS: {
         console.log("Passe par le MW GET USER NFTS")  
         console.log("user account", accounts[0])    
         const config: Object = {
@@ -53,6 +54,35 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
           console.error(error);
         }
         break;
+    }
+      
+
+     /*******************************/
+  /* GET TAK /
+  /*******************************/
+
+  case GET_TAK: { 
+    
+    console.log("Passe par le MW GET TAK") 
+     
+    try {
+    const reponse = await addTAKToken(Web3);
+    console.log("reponse", reponse)
+
+    /* const config: Object = {
+      method: 'get',
+      url: `${URL}users/${accounts[0]}`,
+    }
+   
+      const response: any = await axios(config);
+      console.log("response Api", response) */
+      //dispatch(seedUserNFTS(response.data))
+    } catch (error) {
+      console.error(error);
+    }
+    break;
+  }
+    
   
     default:
       return next(action);

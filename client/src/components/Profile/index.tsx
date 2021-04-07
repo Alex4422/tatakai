@@ -12,7 +12,9 @@ import AccountBalanceWalletOutlinedIcon from '@material-ui/icons/AccountBalanceW
 import AccountBalanceOutlinedIcon from '@material-ui/icons/AccountBalanceOutlined';
 import SupervisorAccountOutlinedIcon from '@material-ui/icons/SupervisorAccountOutlined';
 import Divider from '@material-ui/core/Divider';
+import Button from '@material-ui/core/Button';
 import "../styles.css";
+
 
 declare interface Props {
   accounts: Array<any> | null,
@@ -20,7 +22,8 @@ declare interface Props {
   isAdmin: Boolean,
   balanceTAK: any | null,
   balanceWei: any | null,
-  isLoading: Boolean
+  isLoading: Boolean,
+  getTAK: Function
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -33,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Profile = ({ accounts, cards, isAdmin, balanceTAK, balanceWei,isLoading }: Props) => {
+const Profile = ({ accounts, cards, isAdmin, balanceTAK, balanceWei,isLoading, getTAK }: Props) => {
   const classes = useStyles();
   useEffect(() => {
 
@@ -96,7 +99,9 @@ const Profile = ({ accounts, cards, isAdmin, balanceTAK, balanceWei,isLoading }:
           : null
           }
         </List>
-       
+        <Button variant="contained" color="secondary" onClick={() => getTAK()}>
+        Get TAK !
+      </Button>
       </div>
     </Container>
   );
