@@ -8,9 +8,6 @@ const {
 } = require('@openzeppelin/test-helpers')
 const { web3 } = require('@openzeppelin/test-helpers/src/setup');
 
-
-require('chai').should()
-
 describe('Marketplace', function () {
     let owner;
     let someOne;
@@ -19,6 +16,7 @@ describe('Marketplace', function () {
         accounts = await web3.eth.getAccounts();
         owner = accounts[0];
         someOne = accounts[1];
+
         this.erc20token = await TakToken.new(
             10000, 
             "Tatakai", 
@@ -27,14 +25,17 @@ describe('Marketplace', function () {
         )
 
         this.marketplace = await Marketplace.new(
-            this.erc20token.address, { from: owner }
+            this.erc20token.address, 
+            { from: owner }
         )
         this.nft = await CardItem.new(
             "Token Test",
             "TEST",
-            this.marketplace.address, { from: owner }
+            this.marketplace.address, 
+            { from: owner }
         )
     });
+
     describe('Mint, buy and transfer NFT', function () {
 
         it('should mint NFT', async function () {
@@ -54,4 +55,5 @@ describe('Marketplace', function () {
             expect(afterGetNftOwner).to.eql(someOne);
         })
     })
+    
 })
