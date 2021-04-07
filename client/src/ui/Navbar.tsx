@@ -128,7 +128,7 @@ function Navbar() {
               <li>
                 <Link
                   style={{ color: "white", textDecoration: "none" }}
-                  to="/admin"
+                  to="/profile"
                 >
                   Profile
                 </Link>
