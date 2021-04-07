@@ -7,7 +7,8 @@ const connectWeb3 = async (store: any) => {
   try {
     const web3: any = await getWeb3();
     const accounts = await web3.eth.getAccounts();
-    store.dispatch(seedAuthMetamask(web3, accounts));
+    const balance = await web3.eth.getBalance(accounts[0])
+    store.dispatch(seedAuthMetamask(web3, accounts, balance));
   } catch (error) {
     alert(
       `Failed to load web3, accounts, or contract. Check console for details.`

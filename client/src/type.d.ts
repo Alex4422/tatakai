@@ -35,7 +35,8 @@ interface IUserState {
   isLoading: Boolean;
   isAdmin: Boolean;
   cards: Array<Object> | null;
-  balance: Number | null;
+  balanceWei: Number | null;
+  balanceTAK: Number | null;
 }
 
 interface IAdminState {
