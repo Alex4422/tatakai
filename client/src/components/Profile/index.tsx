@@ -23,7 +23,8 @@ declare interface Props {
   balanceTAK: any | null,
   balanceWei: any | null,
   isLoading: Boolean,
-  getTAK: Function
+  getTAK: Function,
+  importTAKMetamaskWallet: Function
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -36,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Profile = ({ accounts, cards, isAdmin, balanceTAK, balanceWei,isLoading, getTAK }: Props) => {
+const Profile = ({ accounts, cards, isAdmin, balanceTAK, balanceWei,isLoading, getTAK, importTAKMetamaskWallet }: Props) => {
   const classes = useStyles();
   useEffect(() => {
 
@@ -101,6 +102,9 @@ const Profile = ({ accounts, cards, isAdmin, balanceTAK, balanceWei,isLoading, g
         </List>
         <Button variant="contained" color="secondary" onClick={() => getTAK()}>
         Get TAK !
+      </Button><br></br>
+      <Button variant="contained"  onClick={() => importTAKMetamaskWallet()} style={{display: "block", margin: "1rem auto"}}>
+        Import Tak !
       </Button>
       </div>
     </Container>

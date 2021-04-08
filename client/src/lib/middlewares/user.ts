@@ -1,4 +1,4 @@
-import { GET_AUTH_METAMASK, GET_USER_NFTS, GET_TAK } from "../actions/types";
+import { GET_AUTH_METAMASK, GET_USER_NFTS, GET_TAK, IMPORT_TAK_METAMASK_WALLET } from "../actions/types";
 import {seedAuthMetamask, seedUserNFTS} from "../actions/user";
 import detectEthereumProvider from '@metamask/detect-provider';
 import getAccount from "./utils"
@@ -60,20 +60,30 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
         break;
     }
       
+   /*******************************/
+  /* IMPORT TAK TOKEN TO METAMASK WALLET /
+  /*******************************/
+
+  case IMPORT_TAK_METAMASK_WALLET: {
+    console.log("Passe par le MW GET USER NFTS")  
+    try {
+       const promise: any = await addTAKToken(provider);
+      if(promise) {
+        console.log("Wallet updated !", promise)
+      }
+    } catch (error) {
+      console.error(error);
+    }
+    break;
+  }
 
      /*******************************/
   /* GET TAK /
   /*******************************/
 
   case GET_TAK: { 
-    
-    console.log("Passe par le MW GET TAK") 
-     
+    console.log("Passe par le MW GET TAK")     
     try {
-     /******** ADD TAK TOKEN TO USER'S METAMASK WALLET********/ 
-     const promise = await addTAKToken(provider);
-    
-
     //Ask Faucet try
      const config: Object = {
       method: 'post',
@@ -85,7 +95,6 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
         address: accounts[0]
        },
     }
-    
       const response: any = await axios(config);
       console.log("response Api", response) 
       //dispatch(seedUserNFTS(response.data))

@@ -22,8 +22,6 @@ return await contract.methods.balanceOf(account).call()
 const addTAKToken = async (provider) => {
   try {
     const network = provider.networkVersion;
-   
-    
     console.log("network:", provider.networkVersion)
     const instanceAdress = TakToken.networks[network].address;
     console.log(instanceAdress); 
@@ -43,8 +41,10 @@ const addTAKToken = async (provider) => {
 
    if (wasAdded) {
     console.log('Thanks for your interest!');
+    return true
   } else {
     console.log('Your loss!');
+    return false
   } 
 } catch (error) {
   console.log(error);
