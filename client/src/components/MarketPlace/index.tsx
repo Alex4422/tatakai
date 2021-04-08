@@ -7,7 +7,7 @@ import "../styles.css";
 
 declare interface Props {
   initMarket: Function;
-  nfts: Array<Object> | null;
+  nfts: Array<ICard> | null;
   isLoading: Boolean;
 }
 
@@ -26,11 +26,11 @@ const MarketPlace = ({ initMarket, nfts, isLoading }: Props) => {
   const classes = useStyles();
 
   useEffect(() => {
-    initMarket()
+    initMarket();
   }, []);
 
   useEffect(() => {
-    console.log("isLoading", isLoading)
+    console.log("isLoading", isLoading);
   }, [isLoading]);
 
   return (
@@ -38,12 +38,12 @@ const MarketPlace = ({ initMarket, nfts, isLoading }: Props) => {
       <div className="App">
         <h1>Liste des NFTS : </h1>
         {/* <CardsCarousel items={nfts} /> */}
-      
-        {isLoading 
-        ?  <CircularProgress size='75px' style={{ color: "black" }} />
-        :  <Gallery items={nfts} />
-        }
-        
+
+        {isLoading ? (
+          <CircularProgress size="75px" style={{ color: "black" }} />
+        ) : (
+          <Gallery items={nfts} />
+        )}
       </div>
     </Container>
   );

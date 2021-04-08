@@ -70,3 +70,14 @@ interface ConfigAxios {
   headers: any;
   body: any;
 }
+
+interface ICard {
+  name: string;
+  age: number;
+  nationality: string;
+  saison: string;
+  type: string;
+  supply: number;
+  price: Float32Array;
+  image: string;
+}

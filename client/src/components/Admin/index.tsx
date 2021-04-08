@@ -214,11 +214,9 @@ const Admin = ({
                   </Grid>
                 </Grid>
               ) : null}
-              <br />
-
               <Grid xs={4} spacing={2}>
                 {preview.image && (
-                  <div>
+                  <div style={{ marginTop: 15 }}>
                     <img
                       className="preview"
                       style={{ width: "100%" }}
@@ -228,7 +226,6 @@ const Admin = ({
                   </div>
                 )}
               </Grid>
-
               <Button
                 type="submit"
                 fullWidth

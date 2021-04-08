@@ -1,8 +1,9 @@
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
-import "./gallery.css"
+import Card from "./Card";
+import "./gallery.css";
 interface Props {
-  items: Array<any> | null;
+  items: Array<ICard> | null;
 }
 
 const useStyles = () => {
@@ -20,7 +21,7 @@ const useStyles = () => {
     },
     gridList: {
       width: "70%",
-      height: "100vh", 
+      height: "100vh",
     },
   };
   return classes;
@@ -37,16 +38,9 @@ const Gallery = ({ items }: Props) => {
         alignItems: "space-around",
       }}
     >
-        {items?.map((item, index) => (
-            <div className="itemCard" style={{
-              
-              backgroundImage: `url(${item.image})`, 
-              backgroundSize: "cover", 
-              margin: "1rem", 
-              }}>
-            </div>
-        ))}
-      
+      {items?.map((item, index) => (
+        <Card item={item} key={index} />
+      ))}
     </div>
   );
 };
