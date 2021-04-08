@@ -1,5 +1,5 @@
 module.exports = app => {
-  const faucet = require("../controllers/faucet.controller.js");
+  const FaucetController = require("../controllers/FaucetController");
   var router = require("express").Router();
 
 /**
@@ -15,7 +15,7 @@ module.exports = app => {
  *         schema:
  *           type: string
 */
-  router.post("/", faucet.request);
+  router.post("/", FaucetController.create);
 
   app.use('/api/faucet', router);
 };

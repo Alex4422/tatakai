@@ -1,5 +1,5 @@
 module.exports = app => {
-  const cards = require("../controllers/card.controller.js");
+  const CardController = require("../controllers/CardController.js");
   var router = require("express").Router();
 
 /**
@@ -27,7 +27,7 @@ module.exports = app => {
  *         schema:
  *           type: file
 */
-  router.post("/", cards.create);
+  router.post("/", CardController.create);
 
 /**
  * @swagger
@@ -35,7 +35,7 @@ module.exports = app => {
  *   get:
  *     summary: Retrieve a list of Card.
 */
-  router.get("/", cards.findAll);
+  router.get("/", CardController.findAll);
 
 /**
  * @swagger
@@ -50,7 +50,7 @@ module.exports = app => {
  *         schema:
  *           type: integer
 */
-  router.get("/:id", cards.findOne);
+  router.get("/:id", CardController.findOne);
 
 /**
  * @swagger
@@ -71,7 +71,7 @@ module.exports = app => {
  *         schema:
  *           type: string
 */
-  router.post("/buy", cards.buy);
+  router.post("/buy", CardController.buy);
 
   app.use('/api/cards', router);
 };
