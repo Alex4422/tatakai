@@ -1,7 +1,7 @@
 const redoc = require('redoc-express');
 
 module.exports = app => {
-    app.get('/api/docs/swagger.yaml', (req, res) => {
+    app.get('/docs/swagger.yaml', (req, res) => {
         res.sendFile('swagger.yaml', { root: '.' });
     });
     

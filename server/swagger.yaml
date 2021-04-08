@@ -113,6 +113,29 @@ paths:
               $ref: "#/definitions/Cards"
         "404":
           description: "No exist"
+  /cards/buy:
+    post:
+      tags:
+      - "cards"
+      summary: "Buy a card"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "query"
+        description: "Card ID"
+        required: true
+        type: "integer"
+      - name: "address"
+        in: "query"
+        description: "Buyer address"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Return true"
+        "500":
+          description: "Invalid input"
   /accounts/{address}:
     get:
       tags:
