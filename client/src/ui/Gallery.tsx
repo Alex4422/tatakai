@@ -1,5 +1,6 @@
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
+import Modal from "./Modal";
 import Card from "./Card";
 import "./gallery.css";
 interface Props {
@@ -30,18 +31,21 @@ const useStyles = () => {
 const Gallery = ({ items }: Props) => {
   const classes = useStyles();
   return (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "space-around",
-        alignItems: "space-around",
-      }}
-    >
-      {items?.map((item, index) => (
-        <Card item={item} key={index} />
-      ))}
-    </div>
+    <>
+      <Modal />
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-around",
+          alignItems: "space-around",
+        }}
+      >
+        {items?.map((item, index) => (
+          <Card item={item} key={index} />
+        ))}
+      </div>
+    </>
   );
 };
 export default Gallery;

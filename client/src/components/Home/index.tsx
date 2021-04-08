@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import Container from "@material-ui/core/Container";
+import Modal from "../../ui/Modal";
 import "../styles.css";
 
 declare interface Props {
@@ -12,6 +13,7 @@ const Home = ({ getAuthMetamask }: Props) => {
 
   return (
     <Container component="main" maxWidth="lg">
+      <Modal />
       <div className="App">
         <h1>TAKAKAI - Welcome</h1>
       </div>

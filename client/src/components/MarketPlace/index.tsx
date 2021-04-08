@@ -38,7 +38,6 @@ const MarketPlace = ({ initMarket, nfts, isLoading }: Props) => {
       <div className="App">
         <h1>Liste des NFTS : </h1>
         {/* <CardsCarousel items={nfts} /> */}
-
         {isLoading ? (
           <CircularProgress size="75px" style={{ color: "black" }} />
         ) : (
@@ -48,5 +47,4 @@ const MarketPlace = ({ initMarket, nfts, isLoading }: Props) => {
     </Container>
   );
 };
-
 export default MarketPlace;
