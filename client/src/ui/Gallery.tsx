@@ -1,5 +1,7 @@
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
+import Button from '@material-ui/core/Button';
+
 import "./gallery.css"
 interface Props {
   items: Array<any> | null;
@@ -38,13 +40,17 @@ const Gallery = ({ items }: Props) => {
       }}
     >
         {items?.map((item, index) => (
+          <div>
             <div className="itemCard" style={{
-              
               backgroundImage: `url(${item.image})`, 
               backgroundSize: "cover", 
               margin: "1rem", 
               }}>
             </div>
+            <Button variant="contained">
+            Acheter
+            </Button>
+          </div>
         ))}
       
     </div>

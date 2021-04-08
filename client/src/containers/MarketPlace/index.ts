@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import MarketPlace from "../../components/MarketPlace";
 import { initMarket } from "../../lib/actions/marketplace";
-
+import {buyNFT} from '../../lib/actions/user';
 // dummy data pending api call available
 const items = [
   { id: 1, title: "item #1" },

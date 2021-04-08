@@ -9,6 +9,7 @@ declare interface Props {
   initMarket: Function;
   nfts: Array<Object> | null;
   isLoading: Boolean;
+  buyNFT: Function;
 }
 
 const useStyles = () => {
@@ -22,7 +23,7 @@ const useStyles = () => {
   };
   return classes;
 };
-const MarketPlace = ({ initMarket, nfts, isLoading }: Props) => {
+const MarketPlace = ({ initMarket, nfts, isLoading, buyNFT }: Props) => {
   const classes = useStyles();
 
   useEffect(() => {
@@ -41,7 +42,7 @@ const MarketPlace = ({ initMarket, nfts, isLoading }: Props) => {
       
         {isLoading 
         ?  <CircularProgress size='75px' style={{ color: "black" }} />
-        :  <Gallery items={nfts} />
+        :  <Gallery items={nfts}/>
         }
         
       </div>
