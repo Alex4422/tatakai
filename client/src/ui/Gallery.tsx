@@ -1,10 +1,12 @@
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
-import Button from '@material-ui/core/Button';
+import Modal from "./Modal";
+import Card from "./Card";
+import Button from "@material-ui/core/Button";
+import "./gallery.css";
 
-import "./gallery.css"
 interface Props {
-  items: Array<any> | null;
+  items: Array<ICard> | null;
 }
 
 const useStyles = () => {
@@ -22,7 +24,7 @@ const useStyles = () => {
     },
     gridList: {
       width: "70%",
-      height: "100vh", 
+      height: "100vh",
     },
   };
   return classes;
@@ -31,29 +33,21 @@ const useStyles = () => {
 const Gallery = ({ items }: Props) => {
   const classes = useStyles();
   return (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "space-around",
-        alignItems: "space-around",
-      }}
-    >
+    <>
+      <Modal />
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-around",
+          alignItems: "space-around",
+        }}
+      >
         {items?.map((item, index) => (
-          <div>
-            <div className="itemCard" style={{
-              backgroundImage: `url(${item.image})`, 
-              backgroundSize: "cover", 
-              margin: "1rem", 
-              }}>
-            </div>
-            <Button variant="contained">
-            Acheter
-            </Button>
-          </div>
+          <Card item={item} key={index} />
         ))}
-      
-    </div>
+      </div>
+    </>
   );
 };
 export default Gallery;

@@ -23,10 +23,15 @@ const useStyles = () => {
   };
   return classes;
 };
-const MarketPlace = ({ getAuthMetamask, seedAuthMetamask, cards, getUserNFTS }: Props) => {
+const MarketPlace = ({
+  getAuthMetamask,
+  seedAuthMetamask,
+  cards,
+  getUserNFTS,
+}: Props) => {
   const classes = useStyles();
   useEffect(() => {
-    getUserNFTS()
+    getUserNFTS();
   }, []);
 
   return (

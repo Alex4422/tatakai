@@ -1,11 +1,8 @@
-import { bindActionCreators } from "redux";
-import {
-  INIT_MARKET,
-  SEED_MARKET,
-} from "../actions/types";
+import { INIT_MARKET, SEED_MARKET, SELECT_CURRENT } from "../actions/types";
 
 export const initialState = {
-  NFTS: null,
+  items: null,
+  current: null,
   isLoading: true,
 };
 
@@ -21,9 +18,23 @@ const marketplace = (
       };
     case SEED_MARKET:
       return {
-        NFTS: payload,
+        ...oldState,
+        ...payload,
         isLoading: false,
       };
+    case SELECT_CURRENT: {
+      return {
+        ...oldState,
+        ...payload,
+      };
+    }
+    case SELECT_CURRENT: {
+      return {
+        ...oldState,
+        ...payload,
+      };
+    }
+
     default:
       return {
         ...oldState,

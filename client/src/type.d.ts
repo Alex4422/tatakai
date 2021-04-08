@@ -46,7 +46,7 @@ interface IAdminState {
 }
 
 interface IMarketplaceState {
-  NFTS: Array<any> | null;
+  items: Array<any> | null;
   isLoading: boolean;
 }
 
@@ -69,4 +69,17 @@ interface ConfigAxios {
   url: string;
   headers: any;
   body: any;
+}
+
+interface ICard {
+  id: number;
+  eex;
+  name: string;
+  age: number;
+  nationality: string;
+  saison: string;
+  type: string;
+  supply: number;
+  price: Float32Array;
+  image: string;
 }

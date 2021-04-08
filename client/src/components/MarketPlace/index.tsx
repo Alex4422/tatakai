@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Container from "@material-ui/core/Container";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Gallery from "../../ui/Gallery";
@@ -7,7 +7,7 @@ import "../styles.css";
 
 declare interface Props {
   initMarket: Function;
-  nfts: Array<Object> | null;
+  items: Array<ICard> | null;
   isLoading: Boolean;
   buyNFT: Function;
 }
@@ -23,31 +23,29 @@ const useStyles = () => {
   };
   return classes;
 };
-const MarketPlace = ({ initMarket, nfts, isLoading, buyNFT }: Props) => {
+const MarketPlace = ({ initMarket, items, isLoading }: Props) => {
   const classes = useStyles();
 
   useEffect(() => {
-    initMarket()
+    initMarket();
   }, []);
 
   useEffect(() => {
-    console.log("isLoading", isLoading)
+    console.log("isLoading", isLoading);
   }, [isLoading]);
 
   return (
     <Container component="main" maxWidth="lg">
       <div className="App">
         <h1>Liste des NFTS : </h1>
-        {/* <CardsCarousel items={nfts} /> */}
-      
-        {isLoading 
-        ?  <CircularProgress size='75px' style={{ color: "black" }} />
-        :  <Gallery items={nfts}/>
-        }
-        
+        {/* <CardsCarousel  /> */}
+        {isLoading ? (
+          <CircularProgress size="75px" style={{ color: "black" }} />
+        ) : (
+          <Gallery items={items} />
+        )}
       </div>
     </Container>
   );
 };
-
 export default MarketPlace;
