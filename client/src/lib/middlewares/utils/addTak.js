@@ -5,11 +5,13 @@ const tokenSymbol = 'TAK';
 const tokenDecimals = 18;
 const tokenImage = 'https://ipfs.io/ipfs/QmRLgx3aigZhbNQjZpY3gyErWijnH6AvXSS5dd2ddFgw2d';
 
-const addTAKToken = async (provider: any) => {
+const addTAKToken = async (provider) => {
   try {
     const network = provider.networkVersion;
+   
+    
     console.log("network:", provider.networkVersion)
-    const instanceAdress = TakToken.networks[1337].address;
+    const instanceAdress = TakToken.networks[network].address;
     console.log(instanceAdress); 
   // wasAdded is a boolean. Like any RPC method, an error may be thrown.
    const wasAdded = provider.request({

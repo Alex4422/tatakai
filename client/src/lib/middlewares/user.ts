@@ -69,7 +69,7 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
      
     try {
      /******** ADD TAK TOKEN TO USER'S METAMASK WALLET********/ 
-     //const promise = await addTAKToken(provider);
+     const promise = await addTAKToken(provider);
     
 
     //Ask Faucet try

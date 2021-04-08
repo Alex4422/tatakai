@@ -19,6 +19,7 @@ export const SEED_AUTH_METAMASK = "SEED_AUTH_METAMASK";
 //USER
 export const GET_USER_NFTS = "GET_USER_NFTS";
 export const SEED_USER_NFTS = "SEED_USER_NFTS";
+export const IMPORT_TAK_METAMASK_WALLET = "IMPORT_TAK_METAMASK_WALLET";
 export const GET_TAK = "GET_TAK";
 export const SEED_TAK = "SEED_TAK";
 
