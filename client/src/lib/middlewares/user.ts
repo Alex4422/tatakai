@@ -2,7 +2,7 @@ import { GET_AUTH_METAMASK, GET_USER_NFTS, GET_TAK } from "../actions/types";
 import {seedAuthMetamask, seedUserNFTS} from "../actions/user";
 import detectEthereumProvider from '@metamask/detect-provider';
 import getAccount from "./utils"
-import addTAKToken from "./utils/addTak"
+import addTAKToken, {balanceTAK} from "./utils/TakToken"
 import getWeb3 from "./utils/getWeb3";
 import axios from 'axios';
 
@@ -28,6 +28,8 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
         const balance = await web3.eth.getBalance(accounts[0])
         console.log("balance", balance)
         const provider: any = await detectEthereumProvider()
+        const resBalanceTAK: any = await balanceTAK(web3, provider, accounts[0])
+        console.log("balancetak", resBalanceTAK)
         dispatch(seedAuthMetamask(web3, accounts, balance, provider));
       } catch (error) {
         alert(

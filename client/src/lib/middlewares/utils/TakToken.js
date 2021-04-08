@@ -5,6 +5,18 @@ const tokenSymbol = 'TAK';
 const tokenDecimals = 18;
 const tokenImage = 'https://ipfs.io/ipfs/QmRLgx3aigZhbNQjZpY3gyErWijnH6AvXSS5dd2ddFgw2d';
 
+export const balanceTAK = async (web3, provider, account) => {
+  const netId = await web3.eth.net.getId();
+  const deployedNetwork = TakToken.networks[netId];
+  const contract = new web3.eth.Contract(
+    TakToken.abi,
+    deployedNetwork && deployedNetwork.address
+  );
+// Call balanceOf function
+return await contract.methods.balanceOf(account).call()
+}
+
+
 const addTAKToken = async (provider) => {
   try {
     const network = provider.networkVersion;
