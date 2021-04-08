@@ -1,12 +1,12 @@
 module.exports = app => {
-  const cards = require("../controllers/user.controller.js");
+  const cards = require("../controllers/account.controller.js");
   var router = require("express").Router();
 
 /**
  * @swagger
- * /users/{address}:
+ * /accounts/{address}:
  *   get:
- *     summary: Retrieve cards by user .
+ *     summary: Retrieve cards by user
  *     parameters:
  *       - in: path
  *         name: id
@@ -17,5 +17,5 @@ module.exports = app => {
 */
   router.get("/:address", cards.findOne);
 
-  app.use('/api/users', router);
+  app.use('/api/accounts', router);
 };
