@@ -46,7 +46,7 @@ interface IAdminState {
 }
 
 interface IMarketplaceState {
-  NFTS: Array<any> | null;
+  items: Array<any> | null;
   isLoading: boolean;
 }
 

@@ -1,4 +1,4 @@
-import { INIT_MARKET, SEED_MARKET } from "./types";
+import { INIT_MARKET, SEED_MARKET, SELECT_CURRENT } from "./types";
 
 export const initMarket = () => ({
   type: INIT_MARKET,
@@ -6,6 +6,10 @@ export const initMarket = () => ({
 
 export const seedMarket = (data: Array<Object>) => ({
   type: SEED_MARKET,
-  payload: data,
+  payload: { items: data },
 });
 
+export const selectCurrent = (item: ICard) => ({
+  type: SELECT_CURRENT,
+  payload: { current: item },
+});

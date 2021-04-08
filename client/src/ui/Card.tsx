@@ -1,3 +1,5 @@
+import { useDispatch } from "react-redux";
+import { selectCurrent } from "../lib/actions/marketplace";
 import { useModal } from "../hooks/useModal";
 interface Props {
   item: ICard;
@@ -5,10 +7,15 @@ interface Props {
 
 const Card = ({ item }: Props) => {
   const { handleOpen } = useModal();
+  const dispatch = useDispatch();
+  const handleOnClick = () => {
+    handleOpen();
+    dispatch(selectCurrent(item));
+  };
   return (
     <div
       className="itemCard"
-      onClick={handleOpen}
+      onClick={handleOnClick}
       style={{
         backgroundImage: `url(${item.image})`,
         backgroundSize: "cover",

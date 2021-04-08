@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { useModal } from "../hooks/useModal";
 import Modal from "@material-ui/core/Modal";

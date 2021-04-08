@@ -4,10 +4,11 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Gallery from "../../ui/Gallery";
 import CardsCarousel from "../../ui/CardsCarousel";
 import "../styles.css";
+import nfts from "./nfts";
 
 declare interface Props {
   initMarket: Function;
-  nfts: Array<ICard> | null;
+  items: Array<ICard> | null;
   isLoading: Boolean;
 }
 
@@ -22,7 +23,7 @@ const useStyles = () => {
   };
   return classes;
 };
-const MarketPlace = ({ initMarket, nfts, isLoading }: Props) => {
+const MarketPlace = ({ initMarket, items, isLoading }: Props) => {
   const classes = useStyles();
 
   useEffect(() => {
@@ -37,11 +38,11 @@ const MarketPlace = ({ initMarket, nfts, isLoading }: Props) => {
     <Container component="main" maxWidth="lg">
       <div className="App">
         <h1>Liste des NFTS : </h1>
-        {/* <CardsCarousel items={nfts} /> */}
+        {/* <CardsCarousel  /> */}
         {isLoading ? (
           <CircularProgress size="75px" style={{ color: "black" }} />
         ) : (
-          <Gallery items={nfts} />
+          <Gallery items={items} />
         )}
       </div>
     </Container>
