@@ -1,48 +1,44 @@
-import React from "react";
 import { useSelector } from "react-redux";
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { useModal } from "../hooks/useModal";
 import Modal from "@material-ui/core/Modal";
+import "./Card.css";
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
+interface TemplateProps {
+  item: ICard;
 }
-
-function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    paper: {
-      position: "absolute",
-      backgroundColor: theme.palette.background.paper,
-      border: "2px solid #000",
-      boxShadow: theme.shadows[5],
-      padding: theme.spacing(2, 4, 3),
-    },
-  })
-);
-
-export default function SimpleModal() {
-  const classes = useStyles();
-  const [modalStyle] = React.useState(getModalStyle);
-  const { handleClose, visible } = useModal();
-  const body = (
-    <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">Text in a modal</h2>
-      <p id="simple-modal-description">
-        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-      </p>
+const Template = ({ item }: TemplateProps) => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 100,
+      }}
+    >
+      <div className="card">
+        <div
+          style={{
+            backgroundImage: `url(${item?.image})`,
+            backgroundSize: "cover",
+          }}
+          className="card-image"
+        />
+        <div className="card-title">{item?.name}</div>
+        <div className="card-desc">{item?.nationality}</div>
+        <div className="card-actions">
+          <button type="button" color="primary" className="card-action-buy">
+            Buy
+          </button>
+        </div>
+      </div>
     </div>
   );
+};
+
+export default function SimpleModal() {
+  const { handleClose, visible } = useModal();
+  const { current } = useSelector((state: any) => state.marketplace);
   return (
     <div>
       <Modal
@@ -51,7 +47,7 @@ export default function SimpleModal() {
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
-        {body}
+        <Template item={current} />
       </Modal>
     </div>
   );
