@@ -52,7 +52,6 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
     }
     break;
   }
-    
   
     default:
       return next(action);

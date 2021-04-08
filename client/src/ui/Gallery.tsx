@@ -1,6 +1,6 @@
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
-
+import "./gallery.css"
 interface Props {
   items: Array<any> | null;
 }
@@ -38,7 +38,12 @@ const Gallery = ({ items }: Props) => {
       }}
     >
         {items?.map((item, index) => (
-            <div style={{height: "416px", width:"257px", backgroundImage: `url(${item.image})`, backgroundSize: "cover", margin: "1rem"}}>
+            <div className="itemCard" style={{
+              
+              backgroundImage: `url(${item.image})`, 
+              backgroundSize: "cover", 
+              margin: "1rem", 
+              }}>
             </div>
         ))}
       
