@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Container from "@material-ui/core/Container";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Gallery from "../../ui/Gallery";
 import CardsCarousel from "../../ui/CardsCarousel";
 import "../styles.css";
-import nfts from "./nfts";
 
 declare interface Props {
   initMarket: Function;
   items: Array<ICard> | null;
   isLoading: Boolean;
+  buyNFT: Function;
 }
 
 const useStyles = () => {

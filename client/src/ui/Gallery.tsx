@@ -2,7 +2,9 @@ import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import Modal from "./Modal";
 import Card from "./Card";
+import Button from "@material-ui/core/Button";
 import "./gallery.css";
+
 interface Props {
   items: Array<ICard> | null;
 }
