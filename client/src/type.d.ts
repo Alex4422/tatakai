@@ -43,6 +43,7 @@ interface IUserState {
 interface IAdminState {
   nft: any;
   isLoading: boolean;
+  isFullfilled: boolean;
 }
 
 interface IMarketplaceState {

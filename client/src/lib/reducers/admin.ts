@@ -7,8 +7,18 @@ import {
 } from "../actions/types";
 
 export const initialState = {
-  nft: { name: null, age: null, file: null, supply: null, nationality: null, saison: null, type: null, price: 0 },
+  nft: {
+    name: null,
+    age: null,
+    file: null,
+    supply: null,
+    nationality: null,
+    saison: null,
+    type: null,
+    price: 0,
+  },
   isLoading: false,
+  isFullfilled: false,
 };
 
 const admin = (
@@ -26,15 +36,16 @@ const admin = (
         ...oldState,
         isLoading: true,
       };
-    case IS_MINTING: 
+    case IS_MINTING:
       return {
         ...oldState,
         isLoading: true,
-      }
+      };
     case MINT_NFT_SUCCESS:
       return {
         nft: {},
         isLoading: false,
+        isFullfilled: true,
       };
     default:
       return {

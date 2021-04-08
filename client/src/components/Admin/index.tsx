@@ -44,7 +44,9 @@ const Admin = ({
   submitValue,
   changeFieldFile,
   isLoading,
-}: Props & AdminProps) => {
+  isFullfilled,
+  history,
+}: Props & AdminProps & { history: any }) => {
   const { validate, isValid } = useFormValidation();
   const classes = useStyles();
   const [file, setFile] = useState();
@@ -65,6 +67,7 @@ const Admin = ({
 
   useEffect(() => {
     console.log("isLoading", isLoading);
+    isFullfilled && history.push("/marketplace");
   }, [isLoading]);
 
   const selectFile = (event: any) => {

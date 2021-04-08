@@ -10,6 +10,12 @@ interface TemplateProps {
 const Template = ({ item }: TemplateProps) => {
   const dispatch = useDispatch();
   const { accounts } = useSelector((state: any) => state.user);
+  const { handleClose } = useModal();
+
+  const handleOnClick = () => {
+    dispatch(buyNFT(item.id, accounts[0]));
+    handleClose();
+  };
   return (
     <div
       style={{
@@ -31,10 +37,18 @@ const Template = ({ item }: TemplateProps) => {
         <div className="card-desc">{item?.nationality}</div>
         <div className="card-actions">
           <button
-            onClick={() => dispatch(buyNFT(item.id, accounts[0]))}
+            onClick={handleClose}
             type="button"
             color="primary"
-            className="card-action-buy"
+            className="card-action card-action-cancel"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleOnClick}
+            type="button"
+            color="primary"
+            className="card-action"
           >
             Buy
           </button>
