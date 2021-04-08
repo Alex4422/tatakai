@@ -52,5 +52,26 @@ module.exports = app => {
 */
   router.get("/:id", cards.findOne);
 
+/**
+ * @swagger
+ * /cards/buy:
+ *   post:
+ *     summary: Buy a Card.
+ *     parameters:
+ *       - in: query
+ *         name: id
+ *         required: true
+ *         description: Card ID
+ *         schema:
+ *           type: integer
+ *       - in: query
+ *         name: address
+ *         required: true
+ *         description: Buyer address
+ *         schema:
+ *           type: string
+*/
+  router.post("/buy", cards.buy);
+
   app.use('/api/cards', router);
 };

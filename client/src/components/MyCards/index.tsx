@@ -8,6 +8,7 @@ declare interface Props {
   fetchUserCards: Function;
   getAuthMetamask: Function;
   seedAuthMetamask: Function;
+  getUserNFTS: Function;
   cards: Array<any> | null;
 }
 
@@ -22,9 +23,11 @@ const useStyles = () => {
   };
   return classes;
 };
-const MarketPlace = ({ getAuthMetamask, seedAuthMetamask, cards }: Props) => {
+const MarketPlace = ({ getAuthMetamask, seedAuthMetamask, cards, getUserNFTS }: Props) => {
   const classes = useStyles();
-  useEffect(() => {}, []);
+  useEffect(() => {
+    getUserNFTS()
+  }, []);
 
   return (
     <Container component="main" maxWidth="lg">

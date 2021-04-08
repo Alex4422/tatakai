@@ -1,0 +1,12 @@
+
+.itemCard {
+  height: 416px; 
+  width: 257px;
+  background-size: cover; 
+  margin: 1rem;
+  transition-duration: 0.2s;
+}
+
+.itemCard:hover {
+  transform: scale(1.1);
+}

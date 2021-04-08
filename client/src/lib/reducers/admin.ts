@@ -7,7 +7,7 @@ import {
 } from "../actions/types";
 
 export const initialState = {
-  nft: { name: null, age: null, file: null, supply: null, nationality: null, saison: null, type: null },
+  nft: { name: null, age: null, file: null, supply: null, nationality: null, saison: null, type: null, price: 0 },
   isLoading: false,
 };
 

@@ -5,11 +5,13 @@ import {
 
 export const initialState = {
   web3: null,
+  provider: null,
   accounts: null,
   isLoading: false,
   isAdmin: false,
   cards: null,
-  balance: null,
+  balanceWei: null,
+  balanceTAK: null,
 };
 
 const marketplace = (
@@ -27,6 +29,9 @@ const marketplace = (
         ...oldState,
         web3: payload.web3,
         accounts: payload.accounts,
+        balanceWei: payload.balanceWei,
+        provider: payload.provider,
+        balanceTAK: payload.balanceTAK,
         isLoading: false,
       };
     default:

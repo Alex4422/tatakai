@@ -31,11 +31,13 @@ interface IStorageAction {
 
 interface IUserState {
   web3: any | null;
+  provider: any | null;
   accounts: Array<string> | null;
   isLoading: Boolean;
   isAdmin: Boolean;
   cards: Array<Object> | null;
-  balance: Number | null;
+  balanceWei: Number | null;
+  balanceTAK: Number | null;
 }
 
 interface IAdminState {
