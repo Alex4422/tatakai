@@ -8,9 +8,9 @@ export const getAuthMetamask = () => ({
 });
 
 
-export const seedAuthMetamask = (web3: any, accounts: any, balanceWei: Number, provider: any) => ({
+export const seedAuthMetamask = (web3: any, accounts: any, balanceWei: Number, provider: any, balanceTAK: any) => ({
   type: SEED_AUTH_METAMASK,
-  payload: { web3, accounts, balanceWei, provider },
+  payload: { web3, accounts, balanceWei, provider, balanceTAK },
 });
 
 

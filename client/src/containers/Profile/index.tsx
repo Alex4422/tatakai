@@ -1,7 +1,6 @@
 import { connect } from "react-redux";
 import Profile from "../../components/Profile";
 import { getTAK } from "../../lib/actions/user";
-
 type IMapStateToPropsType = {
   user: IUserState;
 };

@@ -6,8 +6,10 @@ const tokenDecimals = 18;
 const tokenImage = 'https://ipfs.io/ipfs/QmRLgx3aigZhbNQjZpY3gyErWijnH6AvXSS5dd2ddFgw2d';
 
 export const balanceTAK = async (web3, provider, account) => {
-  const netId = await web3.eth.net.getId();
+  const netId = provider.networkVersion;
+  console.log(netId)
   const deployedNetwork = TakToken.networks[netId];
+  console.log(deployedNetwork)
   const contract = new web3.eth.Contract(
     TakToken.abi,
     deployedNetwork && deployedNetwork.address

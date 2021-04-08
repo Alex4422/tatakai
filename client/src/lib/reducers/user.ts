@@ -31,6 +31,7 @@ const marketplace = (
         accounts: payload.accounts,
         balanceWei: payload.balanceWei,
         provider: payload.provider,
+        balanceTAK: payload.balanceTAK,
         isLoading: false,
       };
     default:

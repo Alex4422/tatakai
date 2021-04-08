@@ -30,7 +30,7 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
         const provider: any = await detectEthereumProvider()
         const resBalanceTAK: any = await balanceTAK(web3, provider, accounts[0])
         console.log("balancetak", resBalanceTAK)
-        dispatch(seedAuthMetamask(web3, accounts, balance, provider));
+        dispatch(seedAuthMetamask(web3, accounts, balance, provider, resBalanceTAK));
       } catch (error) {
         alert(
           `Failed to load web3, accounts, or contract. Check console for details.`
