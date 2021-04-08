@@ -1,5 +1,6 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useModal } from "../hooks/useModal";
+import { buyNFT } from "../lib/actions/marketplace";
 import Modal from "@material-ui/core/Modal";
 import "./Card.css";
 
@@ -7,6 +8,8 @@ interface TemplateProps {
   item: ICard;
 }
 const Template = ({ item }: TemplateProps) => {
+  const dispatch = useDispatch();
+  const { accounts } = useSelector((state: any) => state.user);
   return (
     <div
       style={{
@@ -27,7 +30,12 @@ const Template = ({ item }: TemplateProps) => {
         <div className="card-title">{item?.name}</div>
         <div className="card-desc">{item?.nationality}</div>
         <div className="card-actions">
-          <button type="button" color="primary" className="card-action-buy">
+          <button
+            onClick={() => dispatch(buyNFT(item.id, accounts[0]))}
+            type="button"
+            color="primary"
+            className="card-action-buy"
+          >
             Buy
           </button>
         </div>

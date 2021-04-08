@@ -28,6 +28,13 @@ const marketplace = (
         ...payload,
       };
     }
+    case SELECT_CURRENT: {
+      return {
+        ...oldState,
+        ...payload,
+      };
+    }
+
     default:
       return {
         ...oldState,

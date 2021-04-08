@@ -25,6 +25,7 @@ export const SEED_TAK = "SEED_TAK";
 
 //BUY
 export const BUY_NFT = "BUY_NFT";
+export const BUY_NFT_SUCCESS = "BUY_NFT_SUCCESS";
 export const USER_BOUGHT_NFT = "USER_BOUGHT_NFT";
 
 //MARKETPLACE

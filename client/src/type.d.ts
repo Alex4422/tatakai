@@ -72,6 +72,8 @@ interface ConfigAxios {
 }
 
 interface ICard {
+  id: number;
+  eex;
   name: string;
   age: number;
   nationality: string;

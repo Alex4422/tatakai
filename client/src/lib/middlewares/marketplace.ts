@@ -1,5 +1,5 @@
 import { INIT_MARKET, BUY_NFT } from "../actions/types";
-import { seedMarket } from "../actions/marketplace";
+import { seedMarket, buyNFTSuccess } from "../actions/marketplace";
 import getAccount from "./utils";
 import axios from "axios";
 
@@ -34,18 +34,19 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
 
     /*******************************/
     /* USER BUY NFT
-  /*******************************/
+  /**************e*****************/
     case BUY_NFT: {
       console.log("Passe par le MW MarketPLace via Buy NFT");
-      const idNFT = action.payload;
       const config: Object = {
         method: "post",
-        url: `${URL}cards`,
       };
+      let data = { id: action.payload.id, address: action.payload.address };
       try {
-        const response: any = await axios(config);
+        const response: any = await axios.post(`${URL}cards/buy`, data, config);
         console.log("response Api", response);
-        dispatch(seedMarket(response.data));
+        if (response.status === 200) {
+          dispatch(buyNFTSuccess());
+        }
       } catch (error) {
         console.error(error);
       }
