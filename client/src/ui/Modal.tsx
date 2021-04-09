@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useModal } from "../hooks/useModal";
+import { useModal } from "../Hooks/useModal";
 import { buyNFT } from "../lib/actions/marketplace";
 import Modal from "@material-ui/core/Modal";
 import "./Card.css";
@@ -27,8 +27,8 @@ const Template = ({ item }: TemplateProps) => {
           }}
           className="card-image"
         />
-        <div className="card-title">{item?.name}</div>
-        <div className="card-desc">{item?.nationality}</div>
+        <div className="card-title">{item?.metadata?.name}</div>
+        <div className="card-desc">{item?.metadata?.nationality}</div>
         <div className="card-actions">
           <button
             onClick={() => dispatch(buyNFT(item.id, accounts[0]))}

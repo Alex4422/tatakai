@@ -73,13 +73,14 @@ interface ConfigAxios {
 
 interface ICard {
   id: number;
-  eex;
-  name: string;
-  age: number;
-  nationality: string;
-  saison: string;
-  type: string;
-  supply: number;
-  price: Float32Array;
+  description: string;
   image: string;
+  metadata: {
+    age: string;
+    name: string;
+    nationality: string;
+    price: string;
+    saison: string;
+    type: string;
+  }
 }
