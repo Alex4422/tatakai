@@ -2,7 +2,7 @@ import { GET_AUTH_METAMASK, GET_USER_NFTS, GET_TAK, IMPORT_TAK_METAMASK_WALLET }
 import {seedAuthMetamask, seedUserNFTS} from "../actions/user";
 import detectEthereumProvider from '@metamask/detect-provider';
 import getAccount from "./utils"
-import addTAKToken, {balanceTAK} from "./utils/TakToken"
+import {balanceTAK, addTAKToken} from "./utils/TakToken"
 import getWeb3 from "./utils/getWeb3";
 import axios from 'axios';
 

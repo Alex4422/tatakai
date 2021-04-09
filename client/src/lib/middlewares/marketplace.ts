@@ -1,7 +1,10 @@
 import { INIT_MARKET, BUY_NFT } from "../actions/types";
 import { seedMarket, buyNFTSuccess } from "../actions/marketplace";
-import getAccount from "./utils";
+import MarketplaceInstanceCall from "./utils/Marketplace";
+import CardItemInstanceCall from "./utils/cardItem";
+import TakTokenInstanceCall from "./utils/TakToken";
 import axios from "axios";
+import { get } from "node:https";
 
 const URL = "http://localhost:8080/api/";
 
@@ -9,7 +12,7 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
   next: any
 ) => async (action: IAction) => {
   const {
-    user: { accounts },
+    user: { accounts, web3 },
     contract: {TakToken, Marketplace, CardItem}
   } = getState();
 
@@ -57,12 +60,17 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
     case BUY_NFT: {
       console.log("Passe par le MW MarketPLace via Buy NFT");
       let data = { id: action.payload.id, price: action.payload.price };
-      console.log("data de la modale", data.id , data.price)
-      console.log("marketplace.address", Marketplace.address)
+      console.log("data de la modale", data.id , data.price);
       try {
-        
-        console.log("response Api");
-        
+        const MarketplaceInstance = await MarketplaceInstanceCall(web3)
+      console.log("marketplace", MarketplaceInstance);
+      console.log("response Api");
+      
+      
+      //TODO rest plus qu'à appeler la méthode
+      /*  await this.TakTokenContract.approve(marketplaceAddress, card.metadata.price, {from: buyer});
+      await this.MarketplaceContract.buy(this.CardItemContract.address, buyer, id, card.metadata.price, {from: buyer}) */
+
       } catch (error) {
         console.error(error);
       }
