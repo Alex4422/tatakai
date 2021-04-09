@@ -4,7 +4,7 @@ import MarketplaceInstanceCall from "./utils/Marketplace";
 import CardItemInstanceCall from "./utils/cardItem";
 import TakTokenInstanceCall from "./utils/TakToken";
 import axios from "axios";
-import { get } from "node:https";
+
 
 const URL = "http://localhost:8080/api/";
 
@@ -58,19 +58,22 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
       break;
     } */
     case BUY_NFT: {
-      console.log("Passe par le MW MarketPLace via Buy NFT");
       let data = { id: action.payload.id, price: action.payload.price };
-      console.log("data de la modale", data.id , data.price);
       try {
-        const MarketplaceInstance = await MarketplaceInstanceCall(web3)
-      console.log("marketplace", MarketplaceInstance);
-      console.log("response Api");
-      
-      
-      //TODO rest plus qu'à appeler la méthode
-      /*  await this.TakTokenContract.approve(marketplaceAddress, card.metadata.price, {from: buyer});
-      await this.MarketplaceContract.buy(this.CardItemContract.address, buyer, id, card.metadata.price, {from: buyer}) */
+        //TODO mutualiser ca!
+      const MarketplaceInstance = await MarketplaceInstanceCall(web3);
+      const TakTokenInstance = await TakTokenInstanceCall(web3);
+      const CardItemInstance = await CardItemInstanceCall(web3)
 
+      await TakTokenInstance.methods.approve(MarketplaceInstance._address,data.price).call({from: accounts[0]}).then(async (result: any) => {
+        console.dir(result);
+        if(result){
+          console.log(CardItemInstance._address,accounts[0], data.id, data.price)
+          await MarketplaceInstance.methods.buy(CardItemInstance._address, accounts[0], data.id, data.price).send({from: accounts[0]}).then((response: any) => {
+            console.dir(response)
+          })
+        }
+      })
       } catch (error) {
         console.error(error);
       }
