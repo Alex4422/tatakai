@@ -19,18 +19,18 @@ contract Faucet {
     }
 
     function requestTokens() public {
-        require(allowedToWithdraw(msg.sender), "You have to wait 30 minutes!");
+        // require(allowedToWithdraw(msg.sender), "You have to wait 30 minutes!");
         tokenInstance.transfer(msg.sender, tokenAmount);
-        lastAccessTime[msg.sender] = block.timestamp + waitTime;
+        // lastAccessTime[msg.sender] = block.timestamp + waitTime;
         emit Withdrawal(msg.sender);
     }
 
-    function allowedToWithdraw(address _address) public view returns (bool) {
-        if(lastAccessTime[_address] == 0) {
-            return true;
-        } else if(block.timestamp >= lastAccessTime[_address]) {
-            return true;
-        }
-        return false;
-    }
+    // function allowedToWithdraw(address _address) public view returns (bool) {
+    //     if(lastAccessTime[_address] == 0) {
+    //         return true;
+    //     } else if(block.timestamp >= lastAccessTime[_address]) {
+    //         return true;
+    //     }
+    //     return false;
+    // }
 }

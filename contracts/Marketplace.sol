@@ -27,7 +27,7 @@ contract Marketplace is ERC721Holder, Ownable {
         
         acceptedToken.transferFrom(
             msg.sender,
-            owner(),
+            address(this),
             _priceInWei
         );
         
