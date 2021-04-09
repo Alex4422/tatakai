@@ -1,7 +1,10 @@
 import { INIT_MARKET, BUY_NFT } from "../actions/types";
 import { seedMarket, buyNFTSuccess } from "../actions/marketplace";
-import getAccount from "./utils";
+import MarketplaceInstanceCall from "./utils/Marketplace";
+import CardItemInstanceCall from "./utils/cardItem";
+import TakTokenInstanceCall from "./utils/TakToken";
 import axios from "axios";
+
 
 const URL = "http://localhost:8080/api/";
 
@@ -9,7 +12,8 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
   next: any
 ) => async (action: IAction) => {
   const {
-    user: { accounts },
+    user: { accounts, web3 },
+    contract: {TakToken, Marketplace, CardItem}
   } = getState();
 
   switch (action.type) {
@@ -34,8 +38,9 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
 
     /*******************************/
     /* USER BUY NFT
-  /**************e*****************/
-    case BUY_NFT: {
+  /********************************/
+  //VIa API:
+    /* case BUY_NFT: {
       console.log("Passe par le MW MarketPLace via Buy NFT");
       const config: Object = {
         method: "post",
@@ -47,6 +52,28 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
         if (response.status === 200) {
           dispatch(buyNFTSuccess());
         }
+      } catch (error) {
+        console.error(error);
+      }
+      break;
+    } */
+    case BUY_NFT: {
+      let data = { id: action.payload.id, price: action.payload.price };
+      try {
+        //TODO mutualiser ca!
+      const MarketplaceInstance = await MarketplaceInstanceCall(web3);
+      const TakTokenInstance = await TakTokenInstanceCall(web3);
+      const CardItemInstance = await CardItemInstanceCall(web3)
+
+      await TakTokenInstance.methods.approve(MarketplaceInstance._address,data.price).call({from: accounts[0]}).then(async (result: any) => {
+        console.dir(result);
+        if(result){
+          console.log(CardItemInstance._address,accounts[0], data.id, data.price)
+          await MarketplaceInstance.methods.buy(CardItemInstance._address, accounts[0], data.id, data.price).send({from: accounts[0]}).then((response: any) => {
+            console.dir(response)
+          })
+        }
+      })
       } catch (error) {
         console.error(error);
       }

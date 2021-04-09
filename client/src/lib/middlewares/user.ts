@@ -2,7 +2,7 @@ import { GET_AUTH_METAMASK, GET_USER_NFTS, GET_TAK, IMPORT_TAK_METAMASK_WALLET }
 import {seedAuthMetamask, seedUserNFTS} from "../actions/user";
 import detectEthereumProvider from '@metamask/detect-provider';
 import getAccount from "./utils"
-import addTAKToken, {balanceTAK} from "./utils/TakToken"
+import {balanceTAK, addTAKToken} from "./utils/TakToken"
 import getWeb3 from "./utils/getWeb3";
 import axios from 'axios';
 
@@ -48,7 +48,7 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
         console.log("user account", accounts[0])    
         const config: Object = {
           method: 'get',
-          url: `${URL}users/${accounts[0]}`,
+          url: `${URL}accounts/${accounts[0]}`,
         }
         try {
           const response: any = await axios(config);

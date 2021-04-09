@@ -1,10 +1,11 @@
-import Web3 from "web3";
 import TakToken from "../../../contracts/TakToken.json";
 
 const tokenSymbol = 'TAK';
 const tokenDecimals = 18;
 const tokenImage = 'https://ipfs.io/ipfs/QmRLgx3aigZhbNQjZpY3gyErWijnH6AvXSS5dd2ddFgw2d';
 
+
+//TODO à refacto vu qu'on a les instances dans le reducer now
 export const balanceTAK = async (web3, provider, account) => {
   const netId = provider.networkVersion;
   console.log(netId)
@@ -19,7 +20,7 @@ return await contract.methods.balanceOf(account).call()
 }
 
 
-const addTAKToken = async (provider) => {
+export const addTAKToken = async (provider) => {
   try {
     const network = provider.networkVersion;
     console.log("network:", provider.networkVersion)
@@ -50,4 +51,16 @@ const addTAKToken = async (provider) => {
   console.log(error);
 }
 }
-export default addTAKToken
+
+const TakTokenIntance = async (web3) => {
+    const networkId = await web3.eth.net.getId();
+    const deployedNetwork = TakToken.networks[networkId];
+    const instance = new web3.eth.Contract(
+      TakToken.abi,
+      deployedNetwork && deployedNetwork.address
+    );
+    return instance
+}
+
+
+export default TakTokenIntance

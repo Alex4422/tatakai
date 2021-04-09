@@ -1,4 +1,5 @@
-//types contract
+//Contracts
+export const SEED_CONTRACTS = "SEED_CONTRACTS"
 
 //SIMPLE STORAGE
 export const CHANGE_FIELD = "CHANGE_FIELD";

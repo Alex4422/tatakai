@@ -14,7 +14,7 @@ const Template = ({ item }: TemplateProps) => {
   const { handleClose } = useModal();
 
   const handleOnClick = () => {
-    dispatch(buyNFT(item.id, accounts[0]));
+    dispatch(buyNFT(item.id, item.metadata.price));
     handleClose();
   };
   return (
