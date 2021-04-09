@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useModal } from "../hooks/useModal";
 import { buyNFT } from "../lib/actions/marketplace";
 import Modal from "@material-ui/core/Modal";
+
 import "./Card.css";
 
 interface TemplateProps {
@@ -10,6 +11,12 @@ interface TemplateProps {
 const Template = ({ item }: TemplateProps) => {
   const dispatch = useDispatch();
   const { accounts } = useSelector((state: any) => state.user);
+  const { handleClose } = useModal();
+
+  const handleOnClick = () => {
+    dispatch(buyNFT(item.id, accounts[0]));
+    handleClose();
+  };
   return (
     <div
       style={{
@@ -27,14 +34,30 @@ const Template = ({ item }: TemplateProps) => {
           }}
           className="card-image"
         />
-        <div className="card-title">{item?.name}</div>
-        <div className="card-desc">{item?.nationality}</div>
+        <div className="card-title">{item?.metadata?.name}</div>
+        <div className="card-desc">
+          <p>Type : {item?.metadata?.type}</p>
+          <p>Age : {item?.metadata?.age}</p>
+          <p>Nationality : {item?.metadata?.nationality}</p>
+           <p>Price : {item?.metadata?.price} </p>
+        </div>
+
         <div className="card-actions">
+       
+
           <button
-            onClick={() => dispatch(buyNFT(item.id, accounts[0]))}
+            onClick={handleClose}
             type="button"
             color="primary"
-            className="card-action-buy"
+            className="card-action card-action-cancel"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleOnClick}
+            type="button"
+            color="primary"
+            className="card-action"
           >
             Buy
           </button>

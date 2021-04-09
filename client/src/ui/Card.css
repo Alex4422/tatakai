@@ -28,7 +28,7 @@
 .card-desc {
   padding: 0 1em 1em 1em;
   border-bottom: 1px solid rgba(128, 128, 128, 0.3);
-  height: 75px;
+
   overflow: hidden;
   text-align: justify;
 }
@@ -37,8 +37,8 @@
   justify-content: flex-end;
   padding: 20;
 }
-.card-action-buy {
-  margin: 1em;
+.card-action {
+  margin: 1em 0.2em;
   height: 3em;
   width: 8em;
   border: none;
@@ -48,6 +48,10 @@
   outline: none;
   border-radius: 2px;
 }
+.card-action-cancel {
+  background: rgba(255, 29, 142, 0.8);
+}
+
 .card-action-readMore:hover {
   background: rgba(255, 29, 142, 0.8);
   transition: all 0.1s ease-in;

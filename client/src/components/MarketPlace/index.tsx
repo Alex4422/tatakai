@@ -7,7 +7,7 @@ import "../styles.css";
 
 declare interface Props {
   initMarket: Function;
-  items: Array<ICard> | null;
+  items: Array<ICard> | [];
   isLoading: Boolean;
   buyNFT: Function;
 }
