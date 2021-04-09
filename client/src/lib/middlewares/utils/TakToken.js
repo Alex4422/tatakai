@@ -5,6 +5,8 @@ const tokenSymbol = 'TAK';
 const tokenDecimals = 18;
 const tokenImage = 'https://ipfs.io/ipfs/QmRLgx3aigZhbNQjZpY3gyErWijnH6AvXSS5dd2ddFgw2d';
 
+
+//TODO à refacto vu qu'on a les instances dans le reducer now
 export const balanceTAK = async (web3, provider, account) => {
   const netId = provider.networkVersion;
   console.log(netId)

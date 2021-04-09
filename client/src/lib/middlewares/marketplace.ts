@@ -10,6 +10,7 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
 ) => async (action: IAction) => {
   const {
     user: { accounts },
+    contract: {TakToken, Marketplace, CardItem}
   } = getState();
 
   switch (action.type) {
@@ -34,8 +35,9 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
 
     /*******************************/
     /* USER BUY NFT
-  /**************e*****************/
-    case BUY_NFT: {
+  /********************************/
+  //VIa API:
+    /* case BUY_NFT: {
       console.log("Passe par le MW MarketPLace via Buy NFT");
       const config: Object = {
         method: "post",
@@ -47,6 +49,20 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
         if (response.status === 200) {
           dispatch(buyNFTSuccess());
         }
+      } catch (error) {
+        console.error(error);
+      }
+      break;
+    } */
+    case BUY_NFT: {
+      console.log("Passe par le MW MarketPLace via Buy NFT");
+      let data = { id: action.payload.id, price: action.payload.price };
+      console.log("data de la modale", data.id , data.price)
+      console.log("marketplace.address", Marketplace.address)
+      try {
+        
+        console.log("response Api");
+        
       } catch (error) {
         console.error(error);
       }

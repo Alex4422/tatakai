@@ -182,12 +182,12 @@ const Admin = ({
                   variant="outlined"
                   required
                   fullWidth
-                  id="supply"
+                  id="price"
                   type="number"
-                  label="Supply"
-                  name="supply"
-                  autoComplete="supply"
-                  defaultValue={nft.supply || ""}
+                  label="Price in TAK"
+                  name="price"
+                  autoComplete="price"
+                  defaultValue={nft.price || ""}
                   onChange={handleOnChange}
                 />
               </Grid>
