@@ -48,7 +48,7 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
         console.log("user account", accounts[0])    
         const config: Object = {
           method: 'get',
-          url: `${URL}users/${accounts[0]}`,
+          url: `${URL}accounts/${accounts[0]}`,
         }
         try {
           const response: any = await axios(config);

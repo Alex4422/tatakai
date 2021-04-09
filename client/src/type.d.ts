@@ -11,9 +11,9 @@ interface ContractJSON {
 }
 
 interface IContractState {
-  admin: any | null;
-  web3: any | null;
-  accounts: Array<string> | null;
+  TakToken: any | null;
+  Marketplace: any | null;
+  CardItem: any | null;
 }
 interface IContractAction {
   newInstance: Function;

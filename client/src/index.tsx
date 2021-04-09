@@ -9,7 +9,7 @@ import App from "./containers";
 const rootReactElement = (
   <BrowserRouter>
     <Provider store={store}>
-      <ModalProvider>
+      <ModalProvider>*
         <App />
       </ModalProvider>
     </Provider>

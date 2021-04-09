@@ -11,17 +11,13 @@ const items = [
 ];
 
 type IMapStateToPropsType = {
-  contract: IContractState;
   user: IUserState;
 };
 
 const mapStateToProps = ({
-  contract: { web3, accounts },
   user: { cards },
 }: IMapStateToPropsType) => {
   return {
-    web3,
-    accounts,
     cards: cards || items,
   };
 };
