@@ -1,0 +1,239 @@
+swagger: "2.0"
+info:
+  description: "Tatakai API Endpoints (Documentation)"
+  version: "1.0.0"
+  title: "Tatakai API"
+host: "localhost:8080"
+basePath: "/api"
+tags:
+- name: "accounts"
+  description: "Everything about users accounts (balance, nfts owned..etc)"
+- name: "cards"
+  description: "Mint and retrieve cards"
+- name: "faucet"
+  description: "Faucet request"
+schemes:
+- "https"
+- "http"
+paths:
+  /cards:
+    post:
+      tags:
+      - "cards"
+      summary: "Mint a new NFT Card"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "formData"
+        name: "file"
+        description: "NFT Image"
+        required: true
+        type: "file"
+      - in: "formData"
+        name: "name"
+        description: "Fighter Name"
+        required: true
+        type: "string"
+      - in: "formData"
+        name: "age"
+        description: "Fighter Age"
+        required: false
+        type: "string"
+      - in: "formData"
+        name: "nationality"
+        description: "Fighter Nationality"
+        required: false
+        type: "string"
+      - in: "formData"
+        name: "saison"
+        description: "Card Season"
+        required: false
+        type: "string"
+      - in: "formData"
+        name: "type"
+        description: "Card Type"
+        required: false
+        type: "string"
+      - in: "formData"
+        name: "price"
+        description: "NFT Price"
+        required: false
+        type: "string"
+      responses:
+        "200":
+          description: "Return card info"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Cards"
+        "400":
+          description: "File not uploaded"
+        "500":
+          description: "Invalid input"
+    get:
+      tags:
+        - "cards"
+      summary: "Retrieve all marketplace cards"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Return all cards info"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Cards"
+        "404":
+          description: "No cards minted yet"
+        "500":
+          description: "Invalid input"
+  /cards/{id}:
+    get:
+      tags:
+      - "cards"
+      summary: "Retrieve a card by id"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Card ID"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "Return card info"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Cards"
+        "404":
+          description: "No exist"
+  /cards/buy:
+    post:
+      tags:
+      - "cards"
+      summary: "Buy a card"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "query"
+        description: "Card ID"
+        required: true
+        type: "integer"
+      - name: "address"
+        in: "query"
+        description: "Buyer address"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Return true"
+        "500":
+          description: "Invalid input"
+  /accounts/{address}:
+    get:
+      tags:
+      - "accounts"
+      summary: "Retrieve account info"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "address"
+        in: "path"
+        description: "ETH address"
+        required: true
+        type: "string"
+        items:
+          type: "string"
+      responses:
+        "200":
+          description: "Return account info"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Accounts"
+        "404":
+          description: "No cards owned "
+  /faucet:
+    post:
+      tags:
+      - "faucet"
+      summary: "Request Tak Token"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "query"
+        name: "address"
+        description: "ETH address"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Request processed"
+        "500":
+          description: "Invalid input"
+definitions:
+  Accounts:
+    type: "object"
+    properties:
+      balance:
+        type: "integer"
+        format: "int64"
+        example: "1000"
+      cards:
+        $ref: "#/definitions/Cards"
+    xml:
+      name: "User"
+  Cards:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      owner:
+        type: "string"
+        example: "0xd5E57D5204c07f8CE425D5f6e8e6331f4b097Db5"
+      description:
+        type: "string"
+        example: "Unique"
+      image:
+        type: "string"
+        example: "https://ipfs.io/ipfs/QmXYUfzGTEXmLHkETDMvmFwWRCfHacf5HbXiotpSQs8Ht4"
+      metadata:
+        $ref: "#/definitions/Metadata"
+    xml:
+      name: "Cards"
+  Metadata:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        example: "Jon Jones"
+      age:
+        type: "string"
+        example: "42"
+      type:
+        type: "string"
+        example: "Unique"
+      price:
+        type: "string"
+        example: "1000"
+      saison:
+        type: "string"
+        example: "2021"
+      nationality:
+        type: "string"
+        example: "United States"
+    xml:
+      name: "Metadata"
+externalDocs:
+  description: "Github"
+  url: "https://github.com/lorcannrauzduel/tatakai"
