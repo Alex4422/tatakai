@@ -9,7 +9,7 @@ declare interface Props {
   getAuthMetamask: Function;
   seedAuthMetamask: Function;
   getUserNFTS: Function;
-  cards: Array<any> | null;
+  cards: Array<any> | [];
 }
 
 const useStyles = () => {

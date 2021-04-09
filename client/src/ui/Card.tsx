@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { selectCurrent } from "../lib/actions/marketplace";
-import { useModal } from "../Hooks/useModal";
+import { useModal } from "../hooks/useModal";
 interface Props {
   item: ICard;
 }

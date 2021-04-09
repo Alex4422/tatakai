@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useModal } from "../Hooks/useModal";
+import { useModal } from "../hooks/useModal";
 import { buyNFT } from "../lib/actions/marketplace";
 import Modal from "@material-ui/core/Modal";
 import "./Card.css";

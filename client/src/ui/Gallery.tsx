@@ -6,7 +6,7 @@ import Button from "@material-ui/core/Button";
 import "./gallery.css";
 
 interface Props {
-  items: Array<ICard> | null;
+  items: Array<ICard> | [];
 }
 
 const useStyles = () => {
@@ -43,7 +43,7 @@ const Gallery = ({ items }: Props) => {
           alignItems: "space-around",
         }}
       >
-        {items?.map((item, index) => (
+        {items?.map((item: ICard, index: number) => (
           <Card item={item} key={index} />
         ))}
       </div>
