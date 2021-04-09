@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useModal } from "../hooks/useModal";
 import { buyNFT } from "../lib/actions/marketplace";
 import Modal from "@material-ui/core/Modal";
+
 import "./Card.css";
 
 interface TemplateProps {
@@ -34,8 +35,16 @@ const Template = ({ item }: TemplateProps) => {
           className="card-image"
         />
         <div className="card-title">{item?.metadata?.name}</div>
-        <div className="card-desc">{item?.metadata?.nationality}</div>
+        <div className="card-desc">
+          <p>Type : {item?.metadata?.type}</p>
+          <p>Age : {item?.metadata?.age}</p>
+          <p>Nationality : {item?.metadata?.nationality}</p>
+           <p>Price : {item?.metadata?.price} </p>
+        </div>
+
         <div className="card-actions">
+       
+
           <button
             onClick={handleClose}
             type="button"

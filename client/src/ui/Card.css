@@ -28,7 +28,7 @@
 .card-desc {
   padding: 0 1em 1em 1em;
   border-bottom: 1px solid rgba(128, 128, 128, 0.3);
-  height: 75px;
+
   overflow: hidden;
   text-align: justify;
 }
