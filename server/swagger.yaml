@@ -232,6 +232,9 @@ definitions:
       nationality:
         type: "string"
         example: "United States"
+      isForSale:
+        type: "bool"
+        example: false
     xml:
       name: "Metadata"
 externalDocs:
