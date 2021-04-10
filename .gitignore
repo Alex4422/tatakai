@@ -25,5 +25,5 @@ node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-server/resources
-client/src/contracts
+/server/resources
+/client/src/contracts
