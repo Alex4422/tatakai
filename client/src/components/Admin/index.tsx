@@ -63,12 +63,14 @@ const Admin = ({
     let data: any = new FormData();
     data.append("file", file!);
     submitValue(data);
+   
   };
 
-  useEffect(() => {
-    console.log("isLoading", isLoading);
-    isFullfilled && history.push("/marketplace");
-  }, [isLoading]);
+  //TODO fix!
+    /* useEffect(() => {
+      console.log("isLoading", isLoading);
+      isFullfilled && history.push("/marketplace");
+    }, [isLoading]); */
 
   const selectFile = (event: any) => {
     setFile(event.target.files[0]);

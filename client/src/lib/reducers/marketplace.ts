@@ -1,4 +1,4 @@
-import { INIT_MARKET, SEED_MARKET, SELECT_CURRENT } from "../actions/types";
+import { INIT_MARKET, SEED_MARKET, SELECT_CURRENT, IS_LOADING } from "../actions/types";
 
 export const initialState = {
   items: null,
@@ -11,6 +11,12 @@ const marketplace = (
   { type, payload }: IAction
 ) => {
   switch (type) {
+    case IS_LOADING:
+      return {
+        ...oldState,
+        isLoading: true,
+      };
+
     case INIT_MARKET:
       return {
         ...oldState,

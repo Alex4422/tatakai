@@ -4,6 +4,7 @@ import {
   SELECT_CURRENT,
   BUY_NFT,
   BUY_NFT_SUCCESS,
+  IS_LOADING,
 } from "./types";
 
 export const initMarket = () => ({
@@ -28,3 +29,7 @@ export const buyNFT = (id: number, price: string) => ({
 export const buyNFTSuccess = () => ({
   type: BUY_NFT_SUCCESS,
 });
+
+export const isLoading = () => ({
+  type : IS_LOADING,
+})

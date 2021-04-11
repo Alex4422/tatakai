@@ -33,6 +33,7 @@ export const USER_BOUGHT_NFT = "USER_BOUGHT_NFT";
 
 //MARKETPLACE
 export const INIT_MARKET = "MARKET_INIT";
+export const IS_LOADING = "IS_LOADING";
 export const SEED_MARKET = "SEED_MARKET";
 export const SELECT_CURRENT = "SELECT_CURRENT";
 

@@ -37,7 +37,6 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
           "Content-Type": `multipart/form-data; boundary=${data._boundary}`,
         },
       };
-      debugger;
       try {
         const response: any = await axios.post(`${URL}cards`, data, config);
         console.log("response Api", response);

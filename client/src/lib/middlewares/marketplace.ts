@@ -1,5 +1,5 @@
 import { INIT_MARKET, BUY_NFT } from "../actions/types";
-import { seedMarket, buyNFTSuccess } from "../actions/marketplace";
+import { seedMarket, buyNFTSuccess, isLoading } from "../actions/marketplace";
 import MarketplaceInstanceCall from "./utils/Marketplace";
 import CardItemInstanceCall from "./utils/cardItem";
 import TakTokenInstanceCall from "./utils/TakToken";
@@ -21,6 +21,7 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
     /* MARKET INIT via API / GET NFTS MARKETPLACE /
   /*******************************/
     case INIT_MARKET: {
+      dispatch(isLoading());
       console.log("Passe par le MW MarketPLace via MarketINit");
       const config: Object = {
         method: "get",
@@ -58,18 +59,30 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
       break;
     } */
     case BUY_NFT: {
-      let data = { id: action.payload.id, price: parseInt(action.payload.price,10) };
+      let data = { id: action.payload.id, price: action.payload.price };
       try {
         //TODO mutualiser ca!
       const MarketplaceInstance = await MarketplaceInstanceCall(web3);
       const TakTokenInstance = await TakTokenInstanceCall(web3);
       const CardItemInstance = await CardItemInstanceCall(web3)
 
-      await TakTokenInstance.methods.approve(MarketplaceInstance._address,data.price).call({from: accounts[0]}).then(async (result: any) => {
+      //test
+      await TakTokenInstance.methods.totalSupply().call({from: accounts[0]}).then(async (result: any) => {
+        console.log("total_supply", result);
+      });
+
+  
+
+      await TakTokenInstance.methods.approve(MarketplaceInstance._address,parseInt(data.price, 10)).send({from: accounts[0]}).then(async (result: any) => {
         console.dir(result);
         if(result){
           console.log(CardItemInstance._address,accounts[0], data.id, data.price)
-          await MarketplaceInstance.methods.buy(CardItemInstance._address, accounts[0], data.id, data.price).send({from: accounts[0]}).then((response: any) => {
+
+          await TakTokenInstance.methods.allowance(accounts[0], Marketplace.options.address).call({from: accounts[0]}).then(async (result: any) => {
+            console.log("allowance", result);
+          });
+
+          await MarketplaceInstance.methods.buy(CardItemInstance._address, accounts[0], data.id, parseInt(data.price, 10)).send({from: accounts[0]}).then((response: any) => {
             console.dir(response)
           })
         }
