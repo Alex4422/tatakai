@@ -65,7 +65,7 @@ describe('Marketplace', function () {
             expect(beforeGetNftOwner).to.eql(seller);
             
             await this.erc20token.approve(seller, price, {from: buyer});
-            await this.marketplace.buy(this.nft.address, buyer, 1, price, {from: buyer});
+            await this.marketplace.buy(this.nft.address, 1, price, {from: buyer});
             const balance2 = await this.erc20token.balanceOf(buyer);
             expect(balance2).to.be.bignumber.equal(new BN(balance-price));
 
@@ -84,7 +84,7 @@ describe('Marketplace', function () {
             expect(beforeGetNftOwner).to.eql(seller);
             
             await this.erc20token.approve(seller, price, {from: buyer});
-            await this.marketplace.buy(this.nft.address, buyer, 1, price, {from: buyer});
+            await this.marketplace.buy(this.nft.address, 1, price, {from: buyer});
             const balance2 = await this.erc20token.balanceOf(buyer);
             expect(balance2).to.be.bignumber.equal(new BN(balance-price));
             

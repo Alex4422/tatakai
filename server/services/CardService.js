@@ -127,7 +127,7 @@ class CardService extends Service {
             const card = await this.getById(id);
             const marketplaceAddress = await this.CardItemContract.marketplace();
             await this.TakTokenContract.approve(marketplaceAddress, card.metadata.price, {from: buyer});
-            await this.MarketplaceContract.buy(this.CardItemContract.address, buyer, id, card.metadata.price, {from: buyer})
+            await this.MarketplaceContract.buy(this.CardItemContract.address, id, card.metadata.price, {from: buyer})
             return true;
       } catch (error) {
             return error;
