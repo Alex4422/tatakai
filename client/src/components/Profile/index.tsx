@@ -24,7 +24,8 @@ declare interface Props {
   balanceWei: any | null,
   isLoading: Boolean,
   getTAK: Function,
-  importTAKMetamaskWallet: Function
+  importTAKMetamaskWallet: Function,
+  getBalances: Function,
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -37,10 +38,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Profile = ({ accounts, cards, isAdmin, balanceTAK, balanceWei,isLoading, getTAK, importTAKMetamaskWallet }: Props) => {
+const Profile = ({ accounts, cards, isAdmin, balanceTAK, balanceWei,isLoading, getTAK, importTAKMetamaskWallet, getBalances }: Props) => {
   const classes = useStyles();
+  
   useEffect(() => {
-
+    getBalances()
   }, []);
 
   return (
@@ -63,7 +65,7 @@ const Profile = ({ accounts, cards, isAdmin, balanceTAK, balanceWei,isLoading, g
                 <ImageIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText primary="Cards" secondary="Nombre de cards todo!" />
+            <ListItemText primary="NFTS" secondary={cards!.length >= 1 ? `Nombre de NFTS : ${cards!.length}`  : "Pas de NFTS dans votre protefeuille !"} />
           </ListItem>
           <Divider variant="inset" component="li" />
           

@@ -58,7 +58,7 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
       break;
     } */
     case BUY_NFT: {
-      let data = { id: action.payload.id, price: action.payload.price };
+      let data = { id: action.payload.id, price: parseInt(action.payload.price,10) };
       try {
         //TODO mutualiser ca!
       const MarketplaceInstance = await MarketplaceInstanceCall(web3);

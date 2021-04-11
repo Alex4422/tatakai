@@ -1,5 +1,5 @@
-import { GET_AUTH_METAMASK, GET_USER_NFTS, GET_TAK, IMPORT_TAK_METAMASK_WALLET } from "../actions/types";
-import {seedAuthMetamask, seedUserNFTS} from "../actions/user";
+import { GET_AUTH_METAMASK, GET_USER_NFTS, GET_TAK, IMPORT_TAK_METAMASK_WALLET, GET_BALANCES } from "../actions/types";
+import {seedAuthMetamask, seedUserNFTS, seedBalances} from "../actions/user";
 import detectEthereumProvider from '@metamask/detect-provider';
 import getAccount from "./utils"
 import {balanceTAK, addTAKToken} from "./utils/TakToken"
@@ -12,7 +12,7 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
   next: any
 ) => async (action: IAction) => {
   const {
-    user: { accounts, Web3, provider },
+    user: { accounts, web3, provider },
   } = getState();
   switch (action.type) {
 
@@ -103,8 +103,28 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
     }
     break;
   }
-    
-  
+
+     /*******************************/
+  /* GET BALANCES /
+  /*******************************/
+
+  case GET_BALANCES: { 
+    console.log("Passe par le MW GET Balances")     
+    try {
+     const config: Object = {
+      method: 'get',
+      url: `${URL}accounts/${accounts[0]}`,
+    }
+      const response: any = await axios(config);
+      const balanceEther: any = await web3.eth.getBalance(accounts[0])
+      console.log("response get balance", response.data, balanceEther)
+      const {balance, cards} = response.data;
+      dispatch(seedBalances(parseInt(balance, 10), cards, parseInt(balanceEther,10)));
+    } catch (error) {
+      console.error(error);
+    }
+    break;
+  }
     default:
       return next(action);
   }

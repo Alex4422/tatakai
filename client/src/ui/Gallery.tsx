@@ -43,9 +43,12 @@ const Gallery = ({ items }: Props) => {
           alignItems: "space-around",
         }}
       >
-        {items?.map((item: ICard, index: number) => (
+        {items.length >= 1 
+        ? items?.map((item: ICard, index: number) => (
           <Card item={item} key={index} />
-        ))}
+        ))
+        : "Pas de cartes à vendre en ce moment !"
+      }
       </div>
     </>
   );

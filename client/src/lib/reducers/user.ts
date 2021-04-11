@@ -1,6 +1,7 @@
 import {
   GET_AUTH_METAMASK,
   SEED_AUTH_METAMASK,
+  SEED_BALANCES,
 } from "../actions/types";
 
 export const initialState = {
@@ -9,12 +10,12 @@ export const initialState = {
   accounts: null,
   isLoading: false,
   isAdmin: false,
-  cards: null,
+  cards: [],
   balanceWei: null,
   balanceTAK: null,
 };
 
-const marketplace = (
+const user = (
   oldState: IUserState = initialState,
   { type, payload }: IAction
 ) => {
@@ -34,6 +35,13 @@ const marketplace = (
         balanceTAK: payload.balanceTAK,
         isLoading: false,
       };
+    case SEED_BALANCES:
+      return {
+        ...oldState,
+        balanceWei: payload.balanceWei,
+        balanceTAK: payload.balanceTAK,
+        cards: payload.cards,
+      };
     default:
       return {
         ...oldState,
@@ -41,4 +49,4 @@ const marketplace = (
   }
 };
 
-export default marketplace;
+export default user;
