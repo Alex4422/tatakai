@@ -5,11 +5,14 @@ import "../styles.css";
 
 declare interface Props {
   getAuthMetamask: Function;
+  accounts: Array<string>;
 }
-const Home = ({ getAuthMetamask }: Props) => {
+const Home = ({ getAuthMetamask, accounts }: Props) => {
   useEffect(() => {
-    getAuthMetamask();
-  }, []);
+    if(!accounts){
+      getAuthMetamask();
+    }
+  }, [accounts]);
 
   return (
     <Container component="main" maxWidth="lg">

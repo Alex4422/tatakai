@@ -3,9 +3,13 @@ import { getAuthMetamask } from "../../lib/actions/user";
 import Modal from "../../ui/Modal";
 import Home from "../../components/Home";
 
-type IMapStateToPropsType = {};
+type IMapStateToPropsType = {
+  user: IUserState;
+};
 
-const mapStateToProps = (state: IMapStateToPropsType) => ({});
+const mapStateToProps = ({user: {accounts}}: IMapStateToPropsType) => ({
+
+});
 
 const mapDispatchToProps = (dispatch: any) => ({
   getAuthMetamask: () => dispatch(getAuthMetamask()),

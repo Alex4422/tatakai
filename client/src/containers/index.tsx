@@ -6,7 +6,7 @@ import MarketPlace from "./MarketPlace";
 import MyCards from "./MyCards";
 import Admin from "./Admin";
 import Profile from "./Profile";
-import Navbar from "../ui/Navbar";
+import Navbar from "./Navbar";
 
 const App = () => {
   return (

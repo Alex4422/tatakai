@@ -33,8 +33,8 @@ interface IUserState {
   web3: any | null;
   provider: any | null;
   accounts: Array<string> | null;
-  isLoading: Boolean;
-  isAdmin: Boolean;
+  isLoading: boolean;
+  isAdmin: boolean;
   cards: Array<Object> | null;
   balanceWei: Number | null;
   balanceTAK: Number | null;

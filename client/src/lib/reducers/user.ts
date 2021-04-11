@@ -33,6 +33,7 @@ const user = (
         balanceWei: payload.balanceWei,
         provider: payload.provider,
         balanceTAK: payload.balanceTAK,
+        isAdmin: payload.isAdmin,
         isLoading: false,
       };
     case SEED_BALANCES:

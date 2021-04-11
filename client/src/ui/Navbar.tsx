@@ -30,7 +30,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Navbar() {
+
+declare interface Props {
+  isAdmin: boolean;
+}
+
+function Navbar({isAdmin}: Props) {
   const classes = useStyles();
   const [auth, setAuth] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -117,7 +122,8 @@ function Navbar() {
                 justifyContent: "space-around",
               }}
             >
-              <li>
+              {isAdmin 
+              ? <li>
                 <Link
                   style={{ color: "white", textDecoration: "none" }}
                   to="/admin"
@@ -125,6 +131,8 @@ function Navbar() {
                   Admin
                 </Link>
               </li>
+              : null}
+             
               <li>
                 <Link
                   style={{ color: "white", textDecoration: "none" }}

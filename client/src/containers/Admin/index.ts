@@ -9,9 +9,11 @@ import {
 type IMapStateToPropsType = {
   contract: IContractState;
   admin: IAdminState;
+  user: IUserState;
 };
 const mapStateToProps = ({
   contract: {},
+  user: {isAdmin},
   admin: { nft, isLoading, isFullfilled },
 }: IMapStateToPropsType) => {
   return {

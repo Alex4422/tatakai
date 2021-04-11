@@ -19,10 +19,10 @@ import "../styles.css";
 declare interface Props {
   accounts: Array<any> | null,
   cards: Array<any> | null,
-  isAdmin: Boolean,
+  isAdmin: boolean,
   balanceTAK: any | null,
   balanceWei: any | null,
-  isLoading: Boolean,
+  isLoading: boolean,
   getTAK: Function,
   importTAKMetamaskWallet: Function,
   getBalances: Function,

@@ -4,6 +4,7 @@ import detectEthereumProvider from '@metamask/detect-provider';
 import getAccount from "./utils"
 import {balanceTAK, addTAKToken} from "./utils/TakToken"
 import getWeb3 from "./utils/getWeb3";
+import MarketplaceInstanceCall from "./utils/Marketplace";
 import axios from 'axios';
 
 const URL = "http://localhost:8080/api/";
@@ -30,7 +31,10 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
         const provider: any = await detectEthereumProvider()
         const resBalanceTAK: any = await balanceTAK(web3, provider, accounts[0])
         console.log("balancetak", resBalanceTAK)
-        dispatch(seedAuthMetamask(web3, accounts, balance, provider, resBalanceTAK));
+        const MarketplaceInstance = await MarketplaceInstanceCall(web3);
+        const admin: any = await MarketplaceInstance.methods.owner().call()
+        const isAdmin = admin == accounts[0];
+        dispatch(seedAuthMetamask(web3, accounts, balance, provider, resBalanceTAK, isAdmin));
       } catch (error) {
         alert(
           `Failed to load web3, accounts, or contract. Check console for details.`
