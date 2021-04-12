@@ -19,21 +19,21 @@ contract Marketplace is ERC721Holder, Ownable {
     /** 
      * @dev Buy a NFT  
      * @param _nftAddress - NFT contract address
-     * @param _buyer - Buyer address
      * @param _assetId - NFT id
      * @param _priceInWei - NFT price
      */
-    function buy(address _nftAddress, address _buyer, uint256 _assetId, uint256 _priceInWei) public payable returns(uint256) {
+    function buy(address _nftAddress, uint256 _assetId, uint256 _priceInWei) public payable returns(uint256) {
+        address nftOwner = IERC721(_nftAddress).ownerOf(_assetId);
         
         acceptedToken.transferFrom(
             msg.sender,
-            address(this),
+            nftOwner,
             _priceInWei
         );
         
         IERC721(_nftAddress).transferFrom(
-            address(this),
-            _buyer,
+            nftOwner,
+            msg.sender,
             _assetId
         );
         

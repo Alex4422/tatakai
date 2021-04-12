@@ -9,14 +9,17 @@ const {
 } = require('@openzeppelin/test-helpers')
 const { web3 } = require('@openzeppelin/test-helpers/src/setup');
 
+const { expect } = require('chai');
 describe('Marketplace', function () {
     let owner;
     let someOne;
+    let someOne2;
 
     before(async function () {
         accounts = await web3.eth.getAccounts();
         owner = accounts[0];
         someOne = accounts[1];
+        someOne2 = accounts[2];
 
         this.erc20token = await TakToken.new(
             web3.utils.toBN(1000000000000000000), 
@@ -51,19 +54,42 @@ describe('Marketplace', function () {
             expectEvent(receipt, "ItemCreated", { tokenId: new BN(1) });
         })
 
-        it('should buy and transfer NFT', async function () {
+        it('should buy and transfer NFT from marketplace', async function () {
             const price = 100;
-            await this.faucet.requestTokens({from: someOne});
-            const balance = await this.erc20token.balanceOf(someOne);
+            const buyer = someOne;
+            const seller = this.marketplace.address;
+            
+            await this.faucet.requestTokens({from: buyer});
+            const balance = await this.erc20token.balanceOf(buyer);
             const beforeGetNftOwner = await this.nft.ownerOf(1);
-            expect(beforeGetNftOwner).to.eql(this.marketplace.address);
-            this.erc20token.approve(this.marketplace.address, price, {from: someOne});
-            await this.marketplace.buy(this.nft.address, someOne, 1, price, {from: someOne});
-            const balance2 = await this.erc20token.balanceOf(someOne);
+            expect(beforeGetNftOwner).to.eql(seller);
+            
+            await this.erc20token.approve(seller, price, {from: buyer});
+            await this.marketplace.buy(this.nft.address, 1, price, {from: buyer});
+            const balance2 = await this.erc20token.balanceOf(buyer);
             expect(balance2).to.be.bignumber.equal(new BN(balance-price));
 
             const afterGetNftOwner = await this.nft.ownerOf(1);
-            expect(afterGetNftOwner).to.eql(someOne);
+            expect(afterGetNftOwner).to.eql(buyer);
+        })
+
+        it('should buy and transfer NFT from user', async function () {
+            const price = 100;
+            const buyer = someOne2;
+            const seller = someOne;
+            
+            await this.faucet.requestTokens({from: buyer});
+            const balance = await this.erc20token.balanceOf(buyer);
+            const beforeGetNftOwner = await this.nft.ownerOf(1);
+            expect(beforeGetNftOwner).to.eql(seller);
+            
+            await this.erc20token.approve(seller, price, {from: buyer});
+            await this.marketplace.buy(this.nft.address, 1, price, {from: buyer});
+            const balance2 = await this.erc20token.balanceOf(buyer);
+            expect(balance2).to.be.bignumber.equal(new BN(balance-price));
+            
+            const afterGetNftOwner = await this.nft.ownerOf(1);
+            expect(afterGetNftOwner).to.eql(buyer);
         })
     })
     

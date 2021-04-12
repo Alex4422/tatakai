@@ -126,11 +126,6 @@ paths:
         description: "Card ID"
         required: true
         type: "integer"
-      - name: "address"
-        in: "query"
-        description: "Buyer address"
-        required: true
-        type: "string"
       responses:
         "200":
           description: "Return true"
