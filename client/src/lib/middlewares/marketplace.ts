@@ -72,7 +72,7 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
   /*******************************/
   case SELL_NFT: {
     console.log("sell nft mw")
-    dispatch(isLoading());
+    //dispatch(isLoading());
     const {id, price} = action.payload;
     console.log(id,price)
     const config: Object = {
