@@ -28,7 +28,7 @@ exports.create = async (req, res) => {
 exports.findAll = async (req, res) => {
       try {
         const marketplace = await (await CardService).MarketplaceContract.address;
-        const cards = await (await CardService).getByAddress(marketplace);
+        const cards = await (await CardService).getOnSale();
         if(!cards){
             res.status(404).json({error: "There are no cards minted yet!"})
         }
