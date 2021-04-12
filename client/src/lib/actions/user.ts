@@ -1,12 +1,11 @@
 import { GET_AUTH_METAMASK, SEED_AUTH_METAMASK, GET_USER_NFTS, 
   SEED_USER_NFTS, BUY_NFT, USER_BOUGHT_NFT, GET_TAK,
-  IMPORT_TAK_METAMASK_WALLET, GET_BALANCES, SEED_BALANCES 
+  IMPORT_TAK_METAMASK_WALLET, GET_BALANCES, SEED_BALANCES,
 } from "./types";
 
 export const getAuthMetamask = () => ({
   type: GET_AUTH_METAMASK,
 });
-
 
 export const seedAuthMetamask = (web3: any, accounts: any, balanceWei: number, provider: any, balanceTAK: number, isAdmin: boolean) => ({
   type: SEED_AUTH_METAMASK,
@@ -39,7 +38,6 @@ export const importTAKMetamaskWallet = () => ({
 export const getTAK = () => ({
   type: GET_TAK
 })
-
 
 export const buyNFT = (id: any)  => ({
   type: BUY_NFT,

@@ -66,13 +66,6 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
       const TakTokenInstance = await TakTokenInstanceCall(web3);
       const CardItemInstance = await CardItemInstanceCall(web3)
 
-      //test
-      await TakTokenInstance.methods.totalSupply().call({from: accounts[0]}).then(async (result: any) => {
-        console.log("total_supply", result);
-      });
-
-  
-
       await TakTokenInstance.methods.approve(MarketplaceInstance._address,parseInt(data.price, 10)).send({from: accounts[0]}).then(async (result: any) => {
         console.dir(result);
         if(result){

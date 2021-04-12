@@ -2,6 +2,8 @@ import {
   GET_AUTH_METAMASK,
   SEED_AUTH_METAMASK,
   SEED_BALANCES,
+  INIT_NEW_USER,
+  TOGGLE_NEW_USER,
 } from "../actions/types";
 
 export const initialState = {
@@ -10,6 +12,7 @@ export const initialState = {
   accounts: null,
   isLoading: false,
   isAdmin: false,
+  isNew: false,
   cards: [],
   balanceWei: null,
   balanceTAK: null,
@@ -24,6 +27,16 @@ const user = (
       return {
         ...oldState,
         isLoading: true,
+      };
+    case INIT_NEW_USER :
+      return {
+        ...oldState,
+        isNew: true,
+      };
+    case TOGGLE_NEW_USER :
+      return {
+        ...oldState,
+        isNew: false,
       };
     case SEED_AUTH_METAMASK:
       return {

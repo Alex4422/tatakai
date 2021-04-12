@@ -1,5 +1,6 @@
 import { GET_AUTH_METAMASK, GET_USER_NFTS, GET_TAK, IMPORT_TAK_METAMASK_WALLET, GET_BALANCES } from "../actions/types";
 import {seedAuthMetamask, seedUserNFTS, seedBalances} from "../actions/user";
+import {toggleNewUser} from "../actions/dashboard";
 import detectEthereumProvider from '@metamask/detect-provider';
 import getAccount from "./utils"
 import {balanceTAK, addTAKToken} from "./utils/TakToken"
@@ -74,6 +75,7 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
        const promise: any = await addTAKToken(provider);
       if(promise) {
         console.log("Wallet updated !", promise)
+        dispatch(toggleNewUser());
       }
     } catch (error) {
       console.error(error);

@@ -35,6 +35,7 @@ interface IUserState {
   accounts: Array<string> | null;
   isLoading: boolean;
   isAdmin: boolean;
+  isNew: boolean;
   cards: Array<Object> | null;
   balanceWei: Number | null;
   balanceTAK: Number | null;
