@@ -37,6 +37,7 @@ interface IUserState {
   isAdmin: boolean;
   isNew: boolean;
   cards: Array<Object> | null;
+  wishlist: Array<number> | null;
   balanceWei: Number | null;
   balanceTAK: Number | null;
 }
@@ -77,6 +78,7 @@ interface ICard {
   id: number;
   description: string;
   image: string;
+  owner: string;
   metadata: {
     age: string;
     name: string;
