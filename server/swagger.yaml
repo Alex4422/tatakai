@@ -136,6 +136,29 @@ paths:
           description: "Return true"
         "500":
           description: "Invalid input"
+  /cards/sale:
+    post:
+      tags:
+      - "cards"
+      summary: "Put a card on sale"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "query"
+        description: "Card ID"
+        required: true
+        type: "integer"
+      - name: "price"
+        in: "query"
+        description: "Card price"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Return a success message"
+        "500":
+          description: "Invalid input"
   /accounts/{address}:
     get:
       tags:
