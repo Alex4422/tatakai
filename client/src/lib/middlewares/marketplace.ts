@@ -40,24 +40,6 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
     /*******************************/
     /* USER BUY NFT
   /********************************/
-  //VIa API:
-    /* case BUY_NFT: {
-      console.log("Passe par le MW MarketPLace via Buy NFT");
-      const config: Object = {
-        method: "post",
-      };
-      let data = { id: action.payload.id, address: action.payload.address };
-      try {
-        const response: any = await axios.post(`${URL}cards/buy`, data, config);
-        console.log("response Api", response);
-        if (response.status === 200) {
-          dispatch(buyNFTSuccess());
-        }
-      } catch (error) {
-        console.error(error);
-      }
-      break;
-    } */
     case BUY_NFT: {
       let data = { id: action.payload.id, price: action.payload.price };
       try {
@@ -75,7 +57,7 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
             console.log("allowance", result);
           });
 
-          await MarketplaceInstance.methods.buy(CardItemInstance._address, accounts[0], data.id, parseInt(data.price, 10)).send({from: accounts[0]}).then((response: any) => {
+          await MarketplaceInstance.methods.buy(CardItemInstance._address, data.id, parseInt(data.price, 10)).send({from: accounts[0]}).then((response: any) => {
             console.dir(response)
           })
         }
@@ -95,11 +77,11 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
     console.log(id,price)
     const config: Object = {
       method: "post",
-      url: `${URL}cards`,
+      url: `${URL}cards/sale`,
     };
     try {
-      //const response: any = await axios(config);
-      //console.log("response Api", response);
+      const response: any = await axios(config);
+      console.log("response Api", response);
       //dispatch(seedMarket(response.data));
     } catch (error) {
       console.error(error);

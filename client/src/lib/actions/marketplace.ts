@@ -14,7 +14,7 @@ export const initMarket = () => ({
 
 export const seedMarket = (data: Array<Object>) => ({
   type: SEED_MARKET,
-  payload: { items: data },
+  payload:  {items: data } ,
 });
 
 export const selectCurrent = (item: ICard) => ({

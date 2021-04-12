@@ -49,7 +49,7 @@ interface IAdminState {
 }
 
 interface IMarketplaceState {
-  items: Array<any> | null;
+  items: Array<any>;
   isLoading: boolean;
 }
 

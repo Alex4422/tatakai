@@ -1,7 +1,7 @@
 import { INIT_MARKET, SEED_MARKET, SELECT_CURRENT, IS_LOADING } from "../actions/types";
 
 export const initialState = {
-  items: null,
+  items: [],
   current: null,
   isLoading: true,
 };
