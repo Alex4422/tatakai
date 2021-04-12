@@ -1,15 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Container from "@material-ui/core/Container";
-import Gallery from "../../ui/Gallery";
-import CardsCarousel from "../../ui/CardsCarousel";
+import MyCardsGallery from "../../ui/MyCardsGallery";
+import CircularProgress from "@material-ui/core/CircularProgress";
+
 import "../styles.css";
 
 declare interface Props {
-  fetchUserCards: Function;
-  getAuthMetamask: Function;
-  seedAuthMetamask: Function;
   getUserNFTS: Function;
   cards: Array<any> | [];
+  isLoading: boolean;
 }
 
 const useStyles = () => {
@@ -23,11 +22,10 @@ const useStyles = () => {
   };
   return classes;
 };
-const MarketPlace = ({
-  getAuthMetamask,
-  seedAuthMetamask,
+const MyCards = ({
   cards,
   getUserNFTS,
+  isLoading,
 }: Props) => {
   const classes = useStyles();
   useEffect(() => {
@@ -38,11 +36,13 @@ const MarketPlace = ({
     <Container component="main" maxWidth="lg">
       <div className="App">
         <h1>My Cards </h1>
-        {/* <CardsCarousel items={nfts} /> */}
-        <Gallery items={cards} />
+        {isLoading 
+        ? <CircularProgress size="75px" style={{ color: "black" }} />
+        : <MyCardsGallery items={cards} />
+        }
       </div>
     </Container>
   );
 };
 
-export default MarketPlace;
+export default MyCards;

@@ -57,8 +57,8 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
         }
         try {
           const response: any = await axios(config);
-          console.log("response Api", response)
-          //dispatch(seedUserNFTS(response.data))
+          console.log("response Api", response.data.cards)
+          dispatch(seedUserNFTS(response.data.cards))
         } catch (error) {
           console.error(error);
         }

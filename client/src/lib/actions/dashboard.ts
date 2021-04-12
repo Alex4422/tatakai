@@ -4,6 +4,7 @@ import {
   INIT_NEW_USER,
   TOGGLE_NEW_USER,
   TOGGLE_TO_WISHLIST,
+  IS_LOADING,
 } from "./types";
 
 export const getUserStorage = () => ({
@@ -29,4 +30,8 @@ export const toggleNewUser = () => ({
 export const toggleToWishlist = (id: number) => ({
   type: TOGGLE_TO_WISHLIST,
   payload: id,
+})
+
+export const isLoading = () => ({
+  type: IS_LOADING,
 })

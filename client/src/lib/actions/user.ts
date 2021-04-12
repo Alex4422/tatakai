@@ -26,10 +26,11 @@ export const seedBalances = (balanceTAK: number, cards: Array<any>, balanceWei: 
   payload: {balanceTAK, cards, balanceWei},
 })
 
-export const seedUserNFTS = (data: Array<Object>) => ({
+export const seedUserNFTS = (data: Array<Object>) =>({
   type: SEED_USER_NFTS,
   payload: data
 })
+
 
 export const importTAKMetamaskWallet = () => ({
   type: IMPORT_TAK_METAMASK_WALLET,

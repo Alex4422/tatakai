@@ -5,6 +5,8 @@ import {
   INIT_NEW_USER,
   TOGGLE_NEW_USER,
   SEED_USER_STORAGE,
+  SEED_USER_NFTS,
+  IS_LOADING,
 } from "../actions/types";
 
 export const initialState = {
@@ -30,6 +32,11 @@ const user = (
         ...oldState,
         isLoading: true,
       };
+    case IS_LOADING:
+      return {
+        ...oldState,
+        isLoading: true,
+      };
     case INIT_NEW_USER :
       return {
         ...oldState,
@@ -39,6 +46,12 @@ const user = (
       return {
         ...oldState,
         wishlist: [...payload],
+      };
+    case SEED_USER_NFTS :
+      return {
+        ...oldState,
+        cards: payload,
+        isLoading: false,
       };
     case TOGGLE_NEW_USER :
       return {
