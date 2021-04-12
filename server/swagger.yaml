@@ -75,7 +75,7 @@ paths:
     get:
       tags:
         - "cards"
-      summary: "Retrieve all marketplace cards"
+      summary: "Retrieve all cards on sale"
       consumes:
       - "application/json"
       produces:
