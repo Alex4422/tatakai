@@ -31,9 +31,12 @@ export const BUY_NFT = "BUY_NFT";
 export const BUY_NFT_SUCCESS = "BUY_NFT_SUCCESS";
 export const USER_BOUGHT_NFT = "USER_BOUGHT_NFT";
 
+//SELL
+export const SELL_NFT = "SELL_NFT";
+
 //MARKETPLACE
 export const INIT_MARKET = "MARKET_INIT";
-export const IS_LOADING = "IS_LOADING";
+
 export const SEED_MARKET = "SEED_MARKET";
 export const SELECT_CURRENT = "SELECT_CURRENT";
 
@@ -43,3 +46,4 @@ export const SEED_USER_STORAGE = "SEED_USER_STORAGE";
 export const INIT_NEW_USER = "INIT_NEW_USER";
 export const TOGGLE_NEW_USER = "TOGGLE_NEW_USER";
 export const TOGGLE_TO_WISHLIST = "TOGGLE_TO_WISHLIST";
+export const IS_LOADING = "IS_LOADING";

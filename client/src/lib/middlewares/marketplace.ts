@@ -1,4 +1,4 @@
-import { INIT_MARKET, BUY_NFT } from "../actions/types";
+import { INIT_MARKET, BUY_NFT, SELL_NFT } from "../actions/types";
 import { seedMarket, buyNFTSuccess, isLoading } from "../actions/marketplace";
 import MarketplaceInstanceCall from "./utils/Marketplace";
 import CardItemInstanceCall from "./utils/cardItem";
@@ -85,7 +85,27 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
       }
       break;
     }
-
+     /*******************************/
+    /*SELL NFT /
+  /*******************************/
+  case SELL_NFT: {
+    console.log("sell nft mw")
+    dispatch(isLoading());
+    const {id, price} = action.payload;
+    console.log(id,price)
+    const config: Object = {
+      method: "post",
+      url: `${URL}cards`,
+    };
+    try {
+      //const response: any = await axios(config);
+      //console.log("response Api", response);
+      //dispatch(seedMarket(response.data));
+    } catch (error) {
+      console.error(error);
+    }
+    break;
+  }
     default:
       return next(action);
   }

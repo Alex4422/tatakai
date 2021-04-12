@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import MyCards from "../../components/MyCards";
-import { seedAuthMetamask, getAuthMetamask, getUserNFTS } from "../../lib/actions/user";
+import { getUserNFTS } from "../../lib/actions/user";
 
 // dummy data pending api call available
 const items = [
@@ -15,10 +15,11 @@ type IMapStateToPropsType = {
 };
 
 const mapStateToProps = ({
-  user: { cards },
+  user: { cards, isLoading },
 }: IMapStateToPropsType) => {
   return {
     cards: cards || items,
+    isLoading,
   };
 };
 
