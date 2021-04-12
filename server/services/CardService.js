@@ -195,6 +195,7 @@ class CardService extends Service {
     async createOrder(id, price) {
         try {
             const hash = await this.CardItemContract.tokenURI(id);
+            console.log(hash);
             const url = `https://api.pinata.cloud/data/pinList?hashContains=${hash}`;
             const nft_info = await axios.get(url, {
                     headers: {
@@ -205,9 +206,11 @@ class CardService extends Service {
 
             const metadata = {
                 ipfsPinHash: hash,
-                name: nft_info.data.rows[0].metadata.name,
+                name: nft_info.data.rows[0].metadata.name || "unknown",
                 keyvalues: {...nft_info.data.rows[0].metadata.keyvalues, price, isForSale: 1}
             };
+
+            console.log(metadata)
 
             const url2 = `https://api.pinata.cloud/pinning/hashMetadata`;
             const response = await axios.put(url2, metadata, {
