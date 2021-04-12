@@ -1,7 +1,11 @@
+import {useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { useModal } from "../hooks/useModal";
 import { buyNFT } from "../lib/actions/marketplace";
+import {toggleToWishlist} from "../lib/actions/dashboard"
 import Modal from "@material-ui/core/Modal";
+import IconButton from '@material-ui/core/IconButton';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 import "./Card.css";
 
@@ -10,13 +14,20 @@ interface TemplateProps {
 }
 const Template = ({ item }: TemplateProps) => {
   const dispatch = useDispatch();
-  const { accounts } = useSelector((state: any) => state.user);
+  const { accounts, wishlist } = useSelector((state: any) => state.user);
   const { handleClose } = useModal();
 
+  let isWhishListed: boolean = item ? wishlist.includes(item.id) : false;
+  
   const handleOnClick = () => {
     dispatch(buyNFT(item.id, item.metadata.price));
     handleClose();
   };
+
+  const handleAddWish = () => {
+    dispatch(toggleToWishlist(item.id))
+  }
+
   return (
     <div
       style={{
@@ -35,16 +46,33 @@ const Template = ({ item }: TemplateProps) => {
           className="card-image"
         />
         <div className="card-title">{item?.metadata?.name}</div>
+        {isWhishListed 
+        ? <div className="card-favorite"><IconButton aria-label="toggleWishlist"  onClick={handleAddWish}><FavoriteIcon/></IconButton></div>
+        : null
+        }
         <div className="card-desc">
+          <p> Owner : {item?.owner}</p>
           <p>Type : {item?.metadata?.type}</p>
           <p>Age : {item?.metadata?.age}</p>
           <p>Nationality : {item?.metadata?.nationality}</p>
-           <p>Price : {item?.metadata?.price} </p>
+          <p>Price : {item?.metadata?.price} </p>
+
         </div>
 
         <div className="card-actions">
-       
-
+        {!isWhishListed
+        ?<button
+            onClick={handleAddWish}
+            type="button"
+            color="primary"
+            className="card-action card-action-cancel"
+          >
+            Add to Wishlist
+          </button>
+        : null
+        }
+         
+        
           <button
             onClick={handleClose}
             type="button"

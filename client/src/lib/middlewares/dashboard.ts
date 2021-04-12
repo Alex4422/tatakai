@@ -1,4 +1,4 @@
-import { GET_USER_STORAGE  } from "../actions/types";
+import { GET_USER_STORAGE, TOGGLE_TO_WISHLIST  } from "../actions/types";
 import { seedUserStorage, initNewUser } from "../actions/dashboard";
 import MarketplaceInstanceCall from "./utils/Marketplace";
 import CardItemInstanceCall from "./utils/cardItem";
@@ -30,14 +30,27 @@ const dashboard = () => ({ dispatch, getState }: any) => (
         dispatch(initNewUser())
       }
       else {
-        let wishlist: Array<any> = JSON.parse(localStorage.getItem('wishlist')|| "rien ici");      
-        dispatch.getItem(wishlist);
+        let wishlist: Array<any> = JSON.parse(localStorage.getItem('wishlist')|| "rien ici");
+        dispatch(seedUserStorage(wishlist));
       }
       break;
     }
-
-  
-
+     /*******************************/
+    /* ADD_TO_WISHLIST /
+  /*******************************/
+  case TOGGLE_TO_WISHLIST: {
+    let wishlist: Array<any> = JSON.parse(localStorage.getItem('wishlist')|| "rien ici");
+    let id = action.payload
+    let isInclude = wishlist.includes(id);
+    if(isInclude){
+      wishlist = wishlist.filter((item:any) => (item!==id))
+    } else {
+       wishlist = [...wishlist, id]
+    }
+    localStorage.setItem('wishlist', JSON.stringify(wishlist))
+    dispatch(seedUserStorage(wishlist));
+    return next(action);
+  }
     default:
       return next(action);
   }

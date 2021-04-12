@@ -4,6 +4,7 @@ import {
   SEED_BALANCES,
   INIT_NEW_USER,
   TOGGLE_NEW_USER,
+  SEED_USER_STORAGE,
 } from "../actions/types";
 
 export const initialState = {
@@ -14,6 +15,7 @@ export const initialState = {
   isAdmin: false,
   isNew: false,
   cards: [],
+  wishlist: [],
   balanceWei: null,
   balanceTAK: null,
 };
@@ -32,6 +34,11 @@ const user = (
       return {
         ...oldState,
         isNew: true,
+      };
+    case SEED_USER_STORAGE :
+      return {
+        ...oldState,
+        wishlist: [...payload],
       };
     case TOGGLE_NEW_USER :
       return {
