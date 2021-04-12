@@ -70,10 +70,10 @@ class CardService extends Service {
                 const info = await axios.get("https://ipfs.io/ipfs/"+ipfsHash);
                 const url = `https://api.pinata.cloud/data/pinList?hashContains=${ipfsHash}`;
                 const nft_info = await axios.get(url, {
-                headers: {
-                    pinata_api_key: process.env.PINATA_KEY, 
-                    pinata_secret_api_key: process.env.PINATA_SECRET_KEY,
-                },
+                    headers: {
+                        pinata_api_key: process.env.PINATA_KEY, 
+                        pinata_secret_api_key: process.env.PINATA_SECRET_KEY,
+                    },
                 });
                 all_nfts.push({
                     id: i,
@@ -132,6 +132,38 @@ class CardService extends Service {
       } catch (error) {
             return error;
       }
+    }
+
+    async createOrder(id) {
+        try {
+            const hash = await this.CardItemContract.tokenURI(id);
+            const url = `https://api.pinata.cloud/data/pinList?hashContains=${hash}`;
+            const nft_info = await axios.get(url, {
+                    headers: {
+                        pinata_api_key: process.env.PINATA_KEY, 
+                        pinata_secret_api_key: process.env.PINATA_SECRET_KEY,
+                    },
+            });
+
+            const metadata = {
+                ipfsPinHash: hash,
+                name: nft_info.data.rows[0].metadata.name,
+                keyvalues: {...nft_info.data.rows[0].metadata.keyvalues, isForSale: 1}
+            };
+
+            const url2 = `https://api.pinata.cloud/pinning/hashMetadata`;
+            const response = await axios.put(url2, metadata, {
+                    headers: {
+                        pinata_api_key: process.env.PINATA_KEY, 
+                        pinata_secret_api_key: process.env.PINATA_SECRET_KEY,
+                    },
+            });
+
+            return 'Your card is now for sale.';
+            
+        } catch (error) {
+            return error;
+        }
     }
 }
 

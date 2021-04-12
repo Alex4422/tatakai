@@ -6,6 +6,7 @@ module.exports = app => {
   router.get("/", CardController.findAll);
   router.get("/:id", CardController.findOne);
   router.post("/buy", CardController.buy);
+  router.post("/sale", CardController.putForSale);
 
   app.use('/api/cards', router);
 };
