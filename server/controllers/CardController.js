@@ -65,7 +65,8 @@ exports.buy = async (req, res) => {
 exports.putForSale = async (req, res) => {
       try {
           const id = req.body.id;
-          const card = await (await CardService).createOrder(id); 
+          const price = req.body.price;
+          const card = await (await CardService).createOrder(id, price); 
           res.json(card);
       } catch (error) {
           res.status(500).json({error: error})

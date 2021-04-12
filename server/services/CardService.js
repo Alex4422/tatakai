@@ -158,16 +158,39 @@ class CardService extends Service {
     async buyFrom(buyer, id) {
       try {
             const card = await this.getById(id);
+            const hash = await this.CardItemContract.tokenURI(id);
             const marketplaceAddress = await this.CardItemContract.marketplace();
             await this.TakTokenContract.approve(marketplaceAddress, card.metadata.price, {from: buyer});
             await this.MarketplaceContract.buy(this.CardItemContract.address, buyer, id, card.metadata.price, {from: buyer})
+            const url = `https://api.pinata.cloud/data/pinList?hashContains=${hash}`;
+            const nft_info = await axios.get(url, {
+                    headers: {
+                        pinata_api_key: process.env.PINATA_KEY, 
+                        pinata_secret_api_key: process.env.PINATA_SECRET_KEY,
+                    },
+            });
+
+            const metadata = {
+                ipfsPinHash: hash,
+                name: nft_info.data.rows[0].metadata.name,
+                keyvalues: {...nft_info.data.rows[0].metadata.keyvalues, isForSale: 0}
+            };
+
+            const url2 = `https://api.pinata.cloud/pinning/hashMetadata`;
+            const response = await axios.put(url2, metadata, {
+                    headers: {
+                        pinata_api_key: process.env.PINATA_KEY, 
+                        pinata_secret_api_key: process.env.PINATA_SECRET_KEY,
+                    },
+            });
+            
             return true;
       } catch (error) {
             return error;
       }
     }
 
-    async createOrder(id) {
+    async createOrder(id, price) {
         try {
             const hash = await this.CardItemContract.tokenURI(id);
             const url = `https://api.pinata.cloud/data/pinList?hashContains=${hash}`;
@@ -181,7 +204,7 @@ class CardService extends Service {
             const metadata = {
                 ipfsPinHash: hash,
                 name: nft_info.data.rows[0].metadata.name,
-                keyvalues: {...nft_info.data.rows[0].metadata.keyvalues, isForSale: 1}
+                keyvalues: {...nft_info.data.rows[0].metadata.keyvalues, price, isForSale: 1}
             };
 
             const url2 = `https://api.pinata.cloud/pinning/hashMetadata`;
