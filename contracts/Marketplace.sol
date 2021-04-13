@@ -16,8 +16,8 @@ contract Marketplace is ERC721Holder, Ownable {
         acceptedToken = IERC20(_acceptedToken);
     }
 
-    receive() {
-        acceptedToken.transfer(msg.value) 
+    receive() external payable {
+        acceptedToken.transfer(msg.sender, msg.value);
     }
     
     /** 
