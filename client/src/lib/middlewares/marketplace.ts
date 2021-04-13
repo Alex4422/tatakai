@@ -47,7 +47,8 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
       const MarketplaceInstance = await MarketplaceInstanceCall(web3);
       const TakTokenInstance = await TakTokenInstanceCall(web3);
       const CardItemInstance = await CardItemInstanceCall(web3)
-
+//todo refacto si async :
+//await TakTokenInstance.methods.approve(MarketplaceInstance._address,parseInt(data.price, 10)).send({from: accounts[0]}, async(result: any) => {})
       await TakTokenInstance.methods.approve(MarketplaceInstance._address,parseInt(data.price, 10)).send({from: accounts[0]}).then(async (result: any) => {
         console.dir(result);
         if(result){
@@ -95,23 +96,27 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
     break;
   }
      /*******************************/
-    /*SELL NFT /
+    /*WITHDRAW_NFT_ON_SALE
   /*******************************/
     case WITHDRAW_NFT_ON_SALE: {
       console.log("withdraw mw")
       //dispatch(isLoading());
       const id = action.payload;
+      let data = {id}
+      console.log("id", id)
       const config: Object = {
-        url: `${URL}cards/sale`,
+        url: `${URL}cards/remove`,
         method: 'post',
         headers: {
           "Content-Type": `application/json`,
         },
+        data,
+        
       };
       try {
-      //const response: any = await axios(config);
-      //console.log("response Api", response);
-      //dispatch(seedMarket(response.data));
+      const response: any = await axios(config);
+      console.log("response Api", response);
+
       } catch (error) {
         console.error(error);
       }
