@@ -79,14 +79,18 @@ describe('Marketplace', function () {
             const seller = someOne;
             
             await this.faucet.requestTokens({from: buyer});
-            const balance = await this.erc20token.balanceOf(buyer);
+
+            const beforeBuyerBalance = await this.erc20token.balanceOf(buyer);
+
             const beforeGetNftOwner = await this.nft.ownerOf(1);
             expect(beforeGetNftOwner).to.eql(seller);
             
-            await this.erc20token.approve(seller, price, {from: buyer});
+            await this.erc20token.approve(this.marketplace.address, price, {from: buyer}); // marketplace approuve les transferts
+            await this.nft.approve(this.marketplace.address, 1, {from: seller});
             await this.marketplace.buy(this.nft.address, 1, price, {from: buyer});
-            const balance2 = await this.erc20token.balanceOf(buyer);
-            expect(balance2).to.be.bignumber.equal(new BN(balance-price));
+
+            const afterBuyerBlance = await this.erc20token.balanceOf(buyer);
+            expect(afterBuyerBlance).to.be.bignumber.equal(new BN(beforeBuyerBalance-price));
             
             const afterGetNftOwner = await this.nft.ownerOf(1);
             expect(afterGetNftOwner).to.eql(buyer);
