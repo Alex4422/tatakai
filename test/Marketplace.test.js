@@ -5,7 +5,7 @@ const Faucet = artifacts.require('Faucet')
 const {
   BN,
   expectEvent, 
-  expectRevert,
+  expectRevert
 } = require('@openzeppelin/test-helpers')
 const { web3 } = require('@openzeppelin/test-helpers/src/setup');
 
@@ -32,6 +32,7 @@ describe('Marketplace', function () {
             this.erc20token.address, 
             { from: owner }
         )
+
         this.nft = await CardItem.new(
             "Token Test",
             "TEST",
@@ -43,8 +44,8 @@ describe('Marketplace', function () {
             this.erc20token.address, 
             { from: owner }
         )
+
         await this.erc20token.transfer(this.faucet.address, web3.utils.toBN(1000000000000000000));
-        
     });
 
     describe('Mint, buy and transfer NFT', function () {
@@ -94,6 +95,27 @@ describe('Marketplace', function () {
             
             const afterGetNftOwner = await this.nft.ownerOf(1);
             expect(afterGetNftOwner).to.eql(buyer);
+        })
+
+        it('should swap token', async function () {
+            const beforeMarketplaceBalanceERC20 = await this.erc20token.balanceOf(this.marketplace.address);
+            const beforeMarketplaceBalanceETH = await web3.eth.getBalance(this.marketplace.address);
+
+            const beforeUserBalanceERC20 = await this.erc20token.balanceOf(someOne);
+            const beforeUserBalanceETH = await web3.eth.getBalance(someOne);
+
+            await this.marketplace.sendTransaction({from:someOne, value:1})
+
+            const afterMarketplaceBalanceERC20 = await this.erc20token.balanceOf(this.marketplace.address);
+            const afterMarketplaceBalanceETH = await web3.eth.getBalance(this.marketplace.address);
+
+            const afterUserBalanceERC20 = await this.erc20token.balanceOf(someOne);
+            const afterUserBalanceETH = await web3.eth.getBalance(someOne);
+            
+            expect(afterMarketplaceBalanceERC20.toNumber()).to.eql(beforeMarketplaceBalanceERC20-1);
+            expect(parseInt(afterMarketplaceBalanceETH)).to.eql(parseInt(beforeMarketplaceBalanceETH)+1);
+
+            expect(afterUserBalanceERC20.toNumber()).to.eql(parseInt(beforeUserBalanceERC20)+1);
         })
     })
     
