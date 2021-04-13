@@ -48,18 +48,18 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
       const TakTokenInstance = await TakTokenInstanceCall(web3);
       const CardItemInstance = await CardItemInstanceCall(web3)
 
-      await TakTokenInstance.methods.approve(MarketplaceInstance._address,parseInt(data.price, 10)).send({from: accounts[0]}, async (result: any) => {
+      await TakTokenInstance.methods.approve(MarketplaceInstance._address,parseInt(data.price, 10)).send({from: accounts[0]}).then(async (result: any) => {
         console.dir(result);
         if(result){
           console.log(CardItemInstance._address,accounts[0], data.id, data.price)
-          await TakTokenInstance.methods.allowance(accounts[0], Marketplace.options.address).call({from: accounts[0]}, async (result: any) => {
+          await TakTokenInstance.methods.allowance(accounts[0], Marketplace.options.address).call({from: accounts[0]}).then(async (result: any) => {
             console.log("allowance", result);
-            await MarketplaceInstance.methods.buy(CardItemInstance._address, data.id, parseInt(data.price, 10)).send({from: accounts[0]}, async (response: any) => {
-              console.dir(response)
-            })
+          });
+          await MarketplaceInstance.methods.buy(CardItemInstance._address, data.id, parseInt(data.price, 10)).send({from: accounts[0]}).then((response: any) => {
+            console.dir(response)
           })
-        }    
-      });
+        }
+      })
       } catch (error) {
         console.error(error);
       }
