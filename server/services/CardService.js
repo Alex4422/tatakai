@@ -67,7 +67,7 @@ class CardService extends Service {
                 const owner = await this.CardItemContract.ownerOf(i);
                 const ipfsHash = await this.CardItemContract.tokenURI(i);
                 if(ipfsHash !== "") {
-                    const url = `https://api.pinata.cloud/data/pinList?metadata[keyvalues][isForSale]={"value":"1", "op":"eq"}`;
+                    const url = `https://api.pinata.cloud/data/pinList?metadata[keyvalues][isForSale]={"value":"1", "op":"eq"}&hashContains=${ipfsHash}`;
         
                     const nft_info = await axios.get(url, {
                         headers: {
