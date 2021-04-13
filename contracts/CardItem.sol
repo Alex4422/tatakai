@@ -9,23 +9,21 @@ import '@openzeppelin/contracts/access/Ownable.sol';
 contract CardItem is ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
     
-    Counters.Counter public _tokenIds;
-    
-    event ItemCreated(
-        address owner,
-        uint256 tokenId
-    );
-    
     struct TokenInfo {
         address owner;
         string ipfsHash;
     }
-    
+
+    Counters.Counter public _tokenIds;
     address public marketplace;
 
     mapping (uint256 => TokenInfo) public tokenInfoMap;
     mapping(string => bool) public ipfsHashes;
-    mapping(string => uint256) public ipfsHashToTokenId;
+        
+    event ItemCreated(
+        address owner,
+        uint256 tokenId
+    );
 
     constructor (string memory _name, string memory _symbol, address _marketplace) public ERC721(_name, _symbol) {
           marketplace = _marketplace;
@@ -45,13 +43,10 @@ contract CardItem is ERC721URIStorage, Ownable {
         _setTokenURI(newItemId, _tokenURI);
         
         ipfsHashes[_tokenURI] = true;
-        ipfsHashToTokenId[_tokenURI] = newItemId;
-     
         tokenInfoMap[newItemId] = TokenInfo({
-                owner: marketplace,
-                ipfsHash: _tokenURI
+            owner: marketplace,
+            ipfsHash: _tokenURI
         });
-        
      
         emit ItemCreated(marketplace, newItemId);
      
