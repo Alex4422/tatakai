@@ -63,7 +63,7 @@ class CardService extends Service {
         try {
             const nft_count = await this.CardItemContract._tokenIds();
             let all_nfts = [];
-            for (let i = 1; i <= nft_count.toNumber(); i++) {
+            for (let i = 1; i <= nft_count; i++) {
                 const owner = await this.CardItemContract.ownerOf(i);
                 const ipfsHash = await this.CardItemContract.tokenURI(i);
                 if(ipfsHash !== "") {
