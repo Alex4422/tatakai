@@ -1,7 +1,7 @@
 import {useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { useModal } from "../hooks/useModal";
-import { buyNFT } from "../lib/actions/marketplace";
+import { buyNFT, withdrawNFTonSale } from "../lib/actions/marketplace";
 import {toggleToWishlist} from "../lib/actions/dashboard"
 import Modal from "@material-ui/core/Modal";
 import IconButton from '@material-ui/core/IconButton';
@@ -21,6 +21,11 @@ const Template = ({ item }: TemplateProps) => {
   
   const handleOnClick = () => {
     dispatch(buyNFT(item.id, item.metadata.price));
+    handleClose();
+  };
+
+  const handleOnClickWithdraw = () => {
+    dispatch(withdrawNFTonSale(item.id));
     handleClose();
   };
 
@@ -81,7 +86,16 @@ const Template = ({ item }: TemplateProps) => {
           >
             Cancel
           </button>
-          <button
+          {(item?.owner == accounts[0])
+          ?<button
+          onClick={handleOnClickWithdraw}
+          type="button"
+          color="primary"
+          className="card-action"
+        >
+          Widraw
+        </button>
+          :<button
             onClick={handleOnClick}
             type="button"
             color="primary"
@@ -89,6 +103,9 @@ const Template = ({ item }: TemplateProps) => {
           >
             Buy
           </button>
+
+          }
+          
         </div>
       </div>
     </div>

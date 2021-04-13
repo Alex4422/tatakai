@@ -1,4 +1,4 @@
-import { INIT_MARKET, BUY_NFT, SELL_NFT } from "../actions/types";
+import { INIT_MARKET, BUY_NFT, SELL_NFT, WITHDRAW_NFT_ON_SALE } from "../actions/types";
 import { seedMarket, buyNFTSuccess, isLoading } from "../actions/marketplace";
 import MarketplaceInstanceCall from "./utils/Marketplace";
 import CardItemInstanceCall from "./utils/cardItem";
@@ -93,6 +93,29 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
       console.error(error);
     }
     break;
+  }
+     /*******************************/
+    /*SELL NFT /
+  /*******************************/
+    case WITHDRAW_NFT_ON_SALE: {
+      console.log("withdraw mw")
+      //dispatch(isLoading());
+      const id = action.payload;
+      const config: Object = {
+        url: `${URL}cards/sale`,
+        method: 'post',
+        headers: {
+          "Content-Type": `application/json`,
+        },
+      };
+      try {
+      //const response: any = await axios(config);
+      //console.log("response Api", response);
+      //dispatch(seedMarket(response.data));
+      } catch (error) {
+        console.error(error);
+      }
+      break;
   }
     default:
       return next(action);

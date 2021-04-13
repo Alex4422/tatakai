@@ -26,6 +26,10 @@ export const SEED_TAK = "SEED_TAK";
 export const GET_BALANCES = "GET_BALANCES";
 export const SEED_BALANCES = "SEED_BALANCES";
 
+//MARKETPLACE
+export const INIT_MARKET = "MARKET_INIT";
+export const SEED_MARKET = "SEED_MARKET";
+export const SELECT_CURRENT = "SELECT_CURRENT";
 //BUY
 export const BUY_NFT = "BUY_NFT";
 export const BUY_NFT_SUCCESS = "BUY_NFT_SUCCESS";
@@ -33,12 +37,7 @@ export const USER_BOUGHT_NFT = "USER_BOUGHT_NFT";
 
 //SELL
 export const SELL_NFT = "SELL_NFT";
-
-//MARKETPLACE
-export const INIT_MARKET = "MARKET_INIT";
-
-export const SEED_MARKET = "SEED_MARKET";
-export const SELECT_CURRENT = "SELECT_CURRENT";
+export const WITHDRAW_NFT_ON_SALE = "WITHDRAW_NFT_ON_SALE";
 
 //DASHBOARD
 export const GET_USER_STORAGE = "GET_USER_STORAGE";

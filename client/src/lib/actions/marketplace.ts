@@ -6,6 +6,7 @@ import {
   BUY_NFT_SUCCESS,
   IS_LOADING,
   SELL_NFT,
+  WITHDRAW_NFT_ON_SALE,
 } from "./types";
 
 export const initMarket = () => ({
@@ -30,6 +31,11 @@ export const buyNFT = (id: number, price: string) => ({
 export const sellNFT = (id: number, price: number) => ({
   type: SELL_NFT,
   payload: {id, price}
+})
+
+export const withdrawNFTonSale = (id: number) => ({
+  type: WITHDRAW_NFT_ON_SALE,
+  payload: id
 })
 
 export const buyNFTSuccess = () => ({
