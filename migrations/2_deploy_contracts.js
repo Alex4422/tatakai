@@ -5,8 +5,15 @@ var Faucet = artifacts.require("Faucet");
 var SimpleStorage = artifacts.require("SimpleStorage");
 
 module.exports = async (deployer) => {
-  await deployer.deploy(TakToken, 1000000000000, "Tatakai", "TAK");
+  await deployer.deploy(TakToken, "Tatakai", "TAK");
+  const token = await TakToken.deployed();
+  
   await deployer.deploy(Marketplace, TakToken.address);
+  const marketplace = await Marketplace.deployed();
+
+  await token.transfer(marketplace.address, "100000000000000000");
+
   await deployer.deploy(Faucet, TakToken.address);
   await deployer.deploy(CardItem, "TatakaiCard", "TAKCARD", Marketplace.address);
+
 };
