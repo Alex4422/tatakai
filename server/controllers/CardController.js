@@ -14,7 +14,7 @@ exports.create = async (req, res) => {
           season: req.body.saison || "",
           type: req.body.type || "",
           price: req.body.price || 1,
-          isForSale: req.body.isForSale || 1
+          isForSale: req.body.isForSale || 0
         };
         const card = await (await CardService).mint(req.file, data)
         res.json(card);
@@ -56,6 +56,16 @@ exports.buy = async (req, res) => {
           const id = req.body.id;
           const buyer = req.body.address;
           const card = await (await CardService).buyFrom(buyer, id); 
+          res.json(card);
+      } catch (error) {
+          res.status(500).json({error: error})
+      }
+};
+
+exports.removeSale = async (req, res) => {
+      try {
+          const id = req.body.id;
+          const card = await (await CardService).removeOrder(id); 
           res.json(card);
       } catch (error) {
           res.status(500).json({error: error})
