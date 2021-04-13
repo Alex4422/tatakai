@@ -75,7 +75,8 @@ class CardService extends Service {
                             pinata_secret_api_key: process.env.PINATA_SECRET_KEY,
                         },
                     });
-                    const info = await axios.get("https://ipfs.io/ipfs/"+ipfsHash);
+                    if(nft_info.data.rows[0].ipfs_pin_hash == ipfsHash) {
+                        const info = await axios.get("https://ipfs.io/ipfs/"+ipfsHash);
                         all_nfts.push({
                             id: i,
                             ipfsHash,
@@ -84,7 +85,8 @@ class CardService extends Service {
                             description: info.data.description,
                             image: info.data.image,
                             metadata: nft_info.data.rows[0].metadata.keyvalues || null
-                    });
+                        });
+                    }
                 }
             }
             return all_nfts;
