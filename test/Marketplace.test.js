@@ -85,7 +85,7 @@ describe('Marketplace', function () {
             const beforeGetNftOwner = await this.nft.ownerOf(1);
             expect(beforeGetNftOwner).to.eql(seller);
             
-            await this.erc20token.approve(this.marketplace.address, price, {from: buyer}); // marketplace approuve les transferts
+            await this.erc20token.approve(this.marketplace.address, price, {from: buyer});
             await this.nft.approve(this.marketplace.address, 1, {from: seller});
             await this.marketplace.buy(this.nft.address, 1, price, {from: buyer});
 
