@@ -67,7 +67,7 @@ class CardService extends Service {
                 const owner = await this.CardItemContract.ownerOf(i);
                 const ipfsHash = await this.CardItemContract.tokenURI(i);
                 if(ipfsHash !== "") {
-                    const url = `https://api.pinata.cloud/data/pinList?metadata[keyvalues][isForSale]={"value":"1", "op":"eq"}&hashContains=${ipfsHash}`;
+                    const url = `https://api.pinata.cloud/data/pinList?hashContains=${ipfsHash}`;
         
                     const nft_info = await axios.get(url, {
                         headers: {
@@ -75,7 +75,8 @@ class CardService extends Service {
                             pinata_secret_api_key: process.env.PINATA_SECRET_KEY,
                         },
                     });
-                    if(nft_info.data.rows[0].ipfs_pin_hash == ipfsHash) {
+
+                    if(nft_info.data.rows[0].metadata.keyvalues.isForSale == 1) {
                         const info = await axios.get("https://ipfs.io/ipfs/"+ipfsHash);
                         all_nfts.push({
                             id: i,
