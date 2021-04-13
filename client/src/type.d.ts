@@ -86,5 +86,6 @@ interface ICard {
     price: string;
     saison: string;
     type: string;
+    isForSale: number;
   }
 }

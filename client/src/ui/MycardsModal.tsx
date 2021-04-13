@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { useModal } from "../hooks/useModal";
-import { sellNFT } from "../lib/actions/marketplace";
+import { sellNFT, withdrawNFTonSale } from "../lib/actions/marketplace";
 import Modal from "@material-ui/core/Modal";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
@@ -23,6 +23,10 @@ const Template = ({ item }: TemplateProps) => {
     handleClose();
   };
 
+  const handleOnClickWithdraw = () => {
+    dispatch(withdrawNFTonSale(item.id));
+    handleClose();
+  };
 
   return (
     <div
@@ -47,7 +51,8 @@ const Template = ({ item }: TemplateProps) => {
           <p>Type : {item?.metadata?.type}</p>
           <p>Age : {item?.metadata?.age}</p>
           <p>Nationality : {item?.metadata?.nationality}</p>
-          <p>Price : {item?.metadata?.price} </p>
+          <p>Current Price : {item?.metadata?.price} TAK</p>
+          <p>Statut: {(item?.metadata?.isForSale === 1)? "On Market!" : "OKLM"}</p>
           <Grid item sm={2} xs={2}>
           <TextField
                   variant="outlined"
@@ -55,12 +60,13 @@ const Template = ({ item }: TemplateProps) => {
                   fullWidth
                   id="price"
                   type="checkbox"
-                  label="Sell"
+                  label="Price"
                   name="isSelling"
+                  size="medium"
                   autoComplete="Sell"
                   defaultValue={isSelling}
                   style={{
-                    color:"white"
+                    color:"#ffffff", padding: "0.5rem", display:'inline-block'
                   }}
                   onChange={e => (setIsSelling(!isSelling))}
                 />
@@ -79,7 +85,7 @@ const Template = ({ item }: TemplateProps) => {
                   defaultValue={price || ""}
                   onChange={e => (setPrice(e.target.value))}
                   style={{
-                    backgroundColor: "white", color:"black"
+                    backgroundColor: "white", color:"black", 
                   }}
                 />
            </Grid>
@@ -97,14 +103,25 @@ const Template = ({ item }: TemplateProps) => {
           >
             Cancel
           </button>
-          <button
+          {(item?.metadata?.isForSale === 1)
+          ? <button
+          onClick={handleOnClickWithdraw}
+          type="button"
+          color="primary"
+          className="card-action"
+        >
+          Withdraw
+        </button> 
+          :<button
             onClick={handleOnClick}
             type="button"
             color="primary"
             className="card-action"
           >
             Sell
-          </button>
+          </button> 
+          }
+          
         </div>
     </div>
   </div>
