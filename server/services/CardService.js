@@ -79,6 +79,7 @@ class CardService extends Service {
                         const info = await axios.get("https://ipfs.io/ipfs/"+ipfsHash);
                         all_nfts.push({
                             id: i,
+                            ipfsHash,
                             owner: owner,
                             name: info.data.name,
                             description: info.data.description,
@@ -143,6 +144,7 @@ class CardService extends Service {
                 });
                 const nft_info = {
                     id,
+                    ipfsHash,
                     owner,
                     name: info.data.name,
                     description: info.data.description,
