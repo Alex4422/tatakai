@@ -74,14 +74,20 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
     console.log("sell nft mw")
     //dispatch(isLoading());
     const {id, price} = action.payload;
-    console.log(id,price)
+    let data = {id, price}
+    console.log(data)
     const config: Object = {
-      method: "post",
       url: `${URL}cards/sale`,
+      method: 'post',
+      headers: {
+        "Content-Type": `application/json`,
+      },
+      body: data,
+      data,
     };
     try {
-      const response: any = await axios(config);
-      console.log("response Api", response);
+    const response: any = await axios(config);
+    console.log("response Api", response);
       //dispatch(seedMarket(response.data));
     } catch (error) {
       console.error(error);

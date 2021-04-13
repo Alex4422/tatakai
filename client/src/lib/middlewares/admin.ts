@@ -30,7 +30,6 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
       data.append("type", nft.type);
       data.append("supply", nft.supply);
       data.append("price", nft.price);
-      data.append("isForSale", true);
 
       const config: Object = {
         headers: {
