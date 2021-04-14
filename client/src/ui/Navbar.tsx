@@ -65,7 +65,7 @@ function Navbar({isAdmin}: Props) {
           ></IconButton>
           <Typography variant="h6" className={classes.title}>
             <Link style={{ color: "white", textDecoration: "none" }} to="/">
-              TAKAKAI
+              TATAKAI
             </Link>
           </Typography>
           <div
