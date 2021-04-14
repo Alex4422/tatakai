@@ -1,10 +1,8 @@
 import { INIT_MARKET, BUY_NFT, SELL_NFT, WITHDRAW_NFT_ON_SALE } from "../actions/types";
-import { seedMarket, buyNFTSuccess, isLoading } from "../actions/marketplace";
+import { seedMarket, buyNFTSuccess} from "../actions/marketplace";
 import buy from "./utils/buy";
 import {API_URL} from "./utils/Constantes";
 import axios from "axios";
-import { resolveProjectReferencePath } from "typescript";
-
 
 const MarketplaceMW = () => ({ dispatch, getState }: any) => (
   next: any
@@ -18,7 +16,6 @@ const MarketplaceMW = () => ({ dispatch, getState }: any) => (
     /* MARKET INIT via API / GET NFTS MARKETPLACE /
   /*******************************/
     case INIT_MARKET: {
-      console.log("Passe par le MW MarketPLace via MarketINit");
       const config: Object = {
         method: "get",
         url: `${API_URL}cards`,
@@ -42,12 +39,13 @@ const MarketplaceMW = () => ({ dispatch, getState }: any) => (
   /********************************/
     case BUY_NFT: {
       let data = { id: action.payload.id, price: action.payload.price };
-      buy(web3, accounts, data)
-        .then(res => {
-          console.log("coucou d'ici")
-          res ? dispatch(buyNFTSuccess()) : console.log("errror")
-        })
-        .catch(err => console.error(err))
+      const promise = new Promise((resolve, reject) => {
+        resolve(buy(web3, accounts, data))
+        })        
+      promise.then(values => {
+          console.log("values",values)
+      })
+        //dispatch(buyNFTSuccess())
       next(action)
       break;
     }
@@ -55,7 +53,6 @@ const MarketplaceMW = () => ({ dispatch, getState }: any) => (
     /*SELL NFT /
   /*******************************/
   case SELL_NFT: {
-    console.log("sell nft mw")
     const {id, price} = action.payload;
     let data = {id, price}
     console.log(data)
@@ -77,7 +74,6 @@ const MarketplaceMW = () => ({ dispatch, getState }: any) => (
     /*WITHDRAW_NFT_ON_SALE
   /*******************************/
     case WITHDRAW_NFT_ON_SALE: {
-      console.log("withdraw mw")
       const id = action.payload;
       let data = {id}
       console.log("id", id)

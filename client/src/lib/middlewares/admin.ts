@@ -15,7 +15,6 @@ const adminMiddleware = () => ({ dispatch, getState }: any) => (
     /* ADMIN_FORM_SUBMIT via API */
     /*******************************/
     case ADMIN_FORM_SUBMIT:
-      console.log("Passe par le MW admin via ADMIN FORM SUBMIT");
       //get FormData img
       let data = action.data!;
       //append data
