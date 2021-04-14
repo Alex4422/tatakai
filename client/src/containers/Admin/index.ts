@@ -10,11 +10,13 @@ type IMapStateToPropsType = {
   contract: IContractState;
   admin: IAdminState;
   user: IUserState;
+  dashboard: IDashboardState;
 };
 const mapStateToProps = ({
   contract: {},
   user: {isAdmin},
-  admin: { nft, isLoading, isFullfilled },
+  admin: { nft, isFullfilled },
+  dashboard: {isLoading},
 }: IMapStateToPropsType) => {
   return {
     nft,

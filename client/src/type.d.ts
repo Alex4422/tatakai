@@ -44,7 +44,6 @@ interface IUserState {
 
 interface IAdminState {
   nft: any;
-  isLoading: boolean;
   isFullfilled: boolean;
 }
 
@@ -88,4 +87,8 @@ interface ICard {
     type: string;
     isForSale: number;
   }
+}
+
+interface IDashboardState {
+  isLoading: boolean;
 }

@@ -10,9 +10,15 @@ import Container from "@material-ui/core/Container";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useEffect, useState, useRef } from "react";
 
-type Props = IContractAction & IContractState;
-type AdminProps = IAdminState & IAdminAction;
-
+declare interface Props {
+  changeField: Function;
+  nft: any;
+  isLoading: boolean;
+  isFullfilled: boolean;
+  buyNFT: Function;
+  changeFieldFile: Function;
+  submitValue: Function;
+}
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -46,7 +52,7 @@ const Admin = ({
   isLoading,
   isFullfilled,
   history,
-}: Props & AdminProps & { history: any }) => {
+}: Props & { history: any }) => {
   const { validate, isValid } = useFormValidation();
   const classes = useStyles();
   const [file, setFile] = useState();
@@ -80,16 +86,7 @@ const Admin = ({
       progress: 0,
     });
   };
-
-  /*   
-
-    useEffect(() => {
-    //console.log("file",file);
-    for (var value of data.values()) {
-      console.log(value);
-    }
-    submitValue(data);
-  };
+/*
   useEffect(() => {
     validate(token);
   }, [validate, token]);

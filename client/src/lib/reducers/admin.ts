@@ -3,7 +3,6 @@ import {
   ADMIN_FORM_HANDLECHANGE,
   MINT_NFT_SUCCESS,
   ADMIN_FORM_HANDLECHANGE_FILE,
-  IS_MINTING,
 } from "../actions/types";
 
 export const initialState = {
@@ -17,7 +16,6 @@ export const initialState = {
     type: null,
     price: 100,
   },
-  isLoading: false,
   isFullfilled: false,
 };
 
@@ -32,11 +30,6 @@ const admin = (
         nft: { ...oldState.nft, ...payload },
       };
     case ADMIN_FORM_SUBMIT:
-      return {
-        ...oldState,
-        isLoading: true,
-      };
-    case IS_MINTING:
       return {
         ...oldState,
         isLoading: true,

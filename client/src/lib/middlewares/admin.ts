@@ -1,14 +1,11 @@
 import { ADMIN_FORM_SUBMIT } from "../actions/types";
-import { mintNFTSuccess, isMinting } from "../actions/admin";
-import CardItem from "../../contracts/CardItem.json";
-import { getContract } from "./utils";
+import { mintNFTSuccess } from "../actions/admin";
+import {API_URL} from "./utils/Constantes"
 import axios from "axios";
 
-const URL = "http://localhost:8080/api/";
-
-const customMiddleware = () => ({ dispatch, getState }: any) => (
+const adminMiddleware = () => ({ dispatch, getState }: any) => (
   next: any
-) => async (action: IAction) => {
+) => (action: IAction) => {
   const {
     admin: { nft },
   } = getState();
@@ -18,7 +15,6 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
     /* ADMIN_FORM_SUBMIT via API */
     /*******************************/
     case ADMIN_FORM_SUBMIT:
-      dispatch(isMinting());
       console.log("Passe par le MW admin via ADMIN FORM SUBMIT");
       //get FormData img
       let data = action.data!;
@@ -36,15 +32,17 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
           "Content-Type": `multipart/form-data; boundary=${data._boundary}`,
         },
       };
-      try {
-        const response: any = await axios.post(`${URL}cards`, data, config);
-        console.log("response Api", response);
-        if (response.status === 200) {
-          dispatch(mintNFTSuccess());
-        }
-      } catch (error) {
-        console.error(error);
-      }
+        axios.post(`${API_URL}cards`, data, config)
+          .then(response => {
+            console.log("response Api", response);
+            if (response.status === 200) {
+              dispatch(mintNFTSuccess());
+            }
+          })
+          .catch(err => {
+            console.error(err)
+          })
+      next(action)
       break;
 
     default:
@@ -52,5 +50,5 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
   }
   return next(action);
 };
-const admin = () => customMiddleware();
-export default admin();
+
+export default adminMiddleware();
