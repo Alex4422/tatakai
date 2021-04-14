@@ -70,7 +70,7 @@ const Template = ({ item }: TemplateProps) => {
             onClick={handleAddWish}
             type="button"
             color="primary"
-            className="card-action card-action-cancel"
+            className="card-action"
           >
             Add to Wishlist
           </button>
@@ -82,7 +82,7 @@ const Template = ({ item }: TemplateProps) => {
             onClick={handleClose}
             type="button"
             color="primary"
-            className="card-action card-action-cancel"
+            className="card-action"
           >
             Cancel
           </button>
@@ -91,7 +91,7 @@ const Template = ({ item }: TemplateProps) => {
           onClick={handleOnClickWithdraw}
           type="button"
           color="primary"
-          className="card-action"
+          className="card-action card-action-confirm"
         >
           Widraw
         </button>
@@ -99,7 +99,7 @@ const Template = ({ item }: TemplateProps) => {
             onClick={handleOnClick}
             type="button"
             color="primary"
-            className="card-action"
+            className="card-action card-action-confirm"
           >
             Buy
           </button>

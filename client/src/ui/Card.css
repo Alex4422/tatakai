@@ -57,7 +57,13 @@
   border-radius: 2px;
 }
 .card-action-cancel {
-  background: rgba(255, 29, 142, 0.8);
+  background: grey;
+}
+
+
+.card-action-confirm {
+  background: rgba(255, 29, 142, 1);
+
 }
 
 .card-action-readMore:hover {

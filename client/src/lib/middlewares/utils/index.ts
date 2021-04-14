@@ -17,8 +17,7 @@ const connectWeb3 = async (store: any) => {
     const web3: any = await getWeb3();
     const accounts = await web3.eth.getAccounts();
     const balance = await web3.eth.getBalance(accounts[0])
-    const provider: any = await detectEthereumProvider()
-    const balanceTak: any = await balanceTAK(web3, provider, accounts[0]);
+    
     const TakTokenContract: any = await getInstance(web3, TakToken);
     const MarketplaceContract: any = await getInstance(web3, Marketplace);
     const CardItemContract: any = await getInstance(web3, CardItem);
@@ -29,6 +28,9 @@ const connectWeb3 = async (store: any) => {
     const isAdmin = admin == accounts[0];
     console.log("isAdmin: ", isAdmin)
 
+    const provider: any = await detectEthereumProvider()
+    const balanceTak: any = await balanceTAK(web3, provider, accounts[0]);
+    
     store.dispatch(seedAuthMetamask(web3, accounts, parseInt(balance,10), provider, parseInt(balanceTak, 10), isAdmin));
     store.dispatch(seedContracts(TakTokenContract, MarketplaceContract, CardItemContract))
   } catch (error) {

@@ -25,11 +25,13 @@ export const GET_TAK = "GET_TAK";
 export const SEED_TAK = "SEED_TAK";
 export const GET_BALANCES = "GET_BALANCES";
 export const SEED_BALANCES = "SEED_BALANCES";
+export const SWAP_ETH_TAK = "SWAP_ETH_TAK";
 
 //MARKETPLACE
 export const INIT_MARKET = "MARKET_INIT";
 export const SEED_MARKET = "SEED_MARKET";
 export const SELECT_CURRENT = "SELECT_CURRENT";
+
 //BUY
 export const BUY_NFT = "BUY_NFT";
 export const BUY_NFT_SUCCESS = "BUY_NFT_SUCCESS";

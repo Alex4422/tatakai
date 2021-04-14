@@ -1,4 +1,4 @@
-import { GET_AUTH_METAMASK, GET_USER_NFTS, GET_TAK, IMPORT_TAK_METAMASK_WALLET, GET_BALANCES } from "../actions/types";
+import { GET_AUTH_METAMASK, GET_USER_NFTS, GET_TAK, SWAP_ETH_TAK, IMPORT_TAK_METAMASK_WALLET, GET_BALANCES } from "../actions/types";
 import {seedAuthMetamask, seedUserNFTS, seedBalances} from "../actions/user";
 import {toggleNewUser} from "../actions/dashboard";
 import detectEthereumProvider from '@metamask/detect-provider';
@@ -15,6 +15,7 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
 ) => async (action: IAction) => {
   const {
     user: { accounts, web3, provider },
+    contract: {Marketplace},
   } = getState();
   switch (action.type) {
 
@@ -76,6 +77,7 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
       if(promise) {
         console.log("Wallet updated !", promise)
         dispatch(toggleNewUser());
+        //TOAST
       }
     } catch (error) {
       console.error(error);
@@ -90,7 +92,7 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
   case GET_TAK: { 
     console.log("Passe par le MW GET TAK")     
     try {
-    //Ask Faucet try
+    //Ask by Faucet  
      const config: Object = {
       method: 'post',
       url: `${URL}faucet/`,
@@ -103,7 +105,8 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
     }
       const response: any = await axios(config);
       console.log("response Api", response) 
-      //dispatch(seedUserNFTS(response.data))
+      //TOAST
+
     } catch (error) {
       console.error(error);
     }
@@ -126,6 +129,30 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
       console.log("response get balance", response.data, balanceEther)
       const {balance, cards} = response.data;
       dispatch(seedBalances(parseInt(balance, 10), cards, parseInt(balanceEther,10)));
+    } catch (error) {
+      console.error(error);
+    }
+    break;
+  }
+
+      /*******************************/
+  /* SWAP ETHER TAK /
+  /*******************************/
+
+  case SWAP_ETH_TAK: { 
+    console.log("Passe par le MW SWAP_ETH_TAK")    
+    const value = action.payload;
+    console.log('value à swap:', value)
+    console.log("adress:", Marketplace.options.address)
+    console.log("from: ", accounts[0])
+    try {
+      web3.eth.sendTransaction({
+        from: accounts[0],
+        to: Marketplace.options.address, 
+        value: value, 
+        }, (error: any, result:any) => {
+          console.log("resultat de la transac:", result)
+        })
     } catch (error) {
       console.error(error);
     }

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { makeStyles } from '@material-ui/core/styles';
+import { useModal } from "../../hooks/useModal";
+import SwapModal from "../../ui/SwapModal";
 import Container from "@material-ui/core/Container";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -27,6 +29,7 @@ declare interface Props {
   getTAK: Function,
   importTAKMetamaskWallet: Function,
   getBalances: Function,
+  swapEthTak: Function,
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -39,9 +42,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Profile = ({ accounts, cards, isAdmin, balanceTAK, balanceWei,isLoading, getTAK, importTAKMetamaskWallet, getBalances, isNew }: Props) => {
+const Profile = ({ accounts, cards, isAdmin, balanceTAK, balanceWei,isLoading, getTAK, importTAKMetamaskWallet, getBalances, isNew, swapEthTak }: Props) => {
   const classes = useStyles();
+  const { handleOpen } = useModal();
   
+  const handleOnClickModal = () => {
+    handleOpen();
+  };
+
+
   useEffect(() => {
     getBalances()
   }, []);
@@ -50,6 +59,7 @@ const Profile = ({ accounts, cards, isAdmin, balanceTAK, balanceWei,isLoading, g
     <Container component="main" maxWidth="lg">
       <div className="App">
         <h1>My Profile </h1>
+        <SwapModal/>
         <List className={classes.root}>
           <ListItem>
             <ListItemAvatar>
@@ -103,9 +113,15 @@ const Profile = ({ accounts, cards, isAdmin, balanceTAK, balanceWei,isLoading, g
           : null
           }
         </List>
+        <br></br>
         <Button variant="contained" color="secondary" onClick={() => getTAK()}>
         Get TAK !
-      </Button><br></br>
+        </Button>
+       <br></br>
+       <Button variant="contained" color="secondary" style={{marginTop: "1rem"}} onClick={handleOnClickModal}>
+        Swap Ether to TAK !
+      </Button>
+
       {isNew 
       ?<Button variant="contained"  onClick={() => importTAKMetamaskWallet()} style={{display: "block", margin: "1rem auto"}}>
         Import Tak !

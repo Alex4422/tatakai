@@ -99,7 +99,7 @@ const Template = ({ item }: TemplateProps) => {
             onClick={handleClose}
             type="button"
             color="primary"
-            className="card-action card-action-cancel"
+            className="card-action"
           >
             Cancel
           </button>
@@ -107,8 +107,8 @@ const Template = ({ item }: TemplateProps) => {
           ? <button
           onClick={handleOnClickWithdraw}
           type="button"
-          color="primary"
-          className="card-action"
+          color="secondary"
+          className="card-action card-action-confirm"
         >
           Withdraw
         </button> 
@@ -116,7 +116,7 @@ const Template = ({ item }: TemplateProps) => {
             onClick={handleOnClick}
             type="button"
             color="primary"
-            className="card-action"
+            className="card-action card-action-confirm"
           >
             Sell
           </button> 
