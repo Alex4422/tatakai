@@ -4,6 +4,7 @@ import storage from "./storage";
 import admin from "./admin";
 import marketplace from "./marketplace";
 import user from "./user";
+import dashboard from "./dashboard";
 
 
 export default combineReducers({
@@ -12,4 +13,5 @@ export default combineReducers({
   admin,
   marketplace,
   user,
+  dashboard,
 });

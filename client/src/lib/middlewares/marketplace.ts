@@ -3,14 +3,13 @@ import { seedMarket, buyNFTSuccess, isLoading } from "../actions/marketplace";
 import MarketplaceInstanceCall from "./utils/Marketplace";
 import CardItemInstanceCall from "./utils/cardItem";
 import TakTokenInstanceCall from "./utils/TakToken";
+import {API_URL} from "./utils/Constantes";
 import axios from "axios";
 
 
-const URL = "http://localhost:8080/api/";
-
-const customMiddleware = () => ({ dispatch, getState }: any) => (
+const MarketplaceMW = () => ({ dispatch, getState }: any) => (
   next: any
-) => async (action: IAction) => {
+) => (action: IAction) => {
   const {
     user: { accounts, web3 },
     contract: {TakToken, Marketplace, CardItem}
@@ -21,19 +20,22 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
     /* MARKET INIT via API / GET NFTS MARKETPLACE /
   /*******************************/
     case INIT_MARKET: {
-      dispatch(isLoading());
       console.log("Passe par le MW MarketPLace via MarketINit");
       const config: Object = {
         method: "get",
-        url: `${URL}cards`,
+        url: `${API_URL}cards`,
       };
-      try {
-        const response: any = await axios(config);
-        console.log("response Api", response);
-        dispatch(seedMarket(response.data));
-      } catch (error) {
-        console.error(error);
-      }
+      axios(config)
+          .then(response => {
+            console.log("response Api", response);
+            if (response.status === 200) {
+              dispatch(seedMarket(response.data));
+            }
+          })
+          .catch(err => {
+            console.error(err)
+          })
+      next(action)
       break;
     }
 
@@ -44,25 +46,31 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
       let data = { id: action.payload.id, price: action.payload.price };
       try {
         //TODO mutualiser ca!
-      const MarketplaceInstance = await MarketplaceInstanceCall(web3);
-      const TakTokenInstance = await TakTokenInstanceCall(web3);
-      const CardItemInstance = await CardItemInstanceCall(web3)
+      let MarketplaceInstance: any;
+      let TakTokenInstance: any;
+      let CardItemInstance: any;
 
-      await TakTokenInstance.methods.approve(MarketplaceInstance._address,parseInt(data.price, 10)).send({from: accounts[0]}).then(async (result: any) => {
+      MarketplaceInstanceCall(web3).then(result => MarketplaceInstance = result);
+      TakTokenInstanceCall(web3).then(result => TakTokenInstance = result);
+      CardItemInstanceCall(web3).then(result => CardItemInstance = result);
+
+      TakTokenInstance.methods.approve(MarketplaceInstance._address,parseInt(data.price, 10)).send({from: accounts[0]}).then((result: any) => {
         console.dir(result);
         if(result){
           console.log(CardItemInstance._address,accounts[0], data.id, data.price)
-          await TakTokenInstance.methods.allowance(accounts[0], Marketplace.options.address).call({from: accounts[0]}).then(async (result: any) => {
+           TakTokenInstance.methods.allowance(accounts[0], Marketplace.options.address).call({from: accounts[0]}).then((result: any) => {
             console.log("allowance", result);
           });
-          await MarketplaceInstance.methods.buy(CardItemInstance._address, data.id, parseInt(data.price, 10)).send({from: accounts[0]}).then((response: any) => {
+           MarketplaceInstance.methods.buy(CardItemInstance._address, data.id, parseInt(data.price, 10)).send({from: accounts[0]}).then((response: any) => {
             console.dir(response)
+            dispatch(buyNFTSuccess())
           })
         }
       })
       } catch (error) {
         console.error(error);
       }
+      next(action)
       break;
     }
      /*******************************/
@@ -70,26 +78,21 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
   /*******************************/
   case SELL_NFT: {
     console.log("sell nft mw")
-    //dispatch(isLoading());
     const {id, price} = action.payload;
     let data = {id, price}
     console.log(data)
     const config: Object = {
-      url: `${URL}cards/sale`,
+      url: `${API_URL}cards/sale`,
       method: 'post',
       headers: {
         "Content-Type": `application/json`,
       },
-      body: data,
       data,
     };
-    try {
-    const response: any = await axios(config);
-    console.log("response Api", response);
-      //dispatch(seedMarket(response.data));
-    } catch (error) {
-      console.error(error);
-    }
+    axios(config)
+      .then(res => console.log("response Api", res))
+      .catch(err => console.error(err))
+    next(action)
     break;
   }
      /*******************************/
@@ -97,7 +100,6 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
   /*******************************/
     case WITHDRAW_NFT_ON_SALE: {
       console.log("withdraw mw")
-      //dispatch(isLoading());
       const id = action.payload;
       let data = {id}
       console.log("id", id)
@@ -108,15 +110,10 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
           "Content-Type": `application/json`,
         },
         data,
-        
       };
-      try {
-      const response: any = await axios(config);
-      console.log("response Api", response);
-
-      } catch (error) {
-        console.error(error);
-      }
+      axios(config)
+        .then(res => console.log("response Api", res))
+        .catch(err => console.error(err))
       break;
   }
     default:
@@ -124,5 +121,5 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
   }
   return next(action);
 };
-const marketplace = () => customMiddleware();
-export default marketplace();
+
+export default MarketplaceMW();

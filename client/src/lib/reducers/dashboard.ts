@@ -1,6 +1,8 @@
 import {
   ADMIN_FORM_SUBMIT,
   MINT_NFT_SUCCESS,
+  INIT_MARKET,
+  SEED_MARKET,
 
 
 } from "../actions/types";
@@ -22,7 +24,17 @@ const user = (
         ...oldState,
         isLoading: true,
       };
+    case INIT_MARKET:
+      return {
+        ...oldState,
+        isLoading: true,
+      };
     case MINT_NFT_SUCCESS:
+      return {
+        ...oldState,
+        isLoading: false,
+      };
+    case SEED_MARKET:
       return {
         ...oldState,
         isLoading: false,

@@ -49,7 +49,6 @@ interface IAdminState {
 
 interface IMarketplaceState {
   items: Array<any>;
-  isLoading: boolean;
 }
 
 interface IAdminAction {

@@ -4,10 +4,12 @@ import { initMarket } from "../../lib/actions/marketplace";
 
 type IMapStateToPropsType = {
   marketplace: IMarketplaceState;
+  dashboard: IDashboardState
 };
 
 const mapStateToProps = ({
-  marketplace: { items, isLoading },
+  marketplace: { items },
+  dashboard: {isLoading},
 }: IMapStateToPropsType) => {
   return {
     items: items || [],

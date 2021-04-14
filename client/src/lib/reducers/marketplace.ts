@@ -1,9 +1,8 @@
-import { INIT_MARKET, SEED_MARKET, SELECT_CURRENT, IS_LOADING } from "../actions/types";
+import { SEED_MARKET, SELECT_CURRENT, IS_LOADING } from "../actions/types";
 
 export const initialState = {
   items: [],
   current: null,
-  isLoading: true,
 };
 
 const marketplace = (
@@ -14,26 +13,14 @@ const marketplace = (
     case IS_LOADING:
       return {
         ...oldState,
-        isLoading: true,
       };
 
-    case INIT_MARKET:
-      return {
-        ...oldState,
-        isLoading: true,
-      };
+
     case SEED_MARKET:
       return {
         ...oldState,
         ...payload,
-        isLoading: false,
       };
-    case SELECT_CURRENT: {
-      return {
-        ...oldState,
-        ...payload,
-      };
-    }
     case SELECT_CURRENT: {
       return {
         ...oldState,
