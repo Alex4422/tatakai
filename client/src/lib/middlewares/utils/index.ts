@@ -3,10 +3,11 @@ import { seedAuthMetamask } from "../../actions/user";
 import { seedContracts } from "../../actions/contracts";
 import detectEthereumProvider from '@metamask/detect-provider';
 import TakToken from "../../../contracts/TakToken.json";
-import Marketplace from "../../../contracts/TakToken.json";
-import CardItem from "../../../contracts/TakToken.json";
+import Marketplace from "../../../contracts/Marketplace.json";
+import CardItem from "../../../contracts/CardItem.json";
 import {balanceTAK} from "./TakToken";
-import MarketplaceInstanceCall from "./Marketplace";
+
+import marketplace from "../../reducers/marketplace";
 
     /*******************************/
    // Connect web3 and accounts, init STORE
@@ -17,19 +18,15 @@ const connectWeb3 = async (store: any) => {
     const web3: any = await getWeb3();
     const accounts = await web3.eth.getAccounts();
     const balance = await web3.eth.getBalance(accounts[0])
-    
-    const TakTokenContract: any = await getInstance(web3, TakToken);
-    const MarketplaceContract: any = await getInstance(web3, Marketplace);
-    const CardItemContract: any = await getInstance(web3, CardItem);
+    const TakTokenContract: any = await getInstanceTakToken(web3);
+    const MarketplaceContract: any = await getInstanceMarketplace(web3);
+    const CardItemContract: any = await getInstanceCardItem(web3);
     
     //check if user is an Admin
-    const MarketplaceInstance = await MarketplaceInstanceCall(web3);
-    const admin: any = await MarketplaceInstance.methods.owner().call()
+    const admin: any = await MarketplaceContract.methods.owner().call()
     const isAdmin = admin == accounts[0];
-    console.log("isAdmin: ", isAdmin)
-
-    const provider: any = await detectEthereumProvider()
-    const balanceTak: any = await balanceTAK(web3, provider, accounts[0]);
+    const provider: any = await detectEthereumProvider();
+    const balanceTak: any = await balanceTAK(web3, accounts[0]);
     
     store.dispatch(seedAuthMetamask(web3, accounts, parseInt(balance,10), provider, parseInt(balanceTak, 10), isAdmin));
     store.dispatch(seedContracts(TakTokenContract, MarketplaceContract, CardItemContract))
@@ -41,22 +38,9 @@ const connectWeb3 = async (store: any) => {
   }
 };
 
-
-
-// Get the contract's instance.
-export const getContract = async (web3: any, contract: any) => {
-  const networkId: any = await web3?.eth.net.getId();
-  const deployedNetwork: ContractJSON = (contract as any).networks[networkId];
-  return (
-    web3 &&
-    new web3.eth.Contract(
-      contract.abi,
-      deployedNetwork && deployedNetwork.address
-    )
-  );
-};
-
-//Get the only instance without web3
+    /*******************************/
+   // Connect contract Instance
+  /*******************************/
 export const getInstance = async (web3: any, contract: any) => {
   const networkId: any = await web3?.eth.net.getId();
   const deployedNetwork: ContractJSON = (contract as any).networks[networkId];
@@ -66,5 +50,10 @@ export const getInstance = async (web3: any, contract: any) => {
   );
   return instance
 }
-
 export default connectWeb3;
+
+export const getInstanceTakToken = async (web3: any) => await getInstance(web3, TakToken);
+export const getInstanceMarketplace = async (web3: any) => await getInstance(web3, Marketplace);
+export const getInstanceCardItem = async (web3: any) => await getInstance(web3, CardItem);
+
+

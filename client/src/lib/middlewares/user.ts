@@ -1,17 +1,14 @@
 import { GET_USER_NFTS, GET_TAK, SWAP_ETH_TAK, IMPORT_TAK_METAMASK_WALLET, GET_BALANCES } from "../actions/types";
 import {seedUserNFTS, seedBalances} from "../actions/user";
 import {toggleNewUser} from "../actions/dashboard";
+import {API_URL} from "./utils/Constantes"
 
-import {balanceTAK, addTAKToken} from "./utils/TakToken"
-import getWeb3 from "./utils/getWeb3";
-import MarketplaceInstanceCall from "./utils/Marketplace";
-import {API_URL} from "./utils/Constantes";
+import {addTAKToken} from "./utils/TakToken"
+
 import axios from 'axios';
-import { errorMonitor } from "node:events";
 
-const URL = "http://localhost:8080/api/";
 
-const customMiddleware = () => ({ dispatch, getState }: any) => (
+const user = () => ({ dispatch, getState }: any) => (
   next: any
 ) =>  async (action: IAction) => {
   const {
@@ -130,5 +127,5 @@ const customMiddleware = () => ({ dispatch, getState }: any) => (
   }
   return next(action);
 };
-const user = () => customMiddleware();
+
 export default user();

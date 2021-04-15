@@ -39,13 +39,7 @@ const MarketplaceMW = () => ({ dispatch, getState }: any) => (
   /********************************/
     case BUY_NFT: {
       let data = { id: action.payload.id, price: action.payload.price };
-      const promise = new Promise((resolve, reject) => {
-        resolve(buy(web3, accounts, data))
-        })        
-      promise.then(values => {
-          console.log("values",values)
-      })
-        //dispatch(buyNFTSuccess())
+      buy(web3, accounts, data)
       next(action)
       break;
     }

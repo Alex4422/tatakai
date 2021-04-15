@@ -1,12 +1,11 @@
-import MarketplaceInstanceCall from "./Marketplace";
-import CardItemInstanceCall from "./cardItem";
-import TakTokenInstanceCall from "./TakToken";
+import {getInstanceCardItem, getInstanceMarketplace, getInstanceTakToken} from "./index";
+
 
 const buy = async (web3, accounts, data) => {
   try {
-    const MarketplaceInstance = await MarketplaceInstanceCall(web3);
-    const CardItemInstance = await CardItemInstanceCall(web3);
-    const TakTokenInstance = await TakTokenInstanceCall(web3);
+    const MarketplaceInstance = await getInstanceMarketplace(web3);
+    const CardItemInstance = await getInstanceCardItem(web3);
+    const TakTokenInstance = await getInstanceTakToken(web3);
 
     TakTokenInstance.methods.approve(MarketplaceInstance._address,parseInt(data.price, 10)).send({from: accounts[0]}).then((result) => {
       console.dir(result);
