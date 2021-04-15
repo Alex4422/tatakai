@@ -54,8 +54,8 @@ exports.findOne = async (req, res) => {
 exports.buy = async (req, res) => {
       try {
           const id = req.body.id;
-          const buyer = req.body.address;
-          const card = await (await CardService).buyFrom(buyer, id); 
+          // const buyer = req.body.address;
+          const card = await (await CardService).buyFrom(id); 
           res.json(card);
       } catch (error) {
           res.status(500).json({error: error})

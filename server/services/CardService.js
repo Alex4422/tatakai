@@ -159,13 +159,12 @@ class CardService extends Service {
         }
     }
 
-    async buyFrom(buyer, id) {
+    async buyFrom(id) {
       try {
-            const card = await this.getById(id);
             const hash = await this.CardItemContract.tokenURI(id);
-            const marketplaceAddress = await this.CardItemContract.marketplace();
-            await this.TakTokenContract.approve(marketplaceAddress, card.metadata.price, {from: buyer});
-            await this.MarketplaceContract.buy(this.CardItemContract.address, id, card.metadata.price, {from: buyer})
+            // const marketplaceAddress = await this.CardItemContract.marketplace();
+            // await this.TakTokenContract.approve(marketplaceAddress, card.metadata.price, {from: buyer});
+            // await this.MarketplaceContract.buy(this.CardItemContract.address, id, card.metadata.price, {from: buyer})
             const url = `https://api.pinata.cloud/data/pinList?hashContains=${hash}`;
             const nft_info = await axios.get(url, {
                     headers: {
@@ -181,13 +180,13 @@ class CardService extends Service {
             };
 
             const url2 = `https://api.pinata.cloud/pinning/hashMetadata`;
-            const response = await axios.put(url2, metadata, {
+            await axios.put(url2, metadata, {
                     headers: {
                         pinata_api_key: process.env.PINATA_KEY, 
                         pinata_secret_api_key: process.env.PINATA_SECRET_KEY,
                     },
             });
-            return true;
+            return metadata;
       } catch (error) {
             return error;
       }
