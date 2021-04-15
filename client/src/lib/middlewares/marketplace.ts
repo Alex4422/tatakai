@@ -1,6 +1,5 @@
-import { INIT_MARKET, BUY_NFT, SELL_NFT, WITHDRAW_NFT_ON_SALE } from "../actions/types";
-import { seedMarket, buyNFTSuccess} from "../actions/marketplace";
-import buy from "./utils/buy";
+import { INIT_MARKET, SELL_NFT, WITHDRAW_NFT_ON_SALE } from "../actions/types";
+import { seedMarket} from "../actions/marketplace";
 import {API_URL} from "./utils/Constantes";
 import axios from "axios";
 
@@ -34,15 +33,6 @@ const MarketplaceMW = () => ({ dispatch, getState }: any) => (
       break;
     }
 
-    /*******************************/
-    /* USER BUY NFT
-  /********************************/
-    case BUY_NFT: {
-      let data = { id: action.payload.id, price: action.payload.price };
-      buy(web3, accounts, data)
-      next(action)
-      break;
-    }
      /*******************************/
     /*SELL NFT /
   /*******************************/

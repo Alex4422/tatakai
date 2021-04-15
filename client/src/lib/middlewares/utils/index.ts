@@ -7,8 +7,6 @@ import Marketplace from "../../../contracts/Marketplace.json";
 import CardItem from "../../../contracts/CardItem.json";
 import {balanceTAK} from "./TakToken";
 
-import marketplace from "../../reducers/marketplace";
-
     /*******************************/
    // Connect web3 and accounts, init STORE
   /*******************************/

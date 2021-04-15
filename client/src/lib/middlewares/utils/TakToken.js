@@ -2,7 +2,6 @@ import {getInstanceTakToken} from "../utils"
 import { TOKEN } from "./Constantes"
 import TakToken from "../../../contracts/TakToken.json";
 
-
 export const balanceTAK = async (web3, account) => {
   let contract = await getInstanceTakToken(web3)
   let res = await contract.methods.balanceOf(account).call()
@@ -26,7 +25,7 @@ export const addTAKToken = async (provider) => {
     },
   }); 
    if (wasAdded) {
-    console.log('Thanks for your interest!');
+    console.log('Your wallet is Updated!');
     return true
   } else {
     console.log('Your loss!');
