@@ -10,10 +10,13 @@ module.exports = async (deployer) => {
   
   await deployer.deploy(Marketplace, TakToken.address);
   const marketplace = await Marketplace.deployed();
-
-  await token.transfer(marketplace.address, "100000000000000000");
-
+  
   await deployer.deploy(Faucet, TakToken.address);
+  const faucet = await Faucet.deployed();
+  
+  await token.transfer(marketplace.address, "500000000000000000");
+  await token.transfer(faucet.address, "500000000000000000");
+  
   await deployer.deploy(CardItem, "TatakaiCard", "TAKCARD", Marketplace.address);
 
 };
