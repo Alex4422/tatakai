@@ -8,7 +8,7 @@ class FaucetService extends Service {
     async request(address) {
         try {
             const accounts = await this.web3.eth.getAccounts();
-            await this.TakTokenContract.transfer(this.FaucetContract.address, 10000, {from: accounts[0]});
+            //await this.TakTokenContract.transfer(this.FaucetContract.address, 10000, {from: accounts[0]});
             await this.FaucetContract.requestTokens({from: address});
             return true;
         }
