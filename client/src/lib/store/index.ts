@@ -1,5 +1,4 @@
 import { createStore, applyMiddleware } from "redux";
-import thunk from 'redux-thunk';
 import rootReducer from "../reducers";
 import marketplace from "../middlewares/marketplace";
 import admin from "../middlewares/admin";
@@ -18,7 +17,6 @@ const contractsMiddlewares = [admin, marketplace, user, dashboard, interactProvi
 const store = createStore(
   rootReducer,
   composeEnhancers(
-    applyMiddleware(thunk),
     applyMiddleware(...contractsMiddlewares)
     )
 );
