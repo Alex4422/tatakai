@@ -6,19 +6,26 @@ import {
   TOGGLE_TO_WISHLIST,
   IS_LOADING,
   SUBSCRIBE_EVENTS,
+  SHOW_ALERT,
+  HIDE_ALERT,
 } from "./types";
+
+enum AlertType {
+  Error = "error",
+  Warning = "warning",
+  Info = "info",
+  Success = "success",
+}
+
 
 export const getUserStorage = () => ({
   type: GET_USER_STORAGE,
 });
 
-export const seedUserStorage = (data: Array<any>) => {
-  return ({
+export const seedUserStorage = (data: Array<any>) => ({
     type: SEED_USER_STORAGE,
     payload: data,
   });
-}
-
 
 export const initNewUser = () => ({
   type: INIT_NEW_USER,
@@ -39,4 +46,13 @@ export const isLoading = () => ({
 
 export const subscribeEvents = () => ({
   type: SUBSCRIBE_EVENTS,
+})
+
+export const showAlert = (message: string, type: AlertType) => ({
+  type: SHOW_ALERT,
+  payload: {message, type}
+})
+
+export const hideAlert = () => ({
+  type: HIDE_ALERT,
 })
