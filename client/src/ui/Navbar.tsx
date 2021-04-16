@@ -10,6 +10,10 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormGroup from "@material-ui/core/FormGroup";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
+import SvgIcon from '@material-ui/core/SvgIcon';
+import Logo from "../assets/logo_fond_noir.svg";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import AddIcon from '@material-ui/icons/AddPhotoAlternate';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,6 +31,13 @@ const useStyles = makeStyles((theme) => ({
   link: {
     color: "white",
     textDecoration: "none",
+    padding: "10px"
+  },
+  linkDisabled: {
+    color: "white",
+    textDecoration: "none",
+    opacity: "0.5",
+    cursor: "not-allowed",
   },
 }));
 
@@ -63,29 +74,30 @@ function Navbar({isAdmin}: Props) {
             color="inherit"
             aria-label="menu"
           ></IconButton>
-          <Typography variant="h6" className={classes.title}>
+          {/* <Typography variant="h6" className={classes.title}> */}
             <Link style={{ color: "white", textDecoration: "none" }} to="/">
-              TATAKAI
+              <img src={Logo} alt="Logo" width="35px"/>
             </Link>
-          </Typography>
+          {/* </Typography> */}
           <div
             style={{
               display: "flex",
               justifyContent: "space-between",
               width: "100%",
+              fontVariant: "petite-caps",
             }}
           >
             <ul
               style={{
                 listStyleType: "none",
-                width: "30%",
                 display: "flex",
                 justifyContent: "space-around",
+                alignItems: "center"
               }}
             >
               <li>
                 <Link
-                  style={{ color: "white", textDecoration: "none" }}
+                  className={classes.link}
                   to="/marketplace"
                 >
                   MarketPlace
@@ -93,7 +105,7 @@ function Navbar({isAdmin}: Props) {
               </li>
               <li>
                 <Link
-                  style={{ color: "white", textDecoration: "none" }}
+                  className={classes.link}
                   to="/cards"
                 >
                   My Cards
@@ -101,12 +113,7 @@ function Navbar({isAdmin}: Props) {
               </li>
               <li>
                 <Link
-                  style={{
-                    color: "white",
-                    textDecoration: "none",
-                    opacity: "0.5",
-                    cursor: "not-allowed",
-                  }}
+                  className={classes.linkDisabled}
                   to="/"
                 >
                   Bid
@@ -117,28 +124,27 @@ function Navbar({isAdmin}: Props) {
             <ul
               style={{
                 listStyleType: "none",
-                width: "20%",
                 display: "flex",
                 justifyContent: "space-around",
               }}
             >
-              {isAdmin 
+              {!isAdmin 
               ? <li>
                 <Link
-                  style={{ color: "white", textDecoration: "none" }}
+                  className={classes.link}
                   to="/admin"
                 >
-                  Admin
+                <AddIcon fontSize="large"/>
                 </Link>
               </li>
               : null}
              
               <li>
                 <Link
-                  style={{ color: "white", textDecoration: "none" }}
+                  className={classes.link}
                   to="/profile"
                 >
-                  Profile
+                  <AccountCircleIcon fontSize="large"/>
                 </Link>
               </li>
             </ul>
