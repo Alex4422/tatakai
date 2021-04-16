@@ -5,6 +5,7 @@ import {
   TOGGLE_NEW_USER,
   TOGGLE_TO_WISHLIST,
   IS_LOADING,
+  SUBSCRIBE_EVENTS,
 } from "./types";
 
 export const getUserStorage = () => ({
@@ -34,4 +35,8 @@ export const toggleToWishlist = (id: number) => ({
 
 export const isLoading = () => ({
   type: IS_LOADING,
+})
+
+export const subscribeEvents = () => ({
+  type: SUBSCRIBE_EVENTS,
 })
