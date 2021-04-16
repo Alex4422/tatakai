@@ -44,13 +44,11 @@ interface IUserState {
 
 interface IAdminState {
   nft: any;
-  isLoading: boolean;
   isFullfilled: boolean;
 }
 
 interface IMarketplaceState {
   items: Array<any>;
-  isLoading: boolean;
 }
 
 interface IAdminAction {
@@ -88,4 +86,8 @@ interface ICard {
     type: string;
     isForSale: number;
   }
+}
+
+interface IDashboardState {
+  isLoading: boolean;
 }
