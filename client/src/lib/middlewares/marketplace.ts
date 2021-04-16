@@ -1,7 +1,8 @@
-import { INIT_MARKET, SELL_NFT, WITHDRAW_NFT_ON_SALE } from "../actions/types";
+import { INIT_MARKET, SELL_NFT, WITHDRAW_NFT_ON_SALE, UPDATE_IS_FOR_SALE } from "../actions/types";
 import { seedMarket} from "../actions/marketplace";
 import {API_URL} from "./utils/Constantes";
 import axios from "axios";
+import { type } from "node:os";
 
 const MarketplaceMW = () => ({ dispatch, getState }: any) => (
   next: any
@@ -60,7 +61,6 @@ const MarketplaceMW = () => ({ dispatch, getState }: any) => (
     case WITHDRAW_NFT_ON_SALE: {
       const id = action.payload;
       let data = {id}
-      console.log("id", id)
       const config: Object = {
         url: `${API_URL}cards/remove`,
         method: 'post',
@@ -74,6 +74,32 @@ const MarketplaceMW = () => ({ dispatch, getState }: any) => (
         .catch(err => console.error(err))
       break;
   }
+
+   /*******************************/
+    /* Update IS_for_sale post buy /
+  /*******************************/
+  case UPDATE_IS_FOR_SALE: {
+    const id = action.payload;
+    let data = {id}
+    const config: Object = {
+      method: "post",
+      url: `${API_URL}cards/buy`,
+      headers: {
+        "Content-Type": `application/json`,
+      },
+      data,
+    };
+    axios(config)
+        .then(response => {
+          console.log("response Api", response);
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    next(action)
+    break;
+  }
+
     default:
       return next(action);
   }

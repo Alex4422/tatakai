@@ -1,7 +1,7 @@
 import { SWAP_ETH_TAK, IMPORT_TAK_METAMASK_WALLET, BUY_NFT } from "../actions/types";
 import {getInstanceCardItem, getInstanceMarketplace, getInstanceTakToken} from "./utils";
 import { getBalances } from "../actions/user";
-import { buyNFTSuccess } from "../actions/marketplace";
+import { buyNFTSuccess, updateIsForSale } from "../actions/marketplace";
 import { toggleNewUser } from "../actions/dashboard";
 import {addTAKToken} from "./utils/TakToken";
 
@@ -66,6 +66,7 @@ const adminMiddleware = () => ({ dispatch, getState }: any) =>  (
             .then((response :any) => {
               if(response.status==true) {
                 console.log("c'est ok, bon achat")
+                dispatch(updateIsForSale(data.id))
                 dispatch(buyNFTSuccess())
             }
           })

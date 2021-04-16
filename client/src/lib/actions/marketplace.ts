@@ -7,6 +7,7 @@ import {
   IS_LOADING,
   SELL_NFT,
   WITHDRAW_NFT_ON_SALE,
+  UPDATE_IS_FOR_SALE,
 } from "./types";
 
 export const initMarket = () => ({
@@ -44,4 +45,9 @@ export const buyNFTSuccess = () => ({
 
 export const isLoading = () => ({
   type : IS_LOADING,
+})
+
+export const updateIsForSale = (id: number) => ({
+  type: UPDATE_IS_FOR_SALE,
+  payload : id
 })

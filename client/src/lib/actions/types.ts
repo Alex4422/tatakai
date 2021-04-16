@@ -36,6 +36,7 @@ export const SELECT_CURRENT = "SELECT_CURRENT";
 export const BUY_NFT = "BUY_NFT";
 export const BUY_NFT_SUCCESS = "BUY_NFT_SUCCESS";
 export const USER_BOUGHT_NFT = "USER_BOUGHT_NFT";
+export const UPDATE_IS_FOR_SALE = "UPDATE_IS_FOR_SALE";
 
 //SELL
 export const SELL_NFT = "SELL_NFT";
