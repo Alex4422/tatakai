@@ -22,7 +22,8 @@ const theme = createMuiTheme({
         body: {
           backgroundImage: `url(${nude})`,
           backgroundRepeat: 'round',
-          backgroundSize: 'contain'
+          backgroundSize: 'contain',
+          minHeight: '100vh'
         },
       },
     },

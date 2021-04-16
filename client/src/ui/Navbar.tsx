@@ -14,6 +14,9 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 import Logo from "../assets/logo_fond_noir.svg";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import AddIcon from '@material-ui/icons/AddPhotoAlternate';
+import StoreIcon from '@material-ui/icons/Storefront';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOnOutlined';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
   
   appBar: {
     backgroundColor: "transparent",
+    boxShadow: "0px 2px 4px -1px rgb(255, 255, 255),0px 4px 5px 0px rgba(255,255,255,0.14),0px 1px 20px 10px rgba(255,255,255,0.1)"
   },
   
   menuButton: {
@@ -33,16 +37,28 @@ const useStyles = makeStyles((theme) => ({
   menu: {
     display: "flex",
   },
+  menuItem: {
+    display:"flex",
+    alignItems:"center",
+    padding: "0 15px"
+  },
   link: {
     color: "white",
     textDecoration: "none",
-    padding: "10px"
+    padding: "10px",
+    fontSize: "17px",
+    '&:hover': {
+      color: theme.palette.secondary.main,
+      transition: "all .25s"
+    }
   },
   linkDisabled: {
     color: "white",
     textDecoration: "none",
+    padding: "10px",
     opacity: "0.5",
     cursor: "not-allowed",
+    fontSize: "17px"
   },
 }));
 
@@ -100,15 +116,17 @@ function Navbar({isAdmin}: Props) {
                 alignItems: "center"
               }}
             >
-              <li>
+              <li className={classes.menuItem}>
+              <StoreIcon/> 
                 <Link
                   className={classes.link}
                   to="/marketplace"
                 >
-                  MarketPlace
+                MarketPlace
                 </Link>
               </li>
-              <li>
+              <li className={classes.menuItem}>
+              <FavoriteBorderIcon/>
                 <Link
                   className={classes.link}
                   to="/cards"
@@ -116,7 +134,8 @@ function Navbar({isAdmin}: Props) {
                   My Cards
                 </Link>
               </li>
-              <li>
+              <li className={classes.menuItem}>
+              <MonetizationOnIcon/>
                 <Link
                   className={classes.linkDisabled}
                   to="/"

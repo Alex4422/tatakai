@@ -21,7 +21,7 @@ const Home = ({ getAuthMetamask, accounts, getUserStorage }: Props) => {
   }, [accounts])
   
   return (
-    <Container component="main" maxWidth="lg" style={{height: "100vh"}} >
+    <Container component="main" maxWidth="lg" >
       <Modal />
       <div className="App" >
       {/*  */}
