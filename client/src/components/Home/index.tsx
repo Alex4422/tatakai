@@ -21,13 +21,10 @@ const Home = ({ getAuthMetamask, accounts, getUserStorage }: Props) => {
   }, [accounts])
   
   return (
-    <Container component="main" maxWidth="lg" style={{backgroundImage: `url(${img})`, backgroundSize: "cover", height: "100vh"}} >
+    <Container component="main" maxWidth="lg" style={{height: "100vh"}} >
       <Modal />
       <div className="App" >
-        <h1>TATAKAI - Welcome</h1>
-      <div>
-        <h2>...woRk In proGreSs...</h2>
-      </div>
+      {/*  */}
       </div>
     </Container>
   );

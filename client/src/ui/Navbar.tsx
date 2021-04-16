@@ -19,6 +19,11 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
+  
+  appBar: {
+    backgroundColor: "transparent",
+  },
+  
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -66,7 +71,7 @@ function Navbar({isAdmin}: Props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" className={classes.appBar}>
         <Toolbar>
           <IconButton
             edge="start"
