@@ -1,13 +1,14 @@
 import {useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { useModal } from "../hooks/useModal";
-import { buyNFT, withdrawNFTonSale } from "../lib/actions/marketplace";
+import { buyNFT, withdrawNFTonSale, buyUserNFT } from "../lib/actions/marketplace";
 import {toggleToWishlist} from "../lib/actions/dashboard"
 import Modal from "@material-ui/core/Modal";
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
 import "./Card.css";
+import MarketPlace from '../containers/MarketPlace';
 
 interface TemplateProps {
   item: ICard;
@@ -15,12 +16,19 @@ interface TemplateProps {
 const Template = ({ item }: TemplateProps) => {
   const dispatch = useDispatch();
   const { accounts, wishlist } = useSelector((state: any) => state.user);
+  const { Marketplace } = useSelector((state: any) => state.contract);
+
   const { handleClose } = useModal();
 
   let isWhishListed: boolean = item ? wishlist.includes(item.id) : false;
   
   const handleOnClick = () => {
-    dispatch(buyNFT(item.id, item.metadata.price));
+    if(item.owner == Marketplace.options.address){
+      dispatch(buyNFT(item.id, item.metadata.price));
+    } else {
+      dispatch(buyUserNFT(item.id, item.metadata.price, item.owner));
+    }
+    
     handleClose();
   };
 

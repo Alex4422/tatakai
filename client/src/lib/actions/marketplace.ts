@@ -8,6 +8,8 @@ import {
   SELL_NFT,
   WITHDRAW_NFT_ON_SALE,
   UPDATE_IS_FOR_SALE,
+  BUY_USER_NFT,
+  APPROVE_MARKETPLACE_TO_SELL
 } from "./types";
 
 export const initMarket = () => ({
@@ -51,3 +53,12 @@ export const updateIsForSale = (id: number) => ({
   type: UPDATE_IS_FOR_SALE,
   payload : id
 })
+
+export const buyUserNFT= (id: number, price: string, owner: string) => ({
+  type: BUY_USER_NFT,
+  payload: {id, price, owner}
+})
+
+export const approveMarketplaceToSell = () => ({
+  type: APPROVE_MARKETPLACE_TO_SELL
+}) 

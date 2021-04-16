@@ -1,4 +1,4 @@
-import { SWAP_ETH_TAK, IMPORT_TAK_METAMASK_WALLET, BUY_NFT } from "../actions/types";
+import { SWAP_ETH_TAK, IMPORT_TAK_METAMASK_WALLET, BUY_NFT, BUY_USER_NFT, APPROVE_MARKETPLACE_TO_SELL } from "../actions/types";
 import {getInstanceCardItem, getInstanceMarketplace, getInstanceTakToken} from "./utils";
 import { getBalances } from "../actions/user";
 import { buyNFTSuccess, updateIsForSale } from "../actions/marketplace";
@@ -43,16 +43,29 @@ const adminMiddleware = () => ({ dispatch, getState }: any) =>  (
     break;
   }
 
+     /*******************************/
+  /* IMPORT TAK TOKEN TO METAMASK WALLET /
+  /*******************************/
+  case APPROVE_MARKETPLACE_TO_SELL: {
+    const MarketplaceInstance = await getInstanceMarketplace(web3);
+    const CardItemInstance = await getInstanceCardItem(web3);
+    CardItemInstance.methods.setApprovalForAll(MarketplaceInstance._address, true)
+      .send({from: accounts[0]})
+      .then((res: any) => console.log(res))
+    next(action)
+    break;
+  }
+
    /*******************************/
     /* USER BUY NFT
   /********************************/
   case BUY_NFT: {
-    let data = { id: action.payload.id, price: action.payload.price };
+    let {id,price} = action.payload;
     const MarketplaceInstance = await getInstanceMarketplace(web3);
     const CardItemInstance = await getInstanceCardItem(web3);
     const TakTokenInstance = await getInstanceTakToken(web3);
     try {
-      TakTokenInstance.methods.approve(MarketplaceInstance._address,data.price)
+      TakTokenInstance.methods.approve(MarketplaceInstance._address,price)
       .send({from: accounts[0]})
         .then((result: any) => {
           if(result){
@@ -61,12 +74,48 @@ const adminMiddleware = () => ({ dispatch, getState }: any) =>  (
             .then((result : any) => {
               console.log("Allowance ok!")
             });
-          MarketplaceInstance.methods.buy(CardItemInstance._address, data.id, data.price)
+          MarketplaceInstance.methods.buy(CardItemInstance._address, id, price)
           .send({from: accounts[0]})
             .then((response :any) => {
               if(response.status==true) {
                 console.log("c'est ok, bon achat")
-                dispatch(updateIsForSale(data.id))
+                dispatch(updateIsForSale(id))
+                dispatch(buyNFTSuccess())
+            }
+          })
+        }
+      })
+    } catch (error) {
+      console.error(error)
+    }
+    next(action)
+    break;
+  }
+
+  /*******************************/
+    /* USER BUY USER's NFT
+  /********************************/
+  case BUY_USER_NFT: {
+    console.log("buy user nft")
+    const {id,price,owner}  = action.payload;
+    console.log(id,price,owner);
+    const MarketplaceInstance = await getInstanceMarketplace(web3);
+    const CardItemInstance = await getInstanceCardItem(web3);
+    const TakTokenInstance = await getInstanceTakToken(web3);
+    try {
+      TakTokenInstance.methods.approve(MarketplaceInstance._address,price)
+      .send({from: accounts[0]})
+        .then((result: any) => {
+          if(result){
+          TakTokenInstance.methods.allowance(accounts[0], MarketplaceInstance._address)
+          .call({from: accounts[0]})
+            .then((result : any) => {
+            });
+          MarketplaceInstance.methods.buy(CardItemInstance._address, id, price)
+          .send({from: accounts[0]})
+            .then((response :any) => {
+              if(response.status==true) {
+                dispatch(updateIsForSale(id))
                 dispatch(buyNFTSuccess())
             }
           })

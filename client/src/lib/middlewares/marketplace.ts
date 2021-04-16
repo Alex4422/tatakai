@@ -1,5 +1,5 @@
 import { INIT_MARKET, SELL_NFT, WITHDRAW_NFT_ON_SALE, UPDATE_IS_FOR_SALE } from "../actions/types";
-import { seedMarket} from "../actions/marketplace";
+import { seedMarket, approveMarketplaceToSell} from "../actions/marketplace";
 import {API_URL} from "./utils/Constantes";
 import axios from "axios";
 import { type } from "node:os";
@@ -50,7 +50,10 @@ const MarketplaceMW = () => ({ dispatch, getState }: any) => (
       data,
     };
     axios(config)
-      .then(res => console.log("response Api", res))
+      .then(res => {
+        console.log("response Api", res)
+        dispatch(approveMarketplaceToSell())
+      })
       .catch(err => console.error(err))
     next(action)
     break;
