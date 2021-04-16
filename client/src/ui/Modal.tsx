@@ -1,7 +1,7 @@
 import {useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { useModal } from "../hooks/useModal";
-import { buyNFT, withdrawNFTonSale, buyUserNFT } from "../lib/actions/marketplace";
+import { buyNFT, withdrawNFTonSale} from "../lib/actions/marketplace";
 import {toggleToWishlist} from "../lib/actions/dashboard"
 import Modal from "@material-ui/core/Modal";
 import IconButton from '@material-ui/core/IconButton';
@@ -23,12 +23,7 @@ const Template = ({ item }: TemplateProps) => {
   let isWhishListed: boolean = item ? wishlist.includes(item.id) : false;
   
   const handleOnClick = () => {
-    if(item.owner == Marketplace.options.address){
-      dispatch(buyNFT(item.id, item.metadata.price));
-    } else {
-      dispatch(buyUserNFT(item.id, item.metadata.price, item.owner));
-    }
-    
+    dispatch(buyNFT(item.id, item.metadata.price));
     handleClose();
   };
 
