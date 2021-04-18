@@ -5,6 +5,8 @@ import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
+import Breadcrumbs from "@material-ui/core/Breadcrumbs";
+import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -21,10 +23,17 @@ declare interface Props {
 }
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    margin: 'auto',
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    width: '70%'
+  },
+  breadcrumbs: {
+    color: 'gray',
+    marginLeft: '80px',
+    marginTop: '40px',
+    marginBottom: '40px'
   },
   avatar: {
     margin: theme.spacing(1),
@@ -35,11 +44,34 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: '30px auto',
   },
   preview: {
     width: "100%",
   },
+  input: {
+    "& .MuiInputLabel-outlined": {
+      color: "#fff"
+    },
+    "& .MuiSelect-select.MuiSelect-select": {
+      color: "#fff"
+    },
+    "& .MuiFilledInput-input": {
+      color: "#fff"
+    },
+    "& .MuiOutlinedInput-input": {
+      color: "#fff"
+    },
+    "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+      borderColor: "#fff"
+    },
+    "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+      borderColor: "#fff"
+    },
+    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+      borderColor: "#fff"
+    }
+  }
 }));
 
 const types = ["COMMON", "RARE", "LEGEND", "UNIQUE"];
@@ -92,12 +124,15 @@ const Admin = ({
   }, [validate, token]);
  */
   return (
-    <Container component="main" maxWidth="sm">
+    <Container component="main" maxWidth="lg">
       <CssBaseline />
+      <Breadcrumbs aria-label="breadcrumb" className={classes.breadcrumbs}>
+          <Link color="inherit" href="/">
+            Home
+          </Link>
+          <Typography color="secondary">Create a new NFT</Typography>
+        </Breadcrumbs>
       <div className={classes.paper}>
-        <Typography component="h1" variant="h5">
-          Create new NFT
-        </Typography>
         {isLoading ? (
           <CircularProgress size="75px" style={{ color: "black" }} />
         ) : (
@@ -105,11 +140,12 @@ const Admin = ({
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
+                  className={classes.input}
                   variant="outlined"
                   required
                   fullWidth
                   id="name"
-                  label="name"
+                  label="Name"
                   name="name"
                   autoComplete="email"
                   defaultValue={nft.name || ""}
@@ -118,6 +154,7 @@ const Admin = ({
               </Grid>
               <Grid item xs={4}>
                 <TextField
+                  className={classes.input}
                   variant="outlined"
                   required
                   name="age"
@@ -131,6 +168,7 @@ const Admin = ({
               </Grid>
               <Grid item xs={4}>
                 <TextField
+                  className={classes.input}
                   variant="outlined"
                   required
                   name="nationality"
@@ -144,6 +182,7 @@ const Admin = ({
               </Grid>
               <Grid item xs={4}>
                 <TextField
+                  className={classes.input}
                   variant="outlined"
                   required
                   name="saison"
@@ -157,6 +196,7 @@ const Admin = ({
               </Grid>
               <Grid item sm={6} xs={12}>
                 <TextField
+                  className={classes.input}
                   variant="outlined"
                   required
                   name="type"
@@ -178,6 +218,7 @@ const Admin = ({
               </Grid>
               <Grid item sm={6} xs={12}>
                 <TextField
+                  className={classes.input}
                   variant="outlined"
                   required
                   fullWidth
@@ -196,6 +237,7 @@ const Admin = ({
                 File Upload
               </InputLabel> */}
                   <TextField
+                  className={classes.input}
                     variant="filled"
                     required
                     fullWidth
@@ -216,12 +258,11 @@ const Admin = ({
                   </Grid>
                 </Grid>
               ) : null}
-              <Grid xs={4} spacing={2}>
+              <Grid xs={12} spacing={2}>
                 {preview.image && (
                   <div style={{ marginTop: 15 }}>
                     <img
                       className="preview"
-                      style={{ width: "100%" }}
                       src={preview.image}
                       alt=""
                     />
@@ -232,7 +273,7 @@ const Admin = ({
                 type="submit"
                 fullWidth
                 variant="contained"
-                color="primary"
+                color="secondary"
                 //disabled={!isValid}
                 className={classes.submit}
               >
