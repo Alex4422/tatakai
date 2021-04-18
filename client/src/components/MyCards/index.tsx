@@ -24,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
   },
   breadcrumbs: {
     color: 'gray',
-    marginLeft: '80px',
     marginTop: '40px',
     marginBottom: '40px'
   },
