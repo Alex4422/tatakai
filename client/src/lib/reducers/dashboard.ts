@@ -3,15 +3,22 @@ import {
   MINT_NFT_SUCCESS,
   INIT_MARKET,
   SEED_MARKET,
-
-
+  SHOW_ALERT,
+  HIDE_ALERT,
 } from "../actions/types";
 
-export const initialState = {
-  
-  isLoading: false,
+enum AlertType {
+  Error = "error",
+  Warning = "warning",
+  Info = "info",
+  Success = "success",
+}
 
-  
+export const initialState = {
+  isLoading: false,
+  type: AlertType.Success,
+  message: "This is a notification",
+  isVisible: true,
 };
 
 const user = (
@@ -39,7 +46,18 @@ const user = (
         ...oldState,
         isLoading: false,
       };
-  
+    case SHOW_ALERT:
+      return {
+        ...oldState,
+        ...payload,
+        isVisible: true,
+      };
+    case HIDE_ALERT:
+      return {
+        ...oldState,
+        ...payload,
+        isVisible: false,
+      };
     default:
       return {
         ...oldState,

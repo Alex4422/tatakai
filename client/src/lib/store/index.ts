@@ -6,6 +6,7 @@ import connectWeb3 from "../middlewares/utils";
 import user from "../middlewares/user";
 import dashboard from "../middlewares/dashboard";
 import interactProvider from "../middlewares/interactProvider";
+import logs from "../middlewares/logs";
 
 declare const window: any;
 
@@ -13,7 +14,7 @@ const composeEnhancers =
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ trace: true, traceLimit: 25 });
 
-const contractsMiddlewares = [admin, marketplace, user, dashboard, interactProvider];
+const contractsMiddlewares = [admin, marketplace, user, dashboard, interactProvider, logs];
 const store = createStore(
   rootReducer,
   composeEnhancers(
