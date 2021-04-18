@@ -152,7 +152,7 @@ function Navbar({isAdmin}: Props) {
                 justifyContent: "space-around",
               }}
             >
-              {!isAdmin 
+              {isAdmin 
               ? <li>
                 <Link
                   className={classes.link}
