@@ -5,12 +5,24 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
+import Logo from "../assets/logo_fond_noir.svg";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import AddIcon from '@material-ui/icons/AddPhotoAlternate';
+import StoreIcon from '@material-ui/icons/Storefront';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOnOutlined';
 import Notifications from "./Notifications";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
+  
+  appBar: {
+    backgroundColor: "transparent",
+    boxShadow: "0px 2px 4px -1px rgb(255, 255, 255),0px 4px 5px 0px rgba(255,255,255,0.14),0px 1px 20px 10px rgba(255,255,255,0.1)"
+  },
+  
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -20,9 +32,28 @@ const useStyles = makeStyles((theme) => ({
   menu: {
     display: "flex",
   },
+  menuItem: {
+    display:"flex",
+    alignItems:"center",
+    padding: "0 15px"
+  },
   link: {
     color: "white",
     textDecoration: "none",
+    padding: "10px",
+    fontSize: "17px",
+    '&:hover': {
+      color: theme.palette.secondary.main,
+      transition: "all .25s"
+    }
+  },
+  linkDisabled: {
+    color: "white",
+    textDecoration: "none",
+    padding: "10px",
+    opacity: "0.5",
+    cursor: "not-allowed",
+    fontSize: "17px"
   },
 }));
 
@@ -51,7 +82,7 @@ function Navbar({isAdmin}: Props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" className={classes.appBar}>
         <Toolbar>
           <IconButton
             edge="start"
@@ -59,50 +90,49 @@ function Navbar({isAdmin}: Props) {
             color="inherit"
             aria-label="menu"
           ></IconButton>
-          <Typography variant="h6" className={classes.title}>
+          {/* <Typography variant="h6" className={classes.title}> */}
             <Link style={{ color: "white", textDecoration: "none" }} to="/">
-              TATAKAI
+              <img src={Logo} alt="Logo" width="35px"/>
             </Link>
-          </Typography>
+          {/* </Typography> */}
           <div
             style={{
               display: "flex",
               justifyContent: "space-between",
               width: "100%",
+              fontVariant: "petite-caps",
             }}
           >
             <ul
               style={{
                 listStyleType: "none",
-                width: "30%",
                 display: "flex",
                 justifyContent: "space-around",
+                alignItems: "center"
               }}
             >
-              <li>
+              <li className={classes.menuItem}>
+              <StoreIcon/> 
                 <Link
-                  style={{ color: "white", textDecoration: "none" }}
+                  className={classes.link}
                   to="/marketplace"
                 >
-                  MarketPlace
+                MarketPlace
                 </Link>
               </li>
-              <li>
+              <li className={classes.menuItem}>
+              <FavoriteBorderIcon/>
                 <Link
-                  style={{ color: "white", textDecoration: "none" }}
+                  className={classes.link}
                   to="/cards"
                 >
                   My Cards
                 </Link>
               </li>
-              <li>
+              <li className={classes.menuItem}>
+              <MonetizationOnIcon/>
                 <Link
-                  style={{
-                    color: "white",
-                    textDecoration: "none",
-                    opacity: "0.5",
-                    cursor: "not-allowed",
-                  }}
+                  className={classes.linkDisabled}
                   to="/"
                 >
                   Bid
@@ -113,7 +143,6 @@ function Navbar({isAdmin}: Props) {
             <ul
               style={{
                 listStyleType: "none",
-                width: "20%",
                 display: "flex",
                 justifyContent: "space-around",
               }}
@@ -121,20 +150,20 @@ function Navbar({isAdmin}: Props) {
               {isAdmin 
               ? <li>
                 <Link
-                  style={{ color: "white", textDecoration: "none" }}
+                  className={classes.link}
                   to="/admin"
                 >
-                  Admin
+                <AddIcon fontSize="large"/>
                 </Link>
               </li>
               : null}
              
               <li>
                 <Link
-                  style={{ color: "white", textDecoration: "none" }}
+                  className={classes.link}
                   to="/profile"
                 >
-                  Profile
+                  <AccountCircleIcon fontSize="large"/>
                 </Link>
               </li>
             </ul>

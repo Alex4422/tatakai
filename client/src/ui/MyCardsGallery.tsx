@@ -41,6 +41,7 @@ const Gallery = ({ items }: Props) => {
           flexWrap: "wrap",
           justifyContent: "space-around",
           alignItems: "space-around",
+          color: '#fff'
         }}
       >
         {items.length >= 1 

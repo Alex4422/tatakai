@@ -50,34 +50,3 @@ exports.findOne = async (req, res) => {
           res.status(500).json({error: error})
       }
 };
-
-exports.buy = async (req, res) => {
-      try {
-          const id = req.body.id;
-          const card = await (await CardService).buyFrom(id); 
-          res.json(card);
-      } catch (error) {
-          res.status(500).json({error: error})
-      }
-};
-
-exports.removeSale = async (req, res) => {
-      try {
-          const id = req.body.id;
-          const card = await (await CardService).removeOrder(id); 
-          res.json(card);
-      } catch (error) {
-          res.status(500).json({error: error})
-      }
-};
-
-exports.putForSale = async (req, res) => {
-      try {
-          const id = req.body.id;
-          const price = req.body.price;
-          const card = await (await CardService).createOrder(id, price); 
-          res.json(card);
-      } catch (error) {
-          res.status(500).json({error: error})
-      }
-};

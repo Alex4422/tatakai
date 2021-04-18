@@ -62,12 +62,18 @@
 
 
 .card-action-confirm {
-  background: rgba(255, 29, 142, 1);
+  background: gold
 
 }
 
-.card-action-readMore:hover {
-  background: rgba(255, 29, 142, 0.8);
+.card-action:hover {
+  cursor: pointer;
+  background: lightgray;
+  transition: all 0.1s ease-in;
+}
+
+.card-action-confirm:hover {
+  background: goldenrod;
   transition: all 0.1s ease-in;
 }
 .card:hover {

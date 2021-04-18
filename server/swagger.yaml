@@ -12,6 +12,8 @@ tags:
   description: "Mint and retrieve cards"
 - name: "faucet"
   description: "Faucet request"
+- name: "order"
+  description: "Buy/sell cards"
 schemes:
 - "https"
 - "http"
@@ -20,7 +22,7 @@ paths:
     post:
       tags:
       - "cards"
-      summary: "Mint a new NFT Card"
+      summary: "Mint"
       consumes:
       - "multipart/form-data"
       produces:
@@ -113,11 +115,12 @@ paths:
               $ref: "#/definitions/Cards"
         "404":
           description: "No exist"
-  /cards/buy:
+  /order/buy:
     post:
       tags:
-      - "cards"
+      - "order"
       summary: "Buy a card"
+      description: "Buy a card from marketplace or user"
       produces:
       - "application/json"
       parameters:
@@ -131,11 +134,12 @@ paths:
           description: "Return true"
         "500":
           description: "Invalid input"
-  /cards/sale:
+  /order/sell:
     post:
       tags:
-      - "cards"
-      summary: "Put a card on sale"
+      - "order"
+      summary: "Sell a card"
+      description: "Put a card on sale to the marketplace"
       produces:
       - "application/json"
       parameters:
@@ -154,11 +158,12 @@ paths:
           description: "Return a success message"
         "500":
           description: "Invalid input"
-  /cards/remove:
+  /order/remove:
     post:
       tags:
-      - "cards"
+      - "order"
       summary: "Remove a card on sale"
+      description: "Remove a card from the marketplace"
       produces:
       - "application/json"
       parameters:
@@ -200,7 +205,8 @@ paths:
     post:
       tags:
       - "faucet"
-      summary: "Request Tak Token"
+      summary: "Request token"
+      description: "Request Tak Token"
       consumes:
       - "application/json"
       produces:
