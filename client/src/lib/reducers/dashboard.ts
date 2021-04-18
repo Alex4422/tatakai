@@ -6,19 +6,13 @@ import {
   SHOW_ALERT,
   HIDE_ALERT,
 } from "../actions/types";
-
-enum AlertType {
-  Error = "error",
-  Warning = "warning",
-  Info = "info",
-  Success = "success",
-}
+import {AlertType} from "../middlewares/utils/enums"
 
 export const initialState = {
   isLoading: false,
   type: AlertType.Success,
   message: "This is a notification",
-  isVisible: true,
+  isVisible: false,
 };
 
 const user = (

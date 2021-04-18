@@ -1,5 +1,7 @@
 import { ADMIN_FORM_SUBMIT } from "../actions/types";
 import { mintNFTSuccess } from "../actions/admin";
+import { showAlert } from "../actions/dashboard";
+import {AlertType} from "../middlewares/utils/enums"
 import {API_URL} from "./utils/Constantes"
 import axios from "axios";
 
@@ -36,10 +38,13 @@ const adminMiddleware = () => ({ dispatch, getState }: any) => (
             console.log("response Api", response);
             if (response.status === 200) {
               dispatch(mintNFTSuccess());
+              dispatch(showAlert("New NFT is on the market !", AlertType.Success))
             }
           })
           .catch(err => {
             console.error(err)
+            dispatch(showAlert("NFT creation failed", AlertType.Error))
+
           })
       next(action)
       break;

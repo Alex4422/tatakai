@@ -41,7 +41,7 @@ export default function CustomizedSnackbars() {
     <div className={classes.root}>
       <Snackbar 
         open={isVisible} 
-        autoHideDuration={6000} 
+        autoHideDuration={4000} 
         onClose={handleClose} 
         anchorOrigin={{vertical: 'top', horizontal: 'right'}}
         //TransitionComponent={() => <Transition />}

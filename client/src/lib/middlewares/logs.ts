@@ -24,36 +24,21 @@ const log = () => ({ dispatch, getState }: any) => (
     /* SUBSCRIBE_EVENTS
   /********************************/
     case SUBSCRIBE_EVENTS: {
-      console.log("coucou de subscribe events");
-      //test Websoscket
       const provider = new Web3.providers.WebsocketProvider("ws://127.0.0.1:7545");
       const web3ws = new Web3(provider);
       try {
-      web3ws.eth.subscribe('logs', accounts[0], async (data: any) => {
-              console.log(data)
-            })
-      const MarketplaceInstance = await getInstanceMarketplace(web3);
-      const TakTokenInstance = await getInstanceTakToken(web3);
-      const CardItemInstance = await getInstanceCardItem(web3)
+      const MarketplaceInstance = await getInstanceMarketplace(web3ws);
+      const TakTokenInstance = await getInstanceTakToken(web3ws);
+      const CardItemInstance = await getInstanceCardItem(web3ws)
       
-      MarketplaceInstance.events.allEvents({}, (error: any, event: any) => {
+      /* CARD USER is sold */
+      MarketplaceInstance.events.BuyTransaction().on("data", (error: any, event: any) => {
         if (error) {
           throw error;
         }
-        console.log("event", event); 
-        dispatch(showAlert("event",AlertType.Success))
-      });
-      TakTokenInstance.events.allEvents({}, (error: any, event: any) => {
-        if (error) {
-          throw error;
+        if (event.returnValues.oldOwner === accounts[0]){
+          dispatch(showAlert(`${event.returnValues.newOwner} a acheté votre carte pour ${event.returnValues.price} TAK`,AlertType.Info))
         }
-        console.log("event", event); 
-      });
-      CardItemInstance.events.allEvents({}, (error: any, event: any) => {
-        if (error) {
-          throw error;
-        }
-        console.log("event", event); 
       });
       
       } catch (error) {
