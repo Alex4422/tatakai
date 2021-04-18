@@ -3,6 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useModal } from "../../hooks/useModal";
 import SwapModal from "../../ui/SwapModal";
 import Container from "@material-ui/core/Container";
+import Breadcrumbs from "@material-ui/core/Breadcrumbs";
+import Link from "@material-ui/core/Link";
+import Typography from "@material-ui/core/Typography";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -38,8 +41,27 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: '50%',
     align: 'center',
     margin: 'auto',
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: 'transparent',
+    color: '#fff'
   },
+  breadcrumbs: {
+    color: 'gray',
+    marginLeft: '80px',
+    marginTop: '40px',
+    marginBottom: '40px'
+  },
+  listItemText: {
+    '& p': {
+      color: '#fff'
+    }
+  },
+  btnContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    '& button': {
+      margin: '0 10px'
+    }
+  }
 }));
 
 const Profile = ({ accounts, cards, isAdmin, balanceTAK, balanceWei,isLoading, getTAK, importTAKMetamaskWallet, getBalances, isNew, swapEthTak }: Props) => {
@@ -58,7 +80,12 @@ const Profile = ({ accounts, cards, isAdmin, balanceTAK, balanceWei,isLoading, g
   return (
     <Container component="main" maxWidth="lg">
       <div className="App">
-        <h1>My Profile </h1>
+      <Breadcrumbs aria-label="breadcrumb" className={classes.breadcrumbs}>
+        <Link color="inherit" href="/">
+          Home
+        </Link>
+        <Typography color="secondary">My Profile</Typography>
+      </Breadcrumbs>
         <SwapModal/>
         <List className={classes.root}>
           <ListItem>
@@ -67,7 +94,7 @@ const Profile = ({ accounts, cards, isAdmin, balanceTAK, balanceWei,isLoading, g
                 <WorkIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText primary="Account" secondary={accounts ? accounts[0] : "Non account"} />
+            <ListItemText className={classes.listItemText} primary="Account" secondary={accounts ? accounts[0] : "Non account"} />
           </ListItem>
           <Divider variant="inset" component="li" />
           <ListItem>
@@ -76,7 +103,7 @@ const Profile = ({ accounts, cards, isAdmin, balanceTAK, balanceWei,isLoading, g
                 <ImageIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText primary="NFTS" secondary={cards!.length >= 1 ? `Nombre de NFTS : ${cards!.length}`  : "Pas de NFTS dans votre protefeuille !"} />
+            <ListItemText className={classes.listItemText} primary="NFTS" secondary={cards!.length >= 1 ? `Nombre de NFTS : ${cards!.length}`  : "Pas de NFTS dans votre protefeuille !"} />
           </ListItem>
           <Divider variant="inset" component="li" />
           
@@ -87,7 +114,7 @@ const Profile = ({ accounts, cards, isAdmin, balanceTAK, balanceWei,isLoading, g
                 <AccountBalanceOutlinedIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText primary="Balance Wei" secondary={balanceWei ? balanceWei : "Non account"} />
+            <ListItemText className={classes.listItemText} primary="Balance Wei" secondary={balanceWei ? balanceWei : "Non account"} />
           </ListItem>
           <Divider variant="inset" component="li" />
           <ListItem>
@@ -96,7 +123,7 @@ const Profile = ({ accounts, cards, isAdmin, balanceTAK, balanceWei,isLoading, g
                 <AccountBalanceWalletOutlinedIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText primary="Balance TAK" secondary={balanceTAK ? balanceTAK : "Non account"} />
+            <ListItemText className={classes.listItemText} primary="Balance TAK" secondary={balanceTAK ? balanceTAK : "Non account"} />
           </ListItem>
           {isAdmin 
           ?<>
@@ -107,19 +134,20 @@ const Profile = ({ accounts, cards, isAdmin, balanceTAK, balanceWei,isLoading, g
                   <SupervisorAccountOutlinedIcon />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText primary="Admin" secondary={"You're admin of the markeplace!"} />
+              <ListItemText className={classes.listItemText} primary="Admin" secondary={"You're admin of the markeplace!"} />
             </ListItem>
           </>
           : null
           }
         </List>
         <br></br>
+        <div className={classes.btnContainer}>
         <Button variant="contained" color="secondary" onClick={() => getTAK()}>
-        Get TAK !
+        Send me TAK
         </Button>
        <br></br>
-       <Button variant="contained" color="secondary" style={{marginTop: "1rem"}} onClick={handleOnClickModal}>
-        Swap Ether to TAK !
+       <Button variant="contained" color="secondary" onClick={handleOnClickModal}>
+        Swap ETH/TAK
       </Button>
 
       {isNew 
@@ -128,6 +156,7 @@ const Profile = ({ accounts, cards, isAdmin, balanceTAK, balanceWei,isLoading, g
       </Button>
       : null
       }
+      </div>
       
       </div>
     </Container>
