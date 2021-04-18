@@ -8,16 +8,20 @@ declare interface Props {
   getAuthMetamask: Function;
   accounts: Array<string>;
   getUserStorage: Function;
+  subscribeEvents: Function
 }
-const Home = ({ getAuthMetamask, accounts, getUserStorage }: Props) => {
+const Home = ({ getAuthMetamask, accounts, getUserStorage, subscribeEvents }: Props) => {
   useEffect(() => {
     if(!accounts){
       getAuthMetamask();
     }
   }, [accounts]);
 
+
+
   useEffect(() => {
     getUserStorage();
+    subscribeEvents();
   }, [accounts])
   
   return (

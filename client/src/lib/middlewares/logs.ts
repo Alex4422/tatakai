@@ -1,6 +1,15 @@
 import { SUBSCRIBE_EVENTS } from "../actions/types";
+import {showAlert} from "../actions/dashboard";
 import Web3 from "web3";
-import {getInstanceMarketplace} from "./utils";
+import {getInstanceMarketplace, getInstanceTakToken, getInstanceCardItem} from "./utils";
+
+enum AlertType {
+  Error = "error",
+  Warning = "warning",
+  Info = "info",
+  Success = "success",
+}
+
 
 const log = () => ({ dispatch, getState }: any) => (
   next: any
@@ -24,7 +33,23 @@ const log = () => ({ dispatch, getState }: any) => (
               console.log(data)
             })
       const MarketplaceInstance = await getInstanceMarketplace(web3);
+      const TakTokenInstance = await getInstanceTakToken(web3);
+      const CardItemInstance = await getInstanceCardItem(web3)
+      
       MarketplaceInstance.events.allEvents({}, (error: any, event: any) => {
+        if (error) {
+          throw error;
+        }
+        console.log("event", event); 
+        dispatch(showAlert("event",AlertType.Success))
+      });
+      TakTokenInstance.events.allEvents({}, (error: any, event: any) => {
+        if (error) {
+          throw error;
+        }
+        console.log("event", event); 
+      });
+      CardItemInstance.events.allEvents({}, (error: any, event: any) => {
         if (error) {
           throw error;
         }
