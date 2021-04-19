@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import Container from "@material-ui/core/Container";
 import Modal from "../../ui/Modal";
 import { makeStyles } from "@material-ui/core/styles";
-import combat from "../../assets/combat.png";
 import "../styles.css";
 
 declare interface Props {
@@ -12,18 +11,7 @@ declare interface Props {
   subscribeEvents: Function
 }
 
-const useStyles = makeStyles((theme) => ({
-
-  breadcrumbs: {
-    color: 'gray',
-    marginTop: '40px',
-    marginBottom: '40px'
-  },
-}));
-
-
 const Home = ({ getAuthMetamask, accounts, getUserStorage, subscribeEvents }: Props) => {
-  const classes = useStyles();
   
   useEffect(() => {
     if(!accounts){

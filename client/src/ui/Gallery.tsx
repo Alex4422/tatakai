@@ -48,7 +48,7 @@ const Gallery = ({ items }: Props) => {
         ? items?.map((item: ICard, index: number) => (
           <Card item={item} key={index} />
         ))
-        : "Pas de cartes à vendre en ce moment !"
+        : <h2>No Cards on the market yet !</h2>
       }
       </div>
     </>

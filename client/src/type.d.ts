@@ -65,6 +65,12 @@ interface IEventType {
   };
 }
 
+interface ITOKEN {
+    symbol: string;
+    decimal: number;
+    img: string;
+}
+
 interface ConfigAxios {
   method: string;
   url: string;

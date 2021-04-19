@@ -1,11 +1,10 @@
-import {useEffect, useState} from 'react';
-import { useSelector, useDispatch } from "react-redux";
+import { useState } from 'react';
+import { useDispatch } from "react-redux";
 import { useModal } from "../hooks/useModal";
 import { swapEthTak } from "../lib/actions/user";
 import Modal from "@material-ui/core/Modal";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
-
 import "./Card.css";
 
 const Template = () => {
@@ -35,7 +34,6 @@ const Template = () => {
     >
         <p>Echangez vos Ethers en tak token </p>
           <Grid item sm={5} xs={5}>
-        
           <TextField
                   variant="outlined"
                   required
@@ -51,12 +49,8 @@ const Template = () => {
                   }}
                   defaultValue={valueSwap || ""}
                   onChange={e => (setValueSwap(e.target.value))}
-
                 />
           </Grid> 
-         
-
-
         <div className="card-actions">        
           <button
             onClick={handleClose}
@@ -66,7 +60,6 @@ const Template = () => {
           >
             Cancel
           </button>
-        
           <button
             onClick={handleOnClick}
             type="button"
@@ -75,7 +68,6 @@ const Template = () => {
           >
             Confirm
           </button>
-          
        </div>
     </div>
 

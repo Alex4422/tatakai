@@ -1,9 +1,7 @@
-import { useState } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Logo from "../assets/logo_fond_noir.svg";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
@@ -64,21 +62,6 @@ declare interface Props {
 
 function Navbar({isAdmin}: Props) {
   const classes = useStyles();
-  const [auth, setAuth] = useState(true);
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-
-  const handleChange = (event: any) => {
-    setAuth(event.target.checked);
-  };
-
-  const handleMenu = (event: any) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   return (
     <div className={classes.root}>
@@ -90,11 +73,9 @@ function Navbar({isAdmin}: Props) {
             color="inherit"
             aria-label="menu"
           ></IconButton>
-          {/* <Typography variant="h6" className={classes.title}> */}
             <Link style={{ color: "white", textDecoration: "none" }} to="/">
               <img src={Logo} alt="Logo" width="35px"/>
             </Link>
-          {/* </Typography> */}
           <div
             style={{
               display: "flex",

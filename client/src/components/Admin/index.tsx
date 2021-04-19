@@ -99,6 +99,11 @@ const Admin = ({
     let data: any = new FormData();
     data.append("file", file!);
     submitValue(data);
+    setPreview({
+      image: "",
+      progress: 0,
+      imageInfos: [],
+    })
    
   };
 

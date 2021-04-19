@@ -1,4 +1,3 @@
-import {useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { useModal } from "../hooks/useModal";
 import { buyNFT, withdrawNFTonSale} from "../lib/actions/marketplace";
@@ -8,7 +7,6 @@ import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
 import "./Card.css";
-import MarketPlace from '../containers/MarketPlace';
 
 interface TemplateProps {
   item: ICard;
@@ -16,7 +14,6 @@ interface TemplateProps {
 const Template = ({ item }: TemplateProps) => {
   const dispatch = useDispatch();
   const { accounts, wishlist } = useSelector((state: any) => state.user);
-  const { Marketplace } = useSelector((state: any) => state.contract);
 
   const { handleClose } = useModal();
 

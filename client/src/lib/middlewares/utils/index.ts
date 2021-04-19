@@ -6,7 +6,6 @@ import detectEthereumProvider from '@metamask/detect-provider';
 import TakToken from "../../../contracts/TakToken.json";
 import Marketplace from "../../../contracts/Marketplace.json";
 import CardItem from "../../../contracts/CardItem.json";
-import {balanceTAK} from "./TakToken";
 
     /*******************************/
    // Connect web3 and accounts, init STORE
@@ -25,7 +24,7 @@ const connectWeb3 = async (store: any) => {
     const admin: any = await MarketplaceContract.methods.owner().call()
     const isAdmin = admin == accounts[0];
     const provider: any = await detectEthereumProvider();
-    const balanceTak: any = await balanceTAK(web3, accounts[0]);
+    let balanceTak = await TakTokenContract.methods.balanceOf(accounts[0]).call()
     
     store.dispatch(seedAuthMetamask(web3, accounts, parseInt(balance,10), provider, parseInt(balanceTak, 10), isAdmin));
     store.dispatch(seedContracts(TakTokenContract, MarketplaceContract, CardItemContract))

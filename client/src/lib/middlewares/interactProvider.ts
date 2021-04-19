@@ -4,7 +4,6 @@ import { getBalances, refreshUserNFTS } from "../actions/user";
 import { showAlert} from "../actions/dashboard";
 import { buyNFTSuccess, updateIsForSale } from "../actions/marketplace";
 import { toggleNewUser } from "../actions/dashboard";
-import {addTAKToken} from "./utils/TakToken";
 import {AlertType} from "./utils/enums";
 import { TOKEN } from "./utils/Constantes"
 

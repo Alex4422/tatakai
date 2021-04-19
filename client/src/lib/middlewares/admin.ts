@@ -1,5 +1,6 @@
 import { ADMIN_FORM_SUBMIT } from "../actions/types";
 import { mintNFTSuccess } from "../actions/admin";
+import { refreshMarket} from "../actions/marketplace";
 import { showAlert } from "../actions/dashboard";
 import {AlertType} from "../middlewares/utils/enums"
 import {API_URL} from "./utils/Constantes"
@@ -39,6 +40,7 @@ const adminMiddleware = () => ({ dispatch, getState }: any) => (
             if (response.status === 200) {
               dispatch(mintNFTSuccess());
               dispatch(showAlert("New NFT is on the market !", AlertType.Success))
+              dispatch(refreshMarket());
             }
           })
           .catch(err => {

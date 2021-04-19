@@ -1,37 +1,12 @@
-import GridList from "@material-ui/core/GridList";
-import GridListTile from "@material-ui/core/GridListTile";
 import MycardsModal from "./MycardsModal";
 import Card from "./Card";
-import Button from "@material-ui/core/Button";
 import "./gallery.css";
 
 interface Props {
   items: Array<ICard> | [];
 }
 
-const useStyles = () => {
-  const classes = {
-    input: {
-      padding: 5,
-    },
-    form: {
-      marginTop: 10,
-    },
-    item: {
-      height: 300,
-      background: "#ccc",
-      borderRadius: 8,
-    },
-    gridList: {
-      width: "70%",
-      height: "100vh",
-    },
-  };
-  return classes;
-};
-
 const Gallery = ({ items }: Props) => {
-  const classes = useStyles();
   return (
     <>
       <MycardsModal />
@@ -48,7 +23,7 @@ const Gallery = ({ items }: Props) => {
         ? items?.map((item: ICard, index: number) => (
           <Card item={item} key={index} />
         ))
-        : "Vous ne possédez pas de cartes !"
+        : <h2>Unfortunatly, you haven't got any cards in your deck !</h2>
       }
       </div>
     </>

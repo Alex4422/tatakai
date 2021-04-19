@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { useModal } from "../hooks/useModal";
 import { sellNFT, withdrawNFTonSale } from "../lib/actions/marketplace";
@@ -13,7 +13,6 @@ interface TemplateProps {
 }
 const Template = ({ item }: TemplateProps) => {
   const dispatch = useDispatch();
-  const { accounts } = useSelector((state: any) => state.user);
   const [price, setPrice] = useState(item?.metadata?.price);
   const [isSelling, setIsSelling] = useState(false);
   const { handleClose } = useModal();

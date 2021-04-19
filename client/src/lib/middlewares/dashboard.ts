@@ -1,7 +1,6 @@
 import { GET_USER_STORAGE, TOGGLE_TO_WISHLIST  } from "../actions/types";
 import { seedUserStorage, initNewUser } from "../actions/dashboard";
 
-
 const dashboard = () => ({ dispatch, getState }: any) => (
   next: any
 ) => (action: IAction) => {

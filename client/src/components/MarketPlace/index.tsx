@@ -49,7 +49,7 @@ const MarketPlace = ({ refreshMarket, items, isLoading }: Props) => {
           <Typography color="secondary">Marketplace</Typography>
         </Breadcrumbs>
         {isLoading ? (
-          <CircularProgress size="75px" style={{ color: "white" }} />
+          <CircularProgress size="75px" style={{ color: "white", marginLeft: "45%" }} />
         ) : (
           <Gallery items={items} />
         )}
