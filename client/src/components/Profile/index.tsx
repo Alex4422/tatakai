@@ -141,10 +141,16 @@ const Profile = ({ accounts, cards, isAdmin, balanceTAK, balanceWei,isLoading, g
         </List>
         <br></br>
         <div className={classes.btnContainer}>
+        { isAdmin 
+        ?<>
         <Button variant="contained" color="secondary" onClick={() => getTAK()}>
         Send me TAK
         </Button>
-       <br></br>
+       <br/>
+       </>
+        : <br/>
+        }
+        
        <Button variant="contained" color="secondary" onClick={handleOnClickModal}>
         Swap ETH/TAK
       </Button>

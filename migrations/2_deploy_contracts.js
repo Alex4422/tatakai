@@ -2,7 +2,6 @@ var TakToken = artifacts.require("TakToken");
 var Marketplace = artifacts.require("Marketplace");
 var CardItem = artifacts.require("CardItem");
 var Faucet = artifacts.require("Faucet");
-var SimpleStorage = artifacts.require("SimpleStorage");
 
 module.exports = async (deployer) => {
   await deployer.deploy(TakToken, "Tatakai", "TAK");

@@ -8,14 +8,9 @@ import {
   SUBSCRIBE_EVENTS,
   SHOW_ALERT,
   HIDE_ALERT,
+  GET_HISTORY,
 } from "./types";
-
-enum AlertType {
-  Error = "error",
-  Warning = "warning",
-  Info = "info",
-  Success = "success",
-}
+import {AlertType} from "../middlewares/utils/enums"
 
 
 export const getUserStorage = () => ({
@@ -55,4 +50,9 @@ export const showAlert = (message: string, type: AlertType) => ({
 
 export const hideAlert = () => ({
   type: HIDE_ALERT,
+})
+
+export const getHistory = (id: any) => ({
+  type: GET_HISTORY,
+  payload: id,
 })

@@ -37,6 +37,8 @@ const log = () => ({ dispatch, getState }: any) => (
         if (error) {
           throw error;
         }
+
+      
         
         /* if (event.returnValues.oldOwner === accounts[0]){
           dispatch(showAlert(`${event.returnValues.newOwner} a acheté votre carte pour ${event.returnValues.price} TAK`,AlertType.Info))
@@ -48,6 +50,37 @@ const log = () => ({ dispatch, getState }: any) => (
       }
       break;
     }
+
+    /*******************************/
+    /* GET Historical buy
+  /********************************/
+  case SUBSCRIBE_EVENTS: {
+    const provider = new Web3.providers.WebsocketProvider("ws://127.0.0.1:7545");
+    const web3ws = new Web3(provider);
+    try {
+    const MarketplaceInstance = await getInstanceMarketplace(web3ws);
+    const TakTokenInstance = await getInstanceTakToken(web3ws);
+    const CardItemInstance = await getInstanceCardItem(web3ws)
+    
+    /* CARD USER is sold */
+    MarketplaceInstance.events.BuyTransaction().on("data", (error: any, event: any) => {
+      console.log("event:", event)
+      if (error) {
+        throw error;
+      }
+
+    
+      
+      /* if (event.returnValues.oldOwner === accounts[0]){
+        dispatch(showAlert(`${event.returnValues.newOwner} a acheté votre carte pour ${event.returnValues.price} TAK`,AlertType.Info))
+      } */
+    });
+    
+    } catch (error) {
+      console.error(error);
+    }
+    break;
+  }
   
     default:
       return next(action);

@@ -50,3 +50,4 @@ export const IS_LOADING = "IS_LOADING";
 export const SUBSCRIBE_EVENTS = "SUBSCRIBE_EVENTS";
 export const SHOW_ALERT = "SHOW_ALERT";
 export const HIDE_ALERT = "HIDE_ALERT";
+export const GET_HISTORY = "GET_HISTORY"
