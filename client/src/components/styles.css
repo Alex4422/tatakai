@@ -2,14 +2,18 @@
   position: absolute;
   width: 100%;
   height: 100%;
+  margin-left: -1rem;
   background-image: url("../assets/combat.png");
   mix-blend-mode: lighten;
   background-size: cover;
+  background-position-y:  150%;
+  background-position-x:-40%;
 }
 .titre {
   font-family: 'Gugi', cursive;
   color: #FEFEFE;
   font-Size: 4rem;
+  margin-top: 0;
 }
 .textbox {
   position: relative;
@@ -20,11 +24,17 @@
   flex-direction: column;
   justify-content: flex-start;
   font-size: 2rem;
+  
 }
 
 .textbox :nth-child(2){
   margin-left: 4rem;
 }
+
+.catch {
+  margin: 1rem;
+}
+
 
 .textbox :nth-child(3){
   margin-left: 8rem;
