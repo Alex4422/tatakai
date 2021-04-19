@@ -22,14 +22,13 @@ describe('Marketplace', function () {
         someOne2 = accounts[2];
 
         this.erc20token = await TakToken.new(
-            web3.utils.toBN(1000000000000000000), 
             "Tatakai", 
             "TAK", 
             { from: owner }
         )
 
         this.marketplace = await Marketplace.new(
-            this.erc20token.address, 
+            this.erc20token.address,
             { from: owner }
         )
 
@@ -42,10 +41,18 @@ describe('Marketplace', function () {
         
         this.faucet = await Faucet.new(
             this.erc20token.address, 
+            this.marketplace.address,
             { from: owner }
         )
 
-        await this.erc20token.transfer(this.faucet.address, web3.utils.toBN(1000000000000000000));
+        await this.erc20token.transfer(this.faucet.address, web3.utils.toBN(50000000));
+        await this.erc20token.transfer(this.marketplace.address, web3.utils.toBN(50000000));
+        
+        // Swap de someOne
+        await this.marketplace.sendTransaction({from:someOne, value:101})
+        
+        // Swap de someOne2
+        await this.marketplace.sendTransaction({from:someOne2, value:101})
     });
 
     describe('Mint, buy and transfer NFT', function () {
@@ -60,7 +67,7 @@ describe('Marketplace', function () {
             const buyer = someOne;
             const seller = this.marketplace.address;
             
-            await this.faucet.requestTokens({from: buyer});
+            //await this.faucet.requestTokens(10000, {from: buyer});
             const balance = await this.erc20token.balanceOf(buyer);
             const beforeGetNftOwner = await this.nft.ownerOf(1);
             expect(beforeGetNftOwner).to.eql(seller);
@@ -79,7 +86,7 @@ describe('Marketplace', function () {
             const buyer = someOne2;
             const seller = someOne;
             
-            await this.faucet.requestTokens({from: buyer});
+            //await this.faucet.requestTokens(10000, {from: buyer});
 
             const beforeBuyerBalance = await this.erc20token.balanceOf(buyer);
 
@@ -104,7 +111,7 @@ describe('Marketplace', function () {
             const beforeUserBalanceERC20 = await this.erc20token.balanceOf(someOne);
             const beforeUserBalanceETH = await web3.eth.getBalance(someOne);
 
-            await this.marketplace.sendTransaction({from:someOne, value:1})
+            await this.marketplace.sendTransaction({from:someOne, value:101})
 
             const afterMarketplaceBalanceERC20 = await this.erc20token.balanceOf(this.marketplace.address);
             const afterMarketplaceBalanceETH = await web3.eth.getBalance(this.marketplace.address);
@@ -112,10 +119,10 @@ describe('Marketplace', function () {
             const afterUserBalanceERC20 = await this.erc20token.balanceOf(someOne);
             const afterUserBalanceETH = await web3.eth.getBalance(someOne);
             
-            expect(afterMarketplaceBalanceERC20.toNumber()).to.eql(beforeMarketplaceBalanceERC20-1);
-            expect(parseInt(afterMarketplaceBalanceETH)).to.eql(parseInt(beforeMarketplaceBalanceETH)+1);
+            expect(afterMarketplaceBalanceERC20.toNumber()).to.eql(beforeMarketplaceBalanceERC20-101);
+            expect(parseInt(afterMarketplaceBalanceETH)).to.eql(parseInt(beforeMarketplaceBalanceETH)+101);
 
-            expect(afterUserBalanceERC20.toNumber()).to.eql(parseInt(beforeUserBalanceERC20)+1);
+            expect(afterUserBalanceERC20.toNumber()).to.eql(parseInt(beforeUserBalanceERC20)+101);
         })
     })
     
