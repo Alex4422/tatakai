@@ -8,11 +8,16 @@ import {
   SELL_NFT,
   WITHDRAW_NFT_ON_SALE,
   UPDATE_IS_FOR_SALE,
-  APPROVE_MARKETPLACE_TO_SELL
+  APPROVE_MARKETPLACE_TO_SELL,
+  REFRESH_MARKET
 } from "./types";
 
 export const initMarket = () => ({
   type: INIT_MARKET,
+});
+
+export const refreshMarket = () => ({
+  type: REFRESH_MARKET,
 });
 
 export const seedMarket = (data: Array<Object>) => ({

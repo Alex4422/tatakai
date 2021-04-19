@@ -2,23 +2,19 @@ import {
   ADMIN_FORM_SUBMIT,
   MINT_NFT_SUCCESS,
   INIT_MARKET,
+  GET_USER_NFTS,
   SEED_MARKET,
   SHOW_ALERT,
   HIDE_ALERT,
+  SEED_USER_NFTS
 } from "../actions/types";
-
-enum AlertType {
-  Error = "error",
-  Warning = "warning",
-  Info = "info",
-  Success = "success",
-}
+import {AlertType} from "../middlewares/utils/enums"
 
 export const initialState = {
   isLoading: false,
   type: AlertType.Success,
   message: "This is a notification",
-  isVisible: true,
+  isVisible: false,
 };
 
 const user = (
@@ -35,6 +31,16 @@ const user = (
       return {
         ...oldState,
         isLoading: true,
+      };
+    case GET_USER_NFTS:
+      return {
+        ...oldState,
+        isLoading: true,
+      };
+    case SEED_USER_NFTS:
+      return {
+        ...oldState,
+        isLoading: false,
       };
     case MINT_NFT_SUCCESS:
       return {

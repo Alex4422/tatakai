@@ -132,7 +132,7 @@ const Admin = ({
         </Breadcrumbs>
       <div className={classes.paper}>
         {isLoading ? (
-          <CircularProgress size="75px" style={{ color: "black" }} />
+          <CircularProgress size="75px" style={{ color: "white" }} />
         ) : (
           <form className={classes.form} onSubmit={handleOnSubmit}>
             <Grid container spacing={2}>

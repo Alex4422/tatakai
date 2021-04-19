@@ -10,7 +10,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import "../styles.css";
 
 declare interface Props {
-  getUserNFTS: Function;
+  refreshUserNFTS: Function;
   cards: Array<any> | [];
   isLoading: boolean;
 }
@@ -30,12 +30,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 const MyCards = ({
   cards,
-  getUserNFTS,
+  refreshUserNFTS,
   isLoading,
 }: Props) => {
   const classes = useStyles();
+  
   useEffect(() => {
-    getUserNFTS();
+    refreshUserNFTS();
   }, []);
 
   return (

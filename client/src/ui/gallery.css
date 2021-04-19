@@ -1,14 +1,15 @@
 
 .itemCard {
-  height: 416px; 
-  width: 257px;
+  height: 277.3px; 
+  width: 171.3px;
   background-size: cover; 
   margin: 1rem;
-  transition-duration: 0.2s;
+  transition-duration: 0.4s;
+  transition-timing-function: ease-in-out;
 }
 
 .itemCard:hover {
-  transform: scale(1.1);
+  transform: scale(1.2);
   box-shadow: 0px 0px 19px 8px rgba(0,0,0,0.46);
   cursor: pointer;
 }

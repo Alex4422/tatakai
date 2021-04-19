@@ -1,9 +1,11 @@
 import { SWAP_ETH_TAK, IMPORT_TAK_METAMASK_WALLET, BUY_NFT, APPROVE_MARKETPLACE_TO_SELL } from "../actions/types";
 import {getInstanceCardItem, getInstanceMarketplace, getInstanceTakToken} from "./utils";
 import { getBalances } from "../actions/user";
+import { showAlert} from "../actions/dashboard";
 import { buyNFTSuccess, updateIsForSale } from "../actions/marketplace";
 import { toggleNewUser } from "../actions/dashboard";
 import {addTAKToken} from "./utils/TakToken";
+import {AlertType} from "./utils/enums";
 
 const adminMiddleware = () => ({ dispatch, getState }: any) =>  (
   next: any
@@ -25,7 +27,11 @@ const adminMiddleware = () => ({ dispatch, getState }: any) =>  (
           to: Marketplace.options.address, 
           value: value, 
           }, (error: any, result:any) => {
-            console.log("resultat de la transac:", result)
+            if(result){
+              dispatch(showAlert("Swap ETH > TAK ok!", AlertType.Success))
+            }else {
+              dispatch(showAlert("Oops problem to swap", AlertType.Error))
+            }
           })
     dispatch(getBalances())
     next(action)
@@ -38,20 +44,26 @@ const adminMiddleware = () => ({ dispatch, getState }: any) =>  (
     const isUpdated: any = await addTAKToken(provider)
       if(isUpdated) {
           dispatch(toggleNewUser())
+          dispatch(showAlert("Wallet updated !", AlertType.Success))
+      } else {
+        dispatch(showAlert("Oops problem to import TAk token to your wallet", AlertType.Error))
       }
     next(action)
     break;
   }
 
      /*******************************/
-  /* IMPORT TAK TOKEN TO METAMASK WALLET /
+  /* APPROVE MARKETPLACE TO SELL /
   /*******************************/
   case APPROVE_MARKETPLACE_TO_SELL: {
     const MarketplaceInstance = await getInstanceMarketplace(web3);
     const CardItemInstance = await getInstanceCardItem(web3);
     CardItemInstance.methods.setApprovalForAll(MarketplaceInstance._address, true)
       .send({from: accounts[0]})
-      .then((res: any) => console.log(res))
+      .then((res: any) => {
+        dispatch(showAlert("Your card is on the market !", AlertType.Success))
+      })
+      
     next(action)
     break;
   }
@@ -81,6 +93,7 @@ const adminMiddleware = () => ({ dispatch, getState }: any) =>  (
                 console.log("c'est ok, bon achat")
                 dispatch(updateIsForSale(id))
                 dispatch(buyNFTSuccess())
+                dispatch(showAlert("Well done, new NFT in your deck !", AlertType.Success))
             }
           })
         }

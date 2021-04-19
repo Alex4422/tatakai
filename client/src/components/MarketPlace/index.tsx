@@ -3,14 +3,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Gallery from "../../ui/Gallery";
-import CardsCarousel from "../../ui/CardsCarousel";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import "../styles.css";
 
 declare interface Props {
-  initMarket: Function;
+  refreshMarket: Function;
   items: Array<ICard> | [];
   isLoading: Boolean;
   buyNFT: Function;
@@ -29,11 +28,11 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: '40px'
     },
 }));
-const MarketPlace = ({ initMarket, items, isLoading }: Props) => {
+const MarketPlace = ({ refreshMarket, items, isLoading }: Props) => {
   const classes = useStyles();
   
   useEffect(() => {
-    initMarket();
+    refreshMarket();
   }, []);
 
   useEffect(() => {
@@ -49,7 +48,6 @@ const MarketPlace = ({ initMarket, items, isLoading }: Props) => {
           </Link>
           <Typography color="secondary">Marketplace</Typography>
         </Breadcrumbs>
-        {/* <CardsCarousel  /> */}
         {isLoading ? (
           <CircularProgress size="75px" style={{ color: "white" }} />
         ) : (

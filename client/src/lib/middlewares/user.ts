@@ -1,11 +1,9 @@
 import { GET_USER_NFTS, GET_TAK, SWAP_ETH_TAK, IMPORT_TAK_METAMASK_WALLET, GET_BALANCES } from "../actions/types";
 import {seedUserNFTS, seedBalances, getBalances} from "../actions/user";
-import {toggleNewUser} from "../actions/dashboard";
 import {API_URL} from "./utils/Constantes"
-import {addTAKToken} from "./utils/TakToken"
-
+import { showAlert} from "../actions/dashboard";
+import {AlertType} from "./utils/enums";
 import axios from 'axios';
-
 
 const user = () => ({ dispatch, getState }: any) => (
   next: any
@@ -30,7 +28,10 @@ const user = () => ({ dispatch, getState }: any) => (
             console.log("response Api", res.data.cards);
             dispatch(seedUserNFTS(res.data.cards));
           })
-          .catch(err => console.error(err))
+          .catch(err => { 
+            console.error(err)
+            dispatch(showAlert("Oops w've got a problem to load your data", AlertType.Error))
+          })
         next(action)
         break;
     }
@@ -51,8 +52,9 @@ const user = () => ({ dispatch, getState }: any) => (
        },
     }
       axios(config)
-        .then(res => console.log("response Api", res))
-        .catch(err => console.log('err', err))
+        .then(res => dispatch(showAlert("You received Tak token!", AlertType.Success)))
+        .catch(err => dispatch(showAlert("Oops w've got a problem on the tak transfer", AlertType.Error))
+        )
     next(action);
     break;
   }

@@ -1,38 +1,64 @@
-.App {
+.app {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.home {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin-left: -1rem;
+  background-image: url("../assets/combat.png");
+  mix-blend-mode: lighten;
+  background-size: cover;
+  background-position-y:  150%;
+  background-position-x:-40%;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.titre {
+  font-family: 'Gugi', cursive;
+  color: #FEFEFE;
+  font-Size: 4rem;
+  margin-top: 0;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.textbox {
+  position: relative;
+  left: 18%;
+  top: -5%;
+  color: #FEFEFE;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: flex-start;
+  font-size: 2rem;
+  
 }
 
-.App-link {
-  color: #61dafb;
+.textbox :nth-child(2){
+  margin-left: 4rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.catch {
+  margin: 1rem;
+}
+
+
+.textbox :nth-child(3){
+  margin-left: 8rem;
+}
+
+strong {
+  font-Size: 3.5rem;
+  font-weight: bold;
+  margin-right: 1rem;
+
+}
+
+.golden {
+  color: #FFD700;
+}
+.combat {
+  z-index: 3000;
+  width: 100%;
+  mix-blend-mode: screen;
+  position: fixed;
+  top: -10;
+  right: 0;
 }

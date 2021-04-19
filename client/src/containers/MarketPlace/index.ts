@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import MarketPlace from "../../components/MarketPlace";
-import { initMarket } from "../../lib/actions/marketplace";
+import { refreshMarket } from "../../lib/actions/marketplace";
 
 type IMapStateToPropsType = {
   marketplace: IMarketplaceState;
@@ -18,6 +18,6 @@ const mapStateToProps = ({
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-  initMarket: () => dispatch(initMarket()),
+  refreshMarket: () => dispatch(refreshMarket()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(MarketPlace);

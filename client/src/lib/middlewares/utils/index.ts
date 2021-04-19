@@ -1,5 +1,6 @@
 import getWeb3 from "./getWeb3";
-import { seedAuthMetamask } from "../../actions/user";
+import {initMarket} from "../../actions/marketplace"
+import { seedAuthMetamask, getUserNFTS } from "../../actions/user";
 import { seedContracts } from "../../actions/contracts";
 import detectEthereumProvider from '@metamask/detect-provider';
 import TakToken from "../../../contracts/TakToken.json";
@@ -28,6 +29,8 @@ const connectWeb3 = async (store: any) => {
     
     store.dispatch(seedAuthMetamask(web3, accounts, parseInt(balance,10), provider, parseInt(balanceTak, 10), isAdmin));
     store.dispatch(seedContracts(TakTokenContract, MarketplaceContract, CardItemContract))
+    store.dispatch(initMarket());
+    store.dispatch(getUserNFTS());
   } catch (error) {
     alert(
       `Failed to load web3, accounts, or contract. Check console for details.`
