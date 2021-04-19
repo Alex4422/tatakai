@@ -36,29 +36,6 @@ const MarketplaceMW = () => ({ dispatch, getState }: any) => (
       next(action)
       break;
     }
-
-    /*******************************/
-    /* MARKET INIT via API / GET NFTS MARKETPLACE /
-  /*******************************/
-  case (INIT_MARKET || REFRESH_MARKET): {
-    console.log("charge data marketplace")
-    const config: Object = {
-      method: "get",
-      url: `${API_URL}cards`,
-    };
-    axios(config)
-        .then(response => {
-          console.log("response Api", response);
-          if (response.status === 200) {
-            dispatch(seedMarket(response.data));
-          }
-        })
-        .catch(err => {
-          console.error(err)
-        })
-    next(action)
-    break;
-  }
     
      /*******************************/
     /*SELL NFT /
