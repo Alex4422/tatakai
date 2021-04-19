@@ -1,7 +1,7 @@
 import { GET_AUTH_METAMASK, SEED_AUTH_METAMASK, GET_USER_NFTS, 
   SEED_USER_NFTS, BUY_NFT, USER_BOUGHT_NFT, GET_TAK,
   IMPORT_TAK_METAMASK_WALLET, GET_BALANCES, SEED_BALANCES,
-  SWAP_ETH_TAK,
+  SWAP_ETH_TAK,REFRESH_USER_NFTS,
 } from "./types";
 
 export const getAuthMetamask = () => ({
@@ -16,6 +16,10 @@ export const seedAuthMetamask = (web3: any, accounts: any, balanceWei: number, p
 
 export const getUserNFTS = ()=> ({
   type: GET_USER_NFTS,
+})
+
+export const refreshUserNFTS = ()=> ({
+  type: REFRESH_USER_NFTS,
 })
 
 export const getBalances = () => ({

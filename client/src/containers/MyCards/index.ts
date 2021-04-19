@@ -1,30 +1,24 @@
 import { connect } from "react-redux";
 import MyCards from "../../components/MyCards";
-import { getUserNFTS } from "../../lib/actions/user";
-
-// dummy data pending api call available
-const items = [
-  { id: 1, title: "item #1" },
-  { id: 2, title: "item #2" },
-  { id: 3, title: "item #3" },
-  { id: 4, title: "item #4" },
-];
+import { refreshUserNFTS } from "../../lib/actions/user";
 
 type IMapStateToPropsType = {
   user: IUserState;
+  dashboard: IDashboardState;
 };
 
 const mapStateToProps = ({
-  user: { cards, isLoading },
+  user: { cards },
+  dashboard: {isLoading}
 }: IMapStateToPropsType) => {
   return {
-    cards: cards || items,
+    cards: cards || [],
     isLoading,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-  getUserNFTS: () => dispatch(getUserNFTS())
+  refreshUserNFTS: () => dispatch(refreshUserNFTS())
 })
  
 export default connect(mapStateToProps, mapDispatchToProps)(MyCards);

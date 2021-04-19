@@ -1,4 +1,4 @@
-import { INIT_MARKET, SELL_NFT, WITHDRAW_NFT_ON_SALE, UPDATE_IS_FOR_SALE } from "../actions/types";
+import { INIT_MARKET, SELL_NFT, WITHDRAW_NFT_ON_SALE, UPDATE_IS_FOR_SALE, REFRESH_MARKET } from "../actions/types";
 import { seedMarket, approveMarketplaceToSell} from "../actions/marketplace";
 import {API_URL} from "./utils/Constantes";
 import axios from "axios";
@@ -16,7 +16,9 @@ const MarketplaceMW = () => ({ dispatch, getState }: any) => (
     /*******************************/
     /* MARKET INIT via API / GET NFTS MARKETPLACE /
   /*******************************/
-    case INIT_MARKET: {
+    case REFRESH_MARKET:
+    case INIT_MARKET : {
+      console.log("charge data marketplace")
       const config: Object = {
         method: "get",
         url: `${API_URL}cards`,
@@ -35,6 +37,29 @@ const MarketplaceMW = () => ({ dispatch, getState }: any) => (
       break;
     }
 
+    /*******************************/
+    /* MARKET INIT via API / GET NFTS MARKETPLACE /
+  /*******************************/
+  case (INIT_MARKET || REFRESH_MARKET): {
+    console.log("charge data marketplace")
+    const config: Object = {
+      method: "get",
+      url: `${API_URL}cards`,
+    };
+    axios(config)
+        .then(response => {
+          console.log("response Api", response);
+          if (response.status === 200) {
+            dispatch(seedMarket(response.data));
+          }
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    next(action)
+    break;
+  }
+    
      /*******************************/
     /*SELL NFT /
   /*******************************/
