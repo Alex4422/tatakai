@@ -43,6 +43,7 @@ class CardService extends Service {
             });
             
             const accounts = await this.web3.eth.getAccounts();
+            console.log("accounts", accounts[0])
             const item = await this.CardItemContract.mintNFT(nft_json.data.IpfsHash, {from: accounts[0]});
             const nft_minted = await this.CardItemContract.tokenInfoMap(item.receipt.logs[0].args.tokenId);
             

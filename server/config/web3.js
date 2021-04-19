@@ -1,11 +1,14 @@
 require('dotenv').config();
+const HDWalletProvider = require("@truffle/hdwallet-provider");
+const endpoint = `https://ropsten.infura.io/${process.env.INFURA_API_KEY}`
+
 const Web3 = require('web3');
 const contract = require('truffle-contract');
 const CardItemJson = require('../../client/src/contracts/CardItem.json');
 const FaucetJson = require('../../client/src/contracts/Faucet.json');
 const TakTokenJson = require('../../client/src/contracts/TakToken.json');
 const MarketplaceJson = require('../../client/src/contracts/Marketplace.json');
-const web3 = new Web3(new Web3.providers.HttpProvider( process.env.WEB3_PROVIDER ));
+const web3 = new Web3(new HDWalletProvider( process.env.MNEMONIC, `https://rpc-mumbai.matic.today`));
 
 const CardItemContract = contract(CardItemJson);
 const FaucetContract = contract(FaucetJson);

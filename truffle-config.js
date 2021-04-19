@@ -33,7 +33,7 @@ module.exports = {
         new HDWalletProvider(process.env.MNEMONIC, endpoints.ropsten),
       network_id: 3,
       gas: 5500000,
-      confirmations: 2,
+      confirmations: 0,
       timeoutBlocks: 200,
     },
 
@@ -60,7 +60,7 @@ module.exports = {
           `https://rpc-mumbai.matic.today`
         ),
       network_id: 80001,
-      confirmations: 2,
+      confirmations: 1,
       timeoutBlocks: 200,
       skipDryRun: true,
     },
