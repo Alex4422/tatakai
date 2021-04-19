@@ -1,5 +1,5 @@
-import { GET_USER_NFTS, GET_TAK, SWAP_ETH_TAK, IMPORT_TAK_METAMASK_WALLET, GET_BALANCES } from "../actions/types";
-import {seedUserNFTS, seedBalances, getBalances} from "../actions/user";
+import { GET_USER_NFTS, GET_TAK, GET_BALANCES, REFRESH_USER_NFTS } from "../actions/types";
+import {seedUserNFTS, seedBalances} from "../actions/user";
 import {API_URL} from "./utils/Constantes"
 import { showAlert} from "../actions/dashboard";
 import {AlertType} from "./utils/enums";
@@ -17,7 +17,7 @@ const user = () => ({ dispatch, getState }: any) => (
     /*******************************/
   /* GET USER NFTS /
   /*******************************/
-
+    case REFRESH_USER_NFTS:
     case GET_USER_NFTS: { 
         const config: Object = {
           method: 'get',

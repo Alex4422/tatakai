@@ -33,12 +33,14 @@ const log = () => ({ dispatch, getState }: any) => (
       
       /* CARD USER is sold */
       MarketplaceInstance.events.BuyTransaction().on("data", (error: any, event: any) => {
+        console.log("event:", event)
         if (error) {
           throw error;
         }
-        if (event.returnValues.oldOwner === accounts[0]){
+        
+        /* if (event.returnValues.oldOwner === accounts[0]){
           dispatch(showAlert(`${event.returnValues.newOwner} a acheté votre carte pour ${event.returnValues.price} TAK`,AlertType.Info))
-        }
+        } */
       });
       
       } catch (error) {
