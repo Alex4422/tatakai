@@ -2,35 +2,43 @@
 pragma solidity 0.8.3;
 
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import '@openzeppelin/contracts/access/Ownable.sol';
 
-contract Faucet {
-    uint256 constant public tokenAmount = 10000;
+contract Faucet is Ownable {
     uint256 constant public waitTime = 30 minutes;
 
     IERC20 public tokenInstance;
+    address public marketplace;
     
     mapping(address => uint256) lastAccessTime;
 
     event Withdrawal(address indexed to);
 
-    constructor(address _tokenInstance) public {
+    constructor(address _tokenInstance, address _marketplace) public {
         require(_tokenInstance != address(0));
+        require(_marketplace != address(0));
         tokenInstance = IERC20(_tokenInstance);
+        marketplace = _marketplace;
+    }
+    
+    modifier onlyMarketplace() {
+        require(msg.sender == marketplace, "Caller should be Marketplace");
+        _;
     }
 
-    function requestTokens() public {
-        // require(allowedToWithdraw(msg.sender), "You have to wait 30 minutes!");
+    function requestTokens(uint256 tokenAmount) public onlyOwner onlyMarketplace {
+        require(allowedToWithdraw(msg.sender), "You have to wait 30 minutes!");
         tokenInstance.transfer(msg.sender, tokenAmount);
-        // lastAccessTime[msg.sender] = block.timestamp + waitTime;
+        lastAccessTime[msg.sender] = block.timestamp + waitTime;
         emit Withdrawal(msg.sender);
     }
 
-    // function allowedToWithdraw(address _address) public view returns (bool) {
-    //     if(lastAccessTime[_address] == 0) {
-    //         return true;
-    //     } else if(block.timestamp >= lastAccessTime[_address]) {
-    //         return true;
-    //     }
-    //     return false;
-    // }
+    function allowedToWithdraw(address _address) internal view returns (bool) {
+        if(lastAccessTime[_address] == 0) {
+            return true;
+        } else if(block.timestamp >= lastAccessTime[_address]) {
+            return true;
+        }
+        return false;
+    }
 }
