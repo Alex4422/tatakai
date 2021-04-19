@@ -156,7 +156,7 @@ const Profile = ({ accounts, cards, isAdmin, balanceTAK, balanceWei,isLoading, g
       </Button>
 
       {isNew 
-      ?<Button variant="contained"  onClick={() => importTAKMetamaskWallet()} style={{display: "block", margin: "1rem auto"}}>
+      ?<Button variant="contained"  onClick={() => importTAKMetamaskWallet()}>
         Import Tak !
       </Button>
       : null
