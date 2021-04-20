@@ -1,5 +1,6 @@
 const uploadFile = require("../middleware/UploadMiddleware");
 const CardService = require("../services/CardService");
+const OrderService = require("../services/OrderService");
 
 exports.create = async (req, res) => {
       try {
@@ -42,10 +43,11 @@ exports.findOne = async (req, res) => {
       try {
         const id = req.params.id;
         const card = await (await CardService).getById(id);
+        const historical = await (await OrderService).getCardOrder(id);
         if(!card){
             res.status(404).json({error: "No exists!"})
         }
-        res.json(card);
+        res.json({card, historical});
       } catch (error) {
           res.status(500).json({error: error})
       }

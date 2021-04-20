@@ -105,6 +105,18 @@ class OrderService extends Service {
             return error;
         }
     }
+    
+    async getCardOrder(id) {
+        try {
+            const events = await this.MarketplaceContract.events.BuyTransaction({
+                fromBlock: 0
+            })
+            
+            return events;
+        } catch (error) {
+            return error;
+        }
+    }
 }
 
 module.exports = (async () => {
