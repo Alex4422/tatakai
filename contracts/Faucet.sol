@@ -26,7 +26,7 @@ contract Faucet is Ownable {
         _;
     }
 
-    function requestTokens(uint256 tokenAmount) public onlyOwner onlyMarketplace {
+    function requestTokens(uint256 tokenAmount) public onlyOwner {
         require(allowedToWithdraw(msg.sender), "You have to wait 30 minutes!");
         tokenInstance.transfer(msg.sender, tokenAmount);
         lastAccessTime[msg.sender] = block.timestamp + waitTime;
