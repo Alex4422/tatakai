@@ -96,5 +96,7 @@ interface ICard {
 
 interface IDashboardState {
   isLoading: boolean;
+  isVisible: boolean;
+  message: string;
 }
 

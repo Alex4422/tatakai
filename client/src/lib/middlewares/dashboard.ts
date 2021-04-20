@@ -1,5 +1,7 @@
-import { GET_USER_STORAGE, TOGGLE_TO_WISHLIST  } from "../actions/types";
-import { seedUserStorage, initNewUser } from "../actions/dashboard";
+import { GET_USER_STORAGE, TOGGLE_TO_WISHLIST, GET_HISTORY  } from "../actions/types";
+import { seedUserStorage, initNewUser, seedHistory } from "../actions/dashboard";
+import {API_URL} from "./utils/Constantes"
+import axios from "axios";
 
 const dashboard = () => ({ dispatch, getState }: any) => (
   next: any
@@ -39,6 +41,28 @@ const dashboard = () => ({ dispatch, getState }: any) => (
     dispatch(seedUserStorage(wishlist));
     return next(action);
   }
+
+      /*******************************/
+  /* GET HISTORY /
+  /*******************************/
+
+  case GET_HISTORY: { 
+    console.log("get history")
+    const id = action.payload
+    console.log(id)
+    const config: Object = {
+     method: 'get',
+     url: `${API_URL}cards/${id}`,
+   }
+     axios(config)
+       .then((res: any) => {
+         console.log("history", res)
+         dispatch(seedHistory(res.data.historical))
+       })
+       .catch((err: any) => console.log(err))
+   next(action);
+   break;
+ }
     default:
       return next(action);
   }

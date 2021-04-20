@@ -1,6 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
+import {useEffect, useState} from "react";
 import { useModal } from "../hooks/useModal";
 import { buyNFT, withdrawNFTonSale} from "../lib/actions/marketplace";
+
 import {toggleToWishlist} from "../lib/actions/dashboard"
 import Modal from "@material-ui/core/Modal";
 import IconButton from '@material-ui/core/IconButton';
@@ -15,7 +17,10 @@ const Template = ({ item }: TemplateProps) => {
   const dispatch = useDispatch();
   const { accounts, wishlist } = useSelector((state: any) => state.user);
   const {Marketplace} = useSelector((state: any) => state.contract);
+  const {history} = useSelector((state: any) => state.dashboard);
   const marketplaceAddress = Marketplace.options.address;
+  const hasHistory = Object.keys(history).length === 0;
+  const [showHistory, setShowHistory] = useState(false);
 
   const { handleClose } = useModal();
 
@@ -25,6 +30,10 @@ const Template = ({ item }: TemplateProps) => {
     dispatch(buyNFT(item.id, item.metadata.price));
     handleClose();
   };
+
+  const handleShowHistory = () => {
+    setShowHistory(!showHistory)
+  }
 
   const handleOnClickWithdraw = () => {
     dispatch(withdrawNFTonSale(item.id));
@@ -67,7 +76,16 @@ const Template = ({ item }: TemplateProps) => {
           <p>Age : {item?.metadata?.age}</p>
           <p>Nationality : {item?.metadata?.nationality}</p>
           <p>Price : {item?.metadata?.price} </p>
-
+          {hasHistory 
+          ?<button
+            onClick={handleShowHistory}
+            type="button"
+            color="primary"
+          >
+            View History
+          </button>
+          : "No history"
+          }
         </div>
 
         <div className="card-actions">

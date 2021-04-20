@@ -9,7 +9,7 @@ import {
   WITHDRAW_NFT_ON_SALE,
   UPDATE_IS_FOR_SALE,
   APPROVE_MARKETPLACE_TO_SELL,
-  REFRESH_MARKET
+  REFRESH_MARKET,
 } from "./types";
 
 export const initMarket = () => ({

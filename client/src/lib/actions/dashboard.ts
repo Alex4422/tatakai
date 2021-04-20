@@ -9,6 +9,7 @@ import {
   SHOW_ALERT,
   HIDE_ALERT,
   GET_HISTORY,
+  SEED_HISTORY,
 } from "./types";
 import {AlertType} from "../middlewares/utils/Constantes"
 
@@ -55,4 +56,9 @@ export const hideAlert = () => ({
 export const getHistory = (id: any) => ({
   type: GET_HISTORY,
   payload: id,
+})
+
+export const seedHistory = (data: any) => ({
+  type: SEED_HISTORY,
+  payload: {data},
 })

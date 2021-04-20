@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { selectCurrent } from "../lib/actions/marketplace";
+import { getHistory } from "../lib/actions/dashboard";
 import { useModal } from "../hooks/useModal";
 interface Props {
   item: ICard;
@@ -11,6 +12,7 @@ const Card = ({ item }: Props) => {
   const handleOnClick = () => {
     handleOpen();
     dispatch(selectCurrent(item));
+    dispatch(getHistory(item.id));
   };
   return (
     <div
