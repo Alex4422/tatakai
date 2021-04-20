@@ -8,7 +8,7 @@ import {
   HIDE_ALERT,
   SEED_USER_NFTS
 } from "../actions/types";
-import {AlertType} from "../middlewares/utils/enums"
+import {AlertType} from "../middlewares/utils/Constantes"
 
 export const initialState = {
   isLoading: false,

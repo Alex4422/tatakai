@@ -1,9 +1,8 @@
-import { ADMIN_FORM_SUBMIT } from "../actions/types";
+import { ADMIN_FORM_SUBMIT, GET_TAK } from "../actions/types";
 import { mintNFTSuccess } from "../actions/admin";
 import { refreshMarket} from "../actions/marketplace";
 import { showAlert } from "../actions/dashboard";
-import {AlertType} from "../middlewares/utils/enums"
-import {API_URL} from "./utils/Constantes"
+import {API_URL, AlertType} from "./utils/Constantes"
 import axios from "axios";
 
 const adminMiddleware = () => ({ dispatch, getState }: any) => (
@@ -11,6 +10,7 @@ const adminMiddleware = () => ({ dispatch, getState }: any) => (
 ) => (action: IAction) => {
   const {
     admin: { nft },
+    user: {accounts}
   } = getState();
 
   switch (action.type) {
@@ -50,6 +50,27 @@ const adminMiddleware = () => ({ dispatch, getState }: any) => (
           })
       next(action)
       break;
+          
+     /*******************************/
+  /* GET TAK /
+  /*******************************/
+
+  case GET_TAK: { 
+    const config: Object = {
+     method: 'post',
+     url: `${API_URL}faucet/`,
+     data: {
+       address: accounts[0],
+       amount: 10000
+      },
+   }
+     axios(config)
+       .then(res => dispatch(showAlert("You received Tak token!", AlertType.Success)))
+       .catch(err => dispatch(showAlert("Oops w've got a problem on the tak transfer", AlertType.Error))
+       )
+   next(action);
+   break;
+ }
 
     default:
       return next(action);

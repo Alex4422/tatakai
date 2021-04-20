@@ -3,6 +3,7 @@ import {
   ADMIN_FORM_SUBMIT,
   MINT_NFT_SUCCESS,
   ADMIN_FORM_HANDLECHANGE_FILE,
+  GET_TAK,
 } from "./types";
 
 export const changeField = ({ target: { name, value } }: IEventType) => ({
@@ -23,3 +24,7 @@ export const submitValue = (data:any) => ({
 export const mintNFTSuccess = () => ({
   type: MINT_NFT_SUCCESS,
 });
+
+export const getTAK = () => ({
+  type: GET_TAK,
+})

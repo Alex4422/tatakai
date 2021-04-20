@@ -1,9 +1,8 @@
 import { INIT_MARKET, SELL_NFT, WITHDRAW_NFT_ON_SALE, UPDATE_IS_FOR_SALE, REFRESH_MARKET } from "../actions/types";
 import { seedMarket, approveMarketplaceToSell} from "../actions/marketplace";
-import {API_URL} from "./utils/Constantes";
+import {API_URL, AlertType} from "./utils/Constantes";
 import axios from "axios";
 import { showAlert} from "../actions/dashboard";
-import {AlertType} from "./utils/enums";
 
 const MarketplaceMW = () => ({ dispatch, getState }: any) => (
   next: any

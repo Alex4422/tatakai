@@ -4,8 +4,7 @@ import { getBalances, refreshUserNFTS } from "../actions/user";
 import { showAlert} from "../actions/dashboard";
 import { buyNFTSuccess, updateIsForSale } from "../actions/marketplace";
 import { toggleNewUser } from "../actions/dashboard";
-import {AlertType} from "./utils/enums";
-import { TOKEN } from "./utils/Constantes"
+import { TOKEN, AlertType } from "./utils/Constantes"
 
 const adminMiddleware = () => ({ dispatch, getState }: any) =>  (
   next: any
@@ -69,6 +68,7 @@ const adminMiddleware = () => ({ dispatch, getState }: any) =>  (
   /* APPROVE MARKETPLACE TO SELL /
   /*******************************/
   case APPROVE_MARKETPLACE_TO_SELL: {
+    
     const MarketplaceInstance = await getInstanceMarketplace(web3);
     const CardItemInstance = await getInstanceCardItem(web3);
     CardItemInstance.methods.setApprovalForAll(MarketplaceInstance._address, true)

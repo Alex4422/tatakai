@@ -14,6 +14,8 @@ interface TemplateProps {
 const Template = ({ item }: TemplateProps) => {
   const dispatch = useDispatch();
   const { accounts, wishlist } = useSelector((state: any) => state.user);
+  const {Marketplace} = useSelector((state: any) => state.contract);
+  const marketplaceAddress = Marketplace.options.address;
 
   const { handleClose } = useModal();
 
@@ -56,7 +58,11 @@ const Template = ({ item }: TemplateProps) => {
         : null
         }
         <div className="card-desc">
-          <p> Owner : {item?.owner}</p>
+          <p> Owner : {item?.owner == accounts[0]
+          ? "You"
+          : item?.owner == marketplaceAddress
+          ? "Tatakai"
+          : item?.owner}</p>
           <p>Type : {item?.metadata?.type}</p>
           <p>Age : {item?.metadata?.age}</p>
           <p>Nationality : {item?.metadata?.nationality}</p>

@@ -10,7 +10,7 @@ import {
   HIDE_ALERT,
   GET_HISTORY,
 } from "./types";
-import {AlertType} from "../middlewares/utils/enums"
+import {AlertType} from "../middlewares/utils/Constantes"
 
 
 export const getUserStorage = () => ({

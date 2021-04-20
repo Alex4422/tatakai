@@ -1,6 +1,8 @@
 import { connect } from "react-redux";
 import Profile from "../../components/Profile";
-import { getTAK, importTAKMetamaskWallet, getBalances, swapEthTak } from "../../lib/actions/user";
+import { importTAKMetamaskWallet, getBalances, swapEthTak } from "../../lib/actions/user";
+import { getTAK } from "../../lib/actions/admin";
+
 type IMapStateToPropsType = {
   user: IUserState;
 };
@@ -19,7 +21,7 @@ const mapStateToProps = ({
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-  getTAK : () => dispatch(getTAK()),
+  getTAK: () => dispatch(getTAK()),
   importTAKMetamaskWallet: () => dispatch(importTAKMetamaskWallet()),
   getBalances: () => dispatch(getBalances()),
   swapEthTak: (value: number) => dispatch(swapEthTak(value)),

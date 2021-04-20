@@ -29,10 +29,10 @@ declare interface Props {
   balanceTAK: any | null,
   balanceWei: any | null,
   isLoading: boolean,
-  getTAK: Function,
   importTAKMetamaskWallet: Function,
   getBalances: Function,
   swapEthTak: Function,
+  getTAK: Function,
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Profile = ({ accounts, cards, isAdmin, balanceTAK, balanceWei,isLoading, getTAK, importTAKMetamaskWallet, getBalances, isNew, swapEthTak }: Props) => {
+const Profile = ({ accounts, cards, isAdmin, balanceTAK, balanceWei,isLoading,getTAK, importTAKMetamaskWallet, getBalances, isNew, swapEthTak }: Props) => {
   const classes = useStyles();
   const { handleOpen } = useModal();
   
