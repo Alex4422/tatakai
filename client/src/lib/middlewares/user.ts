@@ -1,8 +1,7 @@
 import { GET_USER_NFTS, GET_TAK, GET_BALANCES, REFRESH_USER_NFTS } from "../actions/types";
 import {seedUserNFTS, seedBalances} from "../actions/user";
-import {API_URL} from "./utils/Constantes"
+import {API_URL, AlertType} from "./utils/Constantes"
 import { showAlert} from "../actions/dashboard";
-import {AlertType} from "./utils/enums";
 import axios from 'axios';
 
 const user = () => ({ dispatch, getState }: any) => (

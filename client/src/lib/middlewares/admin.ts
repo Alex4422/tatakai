@@ -2,8 +2,7 @@ import { ADMIN_FORM_SUBMIT } from "../actions/types";
 import { mintNFTSuccess } from "../actions/admin";
 import { refreshMarket} from "../actions/marketplace";
 import { showAlert } from "../actions/dashboard";
-import {AlertType} from "../middlewares/utils/enums"
-import {API_URL} from "./utils/Constantes"
+import {API_URL, AlertType} from "./utils/Constantes"
 import axios from "axios";
 
 const adminMiddleware = () => ({ dispatch, getState }: any) => (

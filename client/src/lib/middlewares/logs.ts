@@ -2,14 +2,7 @@ import { SUBSCRIBE_EVENTS } from "../actions/types";
 import {showAlert} from "../actions/dashboard";
 import Web3 from "web3";
 import {getInstanceMarketplace, getInstanceTakToken, getInstanceCardItem} from "./utils";
-
-enum AlertType {
-  Error = "error",
-  Warning = "warning",
-  Info = "info",
-  Success = "success",
-}
-
+import{AlertType} from "./utils/Constantes"
 
 const log = () => ({ dispatch, getState }: any) => (
   next: any
@@ -24,63 +17,47 @@ const log = () => ({ dispatch, getState }: any) => (
     /* SUBSCRIBE_EVENTS
   /********************************/
     case SUBSCRIBE_EVENTS: {
-      const provider = new Web3.providers.WebsocketProvider("ws://127.0.0.1:7545");
-      const web3ws = new Web3(provider);
+      console.log("coucou de subscribe events");
+      const provider = new Web3.providers.WebsocketProvider("wss://rpc-mumbai.maticvigil.com/ws/v1/c8de64ac9d1e2a12657516cfb14e8f1572c7d356");
+      const web3ws = new Web3(provider); 
       try {
       const MarketplaceInstance = await getInstanceMarketplace(web3ws);
       const TakTokenInstance = await getInstanceTakToken(web3ws);
       const CardItemInstance = await getInstanceCardItem(web3ws)
-      
-      /* CARD USER is sold */
-      MarketplaceInstance.events.BuyTransaction().on("data", (error: any, event: any) => {
-        console.log("event:", event)
-        if (error) {
-          throw error;
-        }
 
-      
-        
-        /* if (event.returnValues.oldOwner === accounts[0]){
-          dispatch(showAlert(`${event.returnValues.newOwner} a acheté votre carte pour ${event.returnValues.price} TAK`,AlertType.Info))
-        } */
-      });
-      
-      } catch (error) {
+      /* CARD USER is sold */
+       MarketplaceInstance.events.BuyTransaction({
+        fromBlock: 0
+          }, function(error: any, event: any){ console.log(event); })
+
+          .on('data', function(event: any){
+              console.log(event); // same results as the optional callback above
+          })
+          .on('changed', function(event: any){
+              // remove event from local database
+          })
+          .on('error', function(error: any, receipt: any) { // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
+              console.log("erreur dans la buuying", error, receipt)
+          });
+
+       //trying get Historical
+       let CardItemInstancehistory: any = await CardItemInstance.getPastEvents('ItemCreated',{
+        fromBlock: 0,
+        toBlock: 'latest'
+      })
+      console.log("history mint", CardItemInstancehistory)
+
+      let transferCard: any = await MarketplaceInstance.getPastEvents('BuyTransaction',{
+        fromBlock: 0,
+        toBlock: 'latest'
+      })
+      console.log("history buying", transferCard)
+
+     } catch (error) {
         console.error(error);
       }
       break;
     }
-
-    /*******************************/
-    /* GET Historical buy
-  /********************************/
-  case SUBSCRIBE_EVENTS: {
-    const provider = new Web3.providers.WebsocketProvider("ws://127.0.0.1:7545");
-    const web3ws = new Web3(provider);
-    try {
-    const MarketplaceInstance = await getInstanceMarketplace(web3ws);
-    const TakTokenInstance = await getInstanceTakToken(web3ws);
-    const CardItemInstance = await getInstanceCardItem(web3ws)
-    
-    /* CARD USER is sold */
-    MarketplaceInstance.events.BuyTransaction().on("data", (error: any, event: any) => {
-      console.log("event:", event)
-      if (error) {
-        throw error;
-      }
-
-    
-      
-      /* if (event.returnValues.oldOwner === accounts[0]){
-        dispatch(showAlert(`${event.returnValues.newOwner} a acheté votre carte pour ${event.returnValues.price} TAK`,AlertType.Info))
-      } */
-    });
-    
-    } catch (error) {
-      console.error(error);
-    }
-    break;
-  }
   
     default:
       return next(action);
