@@ -6,7 +6,7 @@ const endpoints = {
   mainnet: `https://mainnet.infura.io/${INFURA_API_KEY}`,
   ropsten: `https://ropsten.infura.io/${INFURA_API_KEY}`,
   kovan: `https://kovan.infura.io/${INFURA_API_KEY}`,
-  kovan: `https://rinkby.infura.io/${INFURA_API_KEY}`,
+  rinkby: `https://rinkby.infura.io/${INFURA_API_KEY}`,
 };
 
 module.exports = {
@@ -17,7 +17,7 @@ module.exports = {
     //develop on Ganache check your config
     develop: {
       host: "127.0.0.1",
-      port: 7545,
+      port: 8545,
       network_id: "*",
     },
     mainnet: {
@@ -57,13 +57,13 @@ module.exports = {
       provider: () =>
         new HDWalletProvider(
           process.env.MNEMONIC,
-          `https://rpc-mumbai.matic.today`
+          `https://matic-mumbai.chainstacklabs.com`
         ),
       network_id: 80001,
       confirmations: 1,
       timeoutBlocks: 200,
       skipDryRun: true,
-    },
+    }
   },
   compilers: {
     solc: {
