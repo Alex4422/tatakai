@@ -13,6 +13,7 @@ contract Marketplace is ERC721Holder, Ownable {
     IERC20 private acceptedToken;
     
     event BuyTransaction(
+        uint assetId,
         address oldOwner,
         address newOwner,
         uint price
@@ -50,7 +51,7 @@ contract Marketplace is ERC721Holder, Ownable {
             _assetId
         );
 
-        emit BuyTransaction(nftOwner, msg.sender, _priceInWei);
+        emit BuyTransaction(_assetId, nftOwner, msg.sender, _priceInWei);
     }
     
 }
