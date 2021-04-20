@@ -46,17 +46,21 @@ describe('Faucet', function () {
             expect(BigInt(afterUserBalance)).to.eql(BigInt(beforeUserBalance - amount));
         })
         
-        
-        // vérifier pour le owner
-        // it('should give user tak token', async function () {
-        //     const requestTokenAmount = 10000;
-        //     const beforeUserBalance2 = await this.erc20token.balanceOf(someOne);
-        //     const receipt = await this.faucet.requestTokens(10000, {from: someOne});
-        //     const afterUserBalance2 = await this.erc20token.balanceOf(someOne);
-        //     expect(BigInt(afterUserBalance2)).to.eql(BigInt(beforeUserBalance2 + requestTokenAmount));
-        //     expectEvent(receipt, "Withdrawal", { to: someOne });
+        // it('should give owner tak token', async function () {
+        //     const requestTokenAmount = 1000;
+        //     const beforeUserBalance2 = await this.erc20token.balanceOf(owner);
+        //     // console.log(beforeUserBalance2)
+        //     const receipt = await this.faucet.requestTokens(requestTokenAmount, {from: owner});
+        //     const afterUserBalance2 = await this.erc20token.balanceOf(owner);
+        //     // expect(new BN(afterUserBalance2)).to.eql(new BN(beforeUserBalance2 + requestTokenAmount));
+        //     expectEvent(receipt, "Withdrawal", { to: owner });
         // })
-
+        
+        it('should revert if user request tak token', async function () {
+            const requestTokenAmount = 10000;
+            expectRevert(this.faucet.requestTokens(requestTokenAmount, {from: someOne}), "caller is not the owner");
+        })
+    
         it('should revert if user not waited', async function() {
             expectRevert(this.faucet.requestTokens(10000, {from: someOne}), "You have to wait 30 minutes!");
         });
