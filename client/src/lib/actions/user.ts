@@ -1,5 +1,5 @@
 import { GET_AUTH_METAMASK, SEED_AUTH_METAMASK, GET_USER_NFTS, 
-  SEED_USER_NFTS, BUY_NFT, USER_BOUGHT_NFT, GET_TAK,
+  SEED_USER_NFTS, BUY_NFT, USER_BOUGHT_NFT,
   IMPORT_TAK_METAMASK_WALLET, GET_BALANCES, SEED_BALANCES,
   SWAP_ETH_TAK,REFRESH_USER_NFTS,
 } from "./types";
@@ -41,9 +41,6 @@ export const importTAKMetamaskWallet = () => ({
   type: IMPORT_TAK_METAMASK_WALLET,
 })
 
-export const getTAK = () => ({
-  type: GET_TAK
-})
 
 export const buyNFT = (id: any)  => ({
   type: BUY_NFT,
