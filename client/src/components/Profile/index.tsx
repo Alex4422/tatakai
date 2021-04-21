@@ -50,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: '40px'
   },
   listItemText: {
+    color:'#ABABAB',
     '& p': {
       color: '#fff'
     }
@@ -102,7 +103,7 @@ const Profile = ({ accounts, cards, isAdmin, balanceTAK, balanceWei,isLoading,ge
                 <ImageIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText className={classes.listItemText} primary="NFTS" secondary={cards!.length >= 1 ? `Nombre de NFTS : ${cards!.length}`  : "Pas de NFTS dans votre protefeuille !"} />
+            <ListItemText className={classes.listItemText} primary="NFTS" secondary={cards!.length >= 1 ? `Nombre de NFTS : ${cards!.length}`  : "None NFTS in your wallet"} />
           </ListItem>
           <Divider variant="inset" component="li" />
           

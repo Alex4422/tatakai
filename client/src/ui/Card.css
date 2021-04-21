@@ -7,6 +7,7 @@
 }
 
 .card {
+  position: relative;
   display: inline-block;
   width: 30%;
   min-width: 400px;
@@ -27,9 +28,10 @@
   font-size: 2em;
 }
 .card-favorite {
-  margin-top: -2.5em;
-  padding-bottom: 0.5em;
-  padding-left: 11.5em;
+  position: absolute;
+  z-index: 2500;
+  left:80%;
+  top: 25%;
   color: yellow;
   font-size: 2em;
 }
