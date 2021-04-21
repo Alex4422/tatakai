@@ -3,11 +3,10 @@ const OrderService = require("../services/OrderService");
 exports.buy = async (req, res) => {
       try {
           const id = req.body.id;
-          // const buyer = req.body.address;
           const order = await (await OrderService).createBuyOrder(id); 
           res.json(order);
       } catch (error) {
-          res.status(500).json({error: error})
+          res.status(500).json({error})
       }
 };
 
@@ -18,7 +17,7 @@ exports.sell = async (req, res) => {
         const order = await (await OrderService).createSellOrder(id, price); 
         res.json(order);
     } catch (error) {
-        res.status(500).json({error: error})
+        res.status(500).json({error})
     }
 };
 
@@ -28,6 +27,6 @@ exports.remove = async (req, res) => {
           const order = await (await OrderService).removeOrder(id); 
           res.json(order);
       } catch (error) {
-          res.status(500).json({error: error})
+          res.status(500).json({error})
       }
 };

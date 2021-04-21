@@ -7,4 +7,4 @@ module.exports = app => {
     router.post("/remove", OrderController.remove);
   
     app.use('/api/order', router);
-  };
+};

@@ -19,10 +19,8 @@ exports.create = async (req, res) => {
         };
         const card = await (await CardService).mint(req.file, data)
         res.json(card);
-      } catch (err) {
-        res.status(500).send({
-          error: err,
-        });
+      } catch (error) {
+        res.status(500).send({error});
       }
 };
 
@@ -35,7 +33,7 @@ exports.findAll = async (req, res) => {
         }
         res.json(cards);
       } catch (error) {
-          res.status(500).json({error: error})
+          res.status(500).json({error})
       }
 };
 
@@ -43,12 +41,11 @@ exports.findOne = async (req, res) => {
       try {
         const id = req.params.id;
         const card = await (await CardService).getById(id);
-        const historical = await (await OrderService).getCardOrder(id);
         if(!card){
             res.status(404).json({error: "No exists!"})
         }
-        res.json({card, historical});
+        res.json({card});
       } catch (error) {
-          res.status(500).json({error: error})
+          res.status(500).json({error})
       }
 };
