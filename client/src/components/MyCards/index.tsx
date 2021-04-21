@@ -49,7 +49,7 @@ const MyCards = ({
           <Typography color="secondary">My Cards</Typography>
         </Breadcrumbs>
         {isLoading 
-        ? <CircularProgress size="75px" style={{ color: "white" }} />
+        ? <CircularProgress size="75px" style={{ color: "white", marginLeft: "45%" }} />
         : <MyCardsGallery items={cards} />
         }
       </div>

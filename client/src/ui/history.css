@@ -1,0 +1,34 @@
+.modalHistory{
+  position: absolute;
+  width: 40%;
+  background-color:rgba(180,180,180,0.98);
+  border-radius: 0.1rem;
+  z-index: 3000;
+  left: 40%;
+  top: 50%;
+  animation: coming 1s 1;
+  animation-timing-function: cubic-bezier(.3,.95,.75,1.03);
+  animation-fill-mode: both;
+}
+
+
+
+.historyPoint{
+  color: black;
+  padding: 0.5rem;
+
+}
+
+@keyframes coming {
+  0% {
+    left:0%;
+    opacity: 0.1;
+    filter: blur(5px);
+  }
+  100% {
+    left: 40%;
+    opacity: 1;
+    filter: blur(0);
+
+  }
+}

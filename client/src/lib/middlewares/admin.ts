@@ -61,7 +61,7 @@ const adminMiddleware = () => ({ dispatch, getState }: any) => (
      url: `${API_URL}faucet/`,
      data: {
        address: accounts[0],
-       amount: 10000
+       amount: "10000"
       },
    }
      axios(config)

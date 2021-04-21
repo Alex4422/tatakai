@@ -2,11 +2,11 @@ import { useSelector, useDispatch } from "react-redux";
 import {useEffect, useState} from "react";
 import { useModal } from "../hooks/useModal";
 import { buyNFT, withdrawNFTonSale} from "../lib/actions/marketplace";
-
 import {toggleToWishlist} from "../lib/actions/dashboard"
 import Modal from "@material-ui/core/Modal";
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import History from "./history";
 
 import "./Card.css";
 
@@ -19,9 +19,10 @@ const Template = ({ item }: TemplateProps) => {
   const {Marketplace} = useSelector((state: any) => state.contract);
   const {history} = useSelector((state: any) => state.dashboard);
   const marketplaceAddress = Marketplace.options.address;
+  //modif le equal
   const hasHistory = Object.keys(history).length === 0;
   const [showHistory, setShowHistory] = useState(false);
-
+  console.log("hasHistory", hasHistory)
   const { handleClose } = useModal();
 
   let isWhishListed: boolean = item ? wishlist.includes(item.id) : false;
@@ -63,29 +64,33 @@ const Template = ({ item }: TemplateProps) => {
         />
         <div className="card-title">{item?.metadata?.name}</div>
         {isWhishListed 
-        ? <div className="card-favorite"><IconButton aria-label="toggleWishlist"  onClick={handleAddWish}><FavoriteIcon/></IconButton></div>
+        ? <div className="card-favorite"><IconButton aria-label="toggleWishlist" color='secondary' onClick={handleAddWish}><FavoriteIcon/></IconButton></div>
         : null
         }
         <div className="card-desc">
-          <p> Owner : {item?.owner == accounts[0]
+          <p> Owner : <span className="info">{item?.owner == accounts[0]
           ? "You"
           : item?.owner == marketplaceAddress
           ? "Tatakai"
-          : item?.owner}</p>
-          <p>Type : {item?.metadata?.type}</p>
-          <p>Age : {item?.metadata?.age}</p>
-          <p>Nationality : {item?.metadata?.nationality}</p>
-          <p>Price : {item?.metadata?.price} </p>
+          : item?.owner}</span></p>
+          <p>Type : <span className="info">{item?.metadata?.type}</span></p>
+          <p>Age : <span className="info">{item?.metadata?.age}</span></p>
+          <p>Nationality : <span className="info">{item?.metadata?.nationality}</span></p>
+          <p>Price : <span className="info">{item?.metadata?.price}</span> </p>
           {hasHistory 
           ?<button
             onClick={handleShowHistory}
             type="button"
             color="primary"
           >
-            View History
+           View History
           </button>
           : "No history"
           }
+        {showHistory 
+        ? <History history={history} setShowHistory={setShowHistory}/>
+        : null
+        }
         </div>
 
         <div className="card-actions">

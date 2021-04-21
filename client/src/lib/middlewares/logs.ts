@@ -24,12 +24,11 @@ const log = () => ({ dispatch, getState }: any) => (
       const MarketplaceInstance = await getInstanceMarketplace(web3ws);
       //const TakTokenInstance = await getInstanceTakToken(web3ws);
       //const CardItemInstance = await getInstanceCardItem(web3ws)
-      console.log(accounts[0], MarketplaceInstance);
 
 
       /* CARD USER is sold */
        MarketplaceInstance.events.BuyTransaction({
-        fromBlock: 0
+        fromBlock: "latest"
           })
           .on('data', function(event: any){
             console.log(event)
@@ -42,13 +41,6 @@ const log = () => ({ dispatch, getState }: any) => (
               console.log("erreur dans la buuying", error)
           });
 
-       //trying get Historical
-     /*   let CardItemInstancehistory: any = await CardItemInstance.getPastEvents('ItemCreated',{
-        fromBlock: 0,
-        toBlock: 'latest'
-      })
-      console.log("history mint", CardItemInstancehistory) */
-      //get history card transfer
       let transferCard: any = await MarketplaceInstance.getPastEvents('BuyTransaction',{
         fromBlock: 0,
         toBlock: 'latest'

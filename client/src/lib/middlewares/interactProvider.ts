@@ -89,6 +89,7 @@ const adminMiddleware = () => ({ dispatch, getState }: any) =>  (
     const MarketplaceInstance = await getInstanceMarketplace(web3);
     const CardItemInstance = await getInstanceCardItem(web3);
     const TakTokenInstance = await getInstanceTakToken(web3);
+    dispatch(showAlert("Buying process, waiting for metamask...",AlertType.Info))
     try {
       TakTokenInstance.methods.approve(MarketplaceInstance._address,price)
       .send({from: accounts[0]})
@@ -113,6 +114,7 @@ const adminMiddleware = () => ({ dispatch, getState }: any) =>  (
         }
       })
     } catch (error) {
+      dispatch(showAlert("Sorry, buying failed", AlertType.Error))
       console.error(error)
     }
     next(action)

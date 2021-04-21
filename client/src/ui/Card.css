@@ -18,16 +18,16 @@
   margin-top: -1.5em;
   padding-bottom: 0.5em;
   padding-left: 0.5em;
-  color: #fff;
+  color: #FEFEFE;
+  font-weight: bolder;
   font-size: 2em;
 }
 .card-favorite {
-  margin-top: -1.5em;
+  margin-top: -2.5em;
   padding-bottom: 0.5em;
-  padding-left: 10em;
+  padding-left: 11.5em;
   color: yellow;
   font-size: 2em;
-  
 }
 .card-image {
   width: 100%;
@@ -36,7 +36,7 @@
 .card-desc {
   padding: 0 1em 1em 1em;
   border-bottom: 1px solid rgba(128, 128, 128, 0.3);
-
+  color:#CACACA;
   overflow: hidden;
   text-align: justify;
 }
@@ -88,6 +88,11 @@
   transform: scale(0);
   opacity: 1;
   animation: ripple 0.4s linear;
+}
+
+.info {
+  font-weight: bolder;
+  color: #FEFEFE;
 }
 
 @keyframes ripple {
