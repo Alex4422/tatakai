@@ -1,8 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
 .cards-row {
   margin: 0px auto;
 }
 
 .card {
+  position: relative;
   display: inline-block;
   width: 30%;
   min-width: 400px;
@@ -23,9 +28,10 @@
   font-size: 2em;
 }
 .card-favorite {
-  margin-top: -2.5em;
-  padding-bottom: 0.5em;
-  padding-left: 11.5em;
+  position: absolute;
+  z-index: 2500;
+  left:80%;
+  top: 25%;
   color: yellow;
   font-size: 2em;
 }
@@ -34,7 +40,7 @@
   height: 180px;
 }
 .card-desc {
-  padding: 0 1em 1em 1em;
+  padding: 0 1em 1.5em 1em;
   border-bottom: 1px solid rgba(128, 128, 128, 0.3);
   color:#CACACA;
   overflow: hidden;

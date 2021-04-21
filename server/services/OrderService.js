@@ -108,8 +108,9 @@ class OrderService extends Service {
     
     async getCardOrder(id) {
         try {
-            const events = await this.MarketplaceContract.events.BuyTransaction({
-                fromBlock: 0
+            const events = await this.MarketplaceContract.getPastEvents("BuyTransaction", {
+                fromBlock: 12931584,
+                toBlock: "latest",
             })
             
             return events;
