@@ -37,14 +37,6 @@ describe('Faucet', function () {
     });
 
     describe('Request TAK Token', function () {
-
-        it('should send tokens to faucet fill up', async function () {
-            const amount = 10000000;
-            const beforeUserBalance = await this.erc20token.balanceOf(owner);
-            const receipt = await this.erc20token.transfer(this.faucet.address, amount);
-            const afterUserBalance = await this.erc20token.balanceOf(owner);
-            expect(BigInt(afterUserBalance)).to.eql(BigInt(beforeUserBalance - amount));
-        })
         
         // it('should give owner tak token', async function () {
         //     const requestTokenAmount = 1000;
@@ -57,12 +49,11 @@ describe('Faucet', function () {
         // })
         
         it('should revert if user request tak token', async function () {
-            const requestTokenAmount = 10000;
-            expectRevert(this.faucet.requestTokens(requestTokenAmount, {from: someOne}), "caller is not the owner");
+            expectRevert(this.faucet.requestTokens({from: someOne}), "caller is not the owner");
         })
     
         it('should revert if user not waited', async function() {
-            expectRevert(this.faucet.requestTokens(10000, {from: someOne}), "You have to wait 30 minutes!");
+            expectRevert(this.faucet.requestTokens({from: someOne}), "You have to wait 30 minutes!");
         });
     })
     

@@ -55,6 +55,29 @@ describe('Marketplace', function () {
         await this.marketplace.sendTransaction({from:someOne2, value:101})
     });
 
+    describe('Swap ETH/TAK', function() {
+        it('should swap token', async function () {
+            const beforeMarketplaceBalanceERC20 = await this.erc20token.balanceOf(this.marketplace.address);
+            const beforeMarketplaceBalanceETH = await web3.eth.getBalance(this.marketplace.address);
+
+            const beforeUserBalanceERC20 = await this.erc20token.balanceOf(someOne);
+            const beforeUserBalanceETH = await web3.eth.getBalance(someOne);
+
+            await this.marketplace.sendTransaction({from:someOne, value:101})
+
+            const afterMarketplaceBalanceERC20 = await this.erc20token.balanceOf(this.marketplace.address);
+            const afterMarketplaceBalanceETH = await web3.eth.getBalance(this.marketplace.address);
+
+            const afterUserBalanceERC20 = await this.erc20token.balanceOf(someOne);
+            const afterUserBalanceETH = await web3.eth.getBalance(someOne);
+            
+            expect(afterMarketplaceBalanceERC20.toNumber()).to.eql(beforeMarketplaceBalanceERC20-101);
+            expect(parseInt(afterMarketplaceBalanceETH)).to.eql(parseInt(beforeMarketplaceBalanceETH)+101);
+
+            expect(afterUserBalanceERC20.toNumber()).to.eql(parseInt(beforeUserBalanceERC20)+101);
+        })
+    })
+
     describe('Mint, buy and transfer NFT', function () {
 
         it('should mint NFT', async function () {
@@ -107,27 +130,6 @@ describe('Marketplace', function () {
 
             expectEvent(receipt, "BuyTransaction", { assetId: new BN(1), oldOwner: seller, newOwner: buyer, price: new BN(price) });
 
-        })
-
-        it('should swap token', async function () {
-            const beforeMarketplaceBalanceERC20 = await this.erc20token.balanceOf(this.marketplace.address);
-            const beforeMarketplaceBalanceETH = await web3.eth.getBalance(this.marketplace.address);
-
-            const beforeUserBalanceERC20 = await this.erc20token.balanceOf(someOne);
-            const beforeUserBalanceETH = await web3.eth.getBalance(someOne);
-
-            await this.marketplace.sendTransaction({from:someOne, value:101})
-
-            const afterMarketplaceBalanceERC20 = await this.erc20token.balanceOf(this.marketplace.address);
-            const afterMarketplaceBalanceETH = await web3.eth.getBalance(this.marketplace.address);
-
-            const afterUserBalanceERC20 = await this.erc20token.balanceOf(someOne);
-            const afterUserBalanceETH = await web3.eth.getBalance(someOne);
-            
-            expect(afterMarketplaceBalanceERC20.toNumber()).to.eql(beforeMarketplaceBalanceERC20-101);
-            expect(parseInt(afterMarketplaceBalanceETH)).to.eql(parseInt(beforeMarketplaceBalanceETH)+101);
-
-            expect(afterUserBalanceERC20.toNumber()).to.eql(parseInt(beforeUserBalanceERC20)+101);
         })
     })
     
