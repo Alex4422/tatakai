@@ -55,14 +55,14 @@ npm start
 
 ## Technologies
 
-- [Truffle Suite] - Framework de développement Ethereum (créé par ConsenSys, l'entreprise co-fondée par Vitalik Buterin). Il permet d'interfacer des smart contracts avec du code JavaScript et l'ensemble de l'écosystème NodeJS.
+- [Truffle Suite] - Framework de développement Ethereum. Il permet d'interfacer des smart contracts avec du code JavaScript et l'ensemble de l'écosystème NodeJS.
 - [React] - Bibliothèque JavaScript open-source qui est utilisée pour construire des interfaces utilisateur spécifiquement pour des applications d'une seule page. 
 - [Material UI] - Librairie de composants React qui implémentent les guidelines de Google en terme de Material Design que l’on retrouve dans les interface des applications Google comme Gmail, Google Photos ou encore dans les applications Android.
 - [Node.js] - Environnement d'exécution permettant d’utiliser le JavaScript côté serveur. 
 - [Express] - Framework pour construire des applications web basées sur Node.js
 - [IPFS] - Protocole P2P permettant de décentraliser l'hébergement de fichiers.
 - [Pinata Cloud] - API qui permet de stocker et de gérer des fichiers sur IPFS.
-- [Matic Network] - Solution de seconde couche d’Ethereum
+- [Matic Network] - Solution de seconde couche d’Ethereum.
 
 
    [Pinata Cloud]: <https://pinata.cloud/>
