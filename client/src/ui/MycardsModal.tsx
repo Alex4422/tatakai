@@ -1,18 +1,38 @@
+import { makeStyles } from "@material-ui/core/styles";
 import {useState} from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { useModal } from "../hooks/useModal";
 import { sellNFT, withdrawNFTonSale } from "../lib/actions/marketplace";
-import Modal from "@material-ui/core/Modal";
-import TextField from "@material-ui/core/TextField";
-import Grid from "@material-ui/core/Grid";
+import { Checkbox, Modal, TextField, Grid, FormControlLabel } from '@material-ui/core';
 
 import "./Card.css";
 
 interface TemplateProps {
   item: ICard;
 }
+const useStyles = makeStyles((theme) => ({
+  input: {
+    "& .MuiInputLabel-outlined": {
+      color: "#fff"
+    },
+    "& .MuiFilledInput-input": {
+      color: "#fff"
+    },
+    "& .MuiOutlinedInput-input": {
+      color: "#fff"
+    },
+    "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+      borderColor: "#fff"
+    },
+  }
+}));
+
+
+
+
 const Template = ({ item }: TemplateProps) => {
   const dispatch = useDispatch();
+  const classes = useStyles();
   const [price, setPrice] = useState(item?.metadata?.price);
   const [isSelling, setIsSelling] = useState(false);
   const { handleClose } = useModal();
@@ -47,35 +67,37 @@ const Template = ({ item }: TemplateProps) => {
         <div className="card-title">{item?.metadata?.name}</div>
       
         <div className="card-desc">
-          <p>Type : {item?.metadata?.type}</p>
-          <p>Age : {item?.metadata?.age}</p>
-          <p>Nationality : {item?.metadata?.nationality}</p>
-          <p>Current Price : {item?.metadata?.price} TAK</p>
-          <p>Statut: {(item?.metadata?.isForSale === 1)? "On Market!" : "OKLM"}</p>
-          <Grid item sm={2} xs={2}>
-          <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
+          <p>Type : <span className="info">{item?.metadata?.type}</span></p>
+          <p>Age : <span className="info">{item?.metadata?.age}</span></p>
+          <p>Nationality : <span className="info">{item?.metadata?.nationality}</span></p>
+          <p>Current Price : <span className="info">{item?.metadata?.price} TAK</span></p>
+          <p>Statut: <span className="info">{(item?.metadata?.isForSale === 1)? "On Market!" : "OKLM"}</span></p>
+          <Grid item sm={12} xs={12}> 
+          <FormControlLabel
+            control={ <Checkbox
+                  className={classes.input}
+                  style={{color: "white", padding: "0.6em 0 0.6em 0"}}
+                  required              
                   id="price"
-                  type="checkbox"
-                  label="Price"
                   name="isSelling"
                   size="medium"
-                  autoComplete="Sell"
-                  defaultValue={isSelling}
-                  style={{
-                    color:"#ffffff", padding: "0.5rem", display:'inline-block'
-                  }}
+                  checked={isSelling}
                   onChange={e => (setIsSelling(!isSelling))}
                 />
-          </Grid> 
+        }
+        label="Set Price"
+        labelPlacement="start"
+        style={{marginLeft: "0rem"}}
+      />
+         
+         
          { isSelling
-          ? <Grid item sm={6} xs={12}>
+          ? 
                 <TextField
-                  variant="filled"
+                  variant="outlined"
+                  className={classes.input}
                   required
-                  fullWidth
+                  margin="dense"
                   id="price"
                   type="number"
                   label="Price in TAK"
@@ -83,14 +105,12 @@ const Template = ({ item }: TemplateProps) => {
                   autoComplete="price"
                   defaultValue={price || ""}
                   onChange={e => (setPrice(e.target.value))}
-                  style={{
-                    backgroundColor: "white", color:"black", 
-                  }}
+                  style={{marginLeft: "2rem"}}
                 />
-           </Grid>
+          
           : null
           } 
-         
+          </Grid> 
         </div>
 
         <div className="card-actions">        
