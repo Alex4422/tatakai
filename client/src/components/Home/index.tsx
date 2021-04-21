@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import Container from "@material-ui/core/Container";
 import Modal from "../../ui/Modal";
-import { makeStyles } from "@material-ui/core/styles";
 import "../styles.css";
+import trait from "../../assets/trait.svg"
 
 declare interface Props {
   getAuthMetamask: Function;
@@ -28,7 +28,10 @@ const Home = ({ getAuthMetamask, accounts, getUserStorage, subscribeEvents }: Pr
     <Container component="main" maxWidth="lg" >
       <Modal />
       <div className="home" >
-      <h1 className="titre">TAT<span className="golden">A</span>KAI</h1>
+      <div className="title">
+        <h1 className="titre">TAT<span className="golden">A</span>KAI</h1>
+      </div>
+      
       <div className="textbox">
         <p className="catch"><strong>Get</strong> your fighters</p>
         <p className="catch"><strong>Bet</strong> with them</p>

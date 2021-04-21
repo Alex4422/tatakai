@@ -42,27 +42,6 @@ const dashboard = () => ({ dispatch, getState }: any) => (
     return next(action);
   }
 
-      /*******************************/
-  /* GET HISTORY /
-  /*******************************/
-
-  case GET_HISTORY: { 
-    console.log("get history")
-    const id = action.payload
-    console.log(id)
-    const config: Object = {
-     method: 'get',
-     url: `${API_URL}cards/${id}`,
-   }
-     axios(config)
-       .then((res: any) => {
-         console.log("history", res)
-         dispatch(seedHistory(res.data.historical))
-       })
-       .catch((err: any) => console.log(err))
-   next(action);
-   break;
- }
     default:
       return next(action);
   }

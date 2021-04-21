@@ -1,4 +1,4 @@
-import { SUBSCRIBE_EVENTS } from "../actions/types";
+import { SUBSCRIBE_EVENTS, GET_HISTORY } from "../actions/types";
 import {showAlert} from "../actions/dashboard";
 import Web3 from "web3";
 import {getInstanceMarketplace, getInstanceTakToken, getInstanceCardItem} from "./utils";
@@ -32,25 +32,44 @@ const log = () => ({ dispatch, getState }: any) => (
           })
           .on('data', function(event: any){
             console.log(event)
-              if(event.returnValues.oldOwner == accounts[0]){
+              /* if(event.returnValues.oldOwner == accounts[0]){
                 console.log(event.returnValues)
                 dispatch(showAlert("your card was sold !", AlertType.Info))
-              }
+              } */
           })
           .on('error', function(error: any) { // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
               console.log("erreur dans la buuying", error)
           });
 
-      let transferCard: any = await MarketplaceInstance.getPastEvents('BuyTransaction',{
-        fromBlock: 0,
-        toBlock: 'latest'
-      })
-      console.log("history buying", transferCard)
      } catch (error) {
         console.error(error);
       }
       break;
     }
+         /*******************************/
+  /* GET HISTORY /
+  /*******************************/
+  case GET_HISTORY: { 
+    const provider = new Web3.providers.WebsocketProvider("wss://ws-matic-mumbai.chainstacklabs.com");
+    const web3ws = new Web3(provider); 
+    const MarketplaceInstance = await getInstanceMarketplace(web3ws);
+    const id = action.payload;
+    let transferCard: any = await MarketplaceInstance.getPastEvents('BuyTransaction',{
+      fromBlock: 12931584,
+      toBlock: 'latest'
+    })
+    let data: Array<Object>=[];
+    if (transferCard.length >= 1){
+      for(let el of transferCard){
+        data.push(el.returnValues)
+      }
+       data = data.filter((entry:any) => entry.assetId == id)
+    }
+    console.log("data filtered", data)
+    //TODO dispatch
+   next(action);
+   break;
+  }
     default:
       return next(action);
   }

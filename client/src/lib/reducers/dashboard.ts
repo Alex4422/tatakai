@@ -50,11 +50,6 @@ const user = (
         ...oldState,
         isLoading: true,
       };
-    case SEED_USER_NFTS:
-      return {
-        ...oldState,
-        isLoading: false,
-      };
     case MINT_NFT_SUCCESS:
       return {
         ...oldState,
