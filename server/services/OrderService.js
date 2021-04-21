@@ -10,9 +10,6 @@ class OrderService extends Service {
     async createBuyOrder(id) {
       try {
             const hash = await this.CardItemContract.tokenURI(id);
-            // const marketplaceAddress = await this.CardItemContract.marketplace();
-            // await this.TakTokenContract.approve(marketplaceAddress, card.metadata.price, {from: buyer});
-            // await this.MarketplaceContract.buy(this.CardItemContract.address, id, card.metadata.price, {from: buyer})
             const url = `https://api.pinata.cloud/data/pinList?hashContains=${hash}`;
             const nft_info = await axios.get(url, {
                     headers: {
@@ -101,19 +98,6 @@ class OrderService extends Service {
 
             return 'You remove your card on sale.';
             
-        } catch (error) {
-            return error;
-        }
-    }
-    
-    async getCardOrder(id) {
-        try {
-            const events = await this.MarketplaceContract.getPastEvents("BuyTransaction", {
-                fromBlock: 12931584,
-                toBlock: "latest",
-            })
-            
-            return events;
         } catch (error) {
             return error;
         }

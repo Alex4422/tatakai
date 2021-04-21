@@ -43,14 +43,9 @@ class CardService extends Service {
             });
             
             const accounts = await this.web3.eth.getAccounts();
-            console.log("accounts", accounts[0])
-            console.log(nft_json.data.IpfsHash)
             const item = await this.CardItemContract.mintNFT(nft_json.data.IpfsHash, {from: accounts[0]});
-            console.log(item)
             const id = item.receipt.logs[0].args.tokenId;
-            console.log(id)
             const owner = await this.CardItemContract.ownerOf(id);
-            console.log(owner);
             const ipfsHash = await this.CardItemContract.tokenURI(id);
             
             const json = {
@@ -163,105 +158,6 @@ class CardService extends Service {
         }
         catch (err) {
             return err;
-        }
-    }
-
-    async buyFrom(id) {
-      try {
-            const hash = await this.CardItemContract.tokenURI(id);
-            // const marketplaceAddress = await this.CardItemContract.marketplace();
-            // await this.TakTokenContract.approve(marketplaceAddress, card.metadata.price, {from: buyer});
-            // await this.MarketplaceContract.buy(this.CardItemContract.address, id, card.metadata.price, {from: buyer})
-            const url = `https://api.pinata.cloud/data/pinList?hashContains=${hash}`;
-            const nft_info = await axios.get(url, {
-                    headers: {
-                        pinata_api_key: process.env.PINATA_KEY, 
-                        pinata_secret_api_key: process.env.PINATA_SECRET_KEY,
-                    },
-            });
-
-            const metadata = {
-                ipfsPinHash: hash,
-                name: nft_info.data.rows[0].metadata.name,
-                keyvalues: {...nft_info.data.rows[0].metadata.keyvalues, isForSale: 0}
-            };
-
-            const url2 = `https://api.pinata.cloud/pinning/hashMetadata`;
-            await axios.put(url2, metadata, {
-                    headers: {
-                        pinata_api_key: process.env.PINATA_KEY, 
-                        pinata_secret_api_key: process.env.PINATA_SECRET_KEY,
-                    },
-            });
-            return metadata;
-      } catch (error) {
-            return error;
-      }
-    }
-
-    async removeOrder(id) {
-        try {
-            const hash = await this.CardItemContract.tokenURI(id);
-            console.log(hash)
-            const url = `https://api.pinata.cloud/data/pinList?hashContains=${hash}`;
-            const nft_info = await axios.get(url, {
-                    headers: {
-                        pinata_api_key: process.env.PINATA_KEY, 
-                        pinata_secret_api_key: process.env.PINATA_SECRET_KEY,
-                    },
-            });
-
-            const metadata = {
-                ipfsPinHash: hash,
-                name: nft_info.data.rows[0].metadata.name,
-                keyvalues: {isForSale: 0}
-            };
-
-            const url2 = `https://api.pinata.cloud/pinning/hashMetadata`;
-            const response = await axios.put(url2, metadata, {
-                    headers: {
-                        pinata_api_key: process.env.PINATA_KEY, 
-                        pinata_secret_api_key: process.env.PINATA_SECRET_KEY,
-                    },
-            });
-
-            return 'You remove your card on sale.';
-            
-        } catch (error) {
-            return error;
-        }
-    }
-
-    async createOrder(id, price) {
-        try {
-            const hash = await this.CardItemContract.tokenURI(id);
-            console.log(hash)
-            const url = `https://api.pinata.cloud/data/pinList?hashContains=${hash}`;
-            const nft_info = await axios.get(url, {
-                    headers: {
-                        pinata_api_key: process.env.PINATA_KEY, 
-                        pinata_secret_api_key: process.env.PINATA_SECRET_KEY,
-                    },
-            });
-
-            const metadata = {
-                ipfsPinHash: hash,
-                name: nft_info.data.rows[0].metadata.name,
-                keyvalues: {price, isForSale: 1}
-            };
-
-            const url2 = `https://api.pinata.cloud/pinning/hashMetadata`;
-            const response = await axios.put(url2, metadata, {
-                    headers: {
-                        pinata_api_key: process.env.PINATA_KEY, 
-                        pinata_secret_api_key: process.env.PINATA_SECRET_KEY,
-                    },
-            });
-
-            return 'Your card is now for sale.';
-            
-        } catch (error) {
-            return error;
         }
     }
 }

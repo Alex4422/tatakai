@@ -10,8 +10,8 @@ class AccountService extends Service {
             const balance = await this.TakTokenContract.balanceOf(address);
             return balance.toString();
         }
-        catch (err) {
-            return err;
+        catch (error) {
+            return error;
         }
     }
 }

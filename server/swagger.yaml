@@ -217,11 +217,6 @@ paths:
         description: "ETH address"
         required: true
         type: "string"
-      - in: "query"
-        name: "amount"
-        description: "Token amount"
-        required: true
-        type: "string"
       responses:
         "200":
           description: "Request processed"

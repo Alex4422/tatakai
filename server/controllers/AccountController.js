@@ -11,6 +11,6 @@ exports.findOne = async (req, res) => {
       }
       res.json({balance, cards});
    } catch (error) {
-      res.status(500).json({error: error})
+      res.status(500).json({error})
    }
 };
