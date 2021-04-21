@@ -9,6 +9,7 @@ import {
   SEED_USER_NFTS, 
   GET_HISTORY,
   SEED_HISTORY,
+  SELECT_CURRENT,
 } from "../actions/types";
 import {AlertType} from "../middlewares/utils/Constantes"
 
@@ -17,7 +18,7 @@ export const initialState = {
   type: AlertType.Success,
   message: "This is a notification",
   isVisible: false,
-  history: {},
+  history: [],
 };
 
 const user = (
@@ -30,15 +31,10 @@ const user = (
         ...oldState,
         isLoading: true,
       };
-    case GET_HISTORY:
-      return {
-        ...oldState,
-        history: {},
-      };
     case SEED_HISTORY:
       return {
         ...oldState,
-        history: payload.data,
+        history: [...payload],
       };
     case INIT_MARKET:
       return {

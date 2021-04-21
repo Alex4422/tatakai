@@ -1,4 +1,5 @@
 import { useDispatch } from "react-redux";
+import {useCallback} from "react";
 import { selectCurrent } from "../lib/actions/marketplace";
 import { getHistory } from "../lib/actions/dashboard";
 import { useModal } from "../hooks/useModal";
@@ -9,10 +10,11 @@ interface Props {
 const Card = ({ item }: Props) => {
   const { handleOpen } = useModal();
   const dispatch = useDispatch();
+  const memoizedCallback = useCallback(() => dispatch(getHistory(item.id)), [item.id]);
   const handleOnClick = () => {
     handleOpen();
     dispatch(selectCurrent(item));
-    dispatch(getHistory(item.id));
+    memoizedCallback();
   };
   return (
     <div

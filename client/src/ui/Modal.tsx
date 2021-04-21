@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import { useModal } from "../hooks/useModal";
 import { buyNFT, withdrawNFTonSale} from "../lib/actions/marketplace";
 import {toggleToWishlist} from "../lib/actions/dashboard"
@@ -20,9 +20,8 @@ const Template = ({ item }: TemplateProps) => {
   const {history} = useSelector((state: any) => state.dashboard);
   const marketplaceAddress = Marketplace.options.address;
   //modif le equal
-  const hasHistory = Object.keys(history).length === 0;
+  const hasHistory = history.length >= 1;
   const [showHistory, setShowHistory] = useState(false);
-  console.log("hasHistory", hasHistory)
   const { handleClose } = useModal();
 
   let isWhishListed: boolean = item ? wishlist.includes(item.id) : false;

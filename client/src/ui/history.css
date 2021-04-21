@@ -1,22 +1,25 @@
 .modalHistory{
   position: absolute;
-  width: 40%;
+  width: 100%;
   background-color:rgba(180,180,180,0.98);
-  border-radius: 0.1rem;
+  border-radius: 0.2rem;
   z-index: 3000;
-  left: 40%;
   top: 50%;
   animation: coming 1s 1;
   animation-timing-function: cubic-bezier(.3,.95,.75,1.03);
   animation-fill-mode: both;
+  color: black;
+  padding: 0.5rem;
+  font-size: 0.8em;
 }
 
 
 
-.historyPoint{
-  color: black;
-  padding: 0.5rem;
-
+.footer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 }
 
 @keyframes coming {

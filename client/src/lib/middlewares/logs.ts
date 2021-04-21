@@ -1,7 +1,8 @@
 import { SUBSCRIBE_EVENTS, GET_HISTORY } from "../actions/types";
+import { seedHistory } from "../actions/dashboard"
 import {showAlert} from "../actions/dashboard";
 import Web3 from "web3";
-import {getInstanceMarketplace, getInstanceTakToken, getInstanceCardItem} from "./utils";
+import {getInstanceMarketplace} from "./utils";
 import{AlertType} from "./utils/Constantes"
 
 const log = () => ({ dispatch, getState }: any) => (
@@ -22,10 +23,6 @@ const log = () => ({ dispatch, getState }: any) => (
       const web3ws = new Web3(provider); 
       try {
       const MarketplaceInstance = await getInstanceMarketplace(web3ws);
-      //const TakTokenInstance = await getInstanceTakToken(web3ws);
-      //const CardItemInstance = await getInstanceCardItem(web3ws)
-
-
       /* CARD USER is sold */
        MarketplaceInstance.events.BuyTransaction({
         fromBlock: "latest"
@@ -46,7 +43,7 @@ const log = () => ({ dispatch, getState }: any) => (
       }
       break;
     }
-         /*******************************/
+  /*******************************/
   /* GET HISTORY /
   /*******************************/
   case GET_HISTORY: { 
@@ -61,12 +58,15 @@ const log = () => ({ dispatch, getState }: any) => (
     let data: Array<Object>=[];
     if (transferCard.length >= 1){
       for(let el of transferCard){
+        let block = await web3.eth.getBlock(el.blockNumber);
+        let date = block.timestamp
+        el.returnValues.date = date
         data.push(el.returnValues)
       }
        data = data.filter((entry:any) => entry.assetId == id)
     }
-    console.log("data filtered", data)
-    //TODO dispatch
+
+    dispatch(seedHistory(data))
    next(action);
    break;
   }

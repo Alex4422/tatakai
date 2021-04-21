@@ -60,5 +60,5 @@ export const getHistory = (id: any) => ({
 
 export const seedHistory = (data: any) => ({
   type: SEED_HISTORY,
-  payload: {data},
+  payload: data,
 })
