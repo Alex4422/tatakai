@@ -16,8 +16,7 @@ contract Marketplace is ERC721Holder, Ownable {
         uint assetId,
         address oldOwner,
         address newOwner,
-        uint price,
-        uint assetId
+        uint price
     );
 
     constructor(address _acceptedToken) public payable {
