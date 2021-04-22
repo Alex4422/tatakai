@@ -6,10 +6,7 @@ import {
   SEED_MARKET,
   SHOW_ALERT,
   HIDE_ALERT,
-  SEED_USER_NFTS, 
-  GET_HISTORY,
   SEED_HISTORY,
-  SELECT_CURRENT,
 } from "../actions/types";
 import {AlertType} from "../middlewares/utils/Constantes"
 

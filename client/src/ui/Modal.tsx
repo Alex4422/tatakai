@@ -67,9 +67,9 @@ const Template = ({ item }: TemplateProps) => {
         : null
         }
         <div className="card-desc">
-          <p> Owner : <span className="info">{item?.owner == accounts[0]
+          <p> Owner : <span className="info">{item?.owner === accounts[0]
           ? "You"
-          : item?.owner == marketplaceAddress
+          : item?.owner === marketplaceAddress
           ? "Tatakai"
           : item?.owner}</span></p>
           <p>Type : <span className="info">{item?.metadata?.type}</span></p>
@@ -114,7 +114,7 @@ const Template = ({ item }: TemplateProps) => {
           >
             Cancel
           </button>
-          {(item?.owner == accounts[0])
+          {(item?.owner === accounts[0])
           ?<button
           onClick={handleOnClickWithdraw}
           type="button"

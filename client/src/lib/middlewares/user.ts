@@ -8,8 +8,7 @@ const user = () => ({ dispatch, getState }: any) => (
   next: any
 ) => (action: IAction) => {
   const {
-    user: { accounts, web3, provider },
-    contract: {Marketplace},
+    user: { accounts, web3},
   } = getState();
   switch (action.type) {
 
@@ -17,12 +16,13 @@ const user = () => ({ dispatch, getState }: any) => (
   /* GET USER NFTS /
   /*******************************/
     case REFRESH_USER_NFTS:
-    case GET_USER_NFTS: { 
+    case GET_USER_NFTS: {
+      if (accounts) {
         const config: Object = {
           method: 'get',
           url: `${API_URL}accounts/${accounts[0]}`,
         }
-        axios(config)
+            axios(config)
           .then(res => {
             console.log("response Api", res.data.cards);
             dispatch(seedUserNFTS(res.data.cards));
@@ -31,6 +31,7 @@ const user = () => ({ dispatch, getState }: any) => (
             console.error(err)
             dispatch(showAlert("Oops w've got a problem to load your data", AlertType.Error))
           })
+        }
         next(action)
         break;
     }
@@ -41,6 +42,7 @@ const user = () => ({ dispatch, getState }: any) => (
   /*******************************/
 
   case GET_BALANCES: { 
+     if (accounts) {
      const config: Object = {
       method: 'get',
       url: `${API_URL}accounts/${accounts[0]}`,
@@ -51,6 +53,7 @@ const user = () => ({ dispatch, getState }: any) => (
           const balanceEther: any = await web3.eth.getBalance(accounts[0])
           dispatch(seedBalances(parseInt(balance, 10), cards, parseInt(balanceEther,10)));
         })
+      }
     break;
   }
     default:

@@ -42,4 +42,7 @@ La blockchain est là pour s'assurer de l'authenticité des NFTs et de la sécur
 
 ## Perspective d'évolution
 - Lorsque l’API demande des données, les demandes sont envoyées à IPFS. Une base de donnée pourrait contenir un réplica des métadonnées et données on-chain qui fournit des informations relatives aux NFTs. Les demandes renverraient les données requises à partir du réplica afin de réduire la latence des requêtes.
-- 
+
+- Ajouter une couche à Redux, Drizzle, pour maintenir les contrats dans le store est resté "frais en data" sans multiplier les requêtes
+
+- Revenir sur le réseau Mainet 

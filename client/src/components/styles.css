@@ -9,6 +9,7 @@
   background-size: cover;
   background-position-y:  100%;
   background-position-x: 50%;
+  
 }
 .titre {
   font-family: 'Gugi', cursive;
@@ -34,21 +35,36 @@
 .catch {
   position: relative;
   margin: 1rem;
-  animation: coming 1.5s 1;
+}
+
+.anim1{
+  animation: coming 0.5s 1;
+  animation-timing-function: cubic-bezier(.3,.95,.75,1.03);
+  animation-fill-mode: forwards;
+}
+.anim2{
+  animation: coming 1.25s 1;
   animation-timing-function: cubic-bezier(.3,.95,.75,1.03);
   animation-fill-mode: forwards;
 }
 
-.anim2{
-  
-}
-
 .anim3{
+  animation: coming 2.5s 1;
+  animation-timing-function: cubic-bezier(.3,.95,.75,1.03);
+  animation-fill-mode: forwards;
 
 }
 
 .textbox :nth-child(3){
   margin-left: 8rem;
+  margin-bottom: 6rem;
+}
+
+.trait{
+  position: relative;
+  animation: comingLoin 3s 1;
+  animation-timing-function: cubic-bezier(.3,.95,.75,1.03);
+  animation-fill-mode: forwards;
 }
 
 strong {
@@ -65,6 +81,21 @@ strong {
 @keyframes coming {
   0% {
     left:-800px;
+    opacity: 0.1;
+    filter: blur(5px);
+
+  }
+  100% {
+    left: 0;
+    opacity: 1;
+    filter: blur(0);
+
+  }
+}
+
+@keyframes comingLoin {
+  0% {
+    left:-1600px;
     opacity: 0.1;
     filter: blur(5px);
 

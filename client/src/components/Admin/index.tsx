@@ -1,6 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
 import useFormValidation from "../../hooks/useFormValidation";
-import UploadService from "../../services/file-upload.service";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -10,7 +9,7 @@ import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { useEffect, useState, useRef } from "react";
+import { useState } from "react";
 
 declare interface Props {
   changeField: Function;
@@ -78,12 +77,9 @@ const Admin = ({
   changeField,
   nft,
   submitValue,
-  changeFieldFile,
   isLoading,
-  isFullfilled,
-  history,
 }: Props & { history: any }) => {
-  const { validate, isValid } = useFormValidation();
+  //const { validate, isValid } = useFormValidation();
   const classes = useStyles();
   const [file, setFile] = useState();
   const [preview, setPreview] = useState({
@@ -267,7 +263,7 @@ const Admin = ({
                     <img
                       className="preview"
                       src={preview.image}
-                      alt=""
+                      alt="preview"
                     />
                   </div>
                 )}

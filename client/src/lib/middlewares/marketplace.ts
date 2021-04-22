@@ -4,12 +4,9 @@ import {API_URL, AlertType} from "./utils/Constantes";
 import axios from "axios";
 import { showAlert} from "../actions/dashboard";
 
-const MarketplaceMW = () => ({ dispatch, getState }: any) => (
+const MarketplaceMW = () => ({dispatch}: any) => (
   next: any
 ) => (action: IAction) => {
-  const {
-    user: { accounts, web3 }
-  } = getState();
 
   switch (action.type) {
     /*******************************/
