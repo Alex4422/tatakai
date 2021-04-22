@@ -26,17 +26,31 @@ it("should swap token")
 - On effectue le swap
 - On vérifie si les balances ont bien été mis à jour.
 ```sh
-describe("Mint, buy and transfer NFT")
+describe("Mint NFT")
 ```
-**Scénario :** Mint, buy and transfer NFT
+**Scénario :** Mint NFT
 **Description :** Ce scénario simule un simple mint et un premier achat dun utilisateur quelconque de ce NFT qui vient d'être minter par la marketplace, puis un achat qui provient de la revente de ce dernier.
-**Raison :** Vérifier que le mint et l'achat/revente de NFT fonctionne, que le NFT change bien de propriétaire et que les balances sont mis à jour.
+**Raison :** Vérifier que le mint fonctionne et est réservé uniquement au propriétaire de la marketplace.
 
 ```sh
 it("should mint NFT")
 ```
-- On effectue le mint d'un NFT
+- Le propriétaire de la marketplace effectue le mint d'un NFT
 - On vérifie si l'event à bien été émis.
+
+
+```sh
+it("should revert if not admin)
+```
+- Un utilisateur effectue le mint d'un NFT
+- On vérifie si un la fonction revert().
+
+```sh
+describe("Buy and transfer NFT")
+```
+**Scénario :** Buy and transfer NFT
+**Description :** Ce scénario simule achat d'un utilisateur quelconque de ce NFT qui vient d'être minter par la marketplace (dans le test précedent), puis un achat qui provient de la revente de ce dernier.
+**Raison :** Vérifier l'achat/revente de NFT fonctionne, que le NFT change bien de propriétaire et que les balances sont mis à jour.
 
 ```sh
 it("should buy and transfer NFT from marketplace")
