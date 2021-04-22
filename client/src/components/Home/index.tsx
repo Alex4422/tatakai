@@ -33,9 +33,10 @@ const Home = ({ getAuthMetamask, accounts, getUserStorage, subscribeEvents }: Pr
       </div>
       
       <div className="textbox">
-        <p className="catch"><strong>Get</strong> your fighters</p>
-        <p className="catch"><strong>Bet</strong> with them</p>
-        <p className="catch golden "><strong>Win</strong> unique Card</p>
+        <p className="catch anim1"><strong>Get</strong> your fighters</p>
+        <p className="catch anim2"><strong>Bet</strong> with them</p>
+        <p className="catch anim3 golden "><strong>Win</strong> unique Card</p>
+        <img src={trait} className="trait"></img>
       </div>
       </div>
     </Container>

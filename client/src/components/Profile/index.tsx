@@ -2,22 +2,14 @@ import { useEffect, useState } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import { useModal } from "../../hooks/useModal";
 import SwapModal from "../../ui/SwapModal";
-import Container from "@material-ui/core/Container";
-import Breadcrumbs from "@material-ui/core/Breadcrumbs";
-import Link from "@material-ui/core/Link";
-import Typography from "@material-ui/core/Typography";
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
+import {Avatar, Button, Divider, ListItemAvatar, ListItemText, ListItem, List, Typography, Link, Breadcrumbs, Container} from '@material-ui/core';
 import ImageIcon from '@material-ui/icons/Image';
 import WorkIcon from '@material-ui/icons/Work';
 import AccountBalanceWalletOutlinedIcon from '@material-ui/icons/AccountBalanceWalletOutlined';
 import AccountBalanceOutlinedIcon from '@material-ui/icons/AccountBalanceOutlined';
 import SupervisorAccountOutlinedIcon from '@material-ui/icons/SupervisorAccountOutlined';
-import Divider from '@material-ui/core/Divider';
-import Button from '@material-ui/core/Button';
+import logo from "../../assets/logo_fond_noir.svg";
+
 import "../styles.css";
 
 
@@ -61,6 +53,10 @@ const useStyles = makeStyles((theme) => ({
     '& button': {
       margin: '0 10px'
     }
+  },
+  logo: {
+    width: "1.8%",
+    verticalAlign: "-5%",
   }
 }));
 
@@ -123,7 +119,7 @@ const Profile = ({ accounts, cards, isAdmin, balanceTAK, balanceWei,isLoading,ge
                 <AccountBalanceWalletOutlinedIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText className={classes.listItemText} primary="Balance TAK" secondary={balanceTAK ? balanceTAK : "Non account"} />
+            <ListItemText className={classes.listItemText} primary="Balance TAK" secondary={balanceTAK ? <>{balanceTAK} <img src={logo} className={classes.logo}></img></>  : "Non account"} />
           </ListItem>
           {isAdmin 
           ?<>
