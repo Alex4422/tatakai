@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   logo: {
-    width: "1.8%",
+    width: "10px",
     verticalAlign: "-5%",
   }
 }));
