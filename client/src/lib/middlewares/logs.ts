@@ -8,7 +8,7 @@ import{AlertType} from "./utils/Constantes"
 const log = () => ({ dispatch, getState }: any) => (
   next: any
 ) => async (action: IAction) => {
-  const {
+  var {
     user: { accounts, web3 },
   } = getState();
 
@@ -28,11 +28,8 @@ const log = () => ({ dispatch, getState }: any) => (
         fromBlock: "latest"
           })
           .on('data', function(event: any){
-            console.log(event)
-              /* if(event.returnValues.oldOwner == accounts[0]){
-                console.log(event.returnValues)
-                dispatch(showAlert("your card was sold !", AlertType.Info))
-              } */
+            console.log("go to dispatch")
+            dispatchAlert(event.returnValues);
           })
           .on('error', function(error: any) { // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
               console.log("erreur dans la buuying", error)
@@ -40,6 +37,14 @@ const log = () => ({ dispatch, getState }: any) => (
 
      } catch (error) {
         console.error(error);
+      }
+      const dispatchAlert = async(data:any) => {
+        console.log(data)
+        console.log(accounts[0])
+           if(data.oldOwner == accounts[0]){
+            console.log(data.oldOwner)
+            dispatch(showAlert(`your card ${data.assetId} was sold !`, AlertType.Info))
+          } 
       }
       break;
     }

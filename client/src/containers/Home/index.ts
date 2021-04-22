@@ -8,9 +8,11 @@ type IMapStateToPropsType = {
   user: IUserState;
 };
 
-const mapStateToProps = ({user: {accounts}}: IMapStateToPropsType) => ({
-
-});
+const mapStateToProps = ({user: {accounts}}: IMapStateToPropsType) => {
+  return {
+    accounts
+  }
+};
 
 const mapDispatchToProps = (dispatch: any) => ({
   getAuthMetamask: () => dispatch(getAuthMetamask()),

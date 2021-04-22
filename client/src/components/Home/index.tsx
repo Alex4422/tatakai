@@ -21,7 +21,9 @@ const Home = ({ getAuthMetamask, accounts, getUserStorage, subscribeEvents }: Pr
 
   useEffect(() => {
     getUserStorage();
-    subscribeEvents();
+    if(accounts){
+      subscribeEvents();
+    }
   }, [accounts])
   
   return (

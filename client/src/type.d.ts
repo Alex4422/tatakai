@@ -32,7 +32,7 @@ interface IStorageAction {
 interface IUserState {
   web3: any | null;
   provider: any | null;
-  accounts: Array<string> | null;
+  accounts: any | null;
   isLoading: boolean;
   isAdmin: boolean;
   isNew: boolean;
