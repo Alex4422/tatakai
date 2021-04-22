@@ -1,7 +1,5 @@
-import { GET_USER_STORAGE, TOGGLE_TO_WISHLIST, GET_HISTORY  } from "../actions/types";
-import { seedUserStorage, initNewUser, seedHistory } from "../actions/dashboard";
-import {API_URL} from "./utils/Constantes"
-import axios from "axios";
+import { GET_USER_STORAGE, TOGGLE_TO_WISHLIST} from "../actions/types";
+import { seedUserStorage, initNewUser} from "../actions/dashboard";
 
 const dashboard = () => ({ dispatch, getState }: any) => (
   next: any

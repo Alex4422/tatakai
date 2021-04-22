@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import { useModal } from "../../hooks/useModal";
 import SwapModal from "../../ui/SwapModal";
@@ -119,7 +119,7 @@ const Profile = ({ accounts, cards, isAdmin, balanceTAK, balanceWei,isLoading,ge
                 <AccountBalanceWalletOutlinedIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText className={classes.listItemText} primary="Balance TAK" secondary={balanceTAK ? <>{balanceTAK} <img src={logo} className={classes.logo}></img></>  : "Non account"} />
+            <ListItemText className={classes.listItemText} primary="Balance TAK" secondary={balanceTAK ? <>{balanceTAK} <img src={logo} className={classes.logo} alt="logo"></img></>  : "Non account"} />
           </ListItem>
           {isAdmin 
           ?<>

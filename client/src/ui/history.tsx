@@ -25,7 +25,7 @@ const History = ({ history, setShowHistory }: Props) => {
           <p><span className="modalHistory__list">Date :</span> {moment(new Date(history[page].date*1000)).locale('fr').format('LLL')}</p>
           <p><span className="modalHistory__list">Old owner :</span> {history[page].oldOwner}</p>
           <p><span className="modalHistory__list">New Older :</span> {history[page].newOwner}</p>
-          <p><span className="modalHistory__list">Price : </span> {history[page].price} <img src={logo} className="modalHistory__logo"></img></p>
+          <p><span className="modalHistory__list">Price : </span> {history[page].price} <img src={logo} className="modalHistory__logo" alt="logo"></img></p>
         </>
       }
       <div className="footer">
