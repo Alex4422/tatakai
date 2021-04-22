@@ -1,6 +1,6 @@
 # Tatakai Marketplace
 
-![Tatakai Logo](https://i.ibb.co/mNSP4rH/logo-fond-blanc.png "Tatakai Logo")
+![Tatakai Logo](./client/src/assets/logo_full_bgnoir.png "Tatakai Logo")
 
 ## Introduction
 
