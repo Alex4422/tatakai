@@ -2,8 +2,6 @@ const Faucet = artifacts.require('Faucet')
 const TakToken = artifacts.require('TakToken')
 const Marketplace = artifacts.require('Marketplace')
 const {
-  BN,
-  expectEvent, 
   expectRevert,
 } = require('@openzeppelin/test-helpers')
 const { web3 } = require('@openzeppelin/test-helpers/src/setup');
@@ -37,16 +35,6 @@ describe('Faucet', function () {
     });
 
     describe('Request TAK Token', function () {
-        
-        // it('should give owner tak token', async function () {
-        //     const requestTokenAmount = 1000;
-        //     const beforeUserBalance2 = await this.erc20token.balanceOf(owner);
-        //     // console.log(beforeUserBalance2)
-        //     const receipt = await this.faucet.requestTokens(requestTokenAmount, {from: owner});
-        //     const afterUserBalance2 = await this.erc20token.balanceOf(owner);
-        //     // expect(new BN(afterUserBalance2)).to.eql(new BN(beforeUserBalance2 + requestTokenAmount));
-        //     expectEvent(receipt, "Withdrawal", { to: owner });
-        // })
         
         it('should revert if user request tak token', async function () {
             expectRevert(this.faucet.requestTokens({from: someOne}), "caller is not the owner");

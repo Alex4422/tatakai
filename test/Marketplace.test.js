@@ -14,12 +14,14 @@ describe('Marketplace', function () {
     let owner;
     let someOne;
     let someOne2;
+    let someOne3;
 
     before(async function () {
         accounts = await web3.eth.getAccounts();
         owner = accounts[0];
         someOne = accounts[1];
         someOne2 = accounts[2];
+        someOne3 = accounts[3];
 
         this.erc20token = await TakToken.new(
             "Tatakai", 
@@ -78,12 +80,21 @@ describe('Marketplace', function () {
         })
     })
 
-    describe('Mint, buy and transfer NFT', function () {
-
+    describe('Mint NFT', function () {
+        
         it('should mint NFT', async function () {
             const receipt = await this.nft.mintNFT("https://ipfs");
             expectEvent(receipt, "ItemCreated", { tokenId: new BN(1) });
         })
+        
+        it('should revert if not admin', async function() {
+            expectRevert(this.nft.mintNFT("https://ipfs", {from: someOne}), 'Ownable: caller is not the owner');
+        })
+        
+    })
+        
+    describe('Buy and transfer NFT', function () {
+        
 
         it('should buy and transfer NFT from marketplace', async function () {
             const price = 100;
@@ -130,6 +141,18 @@ describe('Marketplace', function () {
 
             expectEvent(receipt, "BuyTransaction", { assetId: new BN(1), oldOwner: seller, newOwner: buyer, price: new BN(price) });
 
+        })
+        
+        
+        it('should revert if buyer have no token', async function () {
+            const price = 100;
+            const buyer = someOne3;
+            const seller = someOne2;
+            
+            await this.erc20token.approve(this.marketplace.address, price, {from: buyer});
+            await this.nft.approve(this.marketplace.address, 1, {from: seller});
+
+            expectRevert(this.marketplace.buy(this.nft.address, 1, price, {from: buyer}), 'transfer amount exceeds balance');
         })
     })
     
