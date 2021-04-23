@@ -28,21 +28,17 @@ const log = () => ({ dispatch, getState }: any) => (
         fromBlock: "latest"
           })
           .on('data', function(event: any){
-            console.log("go to dispatch")
             dispatchAlert(event.returnValues);
           })
           .on('error', function(error: any) { // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
-              console.log("erreur dans la buuying", error)
+              console.log("erreur dans la buying", error)
           });
 
      } catch (error) {
         console.error(error);
       }
       const dispatchAlert = async(data:any) => {
-        console.log(data)
-        console.log(accounts[0])
            if(data.oldOwner == accounts[0]){
-            console.log(data.oldOwner)
             dispatch(showAlert(`your card ${data.assetId} was sold !`, AlertType.Info))
           } 
       }

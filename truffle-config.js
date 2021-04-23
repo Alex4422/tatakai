@@ -55,13 +55,8 @@ module.exports = {
     },
     matic: {
       provider: () =>
-        new HDWalletProvider(
-          process.env.MNEMONIC,
-          `https://matic-mumbai.chainstacklabs.com`
-        ),
+        new HDWalletProvider(process.env.MNEMONIC,"https://rpc-mumbai.maticvigil.com/v1/c8de64ac9d1e2a12657516cfb14e8f1572c7d356"),
       network_id: 80001,
-      confirmations: 1,
-      timeoutBlocks: 200,
       skipDryRun: true,
     }
   },

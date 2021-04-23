@@ -75,8 +75,7 @@ const adminMiddleware = () => ({ dispatch, getState }: any) =>  (
       .send({from: accounts[0]})
       .then((res: any) => {
         dispatch(showAlert("Your card is on the market !", AlertType.Success))
-      })
-      
+      })      
     next(action)
     break;
   }
@@ -104,7 +103,6 @@ const adminMiddleware = () => ({ dispatch, getState }: any) =>  (
           .send({from: accounts[0]})
             .then((response :any) => {
               if(response.status==true) {
-                console.log("c'est ok, bon achat");
                 dispatch(updateIsForSale(id));
                 dispatch(buyNFTSuccess());
                 dispatch(showAlert("Well done, new NFT in your deck !", AlertType.Success));

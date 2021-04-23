@@ -14,14 +14,12 @@ const MarketplaceMW = () => ({dispatch}: any) => (
   /*******************************/
     case REFRESH_MARKET:
     case INIT_MARKET : {
-      console.log("charge data marketplace")
       const config: Object = {
         method: "get",
         url: `${API_URL}cards`,
       };
       axios(config)
           .then(response => {
-            console.log("response Api", response);
             if (response.status === 200) {
               dispatch(seedMarket(response.data));
             }
@@ -39,7 +37,6 @@ const MarketplaceMW = () => ({dispatch}: any) => (
   case SELL_NFT: {
     const {id, price} = action.payload;
     let data = {id, price}
-    console.log(data)
     const config: Object = {
       url: `${API_URL}order/sell`,
       method: 'post',
@@ -103,7 +100,6 @@ const MarketplaceMW = () => ({dispatch}: any) => (
     next(action)
     break;
   }
-
     default:
       return next(action);
   }

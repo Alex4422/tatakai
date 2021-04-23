@@ -54,7 +54,6 @@ const adminMiddleware = () => ({ dispatch, getState }: any) => (
      /*******************************/
   /* GET TAK /
   /*******************************/
-
   case GET_TAK: { 
     const config: Object = {
      method: 'post',
@@ -70,7 +69,6 @@ const adminMiddleware = () => ({ dispatch, getState }: any) => (
    next(action);
    break;
  }
-
     default:
       return next(action);
   }
