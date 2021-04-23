@@ -11,7 +11,8 @@
   },
   "scripts": {
     "test": "truffle test",
-    "start": "cd client && npm start",
-    "install-pkg": "npm install && cd client && npm install && cd .."
+    "start": "(cd server && node index.js) & cd client && npm start",
+    "install-pkg": "npm install && cd client && npm install && cd .. && cd server && npm install && cd ..",
+    "deploy-matic": "truffle deploy --network matic"
   }
 }
