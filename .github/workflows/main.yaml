@@ -19,7 +19,6 @@ jobs:
       - name: Install and Deploy
         uses: actions/setup-node@v1
       - run: npm run install-pkg
-      - run: npm run deploy-matic
       - run: npm run start
         env:
           CI: true
