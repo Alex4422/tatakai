@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "truffle test",
-    "start": "(cd server && node index.js) & cd client && npm start",
+    "start": "cd server && npm install && node index.js",
     "heroku-postbuild": "cd client && npm install && npm run build",
     "install-pkg": "npm install && cd client && npm install && CI= npm run build && cd .. && cd server && npm install && cd ..",
     "deploy-matic": "truffle deploy --network matic"
