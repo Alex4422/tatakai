@@ -4,6 +4,7 @@ const cors = require("cors");
 const app = express();
 const multer = require('multer');
 const upload = multer();
+const path = require('path');
 
 const corsOptions = {
   origin: process.env.CORS_ORIGIN,
