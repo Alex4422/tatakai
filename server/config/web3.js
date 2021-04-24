@@ -16,7 +16,7 @@ const web3 = new Web3(new HDWalletProvider({
     numberOfAddresses: 1,
     shareNonce: true,
     derivationPath: "m/44'/1'/0'/0/"
-  });
+  }));
 const CardItemContract = contract(CardItemJson);
 const FaucetContract = contract(FaucetJson);
 const TakTokenContract = contract(TakTokenJson);
