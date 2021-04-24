@@ -3,16 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.11.3",
     "@openzeppelin/contracts": "^4.0.0",
     "@truffle/hdwallet-provider": "^1.2.3",
-    "dotenv": "^8.2.0",
-    "web3": "^1.3.4"
+    "dotenv": "^8.2.0"
   },
   "scripts": {
     "test": "truffle test",
+<<<<<<< HEAD
     "start": "cd server && node index.js",
     "heroku-postbuild": "cd client && npm install && npm run build",
     "install-pkg": "npm install && cd client && npm install && cd .. && cd server && npm install && cd .."
+=======
+    "start": "(cd server && node index.js) & cd client && npm start",
+    "install-pkg": "npm install && cd client && npm install && CI= npm run build && cd .. && cd server && npm install && cd ..",
+    "deploy-matic": "truffle deploy --network matic"
+>>>>>>> d06879e37a844ba8bf3dedc236b89e71ff3e25b3
   }
 }
