@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 require("./config/routes")(app);
 
 
-app.use(express.static(path.resolve('../client')));
+app.use(express.static(path.resolve('../client/build')));
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve('../client')+'/build/index.html');
