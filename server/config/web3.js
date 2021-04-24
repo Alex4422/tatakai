@@ -7,8 +7,16 @@ const CardItemJson = require('../../client/src/contracts/CardItem.json');
 const FaucetJson = require('../../client/src/contracts/Faucet.json');
 const TakTokenJson = require('../../client/src/contracts/TakToken.json');
 const MarketplaceJson = require('../../client/src/contracts/Marketplace.json');
-const web3 = new Web3(new HDWalletProvider( process.env.MNEMONIC, `https://rpc-mumbai.maticvigil.com/v1/e6115eb8f8eac2bd2b347f2890455f74519ff7a9`));
-
+// const web3 = new Web3(new HDWalletProvider( process.env.MNEMONIC, `https://rpc-mumbai.maticvigil.com/v1/e6115eb8f8eac2bd2b347f2890455f74519ff7a9`));
+const web3 = new Web3(new HDWalletProvider({
+    mnemonic: {
+      phrase: process.env.MNEMONIC
+    },
+    providerOrUrl: "https://rpc-mumbai.maticvigil.com/v1/e6115eb8f8eac2bd2b347f2890455f74519ff7a9",
+    numberOfAddresses: 1,
+    shareNonce: true,
+    derivationPath: "m/44'/1'/0'/0/"
+  });
 const CardItemContract = contract(CardItemJson);
 const FaucetContract = contract(FaucetJson);
 const TakTokenContract = contract(TakTokenJson);

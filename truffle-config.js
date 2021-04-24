@@ -55,16 +55,7 @@ module.exports = {
     },
     matic: {
       provider: () =>
-        // new HDWalletProvider(process.env.MNEMONIC,"https://rpc-mumbai.maticvigil.com/v1/c8de64ac9d1e2a12657516cfb14e8f1572c7d356"),
-        new HDWalletProvider({
-          mnemonic: {
-            phrase: process.env.MNEMONIC
-          },
-          providerOrUrl: "https://rpc-mumbai.maticvigil.com/v1/c8de64ac9d1e2a12657516cfb14e8f1572c7d356",
-          numberOfAddresses: 1,
-          shareNonce: true,
-          derivationPath: "m/44'/1'/0'/0/"
-        }),
+        new HDWalletProvider(process.env.MNEMONIC,"https://rpc-mumbai.maticvigil.com/v1/c8de64ac9d1e2a12657516cfb14e8f1572c7d356"),
       network_id: 80001,
       skipDryRun: true,
     }
