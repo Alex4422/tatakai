@@ -1,4 +1,4 @@
-export const API_URL: string = "https://tatakai-marketplace.com/api/";
+export const API_URL: string = "https://pure-headland-73600.herokuapp.com/api/";
 
 export const TOKEN: ITOKEN  = {
   symbol : 'TAK',
