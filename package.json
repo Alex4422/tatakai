@@ -9,14 +9,9 @@
   },
   "scripts": {
     "test": "truffle test",
-<<<<<<< HEAD
-    "start": "cd server && node index.js",
-    "heroku-postbuild": "cd client && npm install && npm run build",
-    "install-pkg": "npm install && cd client && npm install && cd .. && cd server && npm install && cd .."
-=======
     "start": "(cd server && node index.js) & cd client && npm start",
+    "heroku-postbuild": "cd client && npm install && npm run build",
     "install-pkg": "npm install && cd client && npm install && CI= npm run build && cd .. && cd server && npm install && cd ..",
     "deploy-matic": "truffle deploy --network matic"
->>>>>>> d06879e37a844ba8bf3dedc236b89e71ff3e25b3
   }
 }
