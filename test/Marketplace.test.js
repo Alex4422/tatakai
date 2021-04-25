@@ -92,7 +92,7 @@ describe('Marketplace', function () {
         })
         
         it('should revert if not admin', async function() {
-            expectRevert(this.nft.mintNFT("https://ipfs", {from: someOne}), 'Ownable: caller is not the owner');
+            (await expectRevert(this.nft.mintNFT("https://ipfs", {from: someOne}), 'Ownable: caller is not the owner'));
         })
         
     })
@@ -105,7 +105,7 @@ describe('Marketplace', function () {
         })
 
         it('should revert if caller is not nft owner', async function() {
-            expectRevert(this.marketplace.setPrice(this.nft.address, 1, 100, {from: someOne}), 'Caller is not nft owner');
+            (await expectRevert(this.marketplace.setPrice(this.nft.address, 1, 100, {from: someOne}), 'Caller is not nft owner'));
         })
 
         it('should get new price', async function() {
@@ -184,7 +184,7 @@ describe('Marketplace', function () {
             
             await this.erc20token.approve(this.marketplace.address, price, {from: buyer});
             await this.nft.approve(this.marketplace.address, 1, {from: seller});
-            expectRevert(this.marketplace.buy(this.nft.address, 1, {from: buyer}), 'Card is not for sale');
+            (await expectRevert(this.marketplace.buy(this.nft.address, 1, {from: buyer}), 'Card is not for sale'));
 
         })
     })
