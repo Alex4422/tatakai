@@ -6,10 +6,11 @@ import "@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import '@openzeppelin/contracts/access/Ownable.sol';
+import '@openzeppelin/contracts/security/Pausable.sol';
 import "./CardItem.sol";
 
 
-contract Marketplace is ERC721Holder, Ownable {
+contract Marketplace is ERC721Holder, Ownable, Pausable {
 
     IERC20 private acceptedToken;
 
@@ -56,7 +57,7 @@ contract Marketplace is ERC721Holder, Ownable {
      * @param _nftAddress - NFT contract address
      * @param _assetId - NFT id
      */
-    function buy(address _nftAddress, uint256 _assetId) public payable returns(uint256) {
+    function buy(address _nftAddress, uint256 _assetId) public payable whenNotPaused returns(uint256) {
         require(CardItem(_nftAddress).getOnSale(_assetId) == true, "Card is not for sale");
         address nftOwner = IERC721(_nftAddress).ownerOf(_assetId);
         uint256 priceInWei = CardItem(_nftAddress).getPrice(_assetId);
@@ -81,7 +82,7 @@ contract Marketplace is ERC721Holder, Ownable {
      * @param _assetId - NFT id
      * @param _amount - NFT price
      */
-    function setPrice(address _nftAddress, uint256 _assetId, uint256 _amount) public onlyNFTOwner(_nftAddress, _assetId) {
+    function setPrice(address _nftAddress, uint256 _assetId, uint256 _amount) public whenNotPaused onlyNFTOwner(_nftAddress, _assetId) {
         CardItem(_nftAddress).setPrice(_assetId, _amount);
         emit SetNewPrice(_assetId, _amount);
     }
@@ -90,7 +91,7 @@ contract Marketplace is ERC721Holder, Ownable {
      * @dev Put a NFT on sale 
      * @param _assetId - NFT id
      */
-    function putOnSale(address _nftAddress, uint256 _assetId) public onlyNFTOwner(_nftAddress, _assetId) {
+    function putOnSale(address _nftAddress, uint256 _assetId) public whenNotPaused onlyNFTOwner(_nftAddress, _assetId) {
         CardItem(_nftAddress).putOnSale(_assetId);
         emit PutOnSale(_assetId);
     }
@@ -99,7 +100,7 @@ contract Marketplace is ERC721Holder, Ownable {
      * @dev remove NFT on sale
      * @param _assetId - NFT id
      */
-    function removeOnSale(address _nftAddress, uint256 _assetId) public onlyNFTOwner(_nftAddress, _assetId){
+    function removeOnSale(address _nftAddress, uint256 _assetId) public whenNotPaused onlyNFTOwner(_nftAddress, _assetId){
         CardItem(_nftAddress).removeOnSale(_assetId);
         emit RemoveOnSale(_assetId);
     }

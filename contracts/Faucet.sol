@@ -3,8 +3,9 @@ pragma solidity 0.8.3;
 
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import '@openzeppelin/contracts/access/Ownable.sol';
+import '@openzeppelin/contracts/security/Pausable.sol';
 
-contract Faucet is Ownable {
+contract Faucet is Ownable, Pausable {
     uint256 constant public tokenAmount = 10000;
     uint256 constant public waitTime = 30 minutes;
 
@@ -22,7 +23,7 @@ contract Faucet is Ownable {
         marketplace = _marketplace;
     }
 
-    function requestTokens() public onlyOwner {
+    function requestTokens() public whenNotPaused onlyOwner {
         require(allowedToWithdraw(msg.sender), "You have to wait 30 minutes!");
         tokenInstance.transfer(msg.sender, tokenAmount);
         lastAccessTime[msg.sender] = block.timestamp + waitTime;

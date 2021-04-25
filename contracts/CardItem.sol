@@ -5,8 +5,9 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import '@openzeppelin/contracts/access/Ownable.sol';
+import '@openzeppelin/contracts/security/Pausable.sol';
 
-contract CardItem is ERC721URIStorage, Ownable {
+contract CardItem is ERC721URIStorage, Ownable, Pausable {
     using Counters for Counters.Counter;
     
     Counters.Counter public _tokenIds;
@@ -40,7 +41,7 @@ contract CardItem is ERC721URIStorage, Ownable {
      * @param _tokenURI - URL include ipfs hash
      * @return uint256 - return nft id
      */
-    function mintNFT(string memory _tokenURI) public onlyOwner returns (uint256) {
+    function mintNFT(string memory _tokenURI) public whenNotPaused onlyOwner returns (uint256) {
         require(ipfsHashes[_tokenURI] != true, "Already registered");  
         
          _tokenIds.increment();
@@ -65,7 +66,7 @@ contract CardItem is ERC721URIStorage, Ownable {
      * @param _assetId - NFT id
      * @param _amount - NFT price
      */
-    function setPrice(uint256 _assetId, uint256 _amount) external onlyMarketplace {
+    function setPrice(uint256 _assetId, uint256 _amount) external whenNotPaused onlyMarketplace {
         TokenInfo storage token = tokens[_assetId];
         token.price = _amount;
     }
@@ -81,7 +82,7 @@ contract CardItem is ERC721URIStorage, Ownable {
      * @dev put NFT on sale
      * @param _assetId - NFT id
      */
-    function putOnSale(uint256 _assetId) external onlyMarketplace() {
+    function putOnSale(uint256 _assetId) external whenNotPaused onlyMarketplace {
         TokenInfo storage token = tokens[_assetId];
         token.isForSale = true;
     }
@@ -90,7 +91,7 @@ contract CardItem is ERC721URIStorage, Ownable {
      * @dev remove NFT on sale
      * @param _assetId - NFT id
      */
-    function removeOnSale(uint256 _assetId) external onlyMarketplace() {
+    function removeOnSale(uint256 _assetId) external whenNotPaused onlyMarketplace {
         TokenInfo storage token = tokens[_assetId];
         token.isForSale = false;
     }
