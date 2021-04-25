@@ -29,7 +29,6 @@ describe('Faucet', function () {
 
         this.faucet = await Faucet.new(
             this.erc20token.address, 
-            this.marketplace.address,
             { from: owner }
         )
 
