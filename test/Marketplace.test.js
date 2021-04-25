@@ -37,7 +37,7 @@ describe('Marketplace', function () {
         this.nft = await CardItem.new(
             "Token Test",
             "TEST",
-            this.marketplace.address, 
+            owner, 
             { from: owner }
         )
         
@@ -56,7 +56,6 @@ describe('Marketplace', function () {
         // Swap de someOne2
         await this.marketplace.sendTransaction({from:someOne2, value:101})
     });
-
     describe('Swap ETH/TAK', function() {
         it('should swap token', async function () {
             const beforeMarketplaceBalanceERC20 = await this.erc20token.balanceOf(this.marketplace.address);
@@ -92,21 +91,42 @@ describe('Marketplace', function () {
         })
         
     })
+
+    describe('Setting NFT Price', function() {
+        it('should set nft price', async function() {
+            const newPrice = 100;
+            const receipt = await this.nft.setPrice(1, newPrice, {from:owner});
+            expectEvent(receipt, "NewPrice", { assetId: new BN(1), price: new BN(newPrice) });
+        })
+
+        it('should revert if caller is not nft owner', async function() {
+            expectRevert(this.nft.setPrice(1, 100, {from: someOne}), 'Caller is not nft owner');
+        })
+
+        it('should get new price', async function() {
+            const newPrice = 100;
+            const nft = await this.nft.tokens(1);
+            const price = nft.price;
+            expect(price).to.bignumber.equal(new BN(newPrice));
+        })
+    })
         
     describe('Buy and transfer NFT', function () {
         
 
         it('should buy and transfer NFT from marketplace', async function () {
-            const price = 100;
+            const nft = await this.nft.tokens(1);
+            const price = nft.price;
             const buyer = someOne;
-            const seller = this.marketplace.address;
+            const seller = await this.nft.ownerOf(1);
             
             //await this.faucet.requestTokens(10000, {from: buyer});
             const balance = await this.erc20token.balanceOf(buyer);
             const beforeGetNftOwner = await this.nft.ownerOf(1);
             expect(beforeGetNftOwner).to.eql(seller);
             
-            await this.erc20token.approve(seller, price, {from: buyer});
+            await this.erc20token.approve(this.marketplace.address, price, {from: buyer});
+            await this.nft.approve(this.marketplace.address, 1, {from: seller});
             const receipt = await this.marketplace.buy(this.nft.address, 1, price, {from: buyer});
             const balance2 = await this.erc20token.balanceOf(buyer);
             expect(balance2).to.be.bignumber.equal(new BN(balance-price));
@@ -118,9 +138,10 @@ describe('Marketplace', function () {
         })
 
         it('should buy and transfer NFT from user', async function () {
-            const price = 100;
+            const nft = await this.nft.tokens(1);
+            const price = nft.price;
             const buyer = someOne2;
-            const seller = someOne;
+            const seller = await this.nft.ownerOf(1);
             
             //await this.faucet.requestTokens(10000, {from: buyer});
 
@@ -145,7 +166,8 @@ describe('Marketplace', function () {
         
         
         it('should revert if buyer have no token', async function () {
-            const price = 100;
+            const nft = await this.nft.tokens(1);
+            const price = nft.price;
             const buyer = someOne3;
             const seller = someOne2;
             
