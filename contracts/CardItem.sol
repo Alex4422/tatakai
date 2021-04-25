@@ -18,20 +18,21 @@ contract CardItem is ERC721URIStorage, Ownable {
     event ItemCreated(
         address owner,
         uint256 tokenId
-    );
-    
-    event NewPrice(
-        uint256 assetId,
-        uint256 price
-    );
+    ); 
 
     struct TokenInfo {
         string tokenURI;
         uint256 price;
+        bool isForSale;
     }
 
     constructor (string memory _name, string memory _symbol, address _marketplace) public ERC721(_name, _symbol) {
           marketplace = _marketplace;
+    }
+
+    modifier onlyMarketplace() {
+        require(msg.sender == marketplace, "Caller is not marketplace");
+        _;
     }
 
     /** 
@@ -45,13 +46,14 @@ contract CardItem is ERC721URIStorage, Ownable {
          _tokenIds.increment();
         uint256 newItemId = _tokenIds.current();
         
-        _safeMint(marketplace, newItemId);
+        _safeMint(owner(), newItemId);
         _setTokenURI(newItemId, _tokenURI);
         
         ipfsHashes[_tokenURI] = true;
         tokens[newItemId] = TokenInfo(
             _tokenURI,
-            0
+            0,
+            false
         );
      
         emit ItemCreated(marketplace, newItemId);
@@ -63,11 +65,40 @@ contract CardItem is ERC721URIStorage, Ownable {
      * @param _assetId - NFT id
      * @param _amount - NFT price
      */
-    function setPrice(uint256 _assetId, uint256 _amount) public {
-        require(msg.sender == ownerOf(_assetId), "Caller is not nft owner");
+    function setPrice(uint256 _assetId, uint256 _amount) external onlyMarketplace {
         TokenInfo storage token = tokens[_assetId];
         token.price = _amount;
+    }
 
-        emit NewPrice(_assetId, _amount);
+    /** 
+     * @dev Get a NFT price 
+     */
+    function getPrice(uint256 _assetId) public view returns(uint256) {
+        return tokens[_assetId].price; 
+    }
+
+    /** 
+     * @dev put NFT on sale
+     * @param _assetId - NFT id
+     */
+    function putOnSale(uint256 _assetId) external onlyMarketplace() {
+        TokenInfo storage token = tokens[_assetId];
+        token.isForSale = true;
+    }
+
+    /** 
+     * @dev remove NFT on sale
+     * @param _assetId - NFT id
+     */
+    function removeOnSale(uint256 _assetId) external onlyMarketplace() {
+        TokenInfo storage token = tokens[_assetId];
+        token.isForSale = false;
+    }
+
+    /** 
+     * @dev Get a status NFT on sale 
+     */
+    function getOnSale(uint256 _assetId) public view returns(bool) {
+        return tokens[_assetId].isForSale; 
     }
 }
