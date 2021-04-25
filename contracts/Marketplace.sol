@@ -5,22 +5,23 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/security/Pausable.sol';
 import "./CardItem.sol";
 
 
 contract Marketplace is ERC721Holder, Ownable, Pausable {
+    using SafeMath for uint256;
 
     IERC20 private acceptedToken;
-
     CardItem private nft;
     
     event BuyTransaction(
-        uint assetId,
+        uint256 assetId,
         address oldOwner,
         address newOwner,
-        uint price
+        uint256 price
     );
 
     event SetNewPrice(
@@ -48,6 +49,7 @@ contract Marketplace is ERC721Holder, Ownable, Pausable {
     }
     
     modifier onlyNFTOwner(address _nftAddress, uint256 _assetId) {
+        require(_nftAddress != address(0));
         require(msg.sender == IERC721(_nftAddress).ownerOf(_assetId), "Caller is not nft owner");
         _;
     }

@@ -6,15 +6,17 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/security/Pausable.sol';
+import '@openzeppelin/contracts/utils/math/SafeMath.sol';
 
 contract CardItem is ERC721URIStorage, Ownable, Pausable {
     using Counters for Counters.Counter;
+    using SafeMath for uint256;
     
     Counters.Counter public _tokenIds;
     address public marketplace;
     
     mapping(string => bool) public ipfsHashes;
-    mapping(uint => TokenInfo) public tokens;
+    mapping(uint256 => TokenInfo) public tokens;
     
     event ItemCreated(
         address owner,
@@ -28,7 +30,8 @@ contract CardItem is ERC721URIStorage, Ownable, Pausable {
     }
 
     constructor (string memory _name, string memory _symbol, address _marketplace) public ERC721(_name, _symbol) {
-          marketplace = _marketplace;
+        require(_marketplace != address(0));
+        marketplace = _marketplace;
     }
 
     modifier onlyMarketplace() {
