@@ -32,16 +32,19 @@ describe('Faucet', function () {
             this.marketplace.address,
             { from: owner }
         )
+
+        await this.erc20token.transfer(this.faucet.address, web3.utils.toBN(50000000));
     });
 
     describe('Request TAK Token', function () {
         
         it('should revert if user request tak token', async function () {
-            expectRevert(this.faucet.requestTokens({from: someOne}), "caller is not the owner");
+            (await expectRevert(this.faucet.requestTokens({from: someOne}), "caller is not the owner"));
         })
     
         it('should revert if user not waited', async function() {
-            expectRevert(this.faucet.requestTokens({from: someOne}), "You have to wait 30 minutes!");
+            await this.faucet.requestTokens({from: owner});
+            (await expectRevert(this.faucet.requestTokens({from: owner}), "You have to wait 30 minutes!"));
         });
     })
     
