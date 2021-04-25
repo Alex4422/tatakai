@@ -13,11 +13,22 @@ contract CardItem is ERC721URIStorage, Ownable {
     address public marketplace;
     
     mapping(string => bool) public ipfsHashes;
+    mapping(uint => TokenInfo) public tokens;
     
     event ItemCreated(
         address owner,
         uint256 tokenId
     );
+    
+    event NewPrice(
+        uint256 assetId,
+        uint256 price
+    );
+
+    struct TokenInfo {
+        string tokenURI;
+        uint256 price;
+    }
 
     constructor (string memory _name, string memory _symbol, address _marketplace) public ERC721(_name, _symbol) {
           marketplace = _marketplace;
@@ -38,8 +49,25 @@ contract CardItem is ERC721URIStorage, Ownable {
         _setTokenURI(newItemId, _tokenURI);
         
         ipfsHashes[_tokenURI] = true;
+        tokens[newItemId] = TokenInfo(
+            _tokenURI,
+            0
+        );
      
         emit ItemCreated(marketplace, newItemId);
         return newItemId;
+    }
+
+    /** 
+     * @dev Set a NFT price 
+     * @param _assetId - NFT id
+     * @param _amount - NFT price
+     */
+    function setPrice(uint256 _assetId, uint256 _amount) public {
+        require(msg.sender == ownerOf(_assetId), "Caller is not nft owner");
+        TokenInfo storage token = tokens[_assetId];
+        token.price = _amount;
+
+        emit NewPrice(_assetId, _amount);
     }
 }

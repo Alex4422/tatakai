@@ -6,11 +6,14 @@ import "@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import '@openzeppelin/contracts/access/Ownable.sol';
+import "./CardItem.sol";
 
 
 contract Marketplace is ERC721Holder, Ownable {
 
     IERC20 private acceptedToken;
+
+    CardItem private nft;
     
     event BuyTransaction(
         uint assetId,
