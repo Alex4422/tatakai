@@ -4,7 +4,7 @@
 
 ## Introduction
 
-Notre marketplace, à l’instar d’un géant comme "Sorare", propose l’achat-vente de NFT à l’effigie de combattant professionnels pluridisciplinaire avec une gamification autour de leur actualité via une scoremap exclusive et innovante, donnant ainsi une nouvelle synergie à ce marché en plein essor.
+Tatakai propose l’achat-vente de NFT à l’effigie de combattant professionnels pluridisciplinaire avec une gamification autour de leur actualité via une scoremap exclusive et innovante.
 
 ## Fonctionnalités
 
