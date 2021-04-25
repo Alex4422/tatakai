@@ -17,9 +17,8 @@ contract Faucet is Ownable, Pausable {
 
     event Withdrawal(address indexed to);
 
-    constructor(address _tokenInstance) public {
+    constructor(address _tokenInstance) {
         require(_tokenInstance != address(0));
-        require(_marketplace != address(0));
         tokenInstance = IERC20(_tokenInstance);
     }
 

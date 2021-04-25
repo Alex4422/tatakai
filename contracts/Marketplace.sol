@@ -37,7 +37,7 @@ contract Marketplace is ERC721Holder, Ownable, Pausable {
         uint256 assetId
     );
 
-    constructor(address _acceptedToken) public payable {
+    constructor(address _acceptedToken) {
         require(_acceptedToken != address(0));
         acceptedToken = IERC20(_acceptedToken);
     }
@@ -59,7 +59,7 @@ contract Marketplace is ERC721Holder, Ownable, Pausable {
      * @param _nftAddress - NFT contract address
      * @param _assetId - NFT id
      */
-    function buy(address _nftAddress, uint256 _assetId) public payable whenNotPaused returns(uint256) {
+    function buy(address _nftAddress, uint256 _assetId) public payable whenNotPaused {
         require(CardItem(_nftAddress).getOnSale(_assetId) == true, "Card is not for sale");
         address nftOwner = IERC721(_nftAddress).ownerOf(_assetId);
         uint256 priceInWei = CardItem(_nftAddress).getPrice(_assetId);

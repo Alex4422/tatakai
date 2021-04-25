@@ -29,7 +29,7 @@ contract CardItem is ERC721URIStorage, Ownable, Pausable {
         bool isForSale;
     }
 
-    constructor (string memory _name, string memory _symbol, address _marketplace) public ERC721(_name, _symbol) {
+    constructor (string memory _name, string memory _symbol, address _marketplace) ERC721(_name, _symbol) {
         require(_marketplace != address(0));
         marketplace = _marketplace;
     }
@@ -42,9 +42,9 @@ contract CardItem is ERC721URIStorage, Ownable, Pausable {
     /** 
      * @dev Mint a new NFT  
      * @param _tokenURI - URL include ipfs hash
-     * @return uint256 - return nft id
+     * @return assetId - return nft id
      */
-    function mintNFT(string memory _tokenURI) public whenNotPaused onlyOwner returns (uint256) {
+    function mintNFT(string memory _tokenURI) public whenNotPaused onlyOwner returns (uint256 assetId) {
         require(ipfsHashes[_tokenURI] != true, "Already registered");  
         
          _tokenIds.increment();
@@ -54,6 +54,7 @@ contract CardItem is ERC721URIStorage, Ownable, Pausable {
         _setTokenURI(newItemId, _tokenURI);
         
         ipfsHashes[_tokenURI] = true;
+        
         tokens[newItemId] = TokenInfo(
             _tokenURI,
             0,
@@ -61,6 +62,7 @@ contract CardItem is ERC721URIStorage, Ownable, Pausable {
         );
      
         emit ItemCreated(marketplace, newItemId);
+        
         return newItemId;
     }
 
@@ -70,14 +72,16 @@ contract CardItem is ERC721URIStorage, Ownable, Pausable {
      * @param _amount - NFT price
      */
     function setPrice(uint256 _assetId, uint256 _amount) external whenNotPaused onlyMarketplace {
+        require(_amount >= 0, "Price must be higher or equal 0");
         TokenInfo storage token = tokens[_assetId];
         token.price = _amount;
     }
 
     /** 
-     * @dev Get a NFT price 
+     * @dev Get a NFT price
+     * @return price - return nft price 
      */
-    function getPrice(uint256 _assetId) public view returns(uint256) {
+    function getPrice(uint256 _assetId) public view returns(uint256 price) {
         return tokens[_assetId].price; 
     }
 
@@ -86,6 +90,7 @@ contract CardItem is ERC721URIStorage, Ownable, Pausable {
      * @param _assetId - NFT id
      */
     function putOnSale(uint256 _assetId) external whenNotPaused onlyMarketplace {
+        require(getOnSale(_assetId) == false, "Already on sale!");
         TokenInfo storage token = tokens[_assetId];
         token.isForSale = true;
     }
@@ -95,14 +100,16 @@ contract CardItem is ERC721URIStorage, Ownable, Pausable {
      * @param _assetId - NFT id
      */
     function removeOnSale(uint256 _assetId) external whenNotPaused onlyMarketplace {
+        require(getOnSale(_assetId) == true, "Already out of sale!");
         TokenInfo storage token = tokens[_assetId];
         token.isForSale = false;
     }
 
     /** 
      * @dev Get a status NFT on sale 
+     * @return isForSale - return true if nft is for sale or false if not 
      */
-    function getOnSale(uint256 _assetId) public view returns(bool) {
+    function getOnSale(uint256 _assetId) public view returns(bool isForSale) {
         return tokens[_assetId].isForSale; 
     }
 }
