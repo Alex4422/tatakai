@@ -21,11 +21,6 @@ contract Faucet is Ownable {
         tokenInstance = IERC20(_tokenInstance);
         marketplace = _marketplace;
     }
-    
-    modifier onlyMarketplace() {
-        require(msg.sender == marketplace, "Caller should be Marketplace");
-        _;
-    }
 
     function requestTokens() public onlyOwner {
         require(allowedToWithdraw(msg.sender), "You have to wait 30 minutes!");
