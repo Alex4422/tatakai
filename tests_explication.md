@@ -19,13 +19,18 @@ Nous avons effectués des tests end-to-end (de bout en bout) afin de vérifier q
 - **Raison :** Vérifier que la demande de Tak via le faucet fonctionne et est uniquement possible pour le propriétaire de la marketplace et non pour les utilisateurs.
 
 ```sh
-it("should revert if user request tak token")
+it("should send tak token to owner")
 ```
-- On vérifie si la fonction `requestToken()` revert si elle est utilisé par un utilisateur lambda.
+- Le owner fait une demande de Tak Token sur le faucet
+- On vérifie si l'event `Withdrawal` a bien été émis.
 ```sh
-it("should revert if user not waited")
+it("should revert if owner not waited to request tak token")
 ```
-- On vérifie si la fonction `requestToken()` revert si la personne n'a pas attendu 30 minutes après la première demande.
+- On vérifie si la fonction `requestToken()` revert si le owner n'a pas attendu 30 minutes après la première demande.
+```sh
+it("should revert if alice request tak token")
+```
+- On vérifie si la fonction `requestToken()` revert si elle est utilisé par Alice.
 
 
 ### Marketplace.test.js
