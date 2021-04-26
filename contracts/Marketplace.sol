@@ -84,11 +84,18 @@ contract Marketplace is ERC721Holder, Ownable, Pausable {
      * @dev Set a NFT price 
      * @param _assetId - NFT id
      * @param _amount - NFT price
+     * @return status - NFT status (on sale or out of sale)
      */
-    function setPrice(address _nftAddress, uint256 _assetId, uint256 _amount) public whenNotPaused onlyNFTOwner(_nftAddress, _assetId) {
+    function putOnSale(address _nftAddress, uint256 _assetId, uint256 _amount) public whenNotPaused onlyNFTOwner(_nftAddress, _assetId) returns (bool status){
         CardItem(_nftAddress).setPrice(_assetId, _amount);
-        CardItem(_nftAddress).updateOnSale(_assetId, true);
+        
+        if(CardItem(_nftAddress).getOnSale(_assetId) == false) {
+            CardItem(_nftAddress).updateOnSale(_assetId, true);
+            emit PutOnSale(_assetId);
+        }
+        
         emit SetNewPrice(_assetId, _amount);
+        return CardItem(_nftAddress).getOnSale(_assetId);
     }
 
         /** 
