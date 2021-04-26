@@ -126,7 +126,7 @@ class CardService extends Service {
                     image: info.data.image,
                     price: parseInt(contract_info.price, 10),
                     isForSale: contract_info.isForSale,
-                    metadata: nft_info.data.rows[0] !== undefined ? nft_info.data.rows[0].metadata.keyvalues : null
+                    metadata: nft_info.data.rows[0].metadata.keyvalues || null
                 });
             }
             }
