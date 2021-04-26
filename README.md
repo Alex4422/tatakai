@@ -41,7 +41,7 @@ npm install
 truffle test
 ```
 
-[![Units Test](https://i.ibb.co/tpkQhp2/units-test.png)](https://i.ibb.co/tpkQhp2/units-test.png)
+[![Units Test](https://i.ibb.co/0y8mXy9/units-test.png)](https://i.ibb.co/0y8mXy9/units-test.png)
 
 ### Lancer la DApp
 Dans un premier terminal, lancez les commandes suivantes pour démarrer le serveur :

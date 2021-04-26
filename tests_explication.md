@@ -10,7 +10,7 @@ Nous avons 2 fichiers de test :
 - Marketplace.test.js
 
 Nous avons effectués des tests end-to-end (de bout en bout) afin de vérifier que nos contrats fonctionnent comme prévue du début jusqu'à la fin.
-[![Units Test](https://i.ibb.co/tpkQhp2/units-test.png)](https://i.ibb.co/tpkQhp2/units-test.png)
+[![Units Test](https://i.ibb.co/0y8mXy9/units-test.png)](https://i.ibb.co/0y8mXy9/units-test.png)
 
 ### Faucet.test.js
 **Request TAK Token**
