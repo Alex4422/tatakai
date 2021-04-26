@@ -1,4 +1,4 @@
-import { INIT_MARKET, UPDATE_IS_FOR_SALE, REFRESH_MARKET } from "../actions/types";
+import { INIT_MARKET, REFRESH_MARKET } from "../actions/types";
 import { seedMarket} from "../actions/marketplace";
 import {API_URL} from "./utils/Constantes";
 import axios from "axios";
@@ -29,32 +29,7 @@ const MarketplaceMW = () => ({dispatch}: any) => (
       next(action)
       break;
     }
-    
 
-   /*******************************/
-    /* Update IS_for_sale post buy /
-  /*******************************/
-  case UPDATE_IS_FOR_SALE: {
-    const id = action.payload;
-    let data = {id}
-    const config: Object = {
-      method: "post",
-      url: `${API_URL}order/buy`,
-      headers: {
-        "Content-Type": `application/json`,
-      },
-      data,
-    };
-    axios(config)
-        .then(response => {
-          console.log("response Api", response);
-        })
-        .catch(err => {
-          console.error(err)
-        })
-    next(action)
-    break;
-  }
 
     default:
       return next(action);

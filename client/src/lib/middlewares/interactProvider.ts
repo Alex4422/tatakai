@@ -2,7 +2,7 @@ import { SWAP_ETH_TAK, IMPORT_TAK_METAMASK_WALLET, BUY_NFT, APPROVE_MARKETPLACE_
 import {getInstanceCardItem, getInstanceMarketplace, getInstanceTakToken} from "./utils";
 import { getBalances, refreshUserNFTS } from "../actions/user";
 import { showAlert} from "../actions/dashboard";
-import { buyNFTSuccess, updateIsForSale } from "../actions/marketplace";
+import { buyNFTSuccess } from "../actions/marketplace";
 import { toggleNewUser } from "../actions/dashboard";
 import { TOKEN, AlertType } from "./utils/Constantes"
 
