@@ -41,7 +41,7 @@ it("should swap token")
 ```
 
 - On vérifie les balances de la marketplace en ETH et en TAK, pareillement pour l'utilisateur voulant effectué le swap.
-- On effectue le swap
+- On effectue le swap.
 - On vérifie si les balances ont bien été mis à jour.
 
 
@@ -125,7 +125,7 @@ it("should sell and transfer NFT to Alice")
 it("should revert if putOnSale() caller is not nft owner")
 ```
 - Alice met en vente une carte dont elle n'est pas propriétaire.
-- On vérifie que la fonction `revert()`
+- On vérifie que la fonction `revert()`.
 
 ```sh
 
@@ -139,7 +139,7 @@ it("should put card on sale and set a price")
 it("should revert if removeOnSale() caller is not nft owner")
 ```
 - Alice retire de la vente une carte dont elle n'est pas propriétaire.
-- On vérifie que la fonction `revert()`
+- On vérifie que la fonction `revert()`.
 
 ```sh
 
@@ -153,8 +153,6 @@ it("should revert if user trying buy a card not for sale")
 ```
 - Carole achète la carte de Bob qui n'est plus en vente.
 - On vérifie que la fonction `revert()`
-
-
 ```sh
 
 it("should put card on sale and set a price")
