@@ -6,6 +6,8 @@ import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/security/Pausable.sol';
 import '@openzeppelin/contracts/utils/math/SafeMath.sol';
 
+/// @title Faucet Contract
+/// @dev This contract manages everything related to Faucet
 contract Faucet is Ownable, Pausable {
     using SafeMath for uint256;
 
@@ -14,14 +16,26 @@ contract Faucet is Ownable, Pausable {
     IERC20 public tokenInstance;
     
     mapping(address => uint256) lastAccessTime;
-
-    event Withdrawal(address indexed to);
-
+    
+    /**
+     * @dev Emitted when owner request tokens.
+     */
+    event Withdrawal(
+        address to
+    );
+    
+    /** 
+     * @dev Initializes the contract by setting a ERC20 token instance.
+     * @param _tokenInstance - ERC20 token instance.
+     */
     constructor(address _tokenInstance) {
         require(_tokenInstance != address(0));
         tokenInstance = IERC20(_tokenInstance);
     }
 
+    /** 
+     * @dev Request faucet token
+     */
     function requestTokens() public whenNotPaused onlyOwner {
         require(allowedToWithdraw(msg.sender), "You have to wait 30 minutes!");
         tokenInstance.transfer(msg.sender, tokenAmount);
@@ -29,6 +43,11 @@ contract Faucet is Ownable, Pausable {
         emit Withdrawal(msg.sender);
     }
 
+    /** 
+     * @dev Check if account allowed to withdraw
+     * @param _address - requestor address 
+     * @return bool - true if allowed, false if not allowed
+     */
     function allowedToWithdraw(address _address) internal view returns (bool) {
         if(lastAccessTime[_address] == 0) {
             return true;
