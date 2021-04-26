@@ -52,13 +52,13 @@ describe('Marketplace', function () {
         await this.erc20token.transfer(this.marketplace.address, web3.utils.toBN(50000000));
         
         // Swap de someOne
-        await this.marketplace.sendTransaction({from:someOne, value:101})
+        await this.marketplace.sendTransaction({from:someOne, value:10000})
         
         // Swap de someOne2
-        await this.marketplace.sendTransaction({from:someOne2, value:101})
+        await this.marketplace.sendTransaction({from:someOne2, value:10000})
 
         // Swap de someOne3
-        await this.marketplace.sendTransaction({from:someOne3, value:101})
+        await this.marketplace.sendTransaction({from:someOne3, value:10000})
     });
     describe('Swap ETH/TAK', function() {
         it('should swap token', async function () {
@@ -86,12 +86,13 @@ describe('Marketplace', function () {
     describe('Mint NFT', function () {
         
         it('should mint NFT', async function () {
-            const receipt = await this.nft.mintNFT("https://ipfs");
+            const basePrice = 1000;
+            const receipt = await this.nft.mintNFT("https://ipfs", 1000);
             expectEvent(receipt, "ItemCreated", { tokenId: new BN(1) });
         })
         
         it('should revert if not admin', async function() {
-            (await expectRevert(this.nft.mintNFT("https://ipfs", {from: someOne}), 'Ownable: caller is not the owner'));
+            (await expectRevert(this.nft.mintNFT("https://ipfs", 1000, {from: someOne}), 'Ownable: caller is not the owner'));
         })
         
     })
@@ -99,12 +100,12 @@ describe('Marketplace', function () {
     describe('Setting NFT Price', function() {
         it('should set nft price', async function() {
             const newPrice = 100;
-            const receipt = await this.marketplace.setPrice(this.nft.address, 1, newPrice, {from:owner});
-            expectEvent(receipt, "SetNewPrice", { assetId: new BN(1), price: new BN(newPrice) });
+            const receipt = await this.marketplace.putOnSale(this.nft.address, 1, newPrice, {from:owner});
+            expectEvent(receipt, "PutOnSale", { assetId: new BN(1), price: new BN(newPrice) });
         })
 
-        it('should revert if setPrice() caller is not nft owner', async function() {
-            (await expectRevert(this.marketplace.setPrice(this.nft.address, 1, 100, {from: someOne}), 'Caller is not nft owner'));
+        it('should revert if putOnSale() caller is not nft owner', async function() {
+            (await expectRevert(this.marketplace.putOnSale(this.nft.address, 1, 100, {from: someOne}), 'Caller is not nft owner'));
         })
 
         it('should get new price', async function() {
@@ -116,20 +117,9 @@ describe('Marketplace', function () {
     })
         
     describe('Buy and transfer NFT', function () {
-
-        it('should put card on sale', async function() {
-            const nftOwner = await this.nft.ownerOf(1);
-            const receipt = await this.marketplace.putOnSale(this.nft.address, 1, {from:nftOwner});
-            expectEvent(receipt, "PutOnSale", { assetId: new BN(1) });
-        })
-
-        it('should revert if putOnSale() called a second time', async function() {
-            const nftOwner = await this.nft.ownerOf(1);
-            (await expectRevert(this.marketplace.putOnSale(this.nft.address, 1, {from: nftOwner}), 'Already set up!'));
-        })
         
         it('should revert if putOnSale() caller is not nft owner', async function() {
-            (await expectRevert(this.marketplace.putOnSale(this.nft.address, 1, {from: someOne}), 'Caller is not nft owner'));
+            (await expectRevert(this.marketplace.putOnSale(this.nft.address, 1, 100, {from: someOne}), 'Caller is not nft owner'));
         })
 
         it('should buy and transfer NFT from marketplace', async function () {
@@ -154,11 +144,11 @@ describe('Marketplace', function () {
             expectEvent(receipt, "BuyTransaction", { assetId: new BN(1), oldOwner: seller, newOwner: buyer, price: new BN(price) });
         })
         
-        
-        it('should re-put card on sale', async function() {
+
+        it('should put card on sale', async function() {
             const nftOwner = await this.nft.ownerOf(1);
-            const receipt = await this.marketplace.putOnSale(this.nft.address, 1, {from:nftOwner});
-            expectEvent(receipt, "PutOnSale", { assetId: new BN(1) });
+            const receipt = await this.marketplace.putOnSale(this.nft.address, 1, 100, {from:nftOwner});
+            expectEvent(receipt, "PutOnSale", { assetId: new BN(1), price: new BN(100) });
         })
 
         it('should buy and transfer NFT from user', async function () {
@@ -205,6 +195,12 @@ describe('Marketplace', function () {
             await this.nft.approve(this.marketplace.address, 1, {from: seller});
             (await expectRevert(this.marketplace.buy(this.nft.address, 1, {from: buyer}), 'Card is not for sale'));
 
+        })
+        
+        it('should re-put card on sale', async function() {
+            const nftOwner = await this.nft.ownerOf(1);
+            const receipt = await this.marketplace.putOnSale(this.nft.address, 1, 100, {from:nftOwner});
+            expectEvent(receipt, "PutOnSale", { assetId: new BN(1), price: new BN(100) });
         })
     })
     
