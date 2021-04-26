@@ -1,8 +1,7 @@
 import { INIT_MARKET, UPDATE_IS_FOR_SALE, REFRESH_MARKET } from "../actions/types";
-import { seedMarket, approveMarketplaceToSell} from "../actions/marketplace";
-import {API_URL, AlertType} from "./utils/Constantes";
+import { seedMarket} from "../actions/marketplace";
+import {API_URL} from "./utils/Constantes";
 import axios from "axios";
-import { showAlert} from "../actions/dashboard";
 
 const MarketplaceMW = () => ({dispatch}: any) => (
   next: any
@@ -14,14 +13,12 @@ const MarketplaceMW = () => ({dispatch}: any) => (
   /*******************************/
     case REFRESH_MARKET:
     case INIT_MARKET : {
-      console.log("charge data marketplace")
       const config: Object = {
         method: "get",
         url: `${API_URL}cards`,
       };
       axios(config)
           .then(response => {
-            console.log("response Api", response);
             if (response.status === 200) {
               dispatch(seedMarket(response.data));
             }

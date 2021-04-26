@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useModal } from "../hooks/useModal";
 import { sellNFT, withdrawNFTonSale } from "../lib/actions/marketplace";
 import { Checkbox, Modal, TextField, Grid, FormControlLabel } from '@material-ui/core';
+import logo from "../assets/logo_fond_noir.svg";
 
 import "./Card.css";
 
@@ -70,7 +71,7 @@ const Template = ({ item }: TemplateProps) => {
           <p>Type : <span className="info">{item?.metadata?.type}</span></p>
           <p>Age : <span className="info">{item?.metadata?.age}</span></p>
           <p>Nationality : <span className="info">{item?.metadata?.nationality}</span></p>
-          <p>Current Price : <span className="info">{item?.price} TAK</span></p>
+          <p>Current Price : <span className="info">{item?.price} <img className="logo" src={logo} alt="logo"/></span></p>
           <p>Statut: <span className="info">{(item?.isForSale === true)? "On Market!" : "OKLM"}</span></p>
           <Grid item sm={12} xs={12}> 
           <FormControlLabel
