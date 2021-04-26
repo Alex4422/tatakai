@@ -4,7 +4,7 @@
 
 ## Introduction
 
-Notre marketplace, à l’instar d’un géant comme "Sorare", propose l’achat-vente de NFT à l’effigie de combattant professionnels pluridisciplinaire avec une gamification autour de leur actualité via une scoremap exclusive et innovante, donnant ainsi une nouvelle synergie à ce marché en plein essor.
+Tatakai propose l’achat-vente de NFT à l’effigie de combattant professionnels pluridisciplinaire avec une gamification autour de leur actualité via une scoremap exclusive et innovante.
 
 ## Fonctionnalités
 
@@ -77,6 +77,10 @@ npm start
    [Material UI]: <https://material-ui.com/>
    [Ganache]: <https://truffleframework.com/ganache>
 
+   [Avoiding Common Attack]: <https://truffleframework.com/ganache>
+   [Ganache]: <https://truffleframework.com/ganache>
+   [Ganache]: <https://truffleframework.com/ganache>
+
 ## Perspective d'évolution
 
-- Mise en place de la Gamification sous forme de pari. Sur une période donnée, l'utilisateur aura la possibilité de parier sur les prochains matchs de 3 de ses combattants qu'il possède dans son deck. Ainsi il mettra ses cartes en jeu lui donnant le droit de parier sur ces combattants, il sera alors en mesure de spécifier plus précisément sur les combats à venir (victoire par Ko, numero de round, ...) pour augmenter son indice de difficulté. Si le joueur possède des cartes rares/légendaires ou Unique son indice de difficulté sera augmenté en fonction. A l'issu de la période de pari, une grille de récompense offrira les gains associés en fonction du classement du user. Il pourra ainsi remporter des cartes uniques ou encore simplement des TAK token.
+- Mise en place de la gamification sous forme de pari. Sur une période donnée, l'utilisateur aura la possibilité de parier sur les prochains matchs de trois de ses combattants qu'il possède dans son deck. Ainsi il mettra ses cartes en jeu, lui donnant le droit de parier sur ses combattants, il sera alors en mesure de spécifier plus précisément sur les combats à venir (victoire par KO, numéro de round, ...) pour augmenter son indice de difficulté. Si le joueur possède des cartes rares/légendaires ou unique, son indice de difficulté sera augmenté en fonction. A l'issu de la période de pari, une grille de récompense offrira les gains associés en fonction du classement de l'utilisateur. Il pourra ainsi remporter des cartes uniques ou encore simplement des TAK Token.
