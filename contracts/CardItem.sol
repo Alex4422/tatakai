@@ -90,7 +90,7 @@ contract CardItem is ERC721URIStorage, Ownable, Pausable {
      * @param _assetId - NFT id
      */
     function updateOnSale(uint256 _assetId, bool status) external whenNotPaused onlyMarketplace {
-        require(getOnSale(_assetId) == !status, "Already set up!");
+        require(tokens[_assetId].isForSale == !status, "Already set up!");
         TokenInfo storage token = tokens[_assetId];
         token.isForSale = status;
     }

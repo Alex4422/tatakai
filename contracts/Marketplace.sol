@@ -24,15 +24,6 @@ contract Marketplace is ERC721Holder, Ownable, Pausable {
         uint256 price
     );
 
-    event PutOnSale(
-        uint256 assetId,
-        uint256 price
-    );      
-    
-    event RemoveOnSale(
-        uint256 assetId
-    );
-
     constructor(address _acceptedToken) {
         require(_acceptedToken != address(0));
         acceptedToken = IERC20(_acceptedToken);
@@ -59,7 +50,6 @@ contract Marketplace is ERC721Holder, Ownable, Pausable {
         require(CardItem(_nftAddress).getOnSale(_assetId) == true, "Card is not for sale");
         address nftOwner = IERC721(_nftAddress).ownerOf(_assetId);
         uint256 priceInWei = CardItem(_nftAddress).getPrice(_assetId);
-        CardItem(_nftAddress).updateOnSale(_assetId, false);
 
         acceptedToken.transferFrom(
             msg.sender, 
@@ -72,6 +62,8 @@ contract Marketplace is ERC721Holder, Ownable, Pausable {
             msg.sender,
             _assetId
         );
+        
+        CardItem(_nftAddress).updateOnSale(_assetId, false);
 
         emit BuyTransaction(_assetId, nftOwner, msg.sender, priceInWei);
     }
@@ -87,8 +79,6 @@ contract Marketplace is ERC721Holder, Ownable, Pausable {
         if(!CardItem(_nftAddress).getOnSale(_assetId)) {
             CardItem(_nftAddress).updateOnSale(_assetId, true);
         }
-        
-        emit PutOnSale(_assetId, _amount);
     }
 
         /** 
@@ -97,6 +87,5 @@ contract Marketplace is ERC721Holder, Ownable, Pausable {
      */
     function removeOnSale(address _nftAddress, uint256 _assetId) public whenNotPaused onlyNFTOwner(_nftAddress, _assetId){
         CardItem(_nftAddress).updateOnSale(_assetId, false);
-        emit RemoveOnSale(_assetId);
     }
 }
