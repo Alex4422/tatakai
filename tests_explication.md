@@ -1,7 +1,5 @@
 # Test Explication
 
-Ce document explique les tests écrits et pourquoi on les a écrit.
-
 ## Introduction
 
 Nous avons 2 fichiers de test :
@@ -11,16 +9,15 @@ Nous avons 2 fichiers de test :
 
 Nous avons effectués des tests end-to-end (de bout en bout) afin de vérifier que nos contrats fonctionnent comme prévue du début jusqu'à la fin.
 
-[![Units Test](https://i.ibb.co/0y8mXy9/units-test.png)](https://i.ibb.co/0y8mXy9/units-test.png)
+[![Units Test](https://i.ibb.co/7pTfH8r/units-test.png)](https://i.ibb.co/7pTfH8r/units-test.png)
 
 ### Faucet.test.js
 **Request TAK Token**
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
-```sh
-describe("Request TAK Token")
-```
-**Description :** Simulation d'une demande de Tak Token via un faucet.
-**Raison :** Vérifier que la demande de Tak via le faucet fonctionne et est uniquement possible pour le propriétaire de la marketplace et non pour les utilisateurs.
+
+- **Description :** Simulation d'une demande de Tak Token via un faucet.
+- **Raison :** Vérifier que la demande de Tak via le faucet fonctionne et est uniquement possible pour le propriétaire de la marketplace et non pour les utilisateurs.
+
 ```sh
 it("should revert if user request tak token")
 ```
@@ -36,29 +33,23 @@ it("should revert if user not waited")
 **Swap Token**
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-```sh
-describe("Swap Token")
-```
-**Description :** Simulation d'un swap entre ETH/TAK (Le TAK étant la monnaie d'échange de la plateforme). 
-**Raison :** Vérifier que le swap fonctionne, que les balances sont bien mis à jour.
+- **Description :** Simulation d'un swap entre ETH/TAK (Le TAK étant la monnaie d'échange de la plateforme). 
+- **Raison :** Vérifier que le swap fonctionne, que les balances sont bien mis à jour.
 
 ```sh
 it("should swap token")
 ```
 
 - On vérifie les balances de la marketplace en ETH et en TAK, pareillement pour l'utilisateur voulant effectué le swap.
-- On effectue le swap
+- On effectue le swap.
 - On vérifie si les balances ont bien été mis à jour.
 
 
 **Mint NFT**
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-```sh
-describe("Mint NFT")
-```
-**Description :** Simulation d'un mint.
-**Raison :** Vérifier que le mint fonctionne et est réservé uniquement au propriétaire de la marketplace.
+- **Description :** Simulation d'un mint.
+- **Raison :** Vérifier que le mint fonctionne et est réservé uniquement au propriétaire de la marketplace.
 
 ```sh
 it("should mint NFT")
@@ -68,97 +59,104 @@ it("should mint NFT")
 
 
 ```sh
-it("should revert if not admin)
+it("should revert if user try to mint")
 ```
-- Un utilisateur quelconque effectue le mint d'un NFT.
+- Alice effectue le mint d'un NFT.
 - On vérifie si un la fonction `revert()`.
 
+
 ```sh
-describe("Setting NFT Price")
+it("should revert if token uri already registered")
 ```
-**Setting NFT Price**
+- Le propriétaire de la marketplace effectue le mint d'un NFT avec un URI déjà enregistré.
+- On vérifie si un la fonction `revert()`.
+
+**Marketplace sell his NFT to Alice**
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
-```sh
-it("should set nft price")
-```
-- Un utilisateur affecte un nouveau prix à son NFT dont il est propriétaire.
-- On vérifie que l'event `SetNewPrice` a bien été émis.
+
+- **Description :** Simulation d'un premier achat.
+- **Raison :** Vérifier que l'achat fonctionne et passe de la marketplace à une Alice.
 
 ```sh
-it("should revert if setPrice() caller is not nft owner")
+it("should put nft on sale and set a price")
 ```
-- Un utilisateur affecte un nouveau prix à un NFT dont il n'est propriétaire.
-- On vérifie si la fonction `revert()`.
+- La marketplace affecte un nouveau prix à son NFT dont il est propriétaire.
+- On vérifie que la carte en bien en vente.
+- On vérifie que le prix a bien été changé de valeur.
+
 
 ```sh
-it("should get new price")
+it("should sell and transfer NFT to Alice")
 ```
-- On récupère le nouveau prix qui a été affecté par son propriétaire.
-- On vérifie si le prix a bien été affecté et que la valeur est correcte.
+- Alice achète le NFT.
+- On vérifie les balances en Tak Token avant et après l'achat
+- On vérifie que Alice est désormais propriétaire du NFT. 
+- On vérifie que l'event `BuyTransaction` a bien été émis.
 
-**Buy and transfer NFT**
+**Alice sell his NFT to Bob**
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
-```sh
-describe("Buy and transfer NFT")
-```
-**Description :** Simulaton de mise en vente NFT, achat puis revente.
-**Raison :** Vérifier que la mise en vente de NFT, et l'achat/revente de NFT fonctionne, que le NFT change bien de propriétaire et que les balances sont mis à jour.
+
+- **Description :** Simulation d'un second achat.
+- **Raison :** Vérifier que l'achat fonctionne et passe de Alice à Bob.
 
 ```sh
-it("should put card on sale")
+it("should put nft on sale and set a price")
 ```
-- Le propriétaire du NFT met en vente sa carte.
-- On vérifie que l'event `PutOnSale` a bien été émis.
+- Alice affecte un nouveau prix à son NFT dont il est propriétaire.
+- On vérifie que la carte en bien en vente.
+- On vérifie que le prix a bien été changé de valeur.
+
 
 ```sh
-it("should revert if putOnSale() called a second time")
+it("should sell and transfer NFT to Alice")
 ```
-- Le propriétaire du NFT remet en vente sa carte.
-- On vérifie que la fonction `revert()`
+- Bob achète le NFT.
+- On vérifie les balances en Tak Token avant et après l'achat
+- On vérifie que Bob est désormais le propriétaire du NFT. 
+- On vérifie que l'event `BuyTransaction` a bien été émis.
+
+**Put/Remove NFT on sale**
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+
+- **Description :** Mise en vente/Retrait du NFT sur la marketplace. Affectation de prix.
+- **Raison :** Vérifier que la mise en vente/retrait et l'affectation de prix de NFT sur la marketplace fonctionne, et les exceptions.
 
 ```sh
 it("should revert if putOnSale() caller is not nft owner")
 ```
-- Un utilisateur quelconque met en vente une carte dont il n'est pas propriétaire.
-- On vérifie que la fonction `revert()`
+- Alice met en vente une carte dont elle n'est pas propriétaire.
+- On vérifie que la fonction `revert()`.
 
 ```sh
-it("should buy and transfer NFT from marketplace")
-```
-- Un utilisateur quelconque achète le NFT.
-- On vérifie l'achat en controlant les balances en Tak Token avant et après l'achat
-- On vérifie que le NFT a bien changer de propriétaire. 
-- On vérifie que l'event `BuyTransaction` a bien été émis.
 
-```sh
-it("should re-put card on sale")
+it("should put card on sale and set a price")
 ```
-- Le nouveau propriétaire du NFT remet en vente la carte.
-- On vérifie que l'event `PutOnSale` a bien été émis.
-
-```sh
-it("should buy and transfer NFT from user")
-```
-- Un utilisateur quelconque rachète le NFT.
-- On vérifie l'achat en controlant les balances en Tak Token avant et après l'achat
-- On vérifie que le NFT a bien changer de propriétaire. 
-- On vérifie que l'event `BuyTransaction` a bien été émis.
-
-```sh
-it("should check if card has been remove on sale")
-```
-- On vérifie que la carte n'est plus en vente après le dernier achat.
+- Bob met en vente sa carte et propose un nouveau prix.
+- On vérifie que la carte est bien en vente.
+- On vérifie que le prix a bien été changé de valeur.
 
 ```sh
 it("should revert if removeOnSale() caller is not nft owner")
 ```
-- Un utilisateur quelconque retire de la vente une carte dont il n'est pas propriétaire.
-- On vérifie que la fonction `revert()`
+- Alice retire de la vente une carte dont elle n'est pas propriétaire.
+- On vérifie que la fonction `revert()`.
 
+```sh
+
+it("should remove card on sale")
+```
+- Bob retire sa carte de la vente.
+- On vérifie que la carte a bien été retiré de la vente.
 
 ```sh
 it("should revert if user trying buy a card not for sale")
 ```
-- Un utilisateur quelconque essaie d'acheter la carte qui n'est plus en vente.
-- On vérifie que la fonction `revert()`.
+- Carole achète la carte de Bob qui n'est plus en vente.
+- On vérifie que la fonction `revert()`
+```sh
 
+it("should put card on sale and set a price")
+```
+- Bob remet en vente sa carte et propose un nouveau prix.
+- On vérifie que la carte est bien en vente.
+- On vérifie que le prix a bien été changé de valeur.
