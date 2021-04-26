@@ -13,14 +13,11 @@ Nous avons effectués des tests end-to-end (de bout en bout) afin de vérifier q
 
 ### Faucet.test.js
 **Request TAK Token**
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
 - **Description :** Simulation d'une demande de Tak Token via un faucet.
 - **Raison :** Vérifier que la demande de Tak via le faucet fonctionne et est uniquement possible pour le propriétaire de la marketplace et non pour les utilisateurs.
 
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
-```sh
-describe("Request TAK Token")
-```
 ```sh
 it("should revert if user request tak token")
 ```
@@ -40,9 +37,6 @@ it("should revert if user not waited")
 - **Raison :** Vérifier que le swap fonctionne, que les balances sont bien mis à jour.
 
 ```sh
-describe("Swap Token")
-```
-```sh
 it("should swap token")
 ```
 
@@ -57,9 +51,6 @@ it("should swap token")
 - **Description :** Simulation d'un mint.
 - **Raison :** Vérifier que le mint fonctionne et est réservé uniquement au propriétaire de la marketplace.
 
-```sh
-describe("Mint NFT")
-```
 ```sh
 it("should mint NFT")
 ```
@@ -87,9 +78,6 @@ it("should revert if token uri already registered")
 - **Raison :** Vérifier que l'achat fonctionne et passe de la marketplace à une Alice.
 
 ```sh
-describe("Marketplace sell his NFT to Alice")
-```
-```sh
 it("should put nft on sale and set a price")
 ```
 - La marketplace affecte un nouveau prix à son NFT dont il est propriétaire.
@@ -112,9 +100,6 @@ it("should sell and transfer NFT to Alice")
 - **Raison :** Vérifier que l'achat fonctionne et passe de Alice à Bob.
 
 ```sh
-describe("Alice sell his NFT to Bob")
-```
-```sh
 it("should put nft on sale and set a price")
 ```
 - Alice affecte un nouveau prix à son NFT dont il est propriétaire.
@@ -131,14 +116,11 @@ it("should sell and transfer NFT to Alice")
 - On vérifie que l'event `BuyTransaction` a bien été émis.
 
 **Put/Remove NFT on sale**
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
 - **Description :** Mise en vente/Retrait du NFT sur la marketplace. Affectation de prix.
 - **Raison :** Vérifier que la mise en vente/retrait et l'affectation de prix de NFT sur la marketplace fonctionne, et les exceptions.
 
-```sh
-describe("Put/Remove NFT on sale")
-```
 ```sh
 it("should revert if putOnSale() caller is not nft owner")
 ```
