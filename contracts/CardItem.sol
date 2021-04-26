@@ -58,7 +58,7 @@ contract CardItem is ERC721URIStorage, Ownable, Pausable {
         tokens[newItemId] = TokenInfo(
             _tokenURI,
             _priceBase,
-            false
+            true
         );
      
         emit ItemCreated(marketplace, newItemId);
