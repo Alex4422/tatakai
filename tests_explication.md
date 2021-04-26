@@ -37,8 +37,8 @@ it("should revert if user not waited")
 ```sh
 describe("Swap Token")
 ```
-**Description :** Simulation d'un swap entre ETH/TAK (Le TAK étant la monnaie d'échange de la plateforme). 
-**Raison :** Vérifier que le swap fonctionne, que les balances sont bien mis à jour.
+- **Description :** Simulation d'un swap entre ETH/TAK (Le TAK étant la monnaie d'échange de la plateforme). 
+- **Raison :** Vérifier que le swap fonctionne, que les balances sont bien mis à jour.
 
 ```sh
 it("should swap token")
@@ -55,8 +55,8 @@ it("should swap token")
 ```sh
 describe("Mint NFT")
 ```
-**Description :** Simulation d'un mint.
-**Raison :** Vérifier que le mint fonctionne et est réservé uniquement au propriétaire de la marketplace.
+- **Description :** Simulation d'un mint.
+- **Raison :** Vérifier que le mint fonctionne et est réservé uniquement au propriétaire de la marketplace.
 
 ```sh
 it("should mint NFT")
@@ -84,8 +84,8 @@ it("should revert if token uri already registered")
 ```sh
 describe("Marketplace sell his NFT to Alice")
 ```
-**Description :** Simulation d'un premier achat.
-**Raison :** Vérifier que l'achat fonctionne et passe de la marketplace à une Alice.
+- **Description :** Simulation d'un premier achat.
+- **Raison :** Vérifier que l'achat fonctionne et passe de la marketplace à une Alice.
 
 ```sh
 it("should put nft on sale and set a price")
@@ -108,8 +108,8 @@ it("should sell and transfer NFT to Alice")
 ```sh
 describe("Alice sell his NFT to Bob")
 ```
-**Description :** Simulation d'un second achat.
-**Raison :** Vérifier que l'achat fonctionne et passe de Alice à Bob.
+- **Description :** Simulation d'un second achat.
+- **Raison :** Vérifier que l'achat fonctionne et passe de Alice à Bob.
 
 ```sh
 it("should put nft on sale and set a price")
@@ -134,8 +134,8 @@ it("should sell and transfer NFT to Alice")
 describe("Put/Remove NFT on sale")
 ```
 
-**Description :** Mise en vente/Retrait du NFT sur la marketplace. Affectation de prix.
-**Raison :** Vérifier que la mise en vente/retrait et l'affectation de prix de NFT sur la marketplace fonctionne, et les exceptions.
+- **Description :** Mise en vente/Retrait du NFT sur la marketplace. Affectation de prix.
+- **Raison :** Vérifier que la mise en vente/retrait et l'affectation de prix de NFT sur la marketplace fonctionne, et les exceptions.
 
 ```sh
 it("should revert if putOnSale() caller is not nft owner")
