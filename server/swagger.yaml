@@ -12,8 +12,6 @@ tags:
   description: "Mint and retrieve cards"
 - name: "faucet"
   description: "Faucet request"
-- name: "order"
-  description: "Buy/sell cards"
 schemes:
 - "https"
 - "http"
@@ -61,8 +59,8 @@ paths:
       - in: "formData"
         name: "price"
         description: "NFT Price"
-        required: false
-        type: "string"
+        required: true
+        type: "integer"
       responses:
         "200":
           description: "Return card info"
