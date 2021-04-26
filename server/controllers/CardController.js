@@ -9,11 +9,14 @@ exports.create = async (req, res) => {
           return res.status(400).send({ message: "Please upload a file!" });
         }
         const data = {
-          name: req.body.name || "",
-          age: req.body.age || "",
-          nationality: req.body.nationality || "",
-          season: req.body.saison || "",
-          type: req.body.type || ""
+          price: req.body.price || 0,
+          metadata: {
+            name: req.body.name || "",
+            age: req.body.age || "",
+            nationality: req.body.nationality || "",
+            season: req.body.saison || "",
+            type: req.body.type || ""
+          }
         };
         const card = await (await CardService).mint(req.file, data)
         res.json(card);

@@ -25,12 +25,12 @@ class CardService extends Service {
         
             const metadata = {
                 pinataMetadata: {
-                    name: data.name,
-                    keyvalues: data
+                    name: data.metadata.name,
+                    keyvalues: data.metadata
               },
                 pinataContent: {
-                    name: data.name,
-                    description: data.type,
+                    name: data.metadata.name,
+                    description: data.metadata.type,
                     image: "https://ipfs.io/ipfs/"+nft.data.IpfsHash
               }
             };
