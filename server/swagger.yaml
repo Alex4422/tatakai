@@ -37,6 +37,11 @@ paths:
         required: true
         type: "string"
       - in: "formData"
+        name: "price"
+        description: "NFT Price"
+        required: true
+        type: "integer"
+      - in: "formData"
         name: "age"
         description: "Fighter Age"
         required: false
@@ -56,11 +61,6 @@ paths:
         description: "Card Type"
         required: false
         type: "string"
-      - in: "formData"
-        name: "price"
-        description: "NFT Price"
-        required: true
-        type: "integer"
       responses:
         "200":
           description: "Return card info"
@@ -185,6 +185,10 @@ definitions:
       image:
         type: "string"
         example: "https://ipfs.io/ipfs/QmXYUfzGTEXmLHkETDMvmFwWRCfHacf5HbXiotpSQs8Ht4"
+      price:
+        type: "integer"
+        format: "int64"
+        example: "1000"
       metadata:
         $ref: "#/definitions/Metadata"
     xml:
@@ -201,18 +205,12 @@ definitions:
       type:
         type: "string"
         example: "Unique"
-      price:
-        type: "string"
-        example: "1000"
       saison:
         type: "string"
         example: "2021"
       nationality:
         type: "string"
         example: "United States"
-      isForSale:
-        type: "bool"
-        example: false
     xml:
       name: "Metadata"
 externalDocs:
