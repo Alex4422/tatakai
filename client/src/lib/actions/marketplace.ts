@@ -30,7 +30,7 @@ export const selectCurrent = (item: ICard) => ({
   payload: { current: item },
 });
 
-export const buyNFT = (id: number, price: string) => ({
+export const buyNFT = (id: number, price: number) => ({
   type: BUY_NFT,
   payload: { id, price },
 });

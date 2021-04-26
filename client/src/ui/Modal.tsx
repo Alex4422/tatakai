@@ -27,7 +27,7 @@ const Template = ({ item }: TemplateProps) => {
   let isWhishListed: boolean = item ? wishlist.includes(item.id) : false;
   
   const handleOnClick = () => {
-    dispatch(buyNFT(item.id, item.metadata.price));
+    dispatch(buyNFT(item.id, item.price));
     handleClose();
   };
 
@@ -75,7 +75,7 @@ const Template = ({ item }: TemplateProps) => {
           <p>Type : <span className="info">{item?.metadata?.type}</span></p>
           <p>Age : <span className="info">{item?.metadata?.age}</span></p>
           <p>Nationality : <span className="info">{item?.metadata?.nationality}</span></p>
-          <p>Price : <span className="info">{item?.metadata?.price}</span> </p>
+          <p>Price : <span className="info">{item?.price}</span> </p>
           {hasHistory 
           ?<button
             onClick={handleShowHistory}

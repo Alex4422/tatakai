@@ -33,12 +33,12 @@ const useStyles = makeStyles((theme) => ({
 const Template = ({ item }: TemplateProps) => {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const [price, setPrice] = useState(item?.metadata?.price);
+  const [price, setPrice] = useState(item?.price);
   const [isSelling, setIsSelling] = useState(false);
   const { handleClose } = useModal();
   
   const handleOnClick = () => {
-    dispatch(sellNFT(item.id, parseInt(price,10)));
+    dispatch(sellNFT(item.id, price));
     handleClose();
   };
 
@@ -70,8 +70,8 @@ const Template = ({ item }: TemplateProps) => {
           <p>Type : <span className="info">{item?.metadata?.type}</span></p>
           <p>Age : <span className="info">{item?.metadata?.age}</span></p>
           <p>Nationality : <span className="info">{item?.metadata?.nationality}</span></p>
-          <p>Current Price : <span className="info">{item?.metadata?.price} TAK</span></p>
-          <p>Statut: <span className="info">{(item?.metadata?.isForSale === 1)? "On Market!" : "OKLM"}</span></p>
+          <p>Current Price : <span className="info">{item?.price} TAK</span></p>
+          <p>Statut: <span className="info">{(item?.isForSale === true)? "On Market!" : "OKLM"}</span></p>
           <Grid item sm={12} xs={12}> 
           <FormControlLabel
             control={ <Checkbox
@@ -104,7 +104,7 @@ const Template = ({ item }: TemplateProps) => {
                   name="price"
                   autoComplete="price"
                   defaultValue={price || ""}
-                  onChange={e => (setPrice(e.target.value))}
+                  onChange={e => (setPrice(parseInt(e.target.value,10)))}
                   style={{marginLeft: "2rem"}}
                 />
           
@@ -122,7 +122,7 @@ const Template = ({ item }: TemplateProps) => {
           >
             Cancel
           </button>
-          {(item?.metadata?.isForSale === 1)
+          {(item?.isForSale === true)
           ? <button
           onClick={handleOnClickWithdraw}
           type="button"

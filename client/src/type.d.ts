@@ -83,14 +83,14 @@ interface ICard {
   description: string;
   image: string;
   owner: string;
+  price: number;
+  isForSale: boolean;
   metadata: {
     age: string;
     name: string;
     nationality: string;
-    price: string;
     saison: string;
     type: string;
-    isForSale: number;
   }
 }
 

@@ -1,4 +1,4 @@
-import { INIT_MARKET, SELL_NFT, WITHDRAW_NFT_ON_SALE, UPDATE_IS_FOR_SALE, REFRESH_MARKET } from "../actions/types";
+import { INIT_MARKET, UPDATE_IS_FOR_SALE, REFRESH_MARKET } from "../actions/types";
 import { seedMarket, approveMarketplaceToSell} from "../actions/marketplace";
 import {API_URL, AlertType} from "./utils/Constantes";
 import axios from "axios";
@@ -33,51 +33,6 @@ const MarketplaceMW = () => ({dispatch}: any) => (
       break;
     }
     
-     /*******************************/
-    /*SELL NFT /
-  /*******************************/
-  case SELL_NFT: {
-    const {id, price} = action.payload;
-    let data = {id, price}
-    console.log(data)
-    const config: Object = {
-      url: `${API_URL}order/sell`,
-      method: 'post',
-      headers: {
-        "Content-Type": `application/json`,
-      },
-      data,
-    };
-    axios(config)
-      .then(res => {
-        console.log("response Api", res)
-        dispatch(approveMarketplaceToSell())
-      })
-      .catch(err => dispatch(showAlert("Your card is on the market", AlertType.Warning))
-      )
-    next(action)
-    break;
-  }
-     /*******************************/
-    /*WITHDRAW_NFT_ON_SALE
-  /*******************************/
-    case WITHDRAW_NFT_ON_SALE: {
-      const id = action.payload;
-      let data = {id}
-      const config: Object = {
-        url: `${API_URL}order/remove`,
-        method: 'post',
-        headers: {
-          "Content-Type": `application/json`,
-        },
-        data,
-      };
-      axios(config)
-        .then(res => dispatch(showAlert("Your card is no longer on the market", AlertType.Info))
-        )
-        .catch(err => dispatch(showAlert("Your card is still on the market", AlertType.Warning)))
-      break;
-  }
 
    /*******************************/
     /* Update IS_for_sale post buy /
