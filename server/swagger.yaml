@@ -115,68 +115,6 @@ paths:
               $ref: "#/definitions/Cards"
         "404":
           description: "No exist"
-  /order/buy:
-    post:
-      tags:
-      - "order"
-      summary: "Buy a card"
-      description: "Buy a card from marketplace or user"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "id"
-        in: "query"
-        description: "Card ID"
-        required: true
-        type: "integer"
-      responses:
-        "200":
-          description: "Return true"
-        "500":
-          description: "Invalid input"
-  /order/sell:
-    post:
-      tags:
-      - "order"
-      summary: "Sell a card"
-      description: "Put a card on sale to the marketplace"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "id"
-        in: "query"
-        description: "Card ID"
-        required: true
-        type: "integer"
-      - name: "price"
-        in: "query"
-        description: "Card price"
-        required: true
-        type: "string"
-      responses:
-        "200":
-          description: "Return a success message"
-        "500":
-          description: "Invalid input"
-  /order/remove:
-    post:
-      tags:
-      - "order"
-      summary: "Remove a card on sale"
-      description: "Remove a card from the marketplace"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "id"
-        in: "query"
-        description: "Card ID"
-        required: true
-        type: "integer"
-      responses:
-        "200":
-          description: "Return a success message"
-        "500":
-          description: "Invalid input"
   /accounts/{address}:
     get:
       tags:
