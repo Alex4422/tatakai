@@ -44,7 +44,7 @@ contract CardItem is ERC721URIStorage, Ownable, Pausable {
      * @param _tokenURI - URL include ipfs hash
      * @return assetId - return nft id
      */
-    function mintNFT(string memory _tokenURI) public whenNotPaused onlyOwner returns (uint256 assetId) {
+    function mintNFT(string memory _tokenURI, uint256 _priceBase) public whenNotPaused onlyOwner returns (uint256 assetId) {
         require(ipfsHashes[_tokenURI] != true, "Already registered");  
         
          _tokenIds.increment();
@@ -57,7 +57,7 @@ contract CardItem is ERC721URIStorage, Ownable, Pausable {
         
         tokens[newItemId] = TokenInfo(
             _tokenURI,
-            0,
+            _priceBase,
             false
         );
      

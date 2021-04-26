@@ -14,6 +14,7 @@ exports.create = async (req, res) => {
           nationality: req.body.nationality || "",
           season: req.body.saison || "",
           type: req.body.type || "",
+          price: req.body.price || 0,
           isForSale: req.body.isForSale || 1
         };
         const card = await (await CardService).mint(req.file, data)
