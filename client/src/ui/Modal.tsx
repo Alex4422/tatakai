@@ -7,6 +7,8 @@ import Modal from "@material-ui/core/Modal";
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import History from "./history";
+import logo from "../assets/logo_fond_noir.svg";
+
 
 import "./Card.css";
 
@@ -75,7 +77,7 @@ const Template = ({ item }: TemplateProps) => {
           <p>Type : <span className="info">{item?.metadata?.type}</span></p>
           <p>Age : <span className="info">{item?.metadata?.age}</span></p>
           <p>Nationality : <span className="info">{item?.metadata?.nationality}</span></p>
-          <p>Price : <span className="info">{item?.price}</span> </p>
+          <p>Price : <span className="info">{item?.price} <img className="logo" src={logo} alt="logo"/></span> </p>
           {hasHistory 
           ?<button
             onClick={handleShowHistory}

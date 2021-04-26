@@ -90,6 +90,8 @@ const interactMW = () => ({ dispatch, getState }: any) =>  (
     const MarketplaceInstance = await getInstanceMarketplace(web3);
     const CardItemInstance = await getInstanceCardItem(web3);
     const TakTokenInstance = await getInstanceTakToken(web3);
+    const seller = await CardItemInstance.methods.ownerOf(id).call();
+    console.log(seller)
     dispatch(showAlert("Buying process, waiting for metamask...",AlertType.Info))
     try {
       TakTokenInstance.methods.approve(MarketplaceInstance._address,price)
@@ -102,10 +104,9 @@ const interactMW = () => ({ dispatch, getState }: any) =>  (
               console.log("Allowance ok!")
             });
           MarketplaceInstance.methods.buy(CardItemInstance._address, id)
-          .send({from: accounts[0]})
+          .send({from: accounts[0], gas: 400000})
             .then((response :any) => {
               if(response.status==true) {
-                console.log("c'est ok, bon achat");
                 dispatch(buyNFTSuccess());
                 dispatch(showAlert("Well done, new NFT in your deck !", AlertType.Success));
                 dispatch(refreshUserNFTS());
@@ -131,7 +132,6 @@ const interactMW = () => ({ dispatch, getState }: any) =>  (
           .send({from: accounts[0]})
             .then((response :any) => {
               if(response.status==true) {
-                console.log("c'est ok, withdraw ok");
                 dispatch(showAlert("Your card is no longer on the market", AlertType.Info))
               } else {
                  dispatch(showAlert("Your card is still on the market", AlertType.Warning))
@@ -148,11 +148,15 @@ const interactMW = () => ({ dispatch, getState }: any) =>  (
     const {id, price} = action.payload;
     const NFTAddress = CardItem.options.address
     const MarketplaceInstance = await getInstanceMarketplace(web3);
+    const CardItemInstance = await getInstanceCardItem(web3);
+    
+    CardItemInstance.methods.approve(MarketplaceInstance._address, id).send({from: accounts[0]})
+    .then((response:any) => console.log("approve NFT"))
+    .catch((error: any) => console.log("error", error))
     MarketplaceInstance.methods.putOnSale(NFTAddress,id, price)
           .send({from: accounts[0]})
             .then((response :any) => {
               if(response.status==true) {
-                console.log("c'est ok, Onsale ok");
                 dispatch(showAlert("Your card is on the market", AlertType.Info))
               } else {
                  dispatch(showAlert("Oops, your card is not on sale", AlertType.Warning))

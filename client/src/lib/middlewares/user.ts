@@ -24,7 +24,6 @@ const user = () => ({ dispatch, getState }: any) => (
         }
             axios(config)
           .then(res => {
-            console.log("response Api", res.data.cards);
             dispatch(seedUserNFTS(res.data.cards));
           })
           .catch(err => { 
