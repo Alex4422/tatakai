@@ -10,8 +10,7 @@ Nous avons 2 fichiers de test :
 - Marketplace.test.js
 
 Nous avons effectués des tests end-to-end (de bout en bout) afin de vérifier que nos contrats fonctionnent comme prévue du début jusqu'à la fin.
-
-[![Units Test](https://i.ibb.co/fNvNRBz/units-test.png)](https://i.ibb.co/dpMKxHm/units-test.png)
+[![Units Test](https://i.ibb.co/tpkQhp2/units-test.png)](https://i.ibb.co/tpkQhp2/units-test.png)
 
 ### Faucet.test.js
 **Request TAK Token**
@@ -111,6 +110,12 @@ it("should put card on sale")
 - On vérifie que l'event `PutOnSale` a bien été émis.
 
 ```sh
+it("should revert if putOnSale() called a second time")
+```
+- Le propriétaire du NFT remet en vente sa carte.
+- On vérifie que la fonction `revert()`
+
+```sh
 it("should revert if putOnSale() caller is not nft owner")
 ```
 - Un utilisateur quelconque met en vente une carte dont il n'est pas propriétaire.
@@ -119,20 +124,29 @@ it("should revert if putOnSale() caller is not nft owner")
 ```sh
 it("should buy and transfer NFT from marketplace")
 ```
+- Un utilisateur quelconque achète le NFT.
 - On vérifie l'achat en controlant les balances en Tak Token avant et après l'achat
 - On vérifie que le NFT a bien changer de propriétaire. 
 - On vérifie que l'event `BuyTransaction` a bien été émis.
 
 ```sh
-it("should buy and transfer NFT from user")
+it("should re-put card on sale")
 ```
-- On vérifie que ce nouveau propriétaire a bien la possibilité de se faire racheter son NFT en simulant un rachat qui provient d'un autre utilisateur comme dans le précedent test.
+- Le nouveau propriétaire du NFT remet en vente la carte.
+- On vérifie que l'event `PutOnSale` a bien été émis.
 
 ```sh
-it("should remove card on sale")
+it("should buy and transfer NFT from user")
 ```
-- Le propriétaire du NFT retire en vente sa carte.
-- On vérifie que l'event `RemoveOnSale` a bien été émis.
+- Un utilisateur quelconque rachète le NFT.
+- On vérifie l'achat en controlant les balances en Tak Token avant et après l'achat
+- On vérifie que le NFT a bien changer de propriétaire. 
+- On vérifie que l'event `BuyTransaction` a bien été émis.
+
+```sh
+it("should check if card has been remove on sale")
+```
+- On vérifie que la carte n'est plus en vente après le dernier achat.
 
 ```sh
 it("should revert if removeOnSale() caller is not nft owner")
