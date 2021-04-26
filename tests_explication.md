@@ -14,11 +14,10 @@ Nous avons effectués des tests end-to-end (de bout en bout) afin de vérifier q
 ### Faucet.test.js
 **Request TAK Token**
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
-```sh
-describe("Request TAK Token")
-```
-**Description :** Simulation d'une demande de Tak Token via un faucet.
-**Raison :** Vérifier que la demande de Tak via le faucet fonctionne et est uniquement possible pour le propriétaire de la marketplace et non pour les utilisateurs.
+
+- **Description :** Simulation d'une demande de Tak Token via un faucet.
+- **Raison :** Vérifier que la demande de Tak via le faucet fonctionne et est uniquement possible pour le propriétaire de la marketplace et non pour les utilisateurs.
+
 ```sh
 it("should revert if user request tak token")
 ```
@@ -34,9 +33,6 @@ it("should revert if user not waited")
 **Swap Token**
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-```sh
-describe("Swap Token")
-```
 - **Description :** Simulation d'un swap entre ETH/TAK (Le TAK étant la monnaie d'échange de la plateforme). 
 - **Raison :** Vérifier que le swap fonctionne, que les balances sont bien mis à jour.
 
@@ -45,16 +41,13 @@ it("should swap token")
 ```
 
 - On vérifie les balances de la marketplace en ETH et en TAK, pareillement pour l'utilisateur voulant effectué le swap.
-- On effectue le swap
+- On effectue le swap.
 - On vérifie si les balances ont bien été mis à jour.
 
 
 **Mint NFT**
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-```sh
-describe("Mint NFT")
-```
 - **Description :** Simulation d'un mint.
 - **Raison :** Vérifier que le mint fonctionne et est réservé uniquement au propriétaire de la marketplace.
 
@@ -81,9 +74,6 @@ it("should revert if token uri already registered")
 **Marketplace sell his NFT to Alice**
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-```sh
-describe("Marketplace sell his NFT to Alice")
-```
 - **Description :** Simulation d'un premier achat.
 - **Raison :** Vérifier que l'achat fonctionne et passe de la marketplace à une Alice.
 
@@ -105,9 +95,7 @@ it("should sell and transfer NFT to Alice")
 
 **Alice sell his NFT to Bob**
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
-```sh
-describe("Alice sell his NFT to Bob")
-```
+
 - **Description :** Simulation d'un second achat.
 - **Raison :** Vérifier que l'achat fonctionne et passe de Alice à Bob.
 
@@ -130,10 +118,6 @@ it("should sell and transfer NFT to Alice")
 **Put/Remove NFT on sale**
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-```sh
-describe("Put/Remove NFT on sale")
-```
-
 - **Description :** Mise en vente/Retrait du NFT sur la marketplace. Affectation de prix.
 - **Raison :** Vérifier que la mise en vente/retrait et l'affectation de prix de NFT sur la marketplace fonctionne, et les exceptions.
 
@@ -141,7 +125,7 @@ describe("Put/Remove NFT on sale")
 it("should revert if putOnSale() caller is not nft owner")
 ```
 - Alice met en vente une carte dont elle n'est pas propriétaire.
-- On vérifie que la fonction `revert()`
+- On vérifie que la fonction `revert()`.
 
 ```sh
 
@@ -155,7 +139,7 @@ it("should put card on sale and set a price")
 it("should revert if removeOnSale() caller is not nft owner")
 ```
 - Alice retire de la vente une carte dont elle n'est pas propriétaire.
-- On vérifie que la fonction `revert()`
+- On vérifie que la fonction `revert()`.
 
 ```sh
 
@@ -169,8 +153,6 @@ it("should revert if user trying buy a card not for sale")
 ```
 - Carole achète la carte de Bob qui n'est plus en vente.
 - On vérifie que la fonction `revert()`
-
-
 ```sh
 
 it("should put card on sale and set a price")
