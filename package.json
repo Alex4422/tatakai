@@ -12,7 +12,7 @@
     "test": "truffle test",
     "start": "cd server && npm install && node index.js",
     "heroku-postbuild": "cd client && npm install && npm run build",
-    "install": "npm install && cd client && npm install && CI= npm run build && cd .. && cd server && npm install && cd ..",
+    "install-build": "npm install && cd client && npm install && CI= npm run build && cd .. && cd server && npm install && cd ..",
     "install-truffle": "npm install -g truffle"
   }
 }
