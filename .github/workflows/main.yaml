@@ -15,6 +15,12 @@ jobs:
         node-version: [14.x]
 
     steps:
+      - uses: actions/checkout@v2
+      - name: Uses Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+        
       - name: Smart Contract Test
         run: npm run test
 
@@ -38,7 +44,7 @@ jobs:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
           HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
 
-      - name: Pull Heroku Main
+      - name: Pull latest version
         run: git pull heroku main
 
       - name: Push & Build to Heroku
