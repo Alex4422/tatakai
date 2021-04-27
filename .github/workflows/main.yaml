@@ -48,7 +48,7 @@ jobs:
           HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
 
       - name: Pull latest version
-        run: git pull heroku main
+        run: git pull heroku main --allow-unrelated-histories
 
       - name: Push to Heroku
         run: git push heroku main
