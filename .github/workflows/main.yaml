@@ -21,7 +21,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Install NPM dependencies & Build React
+    - name: Install NPM dependencies (Server & Client)
       run: npm run install
 
     - name: Build React
