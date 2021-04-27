@@ -9,11 +9,10 @@
     "dotenv": "^8.2.0"
   },
   "scripts": {
-    "test": "truffle test",
+    "test": "npm install -g truffle && truffle test",
     "start": "cd server && npm install && node index.js",
     "heroku-postbuild": "cd client && npm install && npm run build",
     "install-all": "npm install && cd client && npm install && cd .. && cd server && npm install && cd ..",
-    "react-build": "cd client && npm install && CI= npm run build",
-    "install-truffle": "npm install -g truffle"
+    "react-build": "cd client && npm install && CI= npm run build"
   }
 }
