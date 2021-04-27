@@ -7,7 +7,7 @@ Emitted when NFT is minted.
 - `address owner`
 - `uint256 tokenId`
 # Modifiers
-## 🔗 onlyMarketplace()
+## 🔗 `onlyMarketplace()`
  Throws if called by any account other than the marketplace.
 
 # Constructor
