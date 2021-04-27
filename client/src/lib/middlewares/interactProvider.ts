@@ -1,20 +1,21 @@
-import { SWAP_ETH_TAK, IMPORT_TAK_METAMASK_WALLET, BUY_NFT, APPROVE_MARKETPLACE_TO_SELL } from "../actions/types";
+import { SWAP_ETH_TAK, IMPORT_TAK_METAMASK_WALLET, BUY_NFT, APPROVE_MARKETPLACE_TO_SELL, WITHDRAW_NFT_ON_SALE, SELL_NFT } from "../actions/types";
 import {getInstanceCardItem, getInstanceMarketplace, getInstanceTakToken} from "./utils";
 import { getBalances, refreshUserNFTS } from "../actions/user";
 import { showAlert} from "../actions/dashboard";
-import { buyNFTSuccess, updateIsForSale } from "../actions/marketplace";
+import { buyNFTSuccess } from "../actions/marketplace";
 import { toggleNewUser } from "../actions/dashboard";
 import { TOKEN, AlertType } from "./utils/Constantes"
 
-const adminMiddleware = () => ({ dispatch, getState }: any) =>  (
+const interactMW = () => ({ dispatch, getState }: any) =>  (
   next: any
 ) => async (action: IAction) => {
   const {
     user: { web3, accounts, provider },
-    contract: { Marketplace, TakToken }
+    contract: { Marketplace, TakToken, CardItem }
   } = getState();
  
   switch (action.type) {
+
   /*******************************/
   /* SWAP ETHER TAK /
   /*******************************/
@@ -88,6 +89,8 @@ const adminMiddleware = () => ({ dispatch, getState }: any) =>  (
     const MarketplaceInstance = await getInstanceMarketplace(web3);
     const CardItemInstance = await getInstanceCardItem(web3);
     const TakTokenInstance = await getInstanceTakToken(web3);
+    const seller = await CardItemInstance.methods.ownerOf(id).call();
+    console.log(seller)
     dispatch(showAlert("Buying process, waiting for metamask...",AlertType.Info))
     try {
       TakTokenInstance.methods.approve(MarketplaceInstance._address,price)
@@ -99,11 +102,10 @@ const adminMiddleware = () => ({ dispatch, getState }: any) =>  (
             .then((result : any) => {
               console.log("Allowance ok!")
             });
-          MarketplaceInstance.methods.buy(CardItemInstance._address, id, price)
-          .send({from: accounts[0]})
+          MarketplaceInstance.methods.buy(CardItemInstance._address, id)
+          .send({from: accounts[0], gas: 400000})
             .then((response :any) => {
               if(response.status==true) {
-                dispatch(updateIsForSale(id));
                 dispatch(buyNFTSuccess());
                 dispatch(showAlert("Well done, new NFT in your deck !", AlertType.Success));
                 dispatch(refreshUserNFTS());
@@ -118,10 +120,54 @@ const adminMiddleware = () => ({ dispatch, getState }: any) =>  (
     next(action)
     break;
   }
+   /*******************************/
+    /*WITHDRAW_NFT_ON_SALE
+  /*******************************/
+  case WITHDRAW_NFT_ON_SALE: {
+    const id = action.payload;
+    const NFTAddress = CardItem.options.address
+    const MarketplaceInstance = await getInstanceMarketplace(web3);
+    MarketplaceInstance.methods.removeOnSale(NFTAddress,id)
+          .send({from: accounts[0]})
+            .then((response :any) => {
+              if(response.status==true) {
+                dispatch(showAlert("Your card is no longer on the market", AlertType.Info))
+              } else {
+                 dispatch(showAlert("Your card is still on the market", AlertType.Warning))
+              }
+          })
+    next(action)
+    break;
+}
+
+  /*******************************/
+    /*SELL NFT /
+  /*******************************/
+  case SELL_NFT: {
+    const {id, price} = action.payload;
+    const NFTAddress = CardItem.options.address
+    const MarketplaceInstance = await getInstanceMarketplace(web3);
+    const CardItemInstance = await getInstanceCardItem(web3);
+    
+    CardItemInstance.methods.approve(MarketplaceInstance._address, id).send({from: accounts[0]})
+    .then((response:any) => console.log("approve NFT"))
+    .catch((error: any) => console.log("error", error))
+    MarketplaceInstance.methods.putOnSale(NFTAddress,id, price)
+          .send({from: accounts[0]})
+            .then((response :any) => {
+              if(response.status==true) {
+                dispatch(showAlert("Your card is on the market", AlertType.Info))
+              } else {
+                 dispatch(showAlert("Oops, your card is not on sale", AlertType.Warning))
+              }
+          })
+    next(action)
+    break;
+  }
     default:
       next(action);
   }
   next(action);
 };
 
-export default adminMiddleware();
+export default interactMW();

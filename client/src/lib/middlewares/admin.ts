@@ -36,7 +36,6 @@ const adminMiddleware = () => ({ dispatch, getState }: any) => (
       };
         axios.post(`${API_URL}cards`, data, config)
           .then(response => {
-            console.log("response Api", response);
             if (response.status === 200) {
               dispatch(mintNFTSuccess());
               dispatch(showAlert("New NFT is on the market !", AlertType.Success))
@@ -44,7 +43,6 @@ const adminMiddleware = () => ({ dispatch, getState }: any) => (
             }
           })
           .catch(err => {
-            console.error(err)
             dispatch(showAlert("NFT creation failed", AlertType.Error))
 
           })

@@ -18,7 +18,6 @@ const log = () => ({ dispatch, getState }: any) => (
     /* SUBSCRIBE_EVENTS
   /********************************/
     case SUBSCRIBE_EVENTS: {
-      console.log("coucou de subscribe events");
       const provider = new Web3.providers.WebsocketProvider("wss://ws-matic-mumbai.chainstacklabs.com");
       const web3ws = new Web3(provider); 
       try {
@@ -31,7 +30,6 @@ const log = () => ({ dispatch, getState }: any) => (
             dispatchAlert(event.returnValues);
           })
           .on('error', function(error: any) { // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
-              console.log("erreur dans la buying", error)
           });
 
      } catch (error) {
