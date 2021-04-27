@@ -21,6 +21,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
         
+      - name: Install NPM dependencies
+        run: npm run install-all
+
       - name: Smart Contract Test
         run: npm run test
 
@@ -47,5 +50,5 @@ jobs:
       - name: Pull latest version
         run: git pull heroku main
 
-      - name: Push & Build to Heroku
+      - name: Push to Heroku
         run: git push heroku main
