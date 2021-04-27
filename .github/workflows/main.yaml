@@ -16,19 +16,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Uses Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
+    - name: Login to Heroku
+      env: 
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      run: heroku container:login
+ 
+    - name: Build & Push to Heroku
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      run: heroku container:push -a ${{ secrets.HEROKU_APP_NAME }} web 
 
-    - name: Install NPM dependencies (Server & Client)
-      run: npm run install-all
-
-    - name: React Build
-      run: npm run react-build
-
-    - name: Install Truffle
-      run: npm run install-truffle
-
-    - name: Smart Contract Test
-      run: npm run test
+    - name: Release
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      run: heroku container:release -a ${{ secrets.HEROKU_APP_NAME }} web 
