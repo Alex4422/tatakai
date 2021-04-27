@@ -21,3 +21,5 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm run install-build
+
+    - run: npm run install-truffle
