@@ -22,7 +22,10 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - name: Install NPM dependencies (Server & Client)
-      run: npm run install-build
+      run: npm run install-all
+
+    - name: React Build
+      run: npm run react-build
 
     - name: Install Truffle
       run: npm run install-truffle
