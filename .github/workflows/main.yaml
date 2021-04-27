@@ -15,18 +15,10 @@ jobs:
         node-version: [14.x]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Login to Heroku
-      env: 
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku container:login
- 
-    - name: Build & Push to Heroku
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku container:push -a ${{ secrets.HEROKU_APP_NAME }} web 
-
-    - name: Release
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku container:release -a ${{ secrets.HEROKU_APP_NAME }} web 
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.0.0
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "https://tatakai-marketplace.herokuapp.com"
+          heroku_email: "lorcann@live.fr"
+          usedocker: true
