@@ -12,7 +12,7 @@ const web3 = new Web3(new HDWalletProvider({
     mnemonic: {
       phrase: process.env.MNEMONIC
     },
-    providerOrUrl: "https://rpc-mumbai.maticvigil.com/v1/e6115eb8f8eac2bd2b347f2890455f74519ff7a9",
+    providerOrUrl: "https://rpc-mumbai.maticvigil.com/v1/c8de64ac9d1e2a12657516cfb14e8f1572c7d356",
     numberOfAddresses: 1,
     shareNonce: true,
     derivationPath: "m/44'/1'/0'/0/"
