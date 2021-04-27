@@ -22,11 +22,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm run install-build
 
-    - name: Install Truffle
-      run: npm run install-truffle
+    - run: npm run install-truffle
 
-    - name: Smart Contract Test
-      run: npm run test
+    - run: npm run test
 
-    - name: Push to Heroku
-      run: git push heroku staging:main
+    - run: git push heroku staging:main
