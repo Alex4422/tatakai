@@ -84,10 +84,21 @@ npm start
 - [design_pattern_desicions.md] : Ce document explique les modèles de conception choisis et la raison du choix.
 - [tests_explication.md] : Ce document explique les tests écrits et pourquoi on les avez écrit.
 
+Smart Contrat :
+- [CardItem.md] : Readme du contrat CardItem.sol
+- [Faucet.md] : Readme du contrat Faucet.sol
+- [Marketplace.md] : Readme du contrat Marketplace.sol
+- [TakToken.md] : Readme du contrat TakToken.sol
+
    [avoiding_common_attacks.md]: <https://github.com/lorcannrauzduel/tatakai/blob/main/avoiding_common_attacks.md>
    [deployed_addresses.md]: <https://github.com/lorcannrauzduel/tatakai/blob/main/deployed_addresses.md>
    [design_pattern_desicions.md]: <https://github.com/lorcannrauzduel/tatakai/blob/main/design_pattern_desicions.md>
    [tests_explication.md]: <https://github.com/lorcannrauzduel/tatakai/blob/main/tests_explication.md>
+   
+   [CardItem.md]: <https://github.com/lorcannrauzduel/tatakai/blob/main/docs/CardItem.md>
+   [Faucet.md]: <https://github.com/lorcannrauzduel/tatakai/blob/main/docs/Faucet.md>
+   [Marketplace.md]: <https://github.com/lorcannrauzduel/tatakai/blob/main/docs/Marketplace.md>
+   [TakToken.md]: <https://github.com/lorcannrauzduel/tatakai/blob/main/docs/TakToken.md>
 
 ## Technologies
 
