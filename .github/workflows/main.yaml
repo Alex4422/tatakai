@@ -32,6 +32,3 @@ jobs:
 
     - name: Smart Contract Test
       run: npm run test
-
-    - name: Push to Heroku
-      run: git push heroku staging:main
