@@ -36,10 +36,10 @@ L'utilisation de Ganache est **recommandé**, téléchargez [Ganache] et lancez 
 Ou vous pouvez utiliser Ganache-CLI (s'il n'est pas encore installé) avec `npm install -g ganache-cli` puis `ganache-cli` qui fonctionnera sur le port 8545.
 
 ### Déployer les contrats
-Déployer les contrats sur le réseau Matic.
+Déployer les contrats sur Ganache.
 
 ```sh
-truffle deploy --network matic
+truffle deploy --network develop
 ```
 
 ### Installer les dépendances
