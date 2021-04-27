@@ -55,6 +55,17 @@ cd client
 npm start
 ```
 
+## Demo
+
+[https://tatakai-marketplace.herokuapp.com]
+
+## Documentation
+
+- [avoiding_common_attacks.md] : Ce document explique les mesures de sécurité qui ont été prises.
+- [deployed_addresses.md] : Ce document renseigne les addresses de nos smart contrats déployés.
+- [design_pattern_desicions.md] : Ce document explique les modèles de conception choisis et la raison du choix.
+- [tests_explication.md] : Ce document explique les tests écrits et pourquoi on les avez écrit.
+
 ## Technologies
 
 - [Truffle Suite] - Framework de développement Ethereum. Il permet d'interfacer des smart contracts avec du code JavaScript et l'ensemble de l'écosystème NodeJS.
@@ -77,9 +88,13 @@ npm start
    [Material UI]: <https://material-ui.com/>
    [Ganache]: <https://truffleframework.com/ganache>
 
-   [Avoiding Common Attack]: <https://truffleframework.com/ganache>
-   [Ganache]: <https://truffleframework.com/ganache>
-   [Ganache]: <https://truffleframework.com/ganache>
+   [https://tatakai-marketplace.herokuapp.com]: <https://tatakai-marketplace.herokuapp.com>
+
+   [avoiding_common_attacks.md]: <https://github.com/lorcannrauzduel/tatakai/blob/main/avoiding_common_attacks.md>
+   [deployed_addresses.md]: <https://github.com/lorcannrauzduel/tatakai/blob/main/deployed_addresses.md>
+   [design_pattern_desicions.md]: <https://github.com/lorcannrauzduel/tatakai/blob/main/design_pattern_desicions.md>
+   [tests_explication.md]: <https://github.com/lorcannrauzduel/tatakai/blob/main/tests_explication.md>
+
 
 ## Perspective d'évolution
 
