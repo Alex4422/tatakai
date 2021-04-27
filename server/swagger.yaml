@@ -12,8 +12,6 @@ tags:
   description: "Mint and retrieve cards"
 - name: "faucet"
   description: "Faucet request"
-- name: "order"
-  description: "Buy/sell cards"
 schemes:
 - "https"
 - "http"
@@ -39,6 +37,11 @@ paths:
         required: true
         type: "string"
       - in: "formData"
+        name: "price"
+        description: "NFT Price"
+        required: true
+        type: "integer"
+      - in: "formData"
         name: "age"
         description: "Fighter Age"
         required: false
@@ -56,11 +59,6 @@ paths:
       - in: "formData"
         name: "type"
         description: "Card Type"
-        required: false
-        type: "string"
-      - in: "formData"
-        name: "price"
-        description: "NFT Price"
         required: false
         type: "string"
       responses:
@@ -115,68 +113,6 @@ paths:
               $ref: "#/definitions/Cards"
         "404":
           description: "No exist"
-  /order/buy:
-    post:
-      tags:
-      - "order"
-      summary: "Buy a card"
-      description: "Buy a card from marketplace or user"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "id"
-        in: "query"
-        description: "Card ID"
-        required: true
-        type: "integer"
-      responses:
-        "200":
-          description: "Return true"
-        "500":
-          description: "Invalid input"
-  /order/sell:
-    post:
-      tags:
-      - "order"
-      summary: "Sell a card"
-      description: "Put a card on sale to the marketplace"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "id"
-        in: "query"
-        description: "Card ID"
-        required: true
-        type: "integer"
-      - name: "price"
-        in: "query"
-        description: "Card price"
-        required: true
-        type: "string"
-      responses:
-        "200":
-          description: "Return a success message"
-        "500":
-          description: "Invalid input"
-  /order/remove:
-    post:
-      tags:
-      - "order"
-      summary: "Remove a card on sale"
-      description: "Remove a card from the marketplace"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "id"
-        in: "query"
-        description: "Card ID"
-        required: true
-        type: "integer"
-      responses:
-        "200":
-          description: "Return a success message"
-        "500":
-          description: "Invalid input"
   /accounts/{address}:
     get:
       tags:
@@ -249,6 +185,10 @@ definitions:
       image:
         type: "string"
         example: "https://ipfs.io/ipfs/QmXYUfzGTEXmLHkETDMvmFwWRCfHacf5HbXiotpSQs8Ht4"
+      price:
+        type: "integer"
+        format: "int64"
+        example: "1000"
       metadata:
         $ref: "#/definitions/Metadata"
     xml:
@@ -265,18 +205,12 @@ definitions:
       type:
         type: "string"
         example: "Unique"
-      price:
-        type: "string"
-        example: "1000"
       saison:
         type: "string"
         example: "2021"
       nationality:
         type: "string"
         example: "United States"
-      isForSale:
-        type: "bool"
-        example: false
     xml:
       name: "Metadata"
 externalDocs:

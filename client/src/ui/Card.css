@@ -101,6 +101,11 @@
   color: #FEFEFE;
 }
 
+.logo {
+  width:9px;
+  vertical-align:0%;
+}
+
 @keyframes ripple {
   to {
     transform: scale(2.5);

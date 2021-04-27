@@ -35,9 +35,6 @@ const MarketPlace = ({ refreshMarket, items, isLoading }: Props) => {
     refreshMarket();
   }, []);
 
-  useEffect(() => {
-    console.log("isLoading", isLoading);
-  }, [isLoading]);
 
   return (
     <Container component="main" maxWidth="lg">

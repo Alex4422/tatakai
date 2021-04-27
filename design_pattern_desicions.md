@@ -1,48 +1,36 @@
 # Design Pattern Desicions
 
-Ce document explique les modèles de conception choisis et la raison du choix. 
+## Security Patterns
 
-## Vue d'ensemble
+### Access Restriction
+Les fonctions du contrat ont été resteintent selon des critères appropriés. 
 
-Notre pattern est basée sur des micro-services, permettant une séparation des responsabilités en différents services au sein d’une même entité.
+La documentation de Solidity recommande l'utilisation de `require()` pour tester des conditions et lancer des exceptions.
 
-## Diagramme d'architecture
+![mintNFT() function](https://i.ibb.co/MgxHCCz/code.png "mintNFT() function")
 
-![Architecture Diagram](https://i.ibb.co/RgdkM77/Untitled-Diagram-1.png "architecture diagram")
+L'utilisation de modifiers rajoutent une couche de sécurité supplémentaire, ils portent des noms explicites afin de faciliter leur réutilisabilité et la lisibilité du code.
 
-Le diagramme ci-dessus représente les éléments majeurs qui compose le système réalisé. Leur fonctionnement et leurs interactions sont expliquées plus en profondeur ci-dessous.
+![onlyMarketplace() modifier](https://i.ibb.co/jbGZDq2/code2.png "onlyMarketplace() modifier")
+![onlyNFTOwner() modifier](https://i.ibb.co/kq9KKPg/code3.png "onlyNFTOwner() modifier")
 
-### Marketplace UI
 
-Ceci est tout simplement l’interface graphique par lequel les utilisateurs vont pouvoir acheter et vendre des NFTs sur la plateforme. Il n’y a absolument aucune logique métier ou voir très peu d'interaction directe avec la blockchain.
+### Emergency Stop
 
-### Redux
+Tous les contrats ont un mécanisme d'arrêt d'urgence pour arrêter toutes les fonctionnalités sensible au contrat, dès qu'un problème de sécurité est découvert. Ce qui permet de laisser le temps nécessaire pour rechercher une solution adéquate et éventuellement mettre à jour les contrats afin de corriger la faille de sécurité.
 
-Redux permet une gestion de “states globaux” et de pallier les faiblesses des props qui ne sont accessibles qu’en lecture seule ou des states qui sont liés à un unique composant, et donc seulement localement notamment pour la librairie web3 et l'instance des smarts contracts.
+![_pause() function](https://i.ibb.co/SPBb0J0/code4.png "_pause() function")
 
-### RESTful API
+### Secure Ether Transfer
 
-C’est  dans  ce  service  que  se  trouve toute  la  gestion des NFTs, des transactions et des interactions principales avec la blockchain. En cas de refonte de l'UI (changement de techno front, développement mobile), ce service est toujours fonctionnel, ce qui nous permet d'avoir une certaine flexibilité.
+Le tableau suivant donne un aperçu des différences entre les trois méthodes :
 
-### API Pinata Cloud
+| Function       | Amount of Gas Forwarded | Exception Propagation  |
+| :------------- |-------------:| -----:|
+| send      | 2300 (not adjustable) | `false`on failure |
+| call.value      | all remaining gas (adjustable)      |   `false`on failure |
+| transfer | 2300 (not adjustable)      |    throws on failure |
 
-Pinata Cloud, grâce à son API, nous permet facilement d'uploader et de gérer les fichiers (images, métadonnées..etc) stockés sur IPFS. 
+Le contrat Marketplace utilise la méthode `transfer()` pour faire des transactions. Cette méthode a été choisie en raison de ses fonctions de sécurité intégrées, qui permettent de `revert()` les transactions ayant échoué et de lancer des exceptions en cas d'échec.
 
-### IPFS
-
-IPFS applique le principe du téléchargement Bittorrent à tout ce qui constitue le web. Si vous consultez une page web ou un fichier en IPFS, les ressources seront récupérés bloc par bloc chez d’autres utilisateurs d’IPFS. Ce qui permet de ne plus dépendre d'un serveur centralisé ni d'un prestataire susceptible de disparaître du jour au lendemain.
-
-### Matic Network
-
-Le réseau Matic est une solution de couche 2 et permet de bénéficier de faibles frais de transactions notamment pour le mint et les principales transactions.
-
-### Blockchain
-
-La blockchain est là pour s'assurer de l'authenticité des NFTs et de la sécurité des transactions.
-
-## Perspective d'évolution
-- Lorsque l’API demande des données, les demandes sont envoyées à IPFS. Une base de donnée pourrait contenir un réplica des métadonnées et données on-chain qui fournit des informations relatives aux NFTs. Les demandes renverraient les données requises à partir du réplica afin de réduire la latence des requêtes.
-
-- Ajouter une couche à Redux, Drizzle, pour maintenir les contrats dans le store est resté "frais en data" sans multiplier les requêtes
-
-- Revenir sur le réseau Mainet 
+![_pause() function](https://i.ibb.co/8YJyyxt/code5.png "_pause() function")

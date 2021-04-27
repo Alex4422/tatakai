@@ -7,7 +7,6 @@ import {
   IS_LOADING,
   SELL_NFT,
   WITHDRAW_NFT_ON_SALE,
-  UPDATE_IS_FOR_SALE,
   APPROVE_MARKETPLACE_TO_SELL,
   REFRESH_MARKET,
 } from "./types";
@@ -30,7 +29,7 @@ export const selectCurrent = (item: ICard) => ({
   payload: { current: item },
 });
 
-export const buyNFT = (id: number, price: string) => ({
+export const buyNFT = (id: number, price: number) => ({
   type: BUY_NFT,
   payload: { id, price },
 });
@@ -51,11 +50,6 @@ export const buyNFTSuccess = () => ({
 
 export const isLoading = () => ({
   type : IS_LOADING,
-})
-
-export const updateIsForSale = (id: number) => ({
-  type: UPDATE_IS_FOR_SALE,
-  payload : id
 })
 
 
