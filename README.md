@@ -13,6 +13,7 @@
    - [Lancer les tests](https://github.com/lorcannrauzduel/tatakai/blob/main/README.md#lancer-les-tests)
    - [Lancer la DApp](https://github.com/lorcannrauzduel/tatakai/blob/main/README.md#lancer-la-dapp)
 - [Demo](https://github.com/lorcannrauzduel/tatakai/blob/main/README.md#demo)
+- [Documentation](https://github.com/lorcannrauzduel/tatakai/blob/main/README.md#documentation)
 - [Technologies](https://github.com/lorcannrauzduel/tatakai/blob/main/README.md#technologies)
 - [Perspective d'évolution](https://github.com/lorcannrauzduel/tatakai/blob/main/README.md#perspective-d%C3%A9volution)
 
@@ -74,12 +75,19 @@ npm start
 
 [https://tatakai-marketplace.herokuapp.com]
 
+   [https://tatakai-marketplace.herokuapp.com]: <https://tatakai-marketplace.herokuapp.com>
+
 ## Documentation
 
 - [avoiding_common_attacks.md] : Ce document explique les mesures de sécurité qui ont été prises.
 - [deployed_addresses.md] : Ce document renseigne les addresses de nos smart contrats déployés.
 - [design_pattern_desicions.md] : Ce document explique les modèles de conception choisis et la raison du choix.
 - [tests_explication.md] : Ce document explique les tests écrits et pourquoi on les avez écrit.
+
+   [avoiding_common_attacks.md]: <https://github.com/lorcannrauzduel/tatakai/blob/main/avoiding_common_attacks.md>
+   [deployed_addresses.md]: <https://github.com/lorcannrauzduel/tatakai/blob/main/deployed_addresses.md>
+   [design_pattern_desicions.md]: <https://github.com/lorcannrauzduel/tatakai/blob/main/design_pattern_desicions.md>
+   [tests_explication.md]: <https://github.com/lorcannrauzduel/tatakai/blob/main/tests_explication.md>
 
 ## Technologies
 
@@ -102,13 +110,6 @@ npm start
    [Truffle Suite]: <https://www.trufflesuite.com/>
    [Material UI]: <https://material-ui.com/>
    [Ganache]: <https://truffleframework.com/ganache>
-
-   [https://tatakai-marketplace.herokuapp.com]: <https://tatakai-marketplace.herokuapp.com>
-
-   [avoiding_common_attacks.md]: <https://github.com/lorcannrauzduel/tatakai/blob/main/avoiding_common_attacks.md>
-   [deployed_addresses.md]: <https://github.com/lorcannrauzduel/tatakai/blob/main/deployed_addresses.md>
-   [design_pattern_desicions.md]: <https://github.com/lorcannrauzduel/tatakai/blob/main/design_pattern_desicions.md>
-   [tests_explication.md]: <https://github.com/lorcannrauzduel/tatakai/blob/main/tests_explication.md>
 
 ## Perspective d'évolution
 
