@@ -15,11 +15,19 @@ jobs:
         node-version: [14.x]
 
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+      - name: Uses Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
         with:
-          fetch-depth: 0
-      - name: Heroku login credentials
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install NPM dependencies (Server & Client)
+        run: npm run install-all
+
+      - name: Smart Contract Test
+        run: npm run test
+
+      - name: Login to Heroku
         run: |
           cat > ~/.netrc <<EOF
             machine api.heroku.com
@@ -32,10 +40,12 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
           HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+
       - name: Add Heroku remote
         run: heroku git:remote --app $HEROKU_APP_NAME
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
           HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
-      - name: Push to Heroku
+
+      - name: Push & Build to Heroku
         run: git push heroku main
