@@ -2,6 +2,22 @@
 
 ![Tatakai Logo](./client/src/assets/logo_full_bgnoir.png "Tatakai Logo")
 
+## Sommaire
+
+- [Introduction](https://github.com/lorcannrauzduel/tatakai/blob/main/README.md#introduction)
+- [Fonctionnalités](https://github.com/lorcannrauzduel/tatakai/blob/main/README.md#fonctionnalit%C3%A9s)
+- [Installation & Lancement](https://github.com/lorcannrauzduel/tatakai/blob/main/README.md#installation--lancement)
+   - [Lancer un client Ethereum](https://github.com/lorcannrauzduel/tatakai/blob/main/README.md#lancer-un-client-ethereum)
+   - [Déployer les contrats](https://github.com/lorcannrauzduel/tatakai/blob/main/README.md#d%C3%A9ployer-les-contrats)
+   - [Installer les dépendances](https://github.com/lorcannrauzduel/tatakai/blob/main/README.md#installer-les-d%C3%A9pendances)
+   - [Lancer les tests](https://github.com/lorcannrauzduel/tatakai/blob/main/README.md#lancer-les-tests)
+   - [Lancer la DApp](https://github.com/lorcannrauzduel/tatakai/blob/main/README.md#lancer-la-dapp)
+- [Demo](https://github.com/lorcannrauzduel/tatakai/blob/main/README.md#demo)
+- [Documentation](https://github.com/lorcannrauzduel/tatakai/blob/main/README.md#documentation)
+- [Technologies](https://github.com/lorcannrauzduel/tatakai/blob/main/README.md#technologies)
+- [Perspective d'évolution](https://github.com/lorcannrauzduel/tatakai/blob/main/README.md#perspective-d%C3%A9volution)
+
+
 ## Introduction
 
 Tatakai propose l’achat-vente de NFT à l’effigie de combattant professionnels pluridisciplinaire avec une gamification autour de leur actualité via une scoremap exclusive et innovante.
@@ -55,6 +71,24 @@ cd client
 npm start
 ```
 
+## Demo
+
+[https://tatakai-marketplace.herokuapp.com]
+
+   [https://tatakai-marketplace.herokuapp.com]: <https://tatakai-marketplace.herokuapp.com>
+
+## Documentation
+
+- [avoiding_common_attacks.md] : Ce document explique les mesures de sécurité qui ont été prises.
+- [deployed_addresses.md] : Ce document renseigne les addresses de nos smart contrats déployés.
+- [design_pattern_desicions.md] : Ce document explique les modèles de conception choisis et la raison du choix.
+- [tests_explication.md] : Ce document explique les tests écrits et pourquoi on les avez écrit.
+
+   [avoiding_common_attacks.md]: <https://github.com/lorcannrauzduel/tatakai/blob/main/avoiding_common_attacks.md>
+   [deployed_addresses.md]: <https://github.com/lorcannrauzduel/tatakai/blob/main/deployed_addresses.md>
+   [design_pattern_desicions.md]: <https://github.com/lorcannrauzduel/tatakai/blob/main/design_pattern_desicions.md>
+   [tests_explication.md]: <https://github.com/lorcannrauzduel/tatakai/blob/main/tests_explication.md>
+
 ## Technologies
 
 - [Truffle Suite] - Framework de développement Ethereum. Il permet d'interfacer des smart contracts avec du code JavaScript et l'ensemble de l'écosystème NodeJS.
@@ -77,10 +111,15 @@ npm start
    [Material UI]: <https://material-ui.com/>
    [Ganache]: <https://truffleframework.com/ganache>
 
-   [Avoiding Common Attack]: <https://truffleframework.com/ganache>
-   [Ganache]: <https://truffleframework.com/ganache>
-   [Ganache]: <https://truffleframework.com/ganache>
-
 ## Perspective d'évolution
 
 - Mise en place de la gamification sous forme de pari. Sur une période donnée, l'utilisateur aura la possibilité de parier sur les prochains matchs de trois de ses combattants qu'il possède dans son deck. Ainsi il mettra ses cartes en jeu, lui donnant le droit de parier sur ses combattants, il sera alors en mesure de spécifier plus précisément sur les combats à venir (victoire par KO, numéro de round, ...) pour augmenter son indice de difficulté. Si le joueur possède des cartes rares/légendaires ou unique, son indice de difficulté sera augmenté en fonction. A l'issu de la période de pari, une grille de récompense offrira les gains associés en fonction du classement de l'utilisateur. Il pourra ainsi remporter des cartes uniques ou encore simplement des TAK Token.
+
+## Auteurs
+- [Lorcann RAUZDUEL]
+- [Stéphane Spassevitch]
+- [Sandy Ludosky]
+
+   [Lorcann RAUZDUEL]: <https://www.linkedin.com/in/lorcann-rauzduel-271738163/>
+   [Sandy Ludosky]: <https://www.linkedin.com/in/sandyludosky/>
+   [Stéphane Spassevitch]: <https://github.com/Makariudo>
