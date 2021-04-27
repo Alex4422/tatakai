@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@openzeppelin/contracts": "^4.0.0",
+    "@openzeppelin/test-helpers": "^0.5.10",
     "@truffle/hdwallet-provider": "^1.2.3",
     "dotenv": "^8.2.0"
   },
@@ -13,6 +14,5 @@
     "heroku-postbuild": "cd client && npm install && npm run build",
     "install-build": "npm install && cd client && npm install && CI= npm run build && cd .. && cd server && npm install && cd ..",
     "install-truffle": "npm install -g truffle",
-    "deploy-matic": "truffle deploy --network matic"
   }
 }
