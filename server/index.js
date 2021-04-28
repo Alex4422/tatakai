@@ -5,6 +5,7 @@ const app = express();
 const multer = require('multer');
 const upload = multer();
 const path = require('path');
+const port = process.env.PORT || 3000;
 
 const corsOptions = {
   origin: process.env.CORS_ORIGIN,
@@ -26,6 +27,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve('../client')+'/build/index.html');
 });
 
-app.listen(process.env.PORT, '0.0.0.0', () => {
+app.listen(port, '0.0.0.0', () => {
   console.log(`Server is running on port ${process.env.PORT}.`);
 });
