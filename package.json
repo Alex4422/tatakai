@@ -10,7 +10,7 @@
   },
   "scripts": {
     "test": "npm install -g truffle && truffle test",
-    "start": "node index.js",
+    "start": "cd server && node index.js",
     "heroku-postbuild": "cd server && npm install && cd .. && cd client && npm install && npm run build",
     "install-all": "npm install && cd client && npm install && cd .. && cd server && npm install && cd ..",
     "react-build": "cd client && npm install && CI= npm run build"
