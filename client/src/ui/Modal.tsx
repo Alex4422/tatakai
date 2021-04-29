@@ -123,7 +123,7 @@ const Template = ({ item }: TemplateProps) => {
           color="primary"
           className="card-action card-action-confirm"
         >
-          Widraw
+          Widthraw
         </button>
           :<button
             onClick={handleOnClick}
