@@ -10666,12 +10666,12 @@
         }
       },
       "links": {},
-      "address": "0x7a343713B53Dc7c3149835F6877ab7E63d801BFa",
-      "transactionHash": "0x51170824fffe6bb1fe7c66225b34371491eda4265d8328b727869d3fe9bb723c"
+      "address": "0x0BB5dD39625241398FBFd6fC6b4504d9f2b28024",
+      "transactionHash": "0x7ec51ab20b12204ce3d568e0891a9b571bb97c09fc22f8f5246dbdccb3ee5367"
     }
   },
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-04-26T22:57:37.643Z",
+  "updatedAt": "2021-04-30T08:05:09.624Z",
   "networkType": "ethereum",
   "devdoc": {
     "details": "This contract manages everything related to ERC20 token that the marketplace will use.",

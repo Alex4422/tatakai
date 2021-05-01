@@ -25,6 +25,7 @@ declare interface Props {
   getBalances: Function,
   swapEthTak: Function,
   getTAK: Function,
+  provider: any,
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -60,10 +61,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Profile = ({ accounts, cards, isAdmin, balanceTAK, balanceWei,isLoading,getTAK, importTAKMetamaskWallet, getBalances, isNew, swapEthTak }: Props) => {
+const Profile = ({ accounts, cards, isAdmin, balanceTAK, balanceWei,isLoading,getTAK, importTAKMetamaskWallet, getBalances, isNew, swapEthTak, provider }: Props) => {
   const classes = useStyles();
   const { handleOpen } = useModal();
-  
+  const networkVersion = provider!.networkVersion;
   const handleOnClickModal = () => {
     handleOpen();
   };
@@ -110,7 +111,7 @@ const Profile = ({ accounts, cards, isAdmin, balanceTAK, balanceWei,isLoading,ge
                 <AccountBalanceOutlinedIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText className={classes.listItemText} primary="Balance Wei" secondary={balanceWei ? balanceWei : "Non account"} />
+            <ListItemText className={classes.listItemText} primary={networkVersion=="80001" ? "Balance Matic" : "Balance Wei"} secondary={balanceWei ? balanceWei : "Non account"} />
           </ListItem>
           <Divider variant="inset" component="li" />
           <ListItem>
