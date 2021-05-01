@@ -7,7 +7,7 @@ type IMapStateToPropsType = {
   user: IUserState;
 };
 const mapStateToProps = ({
-  user: { cards, accounts, isAdmin, balanceTAK, balanceWei, isLoading, isNew },
+  user: { cards, accounts, isAdmin, balanceTAK, balanceWei, isLoading, isNew, provider },
 }: IMapStateToPropsType) => {
   return {
     cards,
@@ -17,6 +17,7 @@ const mapStateToProps = ({
     balanceWei,
     isLoading,
     isNew,
+    provider,
   };
 };
 
