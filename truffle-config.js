@@ -19,6 +19,7 @@ module.exports = {
       host: "127.0.0.1",
       port: 8545,
       network_id: "*",
+      websockets: true, 
     },
     mainnet: {
       provider: () =>
@@ -53,6 +54,7 @@ module.exports = {
       confirmations: 0,
       timeoutBlocks: 200,
     },
+    //si on a un point d'accès autant donner directement l'url avec host, port plutot que le hdwalletprovider
     matic: {
       provider: () =>
         new HDWalletProvider(
@@ -62,7 +64,9 @@ module.exports = {
       network_id: 80001,
       confirmations: 1,
       timeoutBlocks: 200,
+      pollingInterval: 8000,
       skipDryRun: true,
+      websockets: true,
     }
   },
   compilers: {

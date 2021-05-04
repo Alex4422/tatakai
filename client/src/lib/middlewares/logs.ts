@@ -3,7 +3,8 @@ import { seedHistory } from "../actions/dashboard"
 import {showAlert} from "../actions/dashboard";
 import Web3 from "web3";
 import {getInstanceMarketplace} from "./utils";
-import{AlertType} from "./utils/Constantes"
+import options from "./utils/optionsWebSocket";
+import {AlertType} from "./utils/Constantes"
 
 const log = () => ({ dispatch, getState }: any) => (
   next: any
@@ -18,7 +19,7 @@ const log = () => ({ dispatch, getState }: any) => (
     /* SUBSCRIBE_EVENTS
   /********************************/
     case SUBSCRIBE_EVENTS: {
-      const provider = new Web3.providers.WebsocketProvider("wss://ws-matic-mumbai.chainstacklabs.com");
+      const provider = new Web3.providers.WebsocketProvider("wss://ws-matic-mumbai.chainstacklabs.com", options);
       const web3ws = new Web3(provider); 
       try {
       const MarketplaceInstance = await getInstanceMarketplace(web3ws);
@@ -58,7 +59,7 @@ const log = () => ({ dispatch, getState }: any) => (
     if (transferCard.length >= 1){
       for(let el of transferCard){
         let block = await web3.eth.getBlock(el.blockNumber);
-        let date = block.timestamp
+        let date = block?.timestamp
         el.returnValues.date = date
         data.push(el.returnValues)
       }

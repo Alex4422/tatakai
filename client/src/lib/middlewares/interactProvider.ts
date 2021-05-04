@@ -26,13 +26,14 @@ const interactMW = () => ({ dispatch, getState }: any) =>  (
           from: accounts[0],
           to: Marketplace.options.address, 
           value: value, 
-          }, (error: any, result:any) => {
-            if(result){
+          })
+        .then((result: any) => {
+           if(result){
               dispatch(showAlert("Swap ETH > TAK ok!", AlertType.Success))
-            }else {
+            } else {
               dispatch(showAlert("Oops problem to swap", AlertType.Error))
             }
-          })
+        })
     dispatch(getBalances())
     next(action)
     break;

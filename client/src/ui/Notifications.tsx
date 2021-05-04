@@ -33,7 +33,7 @@ export default function CustomizedSnackbars() {
         open={isVisible} 
         autoHideDuration={4000} 
         onClose={handleClose} 
-        anchorOrigin={{vertical: 'top', horizontal: 'right'}}
+        anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
       >
         <Alert onClose={handleClose} severity={type} className="notification">
           {message}
