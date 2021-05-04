@@ -7462,12 +7462,12 @@
         }
       },
       "links": {},
-      "address": "0x9a54E7F51a73fBD736BBa351f88D9Fd100f1DF7f",
-      "transactionHash": "0xbe6dc81ed856dfc22d0a346d33b87d6de1ec5d8cce8547e8df83a0250675e43c"
+      "address": "0xBc66e6c0bFa6F7CDb0D53071fF0a375b560e4A05",
+      "transactionHash": "0xf117d97364f05e43517c6845744d29a9acf1a29003b26ed3f5232c73dbe8f3a4"
     }
   },
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-05-03T21:36:46.869Z",
+  "updatedAt": "2021-05-04T20:32:35.547Z",
   "networkType": "ethereum",
   "devdoc": {
     "details": "This contract manages everything related to Faucet",

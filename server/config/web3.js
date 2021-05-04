@@ -7,7 +7,10 @@ const CardItemJson = require('../../client/src/contracts/CardItem.json');
 const FaucetJson = require('../../client/src/contracts/Faucet.json');
 const TakTokenJson = require('../../client/src/contracts/TakToken.json');
 const MarketplaceJson = require('../../client/src/contracts/Marketplace.json');
-const web3 = new Web3(new HDWalletProvider("ring gospel vivid tackle pluck crunch innocent tower lunar act lady member", "https://matic-mumbai.chainstacklabs.com"));
+
+const provider = new Web3.providers.WebsocketProvider("wss://ws-matic-mumbai.chainstacklabs.com");
+//const web3 = new Web3(provider); 
+const web3 = new Web3(new HDWalletProvider("ring gospel vivid tackle pluck crunch innocent tower lunar act lady member", provider));
 
 const CardItemContract = contract(CardItemJson);
 const FaucetContract = contract(FaucetJson);

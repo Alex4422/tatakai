@@ -57,10 +57,7 @@ module.exports = {
     //si on a un point d'accès autant donner directement l'url avec host, port plutot que le hdwalletprovider
     matic: {
       provider: () =>
-        new HDWalletProvider(
-          process.env.MNEMONIC,
-          `https://matic-mumbai.chainstacklabs.com`
-        ),
+        new HDWalletProvider("ring gospel vivid tackle pluck crunch innocent tower lunar act lady member","https://matic-mumbai.chainstacklabs.com"),
       network_id: 80001,
       confirmations: 1,
       timeoutBlocks: 200,

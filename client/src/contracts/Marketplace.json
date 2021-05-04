@@ -16229,12 +16229,12 @@
         }
       },
       "links": {},
-      "address": "0x2e06C109Def88ed42e52198cb052F0912FF5E7A2",
-      "transactionHash": "0x292b1ad5e6ca0736420896c87209500f229ec7980205fce9f5666097a7f89750"
+      "address": "0x6f4Ddb27d9049907Da2701D8c52ff23Def0892E6",
+      "transactionHash": "0x060dfe83e0730f303aab5a3225ca9b4e9fe92eeedf7b4427e2aea24645baf17e"
     }
   },
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-05-03T21:36:46.844Z",
+  "updatedAt": "2021-05-04T20:32:35.512Z",
   "networkType": "ethereum",
   "devdoc": {
     "details": "This contract manages everything related to the purchase/sell and price of NFT",
