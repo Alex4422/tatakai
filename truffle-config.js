@@ -19,6 +19,7 @@ module.exports = {
       host: "127.0.0.1",
       port: 8545,
       network_id: "*",
+      websockets: true, 
     },
     mainnet: {
       provider: () =>
@@ -53,11 +54,16 @@ module.exports = {
       confirmations: 0,
       timeoutBlocks: 200,
     },
+    //si on a un point d'accès autant donner directement l'url avec host, port plutot que le hdwalletprovider
     matic: {
       provider: () =>
-        new HDWalletProvider(process.env.MNEMONIC,"https://rpc-mumbai.maticvigil.com/v1/c8de64ac9d1e2a12657516cfb14e8f1572c7d356"),
+        new HDWalletProvider("ring gospel vivid tackle pluck crunch innocent tower lunar act lady member","https://matic-mumbai.chainstacklabs.com"),
       network_id: 80001,
+      confirmations: 1,
+      timeoutBlocks: 200,
+      pollingInterval: 8000,
       skipDryRun: true,
+      websockets: true,
     }
   },
   compilers: {

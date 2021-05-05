@@ -28348,12 +28348,12 @@
         }
       },
       "links": {},
-      "address": "0x0f587886c5D1327DcA12d8D4c03D3aa3fc161032",
-      "transactionHash": "0xcea01f92d5f9cd4c5384692efc82225a1f780fd4d8f093b8b66a993ec008a631"
+      "address": "0xeFcde89679caDa706003074232CB0F032641bf35",
+      "transactionHash": "0x178574f2267324b3fe69d2015d0b1b52d8a017fbc439252861c7f43de4ffa9c7"
     }
   },
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-04-30T08:05:09.664Z",
+  "updatedAt": "2021-05-04T20:32:35.532Z",
   "networkType": "ethereum",
   "devdoc": {
     "details": "This contract manages everything related to NFT",

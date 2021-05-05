@@ -43,7 +43,10 @@ class CardService extends Service {
             });
             
             const accounts = await this.web3.eth.getAccounts();
-            const item = await this.CardItemContract.mintNFT(nft_json.data.IpfsHash, data.price, {from: accounts[0]});
+            const item = await this.CardItemContract.mintNFT(nft_json.data.IpfsHash, data.price, {
+                from: accounts[0],
+                gasPrice: 5000000000,
+            });
             const id = item.receipt.logs[0].args.tokenId;
             await this.CardItemContract.approve(this.MarketplaceContract.address, id, {from: accounts[0]});
             const owner = await this.CardItemContract.ownerOf(id);
