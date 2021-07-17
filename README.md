@@ -83,7 +83,7 @@ Informations générales:
 - [avoiding_common_attacks.md] : Ce document explique les mesures de sécurité qui ont été prises.
 - [deployed_addresses.md] : Ce document renseigne les addresses de nos smart contrats déployés.
 - [design_pattern_desicions.md] : Ce document explique les modèles de conception choisis et la raison du choix.
-- [tests_explication.md] : Ce document explique les tests écrits et pourquoi on les avez écrit.
+- [tests_explication.md] : Ce document explique les tests écrits et pourquoi on les a écrit.
 
 Smart Contrat :
 - [CardItem.md] : Readme du contrat CardItem.sol
